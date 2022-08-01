@@ -7,16 +7,16 @@
     "MAKE_TITLE_SIZES": "DEF",
     "MAKE_TITLE": true,
     "PACKAGES": [
-            "{symbols}",
             "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
+            "{indentfirst}",
             "{amsmath}",
+            "{mathtools}",
+            "{symbols}",
             "{footmisc}",
             "{gensymb}",
             "{xcolor}",
-            "{indentfirst}",
             "{caption}",
-            "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}",
-            "{mathtools}"
+            "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
         ],
     "SECTION_SIZES": {
             "main": 12,
