@@ -8,10 +8,11 @@ from src.misc.signs import Signs
 
 
 class ConfParse:
-    def __init__(self) -> None:
+    def __init__(self, overrides: dict[str, Any]) -> None:
         """check the config file in instantiation before proceeding."""
 
         self.config_path: str = f"{expanduser('~')}/.config/simtex"
+        self.overrides: dict[str, Any] = overrides
 
         if not exists(f"{self.config_path}/simtex.json"):
             print(f"{Signs.INFO} Config file not found, used the default\n")
@@ -20,12 +21,8 @@ class ConfParse:
                 f"{self.config_path}/simtex.json"
             )
 
-    def parse(self, overrides: dict[str, Any]) -> DataTypes.RawConf:
+    def parse(self) -> DataTypes.RawConf:
         """parse and replace the overriden parameters in the cli.
-
-        Arguments:
-        overrides: dict[str, Any] -- overrides received in cli, will
-            replace the fetched items in config file.
 
         Returns the raw configuration file for further processing.
         """
@@ -35,12 +32,12 @@ class ConfParse:
             ) as conf_file:
             conf: dict[str, Any] = load(conf_file)
 
-        for override in overrides.keys():
-            override: str
-            if overrides in list(conf.keys()):
+        for val in self.overrides.keys():
+            val: str
+            if val in list(conf.keys()):
                 print(
-                    f"{Signs.INFO} {conf[override]} -> {overrides[override]}"
+                    f"{Signs.INFO} {conf[val]} -> {self.overrides[val]}"
                 )
-                conf[override] = overrides[override]
+                conf[val] = self.overrides[val]
 
         return conf
