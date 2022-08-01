@@ -1,5 +1,11 @@
 {
+    "DOC_CLASS": "article",
     "DEF_FONT": "lmodern",
+    "FONT_SIZE": 12,
+    "MARGIN": "1in",
+    "PAPER_SIZE": "a4paper",
+    "MAKE_TITLE_SIZES": "DEF",
+    "MAKE_TITLE": true,
     "PACKAGES": [
             "{symbols}",
             "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
@@ -12,9 +18,6 @@
             "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}",
             "{mathtools}"
         ],
-    "FONT_SIZE": 12,
-    "MARGIN": "1in",
-    "PAPER_SIZE": "a4paper",
     "SECTION_SIZES": {
             "main": 12,
             "sub": 12,
