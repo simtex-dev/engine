@@ -1,7 +1,10 @@
+from curses import raw
+from dataclasses import dataclass
 from os.path import exists, expanduser
 from shutil import copy
 from json import load
 from typing import Any
+from datetime import datetime
 
 from src.misc.type_alias import DataTypes
 from src.misc.signs import Signs
@@ -41,3 +44,37 @@ class ConfParse:
                 conf[val] = self.overrides[val]
 
         return conf
+
+    def conf(self) -> DataTypes.TexConf:
+        """finalize the data returned by ConfParse.parse()
+
+        Returns the data ready for use in tex generation.
+        """
+
+        raw_conf: DataTypes.RawConf = self.parse()
+        packages: DataTypes.TexPkg = raw_conf["PACKAGES"]
+
+        packages[0]: str = (
+                packages[0]
+                    .replace("<MARGIN>", raw_conf["MARGIN"])
+                    .replace("<PAPER_SIZE>", raw_conf["PAPER_SIZE"])
+            )
+        if raw_conf["COLOR_LINKS"]:
+            packages[-1]: str = packages[-1].replace(
+                    "<LINK_COLORS>", raw_conf["LINK_COLORS"]
+                )
+        else:
+            packages.pop(-1)
+
+        return (
+            raw_conf["DOC_CLASS"],
+            raw_conf["DEF_FONT"],
+            raw_conf["FONT_SIZE"],
+            raw_conf["MAKE_TITLE"],
+            packages,
+            raw_conf["SECTION_SIZES"],
+            raw_conf["AUTHOR"],
+            raw_conf["DATE"].replace(
+                "<NOW>", datetime.now().strftime("%B %d, %Y")
+            )
+        )
