@@ -4,7 +4,6 @@
     "FONT_SIZE": 12,
     "MARGIN": "1in",
     "PAPER_SIZE": "a4paper",
-    "MAKE_TITLE_SIZES": "DEF",
     "MAKE_TITLE": true,
     "PACKAGES": [
             "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
