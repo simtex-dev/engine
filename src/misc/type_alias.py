@@ -9,17 +9,13 @@ class DataTypes:
     RawConf: dict[str, Any]
     TexConf: tuple[ # general configuration file
             str,
-            TexPkg,
+            str,
             int,
-            str,
-            str,
+            bool,
+            TexPkg,
             SecSizes,
             str,
             str,
-            bool,
-            str,
-            str,
-            bool,
-            str
+            bool
         ]
 
