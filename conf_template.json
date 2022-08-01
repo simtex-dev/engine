@@ -25,11 +25,8 @@
             "para": 12,
             "subpara": 12
         },
-    "MAKE_TITLE_SIZES": "DEF",
-    "DOC_CLASS": "ARTICLE",
-    "MAKE_TITLE": true,
     "AUTHOR": "John Doe",
-    "DATE": "NOW",
+    "DATE": "<NOW>",
     "COLOR_LINKS": true,
     "LINK_COLORS": "BLUE"
 }
