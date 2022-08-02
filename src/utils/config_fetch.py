@@ -1,5 +1,3 @@
-from curses import raw
-from dataclasses import dataclass
 from os.path import exists, expanduser
 from shutil import copy
 from json import load
