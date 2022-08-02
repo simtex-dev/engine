@@ -60,7 +60,7 @@ class ConfParse:
             )
         if raw_conf["COLOR_LINKS"]:
             packages[-1]: str = packages[-1].replace(
-                    "<LINK_COLORS>", raw_conf["LINK_COLORS"]
+                    "<LINK_COLORS>", raw_conf["LINK_COLORS"].lower()
                 )
         else:
             packages.pop(-1)
