@@ -1,5 +1,7 @@
 # simtex
 
+![](https://api.codiga.io/project/34276/score/svg)
+
 simtex (simplified LaTeX) allows you to convert your markdown or text lectures into LaTeX file with one command, configured with simple `.json` file.
 
 # Notes
