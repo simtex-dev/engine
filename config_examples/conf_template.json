@@ -20,9 +20,7 @@
     "SECTION_SIZES": {
             "main": 12,
             "sub": 12,
-            "subsub": 12,
-            "para": 12,
-            "subpara": 12
+            "subsub": 12
         },
     "AUTHOR": "John Doe",
     "DATE": "<NOW>",
