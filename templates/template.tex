@@ -1,0 +1,48 @@
+\documentclass[<FONT_SIZE>]{<DOC_CLASS>}
+
+% imports
+\usepackage{<DEF_FONT>}
+\usepackage[margin=<MARGIN>, <PAPERSIZE>]{geometry}
+
+% for subsection sizes
+\sectionfont{\fontsize{<SECTION_SIZES:MAIN>}{15}\selectfont}
+\subsectionfont{\fontsize{<SECTION_SIZES:SUB>}{15}\selectfont}
+\subsubsectionfont{\fontsize{<SECTION_SIZES:SUBSUB>}{15}\selectfont}
+
+% for lst listing
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{lstlistings_stylesheet}{
+	backgroundcolor=\color{backcolour},
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\scriptsize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=5pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=4
+}
+\lstset{style=lstlistings_stylesheet}
+
+% --------------------------------------------------------------------
+\author{<AUTHOR>}
+\date{<DATE>}
+\title{<TITLE>}
+% --------------------------------------------------------------------
+
+\begin{document}
+
+TEXT
+
+\end{document}
