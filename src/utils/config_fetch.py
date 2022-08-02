@@ -11,7 +11,7 @@ from src.misc.signs import Signs
 
 
 class ConfParse:
-    def __init__(self, overrides: dict[str, Any]) -> None:
+    def __init__(self, overrides: dict[str, Any] = None) -> None:
         """check the config file in instantiation before proceeding."""
 
         self.config_path: str = f"{expanduser('~')}/.config/simtex"
