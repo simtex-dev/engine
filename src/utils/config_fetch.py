@@ -33,13 +33,14 @@ class ConfParse:
             ) as conf_file:
             conf: dict[str, Any] = load(conf_file)
 
-        for val in self.overrides.keys():
-            val: str
-            if val in list(conf.keys()):
-                print(
-                    f"{Signs.INFO} {conf[val]} -> {self.overrides[val]}"
-                )
-                conf[val] = self.overrides[val]
+        if self.overrides is not None:
+            for val in self.overrides.keys():
+                val: str
+                if val in list(conf.keys()):
+                    print(
+                        f"{Signs.INFO} {conf[val]} -> {self.overrides[val]}"
+                    )
+                    conf[val] = self.overrides[val]
 
         return conf
 
