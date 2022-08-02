@@ -1,0 +1,40 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\begin{document}s
+    \section{Math}
+
+    This program is planned to support the most basic LaTeX features, you can use inline math with $a + b = c^2$. And this will be the paragraph math:
+
+    \begin{equation}
+        \oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0
+    \end{equation}
+
+    \subsection{Images}
+
+    You can also insert images with:
+
+    \begin{figure}[h]
+        \includegraphics{./hi.jpg}
+    \end{figure}
+
+    \subsubsection{Listings}
+
+    And code blocks with:
+
+\begin{lstlisting}
+fn main() {
+    println!("Hello world!");
+}
+\end{lstlisting}
+
+    \paragraph{This is paragraph}
+
+    Check \href{./example.tex}{example.tex} for the LaTeX rendition of this markdown file.
+
+\end{document}
