@@ -15,14 +15,9 @@ def cli() -> None:
         )
 
     parser.add_argument(
-        "-m", "--mardown",
-        help="Convert your markdown files to LaTeX.",
-        action="store_true"
-    )
-    parser.add_argument(
-        "-t", "--text",
-        help="Convert your text files to LaTeX.",
-        action="store_true"
+        "-f", "--file",
+        help="File to be converted into LaTeX.",
+        action="store"
     )
     parser.add_argument(
         "-c", "--convert",
@@ -60,7 +55,7 @@ def cli() -> None:
         action="store"
     )
     parser.add_argument(
-        "-f", "--font",
+        "-F", "--font",
         help="Use different font package.",
         action="store"
     )
