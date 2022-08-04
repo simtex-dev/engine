@@ -41,13 +41,8 @@ class Logger:
         """Log the proccesses using passed message and exception_ variable.
 
         Arguments:
-        exception_: str, determines what type of log level to use
-            (a.) "error" for major error that crashed the program
-            (b.) "Finfo" for failed subprocesses
-            (c.) "subinfo" to simply log the happening subprocesses
-            (d.) "proc_info" for major processes
-            (e.) "info" for information about the process
-        message: str, message to be logged.
+        exception_: str -- determines what type of log level to use
+        message: str -- message to be logged.
         """
 
         match exception_:
