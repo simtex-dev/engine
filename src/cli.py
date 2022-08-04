@@ -25,6 +25,11 @@ def cli() -> None:
         action="store_true"
     )
     parser.add_argument(
+        "-c", "--convert",
+        help="Convert the input to LaTeX.",
+        action="store_true"
+    )
+    parser.add_argument(
         "-b", "--build",
         help="Build the generated LaTeX file.",
         action="store_true"
