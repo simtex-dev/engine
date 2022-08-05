@@ -1,7 +1,7 @@
 from os.path import exists, expanduser
 from shutil import copy
 from json import load
-from typing import Any
+from typing import Any, NoReturn
 from datetime import datetime
 
 from src.misc.type_alias import DataTypes
@@ -27,27 +27,34 @@ class ConfParse:
                 f"{self.config_path}/simtex.json"
             )
 
-    def parse(self) -> DataTypes.RawConf:
+    def parse(self) -> DataTypes.RawConf | NoReturn:
         """parse and replace the overriden parameters in the cli.
 
         Returns the raw configuration file for further processing.
         """
 
-        with open(
-                f"{self.config_path}/simtex.json", "r", encoding="utf-8"
-            ) as conf_file:
-            conf: dict[str, Any] = load(conf_file)
+        for n in range(3):
+            try:
+                with open(
+                        f"{self.config_path}/simtex.json", "r", encoding="utf-8"
+                    ) as conf_file:
+                    conf: dict[str, Any] = load(conf_file)
 
-        if self.overrides is not None:
-            for val in self.overrides.keys():
-                val: str
-                if val in list(conf.keys()):
-                    print(
-                        f"{Signs.INFO} {conf[val]} -> {self.overrides[val]}"
-                    )
-                    conf[val] = self.overrides[val]
-
-        return conf
+                if self.overrides is not None:
+                    for val in self.overrides.keys():
+                        val: str
+                        if val in list(conf.keys()):
+                            print(
+                                f"{Signs.INFO} {conf[val]} -> {self.overrides[val]}"
+                            )
+                            conf[val] = self.overrides[val]
+            except (FileNotFoundError, PermissionError) as Err:
+                if n == 2:
+                    self.log.logger("E", f"Encountered {Err}, aborting ...")
+                    raise SystemExit
+                self.log.logger("E", f"Encountered {Err}, retying ...")
+            else:
+                return conf
 
     def conf(self) -> DataTypes.TexConf:
         """finalize the data returned by ConfParse.parse()
