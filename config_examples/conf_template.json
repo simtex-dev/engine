@@ -2,7 +2,7 @@
     "DOC_CLASS": "article",
     "DEF_FONT": "lmodern",
     "FONT_SIZE": 12,
-    "MARGIN": "1in",
+    "MARGIN": 1,
     "PAPER_SIZE": "a4paper",
     "MAKE_TITLE": true,
     "PACKAGES": [
