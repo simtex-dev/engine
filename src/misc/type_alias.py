@@ -1,21 +1,22 @@
-from typing import Any
+from typing import Any, NewType
 
 
 class DataTypes:
     """custom type annotations."""
 
-    TexPkg = list[str] # packages imported
-    SecSizes = dict[str, int] # sizes of sections e.g. subsection, etc ...
-    RawConf = dict[str, Any]
-    TexConf = tuple[ # general configuration file
-            str,
-            str,
-            int,
-            bool,
-            TexPkg,
-            SecSizes,
-            str,
-            str,
-            bool
-        ]
-
+    TexPkg = NewType("TexPkg", list[str]) # packages imported
+    SecSizes = NewType("SecSizes", dict[str, int]) # sizes of sections e.g. subsection, etc ...
+    RawConf = NewType("RawConf", dict[str, Any])
+    TexConf = NewType( # general configuration file
+            tuple[
+                str,
+                str,
+                int,
+                bool,
+                TexPkg,
+                SecSizes,
+                str,
+                str,
+                bool
+            ]
+        )
