@@ -28,7 +28,7 @@ def headings(
         }
 
     headings: list[str] = [
-            f"\documentclass[{conf[2]}pt]{conf[0]}\n",
+            f"\documentclass[{conf[2]}pt]{{{conf[0]}}}\n",
             f"% font\n\\usepackage{{{conf[1]}}}\n\n% packages"
         ]
 
