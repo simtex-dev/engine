@@ -56,7 +56,7 @@ def headings(
         headings.append(items)
 
     try:
-        print(f"{Signs.INFO} Writing headings to file ...")
+        print(f"{Signs.PROC} Writing headings to file ...")
         items: str
         for items in headings:
             tex_template.write(
