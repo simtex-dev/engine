@@ -5,7 +5,7 @@ from typing import Any
 from datetime import datetime
 
 from src.misc.type_alias import DataTypes
-from src.misc.signs import Signs
+from src.misc.stdout import Signs
 
 
 class ConfParse:

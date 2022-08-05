@@ -1,6 +1,6 @@
 from typing import TextIO, NoReturn
 
-from src.misc.signs import Signs
+from src.misc.stdout import Signs
 from src.misc.type_alias import DataTypes
 
 

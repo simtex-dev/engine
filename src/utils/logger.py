@@ -4,7 +4,7 @@ from os.path import expanduser
 
 from rich.logging import RichHandler
 
-from src.misc.signs import Signs
+from src.misc.stdout import Signs
 
 
 class Logger:
