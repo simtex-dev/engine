@@ -14,7 +14,9 @@ def headings(
 
     SECTIONS: dict[str, str] = {
             "main": (
-                    "\n% size config\n\sectionfont{\\fontsize{"
+                    "\n"
+                    r"% size config of sections"
+                    "\n\sectionfont{\\fontsize{"
                     "<SECTION_SIZES>}{15}\selectfont}"
                 ),
             "sub": (
@@ -59,9 +61,7 @@ def headings(
         print(f"{Signs.PROC} Writing headings to file ...")
         items: str
         for items in headings:
-            tex_template.write(
-                f"{items}\n"
-            )
+            tex_template.write(f"{items}\n")
     except (
         IOError,
         SystemError,
