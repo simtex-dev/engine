@@ -43,8 +43,8 @@ class ConfParse:
                     conf: dict[str, Any] = load(conf_file)
 
                 if self.overrides is not None:
+                    val: str
                     for val in self.overrides.keys():
-                        val: str
                         if val in list(conf.keys()):
                             print(
                                 (
