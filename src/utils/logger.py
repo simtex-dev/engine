@@ -1,6 +1,6 @@
 import logging
-from typing import Optional
-from os.path import expanduser
+from os import mkdir
+from os.path import expanduser, exists
 
 from rich.logging import RichHandler
 
@@ -10,7 +10,7 @@ from src.misc.stdout import Signs
 class Logger:
     """Custom logger."""
 
-    def __init__(self, filename: Optional[str] = None) -> None:
+    def __init__(self) -> None:
         logging.basicConfig(
             format="%(message)s",
             level=logging.INFO,
@@ -24,11 +24,17 @@ class Logger:
             ]
         self.log: object = logging.getLogger("rich")
 
-        if filename is None:
-            file_log: object = logging.FileHandler(filename=filename)
-        else:
-            file_log: object = logging.FileHandler(
-                filename=f"{expanduser('~')}/.simtex/simtex.log"
+        BASE_PATH: str = f"{expanduser('~')}/.simtex"
+        if not exists(BASE_PATH):
+            try:
+                mkdir(BASE_PATH)
+            except (PermissionError, OSError, IOError) as Err:
+                self.logger(
+                    "E", f"Cannot created directory: {Err}, aborting ..."
+                )
+
+        file_log: object = logging.FileHandler(
+                filename=f"{BASE_PATH}/simtex.log"
             )
 
         file_log.setLevel(logging.INFO)
