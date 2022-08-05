@@ -20,7 +20,7 @@ class ConfParse:
 
         if not exists(f"{self.config_path}/simtex.json"):
             log.logger(
-                "E", f"{Signs.INFO} Config file not found, used the default\n"
+                "E", f"{Signs.INFO} Config file not found, used the default."
             )
             copy(
                 f"{self.config_path}/simtex.json.bak",
@@ -36,7 +36,9 @@ class ConfParse:
         for n in range(3):
             try:
                 with open(
-                        f"{self.config_path}/simtex.json", "r", encoding="utf-8"
+                        f"{self.config_path}/simtex.json",
+                        "r",
+                        encoding="utf-8"
                     ) as conf_file:
                     conf: dict[str, Any] = load(conf_file)
 
@@ -45,7 +47,10 @@ class ConfParse:
                         val: str
                         if val in list(conf.keys()):
                             print(
-                                f"{Signs.INFO} {conf[val]} -> {self.overrides[val]}"
+                                (
+                                    f"{Signs.INFO} {conf[val]}"
+                                    f"-> {self.overrides[val]}"
+                                )
                             )
                             conf[val] = self.overrides[val]
             except (FileNotFoundError, PermissionError) as Err:
