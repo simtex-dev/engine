@@ -67,7 +67,7 @@ class ConfParse:
 
         packages[0]: str = (
                 packages[0]
-                    .replace("<MARGIN>", raw_conf["MARGIN"])
+                    .replace("<MARGIN>", f"{raw_conf['MARGIN']}in")
                     .replace("<PAPER_SIZE>", raw_conf["PAPER_SIZE"])
             )
         if raw_conf["COLOR_LINKS"]:
