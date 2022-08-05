@@ -130,4 +130,4 @@ dmypy.json
 
 venv/
 *__pycache__/*
-*__test__.py
+*__test__*
