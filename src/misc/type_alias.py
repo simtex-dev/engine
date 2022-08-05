@@ -8,6 +8,7 @@ class DataTypes:
     SecSizes = NewType("SecSizes", dict[str, int]) # sizes of sections e.g. subsection, etc ...
     RawConf = NewType("RawConf", dict[str, Any])
     TexConf = NewType( # general configuration file
+            "TexConf",
             tuple[
                 str,
                 str,
