@@ -46,6 +46,7 @@ def headings(
             )
         )
 
+    items: str
     for items in [
             f"\n% paper info\n\\title{{{title}}}",
             f"\\author{{{conf[6]}}}",
@@ -54,8 +55,8 @@ def headings(
         headings.append(items)
 
     try:
+        items: str
         for items in headings:
-            items: str
             tex_template.write(
                 f"{items}\n"
             )
