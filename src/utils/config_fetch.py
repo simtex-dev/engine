@@ -9,14 +9,19 @@ from src.misc.stdout import Signs
 
 
 class ConfParse:
-    def __init__(self, overrides: dict[str, Any] = None) -> None:
+    def __init__(
+            self, log: object, overrides: dict[str, Any] = None
+        ) -> None:
         """check the config file in instantiation before proceeding."""
 
+        self.log = log
         self.config_path: str = f"{expanduser('~')}/.config/simtex"
         self.overrides: dict[str, Any] = overrides
 
         if not exists(f"{self.config_path}/simtex.json"):
-            print(f"{Signs.INFO} Config file not found, used the default\n")
+            log.logger(
+                "E", f"{Signs.INFO} Config file not found, used the default\n"
+            )
             copy(
                 f"{self.config_path}/simtex.json.bak",
                 f"{self.config_path}/simtex.json"

@@ -5,6 +5,7 @@ from src.misc.type_alias import DataTypes
 
 
 def headings(
+        log: object,
         conf: DataTypes.TexConf,
         title: str,
         tex_template: TextIO = None
@@ -55,6 +56,7 @@ def headings(
         headings.append(items)
 
     try:
+        print(f"{Signs.INFO} Writing headings to file ...")
         items: str
         for items in headings:
             tex_template.write(
@@ -66,4 +68,5 @@ def headings(
         BlockingIOError,
         PermissionError
     ) as Err:
-        raise SystemExit(f"{Signs.FAIL} Encountered {Err}, aborting ...")
+        log.logger("E", f"Encountered {Err}, aborting ...")
+        raise SystemExit
