@@ -19,7 +19,7 @@ class ConfParse:
         self.overrides: dict[str, Any] = overrides
 
         if not exists(f"{self.config_path}/simtex.json"):
-            log.logger(
+            self.log.logger(
                 "E", f"{Signs.INFO} Config file not found, used the default."
             )
             copy(
