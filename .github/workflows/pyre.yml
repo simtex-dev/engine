@@ -2,10 +2,8 @@ name: Pyre
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "devel" ]
   pull_request:
-    branches: [ "devel" ]
+    branches: [ "devel", "main" ]
 
 permissions:
     contents: read
