@@ -1,6 +1,9 @@
 {
     "DOC_CLASS": "article",
     "DEF_FONT": "lmodern",
+    "CODE_FONT": "DejaVuSansMono",
+    "CFONT_SCALE": 0.9,
+    "CODE_CONF": "./code_conf.txt",
     "FONT_SIZE": 12,
     "MARGIN": 1,
     "PAPER_SIZE": "a4paper",
@@ -14,6 +17,7 @@
             "{footmisc}",
             "{gensymb}",
             "{xcolor}",
+            "{listings}",
             "{caption}",
             "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
         ],
