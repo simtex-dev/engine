@@ -9,7 +9,7 @@ class DataTypes:
     RawConf = NewType("RawConf", dict[str, Any])
     TexConf = NewType( # general configuration file
             "TexConf",
-            tuple[
+            (
                 str,
                 str,
                 int,
@@ -19,5 +19,5 @@ class DataTypes:
                 str,
                 str,
                 bool
-            ]
+            )
         )
