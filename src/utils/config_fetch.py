@@ -20,7 +20,7 @@ class ConfParse:
 
         if not exists(f"{self.config_path}/simtex.json"):
             self.log.logger(
-                "E", f"{Signs.INFO} Config file not found, used the default."
+                "E", f"Config file not found, used the default."
             )
             copy(
                 f"{self.config_path}/simtex.json.bak",
