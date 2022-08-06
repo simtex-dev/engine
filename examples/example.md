@@ -14,9 +14,22 @@ You can also insert images with:
 
 And code blocks with:
 
-```rust
-fn main() {
-    println!("Hello world!");
+```c
+#include <stdio.h>
+
+
+void say() {
+    printf("this is code blocks!");
+}
+
+
+int main() {
+    char hello_world[] = "hello world!\n";
+    printf(helloworld);
+
+    say();
+
+    return 0;
 }
 ```
 
