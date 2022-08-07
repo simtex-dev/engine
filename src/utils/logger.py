@@ -1,6 +1,7 @@
 import logging
+from pathlib import Path
 from os import mkdir
-from os.path import expanduser, exists
+from os.path import exists
 
 from rich.logging import RichHandler
 
@@ -24,7 +25,7 @@ class Logger:
             ]
         self.log: object = logging.getLogger("rich")
 
-        BASE_PATH: str = f"{expanduser('~')}/.simtex"
+        BASE_PATH: str = Path.home()/".simtex"
         if not exists(BASE_PATH):
             try:
                 mkdir(BASE_PATH)

@@ -1,4 +1,6 @@
-from os.path import exists, expanduser
+from os import mkdir
+from pathlib import Path
+from os.path import exists
 from shutil import copy
 from json import load
 from typing import Any, NoReturn, Optional
@@ -15,16 +17,26 @@ class ConfParse:
         """check the config file in instantiation before proceeding."""
 
         self.log = log
-        self.config_path: str = f"{expanduser('~')}/.config/simtex"
+        self.BASE_CONF_PATH: str = Path.home()/".config"
+        self.CONF_PATH: str = self.BASE_CONF_PATH/"simtex"
         self.overrides: dict[str, Any] = overrides
 
-        if not exists(f"{self.config_path}/simtex.json"):
+        for paths in [self.BASE_CONF_PATH, self.CONF_PATH]:
+            if not exists(paths):
+                try:
+                    mkdir(paths)
+                except (SystemError, OSError, IOError) as Err:
+                    self.log.logger(
+                        "E", f"Encountered: {Err}. Cannot create: {paths}"
+                    )
+
+        if not exists(f"{self.CONF_PATH}/simtex.json"):
             self.log.logger(
                 "E", f"Config file not found, used the default."
             )
             copy(
-                f"{self.config_path}/simtex.json.bak",
-                f"{self.config_path}/simtex.json"
+                f"{self.CONF_PATH}/simtex.json.bak",
+                f"{self.CONF_PATH}/simtex.json"
             )
 
     def parse(self) -> DataTypes.RawConf | NoReturn:
@@ -36,7 +48,7 @@ class ConfParse:
         for n in range(3):
             try:
                 with open(
-                        f"{self.config_path}/simtex.json",
+                        f"{self.CONF_PATH}/simtex.json",
                         "r",
                         encoding="utf-8"
                     ) as conf_file:
