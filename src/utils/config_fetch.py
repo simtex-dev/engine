@@ -1,7 +1,7 @@
 from os.path import exists, expanduser
 from shutil import copy
 from json import load
-from typing import Any, NoReturn
+from typing import Any, NoReturn, Optional
 from datetime import datetime
 
 from src.misc.type_alias import DataTypes
@@ -10,7 +10,7 @@ from src.misc.stdout import Signs
 
 class ConfParse:
     def __init__(
-            self, log: object, overrides: dict[str, Any] = None
+            self, log: object, overrides: Optional[dict[str, Any]] = None
         ) -> None:
         """check the config file in instantiation before proceeding."""
 
