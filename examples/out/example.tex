@@ -8,12 +8,12 @@
 \usepackage{indentfirst}
 \usepackage{amsmath}
 \usepackage{mathtools}
-\usepackage{symbols}
 \usepackage{footmisc}
 \usepackage{gensymb}
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{caption}
+\usepackage{sectsty}
 \usepackage[colorlinks, allcolors=blue]{hyperref}
 
 % size config of sections
@@ -38,6 +38,18 @@
     \subsection{Images}
 
     You can also insert images with:
+
+    \begin{figure}[h]
+        \includegraphics[width=\textwidth]{./sample_image.jpeg}
+    \end{figure}
+
+    or by:
+
+    \begin{center}
+        \begin{figure}[h]
+            \includegraphics[width=\textwidth]{./sample_image.jpeg}
+        \end{figure}
+    \end{center}
 
     \subsubsection{Listings}
 
@@ -64,6 +76,6 @@ int main() {
 
     \paragraph{This is paragraph}
 
-    Check \href{./example.tex}{example.tex} for the LaTeX rendition of this markdown file.
+    Check \href{./example.tex}{example.tex} for the LaTeX rendition of this markdown file. The output of the command is always placed in \texttt{./out/}.
 
 \end{document}

@@ -8,7 +8,11 @@ $$\oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0$$
 
 You can also insert images with:
 
-\img{./hi.jpg}
+![figure](./sample_image.jpeg)
+
+or by:
+
+<img src="./sample_image.jpeg" align="center">
 
 ### This is subsubsection: Listings
 
@@ -35,4 +39,4 @@ int main() {
 
 #### This is paragraph
 
-Check [example.tex](./example.tex) for the LaTeX rendition of this markdown file.
+Check [example.tex](./example.tex) for the LaTeX rendition of this markdown file. The output of the command is always placed in `./out/`.
