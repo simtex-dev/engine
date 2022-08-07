@@ -36,10 +36,13 @@ class ConfParse:
             self.log.logger(
                 "E", f"Config file not found, used the default."
             )
-            copy(
-                f"{self.CONF_PATH}/simtex.json.bak",
-                f"{self.CONF_PATH}/simtex.json"
-            )
+            try:
+                copy(
+                    f"{self.CONF_PATH}/simtex.json.bak",
+                    f"{self.CONF_PATH}/simtex.json"
+                )
+            except FileNotFoundError:
+                self.log.logger("E", "Backup file does not exists.")
 
     def parse(self) -> DataTypes.RawConf | NoReturn:
         """parse and replace the overriden parameters in the cli.
