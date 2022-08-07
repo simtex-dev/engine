@@ -11,6 +11,8 @@ from src.misc.stdout import Signs
 
 
 class ConfParse:
+    """Parse the JSON configuration file."""
+
     def __init__(
             self, log: object, overrides: Optional[dict[str, Any]] = None
         ) -> None:
