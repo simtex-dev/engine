@@ -13,7 +13,7 @@
             "{indentfirst}",
             "{amsmath}",
             "{mathtools}",
-            "{symbols}",
+            "{sectsty}",
             "{footmisc}",
             "{gensymb}",
             "{xcolor}",
