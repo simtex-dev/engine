@@ -30,7 +30,7 @@ class Logger:
                 mkdir(BASE_PATH)
             except (PermissionError, OSError, IOError) as Err:
                 self.logger(
-                    "E", f"Cannot created directory: {Err}, aborting ..."
+                    "E", f"Cannot create directory: {Err}, aborting ..."
                 )
 
         file_log: object = logging.FileHandler(
