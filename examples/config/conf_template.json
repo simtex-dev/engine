@@ -29,5 +29,6 @@
     "AUTHOR": "John Doe",
     "DATE": "<NOW>",
     "COLOR_LINKS": true,
-    "LINK_COLORS": "BLUE"
+    "LINK_COLORS": "BLUE",
+    "OUTPUT_FOLDER": "./out/"
 }
