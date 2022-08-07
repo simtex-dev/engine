@@ -1,4 +1,4 @@
-from typing import Any, NewType
+from typing import NewType
 
 
 class DataTypes:
@@ -6,18 +6,26 @@ class DataTypes:
 
     TexPkg = NewType("TexPkg", list[str]) # packages imported
     SecSizes = NewType("SecSizes", dict[str, int]) # sizes of sections e.g. subsection, etc ...
-    RawConf = NewType("RawConf", dict[str, Any])
     TexConf = NewType( # general configuration file
             "TexConf",
             (
                 str,
                 str,
                 int,
-                bool,
+                str,
+                int,
+                str,
+                float,
+                str,
                 TexPkg,
                 SecSizes,
+                bool,
                 str,
                 str,
-                bool
+                str,
+                bool,
+                str
             )
         )
+    RawConf = NewType("RawConf", dict[str, TexConf])
+
