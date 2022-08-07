@@ -15,11 +15,39 @@
 \usepackage{caption}
 \usepackage{sectsty}
 \usepackage[colorlinks, allcolors=blue]{hyperref}
+\usepackage[scaled=0.9]{DejaVuSansMono}
 
 % size config of sections
 \sectionfont{\fontsize{12}{15}\selectfont}
 \subsectionfont{\fontsize{12}{15}\selectfont}
 \subsubsectionfont{\fontsize{12}{15}\selectfont}
+
+% lst listing config
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{lstlistings_stylesheet}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=lstlistings_stylesheet}
+
 
 % paper info
 \title{helloworld}
