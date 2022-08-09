@@ -50,33 +50,30 @@ class ConfParse:
         Returns the raw configuration file for further processing.
         """
 
-        for n in range(3):
-            try:
-                with open(
-                        f"{self.CONF_PATH}/simtex.json",
-                        "r",
-                        encoding="utf-8"
-                    ) as conf_file:
-                    conf: dict[str, Any] = load(conf_file)
+        try:
+            with open(
+                    f"{self.CONF_PATH}/simtex.json",
+                    "r",
+                    encoding="utf-8"
+                ) as conf_file:
+                conf: dict[str, Any] = load(conf_file)
 
-                if self.overrides is not None:
-                    val: str
-                    for val in self.overrides.keys():
-                        if val in list(conf.keys()):
-                            print(
-                                (
-                                    f"{Signs.INFO} {conf[val]}"
-                                    f"-> {self.overrides[val]}"
-                                )
+            if self.overrides is not None:
+                val: str
+                for val in self.overrides.keys():
+                    if val in list(conf.keys()):
+                        print(
+                            (
+                                f"{Signs.INFO} {conf[val]}"
+                                f"-> {self.overrides[val]}"
                             )
-                            conf[val] = self.overrides[val]
-            except (FileNotFoundError, PermissionError) as Err:
-                if n == 2:
-                    self.log.logger("E", f"Encountered {Err}, aborting ...")
-                    raise SystemExit
-                self.log.logger("E", f"Encountered {Err}, retying ...")
-            else:
-                return conf
+                        )
+                        conf[val] = self.overrides[val]
+        except (FileNotFoundError, PermissionError) as Err:
+            self.log.logger("E", f"Encountered {Err}, aborting ...")
+            raise SystemExit
+        else:
+            return conf
 
     def conf(self) -> DataTypes.TexConf:
         """finalize the data returned by ConfParse.parse()
