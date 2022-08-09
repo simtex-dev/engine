@@ -1,9 +1,9 @@
 {
     "DOC_CLASS": "article",
     "DEF_FONT": "lmodern",
+    "FONT_SIZE": 12,
     "MARGIN": 1,
     "PAPER_SIZE": "a4paper",
-    "FONT_SIZE": 12,
     "CODE_FONT": "DejaVuSansMono",
     "CFONT_SCALE": 0.9,
     "CODE_CONF": "./code_conf.txt",
