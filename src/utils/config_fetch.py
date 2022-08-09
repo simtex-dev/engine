@@ -6,7 +6,7 @@ from json import load
 from typing import Any, NoReturn, Optional
 from datetime import datetime
 
-from src.misc.config import Config, Rules
+from src.utils.config import Config, Rules
 from src.misc.stdout import Signs
 
 
