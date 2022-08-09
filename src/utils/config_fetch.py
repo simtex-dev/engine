@@ -56,8 +56,9 @@ class ConfParse:
                     "r",
                     encoding="utf-8"
                 ) as conf_file:
-                conf: dict[str, Any] = load(conf_file)
+                raw_conf: list[dict[str, Any]] = load(conf_file)
 
+            conf = raw_conf[0]
             if self.overrides is not None:
                 val: str
                 for val in self.overrides.keys():
