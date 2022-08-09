@@ -1,12 +1,12 @@
-from typing import TextIO, NoReturn
+from typing import Any, TextIO, NoReturn
 
 from src.misc.stdout import Signs
-from src.misc.config import DataTypes
+from src.misc.config import Config
 
 
 def headings(
         log: object,
-        conf: DataTypes.TexConf,
+        conf: tuple[Any],
         title: str,
         tex_template: TextIO = None
     ) -> None | NoReturn:
