@@ -1,7 +1,7 @@
 from typing import TextIO, NoReturn
 
 from src.misc.stdout import Signs
-from src.misc.type_alias import DataTypes
+from src.misc.config import DataTypes
 
 
 def headings(

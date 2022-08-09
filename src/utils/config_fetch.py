@@ -6,7 +6,7 @@ from json import load
 from typing import Any, NoReturn, Optional
 from datetime import datetime
 
-from src.misc.type_alias import DataTypes
+from src.misc.config import Config
 from src.misc.stdout import Signs
 
 
@@ -44,7 +44,7 @@ class ConfParse:
             except FileNotFoundError:
                 self.log.logger("E", "Backup file does not exists.")
 
-    def parse(self) -> DataTypes.RawConf | NoReturn:
+    def parse(self) -> dict[str, Any] | NoReturn:
         """parse and replace the overriden parameters in the cli.
 
         Returns the raw configuration file for further processing.
@@ -75,14 +75,14 @@ class ConfParse:
         else:
             return conf
 
-    def conf(self) -> DataTypes.TexConf:
+    def conf(self) -> tuple[Any]:
         """finalize the data returned by ConfParse.parse()
 
         Returns the data ready for use in tex generation.
         """
 
-        raw_conf: DataTypes.RawConf = self.parse()
-        packages: DataTypes.TexPkg = raw_conf["PACKAGES"]
+        raw_conf: dict[str, Any] = self.parse()
+        packages: list[str] = raw_conf["PACKAGES"]
 
         packages[0]: str = (
                 packages[0]
