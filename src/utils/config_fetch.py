@@ -6,7 +6,7 @@ from json import load
 from typing import Any, NoReturn, Optional
 from datetime import datetime
 
-from src.misc.config import Config
+from src.misc.config import Config, Rules
 from src.misc.stdout import Signs
 
 
@@ -74,7 +74,16 @@ class ConfParse:
             self.log.logger("E", f"Encountered {Err}, aborting ...")
             raise SystemExit
         else:
-            return conf
+            return raw_conf
+
+    def rules(self) -> tuple[Any]:
+        raw_conf: dict[str, Any] = self.parse()[1]
+
+        return Rules(
+            tuple(
+                item for item in raw_conf.values()
+            )
+        )
 
     def conf(self) -> tuple[Any]:
         """finalize the data returned by ConfParse.parse()
@@ -82,7 +91,7 @@ class ConfParse:
         Returns the data ready for use in tex generation.
         """
 
-        raw_conf: dict[str, Any] = self.parse()
+        raw_conf: dict[str, Any] = self.parse()[0]
         packages: list[str] = raw_conf["PACKAGES"]
 
         packages[0]: str = (
