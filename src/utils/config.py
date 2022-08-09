@@ -4,39 +4,34 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class Config:
     """dataclass for configuration of the latex file."""
-    TexConf: tuple[
-            str,
-            str,
-            int,
-            str,
-            int,
-            str,
-            float,
-            str,
-            list[str],
-            dict[str, int],
-            bool,
-            str,
-            str,
-            str,
-            bool,
-            str
-        ]
+    doc_class: str
+    doc_font: str
+    font_size: int
+    code_font: str
+    cfont_scale: float
+    code_conf: str
+    packages: list[str]
+    section_sizes: dict[str, int]
+    links: bool
+    link_color: str
+    author: str
+    date: str
+    make_title: bool
+    output_folder: str
 
 
 @dataclass(frozen=True)
 class Rules:
     """dataclass for configuration of the parser."""
-    Rule: tuple[
-            list[str],
-            dict[str, str],
-            str,
-            str,
-            str,
-            str,
-            str,
-            str,
-            str,
-            dict[str, str],
-            dict[str, str]
-        ]
+
+    files: list[str]
+    code: dict[str, str]
+    image: str
+    links: str
+    section: str
+    subsection: str
+    subsubsection: str
+    paragraph: str
+    subparagraph: str
+    inline_math: dict[str, str]
+    paragraph_math: dict[str, str]
