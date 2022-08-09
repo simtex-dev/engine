@@ -1,10 +1,9 @@
 from dataclasses import dataclass
-from typing import Any
 
 
 @dataclass(frozen=True)
 class Config:
-    TexConf: tuple(
+    TexConf: tuple[
             str,
             str,
             int,
@@ -21,4 +20,4 @@ class Config:
             str,
             bool,
             str
-        )
+        ]
