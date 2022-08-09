@@ -1,34 +1,64 @@
-{
-    "DOC_CLASS": "article",
-    "DEF_FONT": "lmodern",
-    "FONT_SIZE": 12,
-    "MARGIN": 1,
-    "PAPER_SIZE": "a4paper",
-    "CODE_FONT": "DejaVuSansMono",
-    "CFONT_SCALE": 0.9,
-    "CODE_CONF": "./code_conf.txt",
-    "PACKAGES": [
-            "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
-            "{indentfirst}",
-            "{amsmath}",
-            "{mathtools}",
-            "{sectsty}",
-            "{footmisc}",
-            "{gensymb}",
-            "{xcolor}",
-            "{listings}",
-            "{caption}",
-            "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
-        ],
-    "SECTION_SIZES": {
-            "main": 12,
-            "sub": 12,
-            "subsub": 12
-        },
-    "COLOR_LINKS": true,
-    "LINK_COLORS": "BLUE",
-    "AUTHOR": "John Doe",
-    "DATE": "<NOW>",
-    "MAKE_TITLE": true,
-    "OUTPUT_FOLDER": "./out/"
-}
+[
+    {
+        "DOC_CLASS": "article",
+        "DEF_FONT": "lmodern",
+        "FONT_SIZE": 12,
+        "MARGIN": 1,
+        "PAPER_SIZE": "a4paper",
+        "CODE_FONT": "DejaVuSansMono",
+        "CFONT_SCALE": 0.9,
+        "CODE_CONF": "./code_conf.txt",
+        "PACKAGES": [
+                "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
+                "{indentfirst}",
+                "{amsmath}",
+                "{mathtools}",
+                "{sectsty}",
+                "{footmisc}",
+                "{gensymb}",
+                "{xcolor}",
+                "{listings}",
+                "{caption}",
+                "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
+            ],
+        "SECTION_SIZES": {
+                "main": 12,
+                "sub": 12,
+                "subsub": 12
+            },
+        "COLOR_LINKS": true,
+        "LINK_COLORS": "BLUE",
+        "AUTHOR": "John Doe",
+        "DATE": "<NOW>",
+        "MAKE_TITLE": true,
+        "OUTPUT_FOLDER": "./out/"
+    },
+    {
+        "FOR": [
+                "markdown",
+                "md",
+                "rst",
+                "txt",
+                "text"
+            ],
+        "CODE_BLOCKS": {
+                "STARTS": "```language",
+                "ENDS": "```"
+            },
+        "IMAGE": "![]()",
+        "LINKS": "[]()",
+        "SECTION": "#",
+        "SUBSECTION": "##",
+        "SUBSUBSECTION": "###",
+        "PARAGRAPH": "####",
+        "SUBPARAGRAPH": "#####",
+        "INLINE_MATH": {
+                "STARTS": "$",
+                "ENDS": "$"
+            },
+        "PARAGRAPH_MATH": {
+                "STARTS": "$$",
+                "ENDS": "$$"
+            }
+    }
+]
