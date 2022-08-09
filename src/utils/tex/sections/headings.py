@@ -5,7 +5,7 @@ from src.misc.stdout import Signs
 
 def headings(
         log: object,
-        conf: tuple[Any],
+        conf: object,
         title: str,
         tex_template: TextIO = None
     ) -> None | NoReturn:
@@ -29,19 +29,21 @@ def headings(
         }
 
     headings: list[str] = [
-            f"\documentclass[{conf[2]}pt]{{{conf[0]}}}\n",
-            f"% font\n\\usepackage{{{conf[1]}}}\n\n% packages"
+            f"\documentclass[{conf.font_size}pt]{{{conf.doc_class}}}\n",
+            f"% font\n\\usepackage{{{conf.doc_font}}}\n\n% packages"
         ]
 
     pkgs: str
-    for pkgs in conf[6]:
+    for pkgs in conf.packages:
         headings.append(f"\\usepackage{pkgs}")
-    headings.append(f"\\usepackage[scaled={conf[4]}]{{{conf[3]}}}")
+    headings.append(
+        f"\\usepackage[scaled={conf.cfont_scale}]{{{conf.code_font}}}"
+    )
 
     sec_sizes: int
     sec_val: str
     for sec_sizes, sec_val in zip(
-            conf[7].values(), SECTIONS.values()
+            conf.section_sizes.values(), SECTIONS.values()
         ):
         headings.append(
             sec_val.replace(
@@ -50,22 +52,22 @@ def headings(
         )
 
     lstconf: TextIO
-    # with open(conf[5], "r", encoding="utf-8") as lstconf:
-    #     headings.append(f"\n% lst listings config\n{lstconf.read()}")
+    with open(conf[5], "r", encoding="utf-8") as lstconf:
+        headings.append(f"\n% lst listings config\n{lstconf.read()}")
 
     items: str
     for items in [
-            f"% paper info\n\\title{{{title}}}",
-            f"\\author{{{conf[10]}}}",
-            f"\date{{{conf[11]}}}"
+            f"\n% paper info\n\\title{{{title}}}",
+            f"\\author{{{conf.author}}}",
+            f"\date{{{conf.date}}}"
         ]:
         headings.append(items)
 
     try:
         print(f"{Signs.PROC} Writing headings to file ...")
         items: str
-        # for items in headings:
-        #     tex_template.write(f"{items}\n")
+        for items in headings:
+            tex_template.write(f"{items}\n")
     except (
         IOError,
         SystemError,

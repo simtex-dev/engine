@@ -79,9 +79,17 @@ class ConfParse:
         raw_conf: dict[str, Any] = self.parse()[1]
 
         return Rules(
-            tuple(
-                item for item in raw_conf.values()
-            )
+            raw_conf["FOR"],
+            raw_conf["CODE_BLOCKS"],
+            raw_conf["IMAGE"],
+            raw_conf["LINKS"],
+            raw_conf["SECTION"],
+            raw_conf["SUBSECTION"],
+            raw_conf["SUBSUBSECTION"],
+            raw_conf["PARAGRAPH"],
+            raw_conf["SUBPARAGRAPH"],
+            raw_conf["INLINE_MATH"],
+            raw_conf["PARAGRAPH_MATH"]
         )
 
     def conf(self) -> tuple[Any]:
@@ -103,22 +111,20 @@ class ConfParse:
             packages.pop(-1)
 
         return Config(
-            (
-                raw_conf["DOC_CLASS"],
-                raw_conf["DEF_FONT"],
-                raw_conf["FONT_SIZE"],
-                raw_conf["CODE_FONT"],
-                raw_conf["CFONT_SCALE"],
-                raw_conf["CODE_CONF"],
-                packages,
-                raw_conf["SECTION_SIZES"],
-                raw_conf["COLOR_LINKS"],
-                raw_conf["LINK_COLORS"],
-                raw_conf["AUTHOR"],
-                raw_conf["DATE"].replace(
-                    "<NOW>", datetime.now().strftime("%B %d, %Y")
-                ),
-                raw_conf["MAKE_TITLE"],
-                raw_conf["OUTPUT_FOLDER"]
-            )
+            raw_conf["DOC_CLASS"],
+            raw_conf["DEF_FONT"],
+            raw_conf["FONT_SIZE"],
+            raw_conf["CODE_FONT"],
+            raw_conf["CFONT_SCALE"],
+            raw_conf["CODE_CONF"],
+            packages,
+            raw_conf["SECTION_SIZES"],
+            raw_conf["COLOR_LINKS"],
+            raw_conf["LINK_COLORS"],
+            raw_conf["AUTHOR"],
+            raw_conf["DATE"].replace(
+                "<NOW>", datetime.now().strftime("%B %d, %Y")
+            ),
+            raw_conf["MAKE_TITLE"],
+            raw_conf["OUTPUT_FOLDER"]
         )
