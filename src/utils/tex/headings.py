@@ -1,7 +1,6 @@
 from typing import Any, TextIO, NoReturn
 
 from src.misc.stdout import Signs
-from src.misc.config import Config
 
 
 def headings(
@@ -35,13 +34,14 @@ def headings(
         ]
 
     pkgs: str
-    for pkgs in conf[4]:
+    for pkgs in conf[6]:
         headings.append(f"\\usepackage{pkgs}")
+    headings.append(f"\\usepackage[scaled={conf[4]}]{{{conf[3]}}}")
 
     sec_sizes: int
     sec_val: str
     for sec_sizes, sec_val in zip(
-            conf[5].values(), SECTIONS.values()
+            conf[7].values(), SECTIONS.values()
         ):
         headings.append(
             sec_val.replace(
@@ -49,11 +49,15 @@ def headings(
             )
         )
 
+    lstconf: TextIO
+    with open(conf[5], "r", encoding="utf-8") as lstconf:
+        headings.append(f"\n% lst listings config\n{lstconf.read()}")
+
     items: str
     for items in [
-            f"\n% paper info\n\\title{{{title}}}",
-            f"\\author{{{conf[6]}}}",
-            f"\date{{{conf[7]}}}"
+            f"% paper info\n\\title{{{title}}}",
+            f"\\author{{{conf[10]}}}",
+            f"\date{{{conf[11]}}}"
         ]:
         headings.append(items)
 
