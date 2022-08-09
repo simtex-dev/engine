@@ -103,7 +103,7 @@ class ConfParse:
                 raw_conf["FONT_SIZE"],
                 raw_conf["CODE_FONT"],
                 raw_conf["CFONT_SCALE"],
-                raw_conf["CFONT_CONF"],
+                raw_conf["CODE_CONF"],
                 packages,
                 raw_conf["SECTION_SIZES"],
                 raw_conf["COLOR_LINKS"],
