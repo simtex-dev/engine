@@ -8,7 +8,7 @@ def cli() -> None:
     description: str = (
             "Generate a LaTeX file from your notes with few commands!"
         )
-    parser: object = ArgumentParser(
+    parser: ArgumentParser = ArgumentParser(
             prog="simtex",
             usage="simtex [OPTIONS]",
             description=description

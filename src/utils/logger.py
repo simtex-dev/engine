@@ -23,9 +23,9 @@ class Logger:
                 "[ INPT ]",
                 "[ FAIL ]",
             ]
-        self.log: object = logging.getLogger("rich")
+        self.log = logging.getLogger("rich")
 
-        BASE_PATH: str = Path.home()/".simtex"
+        BASE_PATH: Path = Path.home()/".simtex"
         if not exists(BASE_PATH):
             try:
                 mkdir(BASE_PATH)
@@ -34,7 +34,7 @@ class Logger:
                     "E", f"Cannot create directory: {Err}, aborting ..."
                 )
 
-        file_log: object = logging.FileHandler(
+        file_log = logging.FileHandler(
                 filename=f"{BASE_PATH}/simtex.log"
             )
 

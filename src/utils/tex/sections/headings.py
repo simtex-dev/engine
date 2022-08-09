@@ -1,14 +1,16 @@
-from typing import Any, TextIO, NoReturn
+from typing import IO, Any, Optional, TextIO
 
 from src.misc.stdout import Signs
+from src.utils.logger import Logger
+from src.utils.config import Config
 
 
 def headings(
-        log: object,
-        conf: object,
+        log: Logger,
+        conf: Config,
         title: str,
-        out_file: TextIO = None
-    ) -> None | NoReturn:
+        out_file: Optional[TextIO]
+    ) -> None:
     """Create the headings of the LaTeX file."""
 
     SECTIONS: dict[str, str] = {
@@ -51,8 +53,8 @@ def headings(
             )
         )
 
-    lstconf: TextIO
-    with open(conf[5], "r", encoding="utf-8") as lstconf:
+    lstconf: IO[Any]
+    with open(conf.code_conf, "r", encoding="utf-8") as lstconf:
         headings.append(f"\n% lst listings config\n{lstconf.read()}")
 
     items: str
@@ -65,9 +67,17 @@ def headings(
 
     try:
         print(f"{Signs.PROC} Writing headings to file ...")
-        items: str
-        for items in headings:
-            out_file.write(f"{items}\n")
+        if out_file is not None:
+            for items in headings:
+                out_file.write(f"{items}\n")
+        else:
+            with open(
+                    f"{conf.output_folder}/a.tex", "w", encoding="utf-8"
+                ) as out_file:
+                for items in headings:
+                    out_file.write(f"{items}\n")
+
+
     except (
         IOError,
         SystemError,

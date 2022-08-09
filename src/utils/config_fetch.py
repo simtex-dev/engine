@@ -8,20 +8,22 @@ from datetime import datetime
 
 from src.utils.config import Config, Rules
 from src.misc.stdout import Signs
+from src.utils.logger import Logger
 
 
 class ConfParse:
     """Parse the JSON configuration file."""
 
     def __init__(
-            self, log: object, overrides: Optional[dict[str, Any]] = None
+            self, log: Logger, overrides: Optional[dict[str, Any]] = None
         ) -> None:
         """Check the config file in instantiation before proceeding."""
 
         self.log = log
-        self.BASE_CONF_PATH: str = Path.home()/".config"
-        self.CONF_PATH: str = self.BASE_CONF_PATH/"simtex"
-        self.overrides: dict[str, Any] = overrides
+        self.HOME: Path = Path.home()
+        self.BASE_CONF_PATH: str = f"{self.HOME}/.config"
+        self.CONF_PATH: str = f"{self.BASE_CONF_PATH}/simtex"
+        self.overrides: Optional[dict[str, Any]] = overrides
 
         for paths in [self.BASE_CONF_PATH, self.CONF_PATH]:
             if not exists(paths):
@@ -44,7 +46,7 @@ class ConfParse:
             except FileNotFoundError:
                 self.log.logger("E", "Backup file does not exists.")
 
-    def parse(self) -> dict[str, Any] | NoReturn:
+    def parse(self) -> list[dict[str, Any]] | NoReturn:
         """Parse and replace the overriden parameters in the CLI."""
 
         try:
@@ -73,7 +75,7 @@ class ConfParse:
         else:
             return raw_conf
 
-    def rules(self) -> tuple[Any]:
+    def rules(self) -> Rules:
         """Parse the config of the rules of converter."""
 
         raw_conf: dict[str, Any] = self.parse()[1]
@@ -92,19 +94,19 @@ class ConfParse:
             raw_conf["PARAGRAPH_MATH"]
         )
 
-    def conf(self) -> tuple[Any]:
+    def conf(self) -> Config:
         """Parse the config of the LaTeX file."""
 
         raw_conf: dict[str, Any] = self.parse()[0]
         packages: list[str] = raw_conf["PACKAGES"]
 
-        packages[0]: str = (
+        packages[0] = (
                 packages[0]
                     .replace("<MARGIN>", f"{raw_conf['MARGIN']}in")
                     .replace("<PAPER_SIZE>", raw_conf["PAPER_SIZE"])
             )
         if raw_conf["COLOR_LINKS"]:
-            packages[-1]: str = packages[-1].replace(
+            packages[-1] = packages[-1].replace(
                     "<LINK_COLORS>", raw_conf["LINK_COLORS"].lower()
                 )
         else:

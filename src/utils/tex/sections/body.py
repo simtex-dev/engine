@@ -1,9 +1,13 @@
 from re import findall
 
-from typing import Any, TextIO
+from typing import Any, Optional, TextIO
+
+from src.utils.config import Rules
 
 
-def body(filepath: str, rules: object, out_file: TextIO = None) -> None:
+def body(
+        filepath: str, rules: Rules, out_file: TextIO
+    ) -> None:
     """Generate a LaTeX version of the given markdown file.
 
     Arguments:
@@ -11,12 +15,13 @@ def body(filepath: str, rules: object, out_file: TextIO = None) -> None:
     rules: object -- the rules to follow for parsing.
     out_file: textio -- where the output will be written.
     """
+    # TODO: figure out to efficiently write the body into the file
 
     def title(
             line: str,
             command: str,
-            def_rule: str = None,
-            params: str = None,
+            def_rule: Optional[str] = None,
+            params: Optional[str] = None,
             env: bool = False
         ) -> str:
         """Get the title from the line."""
@@ -25,7 +30,13 @@ def body(filepath: str, rules: object, out_file: TextIO = None) -> None:
             attach: str = f"[{params}]\n" if params is not None else "\n"
             return f"\n\\begin{{{command}}}{attach}"
 
-        stripped_line: str = line.replace(def_rule, "").replace("\n", "").strip()
+        stripped_line: str = (
+                line
+                    .replace(
+                        def_rule if def_rule is not None else "", ""
+                    )
+                    .replace("\n", "").strip()
+            )
         return f"\n\\{command}{{{stripped_line}}}\n"
 
     file: TextIO
@@ -88,7 +99,8 @@ def body(filepath: str, rules: object, out_file: TextIO = None) -> None:
                 parts: list[str] = line.split()
                 part: str
                 for part in parts:
-                    img_results: list[tuple[str]]
+                    img_results: list[tuple[str, str]]
+                    link_results: list[tuple[str, str]]
                     if (
                             img_results := findall(
                                     rules.image, part
@@ -108,12 +120,10 @@ def body(filepath: str, rules: object, out_file: TextIO = None) -> None:
                                     rules.links, part
                                 )
                         ):
-                        links: tuple[str] = link_results[0]
-                        new_line: str = (
-                            line.replace(
+                        links: tuple[str, str] = link_results[0]
+                        new_line: str = line.replace(
                                 f"[{links[0]}]({links[1]})",
                                 f"\\href{{{links[0]}}}{{{links[1]}}}"
                             )
-                        )
                         out_file.write(f"\n{new_line}\n")
 
