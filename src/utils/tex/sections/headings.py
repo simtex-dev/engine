@@ -7,7 +7,7 @@ def headings(
         log: object,
         conf: object,
         title: str,
-        tex_template: TextIO = None
+        out_file: TextIO = None
     ) -> None | NoReturn:
     """Create the headings of the LaTeX file."""
 
@@ -67,7 +67,7 @@ def headings(
         print(f"{Signs.PROC} Writing headings to file ...")
         items: str
         for items in headings:
-            tex_template.write(f"{items}\n")
+            out_file.write(f"{items}\n")
     except (
         IOError,
         SystemError,
