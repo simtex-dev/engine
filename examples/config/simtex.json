@@ -42,8 +42,8 @@
                 "text"
             ],
         "CODE_BLOCKS": "```",
-        "IMAGE": "![]()",
-        "LINKS": "[]()",
+        "IMAGE": "!\\[([^]]+)\\]\\(([^]]+)\\)",
+        "LINKS": "\\[([^]]+)\\]\\(([^]]+)\\)",
         "SECTION": "#",
         "SUBSECTION": "##",
         "SUBSUBSECTION": "###",
