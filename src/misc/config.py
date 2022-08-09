@@ -21,3 +21,20 @@ class Config:
             bool,
             str
         ]
+
+
+@dataclass(frozen=True)
+class Rules:
+    Rule: tuple[
+            list[str],
+            dict[str, str],
+            str,
+            str,
+            str,
+            str,
+            str,
+            str,
+            str,
+            dict[str, str],
+            dict[str, str]
+        ]
