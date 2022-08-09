@@ -4,14 +4,13 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "devel" ]
 
 permissions:
   contents: read
 
 jobs:
   codacy-security-scan:
-    permissions:
     name: Codacy Security Scan
     runs-on: ubuntu-latest
     steps:
