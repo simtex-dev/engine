@@ -25,7 +25,7 @@ class Rules:
     """dataclass for configuration of the parser."""
 
     files: list[str]
-    code: dict[str, str]
+    code: str
     image: str
     links: str
     section: str
@@ -33,5 +33,5 @@ class Rules:
     subsubsection: str
     paragraph: str
     subparagraph: str
-    inline_math: dict[str, str]
-    paragraph_math: dict[str, str]
+    inline_math: str
+    paragraph_math: str

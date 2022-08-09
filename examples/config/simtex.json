@@ -41,10 +41,7 @@
                 "txt",
                 "text"
             ],
-        "CODE_BLOCKS": {
-                "STARTS": "```language",
-                "ENDS": "```"
-            },
+        "CODE_BLOCKS": "```",
         "IMAGE": "![]()",
         "LINKS": "[]()",
         "SECTION": "#",
@@ -52,13 +49,7 @@
         "SUBSUBSECTION": "###",
         "PARAGRAPH": "####",
         "SUBPARAGRAPH": "#####",
-        "INLINE_MATH": {
-                "STARTS": "$",
-                "ENDS": "$"
-            },
-        "PARAGRAPH_MATH": {
-                "STARTS": "$$",
-                "ENDS": "$$"
-            }
+        "INLINE_MATH": "$",
+        "PARAGRAPH_MATH": "$"
     }
 ]
