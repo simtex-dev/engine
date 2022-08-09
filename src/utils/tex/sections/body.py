@@ -3,54 +3,90 @@ from re import findall
 from typing import Any, TextIO
 
 
-def body(filepath: str, rules: tuple[Any]) -> None:
+def body(filepath: str, rules: object, out_file: TextIO = None) -> None:
     """Generate a LaTeX version of the given markdown file.
 
     Arguments:
     filepath: str -- the path of the file to convert (reference file).
+    rules: object -- the rules to follow for parsing.
+    out_file: textio -- where the output will be written.
     """
+
+    def title(
+            line: str,
+            command: str,
+            def_rule: str = None,
+            params: str = None,
+            env: bool = False
+        ) -> str:
+        """Get the title from the line."""
+
+        if env:
+            attach: str = f"[{params}]\n" if params is not None else "\n"
+            return f"\n\\begin{{{command}}}{attach}"
+
+        stripped_line: str = line.replace(def_rule, "").replace("\n", "").strip()
+        return f"\n\\{command}{{{stripped_line}}}\n"
 
     file: TextIO
     with open(filepath, "r", encoding="utf-8") as file:
         text: list[str] = file.readlines()
 
-    PARTS: dict[str, list[str]] = {
-            "sections": [],
-            "subsections": [],
-            "subsubsections": [],
-            "paragraphs": [],
-            "subparagraphs": [],
-            "images": [],
-            "links": [],
-            "code_blocks": {}
-        }
-
     text_2: list[str] = text.copy()
+    i: int
+    ref: int = -1
+    line: str
     for i, line in enumerate(text):
         if line in ["", "\n"]:
             continue
 
+        if i <= ref:
+            continue
+
         match line.split()[0].strip():
             case rules.section:
-                PARTS["sections"].append(line)
+                out_file.write(
+                    title(line, "section", rules.section)
+                )
             case rules.subsection:
-                PARTS["subsections"].append(line)
+                out_file.write(
+                    title(line, "subsection", rules.subsection)
+                )
             case rules.subsubsection:
-                PARTS["subsubsections"].append(line)
+                out_file.write(
+                    title(line, "subsubsection", rules.subsubsection)
+                )
             case rules.paragraph:
-                PARTS["paragraphs"].append(line)
+                out_file.write(
+                    title(line, "paragraph", rules.paragraph)
+                )
             case rules.subparagraph:
-                PARTS["subparagraphs"].append(line)
+                out_file.write(
+                    title(line, "subparagraph", rules.subparagraph)
+                )
             case _:
                 if line.startswith(rules.code):
+                    language: str = line[3:].replace("\n", "")
+                    out_file.write(
+                        title(
+                            line,
+                            "lstlisting",
+                            params=f"language={language}",
+                            env=True
+                        )
+                    )
+                    code: str
+                    n: int
                     for n, code in enumerate(text_2[i+1:]):
                         if code.strip() == rules.code:
-                            PARTS["code_blocks"][
-                                    f"code_{len(PARTS['code_blocks'])}"
-                                ] = text[i+1:i+n+1]
+                            out_file.write("\end{lstlisting}\n\n")
+                            ref = n+i+1
                             break
+                        else:
+                            out_file.write(f"{code}")
 
                 parts: list[str] = line.split()
+                part: str
                 for part in parts:
                     img_results: list[tuple[str]]
                     if (
@@ -58,10 +94,26 @@ def body(filepath: str, rules: tuple[Any]) -> None:
                                     rules.image, part
                                 )
                         ):
-                        PARTS["images"].append(img_results)
+                        out_file.write(
+                            (
+                                "\n\\begin{figure}\n"
+                                "\t\\includegraphics[width=\\textwidth]"
+                                f"{{{img_results[0][1]}}}\n"
+                                f"\t\\caption{img_results[0][0]}\n"
+                                "\\end{figure}\n"
+                            )
+                        )
                     elif (
                             link_results := findall(
                                     rules.links, part
                                 )
                         ):
-                        PARTS["images"].append(link_results)
+                        links: tuple[str] = link_results[0]
+                        new_line: str = (
+                            line.replace(
+                                f"[{links[0]}]({links[1]})",
+                                f"\\href{{{links[0]}}}{{{links[1]}}}"
+                            )
+                        )
+                        out_file.write(f"\n{new_line}\n")
+
