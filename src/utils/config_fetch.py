@@ -96,15 +96,23 @@ class ConfParse:
         else:
             packages.pop(-1)
 
-        return (
-            raw_conf["DOC_CLASS"],
-            raw_conf["DEF_FONT"],
-            raw_conf["FONT_SIZE"],
-            raw_conf["MAKE_TITLE"],
-            packages,
-            raw_conf["SECTION_SIZES"],
-            raw_conf["AUTHOR"],
-            raw_conf["DATE"].replace(
-                "<NOW>", datetime.now().strftime("%B %d, %Y")
+        return Config(
+            (
+                raw_conf["DOC_CLASS"],
+                raw_conf["DEF_FONT"],
+                raw_conf["FONT_SIZE"],
+                raw_conf["CODE_FONT"],
+                raw_conf["CFONT_SCALE"],
+                raw_conf["CFONT_CONF"],
+                packages,
+                raw_conf["SECTION_SIZES"],
+                raw_conf["COLOR_LINKS"],
+                raw_conf["LINK_COLORS"],
+                raw_conf["AUTHOR"],
+                raw_conf["DATE"].replace(
+                    "<NOW>", datetime.now().strftime("%B %d, %Y")
+                ),
+                raw_conf["MAKE_TITLE"],
+                raw_conf["OUTPUT_FOLDER"]
             )
         )
