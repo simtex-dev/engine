@@ -4,9 +4,6 @@ from typing import Any
 
 @dataclass(frozen=True)
 class Config:
-    TexPkg: list[str]
-    """Configuration of the latex file."""
-    SecSizes: dict[str, int]
     TexConf: tuple(
             str,
             str,
@@ -25,4 +22,3 @@ class Config:
             bool,
             str
         )
-    RawConf: dict[str, Any]
