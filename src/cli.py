@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 
 
 def cli() -> None:
-    """commandline interface for the program."""
+    """Commandline interface for the program."""
 
     description: str = (
             "Generate a LaTeX file from your notes with few commands!"

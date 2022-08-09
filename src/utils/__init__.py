@@ -1,1 +1,1 @@
-"""this packages contains essential modules needed in the program."""
+"""This package contains the utilities of the program."""

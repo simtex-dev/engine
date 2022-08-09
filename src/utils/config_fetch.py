@@ -16,7 +16,7 @@ class ConfParse:
     def __init__(
             self, log: object, overrides: Optional[dict[str, Any]] = None
         ) -> None:
-        """check the config file in instantiation before proceeding."""
+        """Check the config file in instantiation before proceeding."""
 
         self.log = log
         self.BASE_CONF_PATH: str = Path.home()/".config"
@@ -45,10 +45,7 @@ class ConfParse:
                 self.log.logger("E", "Backup file does not exists.")
 
     def parse(self) -> dict[str, Any] | NoReturn:
-        """parse and replace the overriden parameters in the cli.
-
-        Returns the raw configuration file for further processing.
-        """
+        """Parse and replace the overriden parameters in the CLI."""
 
         try:
             with open(
@@ -77,6 +74,8 @@ class ConfParse:
             return raw_conf
 
     def rules(self) -> tuple[Any]:
+        """Parse the config of the rules of converter."""
+
         raw_conf: dict[str, Any] = self.parse()[1]
 
         return Rules(
@@ -86,10 +85,7 @@ class ConfParse:
         )
 
     def conf(self) -> tuple[Any]:
-        """finalize the data returned by ConfParse.parse()
-
-        Returns the data ready for use in tex generation.
-        """
+        """Parse the config of the LaTeX file."""
 
         raw_conf: dict[str, Any] = self.parse()[0]
         packages: list[str] = raw_conf["PACKAGES"]

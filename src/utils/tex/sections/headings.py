@@ -9,7 +9,7 @@ def headings(
         title: str,
         tex_template: TextIO = None
     ) -> None | NoReturn:
-    """create the headings for the latex file."""
+    """Create the headings of the LaTeX file."""
 
     SECTIONS: dict[str, str] = {
             "main": (
@@ -50,8 +50,8 @@ def headings(
         )
 
     lstconf: TextIO
-    with open(conf[5], "r", encoding="utf-8") as lstconf:
-        headings.append(f"\n% lst listings config\n{lstconf.read()}")
+    # with open(conf[5], "r", encoding="utf-8") as lstconf:
+    #     headings.append(f"\n% lst listings config\n{lstconf.read()}")
 
     items: str
     for items in [
@@ -64,8 +64,8 @@ def headings(
     try:
         print(f"{Signs.PROC} Writing headings to file ...")
         items: str
-        for items in headings:
-            tex_template.write(f"{items}\n")
+        # for items in headings:
+        #     tex_template.write(f"{items}\n")
     except (
         IOError,
         SystemError,

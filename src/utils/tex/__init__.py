@@ -1,1 +1,2 @@
-"""this subpackage contains the modules needed for tex file generation."""
+"""This subpackage contains the modules that will
+generate the needed parts for the LaTeX file."""

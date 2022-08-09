@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class Config:
+    """dataclass for configuration of the latex file."""
     TexConf: tuple[
             str,
             str,
@@ -25,6 +26,7 @@ class Config:
 
 @dataclass(frozen=True)
 class Rules:
+    """dataclass for configuration of the parser."""
     Rule: tuple[
             list[str],
             dict[str, str],
