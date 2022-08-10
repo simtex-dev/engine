@@ -76,7 +76,15 @@ def body(
                     title(line, "subparagraph", rules.subparagraph)
                 )
             case _:
-                if line.startswith(rules.code):
+                if line.startswith(rules.paragraph_math):
+                    out_file.write(
+                        (
+                            "\n\\begin{equation}\n"
+                            f"\t{line[2:-3]}\n"
+                            "\\end{equation}\n"
+                        )
+                    )
+                elif line.startswith(rules.code):
                     language: str = line[3:].replace("\n", "")
                     out_file.write(
                         title(
