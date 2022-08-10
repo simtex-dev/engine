@@ -3,7 +3,7 @@ from pathlib import Path
 from os.path import exists
 from shutil import copy
 from json import load
-from typing import Any, NoReturn, Optional
+from typing import IO, Any, NoReturn, Optional
 from datetime import datetime
 
 from src.utils.config import Config, Rules
@@ -19,12 +19,13 @@ class ConfParse:
         ) -> None:
         """Check the config file in instantiation before proceeding."""
 
-        self.log = log
+        self.log: Logger = log
         self.HOME: Path = Path.home()
         self.BASE_CONF_PATH: str = f"{self.HOME}/.config"
         self.CONF_PATH: str = f"{self.BASE_CONF_PATH}/simtex"
         self.overrides: Optional[dict[str, Any]] = overrides
 
+        paths: str
         for paths in [self.BASE_CONF_PATH, self.CONF_PATH]:
             if not exists(paths):
                 try:
@@ -50,6 +51,7 @@ class ConfParse:
         """Parse and replace the overriden parameters in the CLI."""
 
         try:
+            conf_file: IO[Any]
             with open(
                     f"{self.CONF_PATH}/simtex.json",
                     "r",
@@ -57,7 +59,7 @@ class ConfParse:
                 ) as conf_file:
                 raw_conf: list[dict[str, Any]] = load(conf_file)
 
-            conf = raw_conf[0]
+            conf: dict[str, Any] = raw_conf[0]
             if self.overrides is not None:
                 val: str
                 for val in self.overrides.keys():

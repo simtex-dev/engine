@@ -42,8 +42,7 @@ def headings(
         f"\\usepackage[scaled={conf.cfont_scale}]{{{conf.code_font}}}"
     )
 
-    sec_sizes: int
-    sec_val: str
+    sec_sizes: int; sec_val: str
     for sec_sizes, sec_val in zip(
             conf.section_sizes.values(), SECTIONS.values()
         ):
@@ -76,7 +75,6 @@ def headings(
                 ) as out_file:
                 for items in headings:
                     out_file.write(f"{items}\n")
-
 
     except (
         IOError,

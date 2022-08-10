@@ -1,6 +1,6 @@
 from re import findall
 
-from typing import Any, Optional, TextIO
+from typing import Any, Optional, TextIO, IO
 
 from src.utils.config import Rules
 
@@ -39,14 +39,14 @@ def body(
             )
         return f"\n\\{command}{{{stripped_line}}}\n"
 
-    file: TextIO
+    file: IO[Any]
     with open(filepath, "r", encoding="utf-8") as file:
         text: list[str] = file.readlines()
 
     text_2: list[str] = text.copy()
-    i: int
     ref: int = -1
-    line: str
+
+    i: int; line: str
     for i, line in enumerate(text):
         if line in ["", "\n"]:
             continue
@@ -86,8 +86,8 @@ def body(
                             env=True
                         )
                     )
-                    code: str
-                    n: int
+
+                    code: str; n: int
                     for n, code in enumerate(text_2[i+1:]):
                         if code.strip() == rules.code:
                             out_file.write("\end{lstlisting}\n\n")
@@ -97,10 +97,12 @@ def body(
                             out_file.write(f"{code}")
 
                 parts: list[str] = line.split()
+
                 part: str
                 for part in parts:
                     img_results: list[tuple[str, str]]
                     link_results: list[tuple[str, str]]
+
                     if (
                             img_results := findall(
                                     rules.image, part
