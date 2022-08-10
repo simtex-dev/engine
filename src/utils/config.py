@@ -17,6 +17,7 @@ class Config:
     author: str
     date: str
     make_title: bool
+    filename: str
     output_folder: str
 
 

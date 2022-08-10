@@ -130,5 +130,6 @@ class ConfParse:
                 "<NOW>", datetime.now().strftime("%B %d, %Y")
             ),
             raw_conf["MAKE_TITLE"],
+            raw_conf["FILE_NAME"],
             raw_conf["OUTPUT_FOLDER"]
         )
