@@ -103,11 +103,7 @@ def body(
                     img_results: list[tuple[str, str]]
                     link_results: list[tuple[str, str]]
 
-                    if (
-                            img_results := findall(
-                                    rules.image, part
-                                )
-                        ):
+                    if (img_results := findall(rules.image, part)):
                         out_file.write(
                             (
                                 "\n\\begin{figure}\n"
@@ -117,11 +113,7 @@ def body(
                                 "\\end{figure}\n"
                             )
                         )
-                    elif (
-                            link_results := findall(
-                                    rules.links, part
-                                )
-                        ):
+                    elif (link_results := findall(rules.links, part)):
                         links: tuple[str, str] = link_results[0]
                         new_line: str = line.replace(
                                 f"[{links[0]}]({links[1]})",
