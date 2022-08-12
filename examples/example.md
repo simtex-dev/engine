@@ -6,10 +6,12 @@ $$\oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0$$
 
 And this is for align:
 
-$$\sum_{i} \vec{B_{i}} \cdot \vec{\ell_{i}} = \mu_{0} \bigg(I + \varepsilon_{0} \frac{\Delta E \cdot A}{\Delta t} \bigg)$$
-$$\sum_{i} \vec{E_{i}} \cdot \vec{\ell_{i}} = - \frac{\Delta B \cdot A}{\Delta t}$$
-$$\sum_{i} E_{i} \cdot A_{i} = \frac{Q}{\varepsilon_{0}}$$
-$$\sum_{i} B_{i} \cdot A_{i} = 0$$
+$$
+\sum_{i} \vec{B_{i}} \cdot \vec{\ell_{i}} = \mu_{0} \bigg(I + \varepsilon_{0} \frac{\Delta E \cdot A}{\Delta t} \bigg)
+\sum_{i} \vec{E_{i}} \cdot \vec{\ell_{i}} = - \frac{\Delta B \cdot A}{\Delta t}
+\sum_{i} E_{i} \cdot A_{i} = \frac{Q}{\varepsilon_{0}}
+\sum_{i} B_{i} \cdot A_{i} = 0
+$$
 
 ## This is subsection: Images
 
