@@ -38,7 +38,6 @@ def body(
     rules: object -- the rules to follow for parsing.
     out_file: textio -- where the output will be written.
     """
-    # TODO: figure out to efficiently write the body into the file
 
     file: IO[Any]
     with open(filepath, "r", encoding="utf-8") as file:
@@ -83,7 +82,7 @@ def body(
                         eqs: str; j: int
                         for j, eqs in enumerate(text.copy()[i+1:]):
                             if eqs.strip() == rules.paragraph_math:
-                                ref = j+i+1
+                                ref: int = j+i+1
                                 break
 
                             if "&" not in eqs:
@@ -115,7 +114,7 @@ def body(
                     for n, code in enumerate(text.copy()[i+1:]):
                         if code.strip() == rules.code:
                             out_file.write("\end{lstlisting}\n")
-                            ref = n+i+1
+                            ref: int = n+i+1
                             break
 
                         out_file.write(code)
