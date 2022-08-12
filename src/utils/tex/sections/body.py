@@ -88,7 +88,7 @@ def body(
                             if "&" not in eqs:
                                 eqs: str = eqs.replace("=", "&=", 1)
 
-                            out_file.write(f"\t{eqs}")
+                            out_file.write(f"\t{eqs}\\\\")
 
                         out_file.write("\\end{align}\n")
                     else:
@@ -129,10 +129,10 @@ def body(
                         if (img_results := findall(rules.image, part)):
                             out_file.write(
                                 (
-                                    "\n\\begin{figure}\n"
+                                    "\n\\begin{figure}[h]\n"
                                     "\t\\includegraphics[width=\\textwidth]"
                                     f"{{{img_results[0][1]}}}\n"
-                                    f"\t\\caption{img_results[0][0]}\n"
+                                    f"\t\\caption{{{img_results[0][0]}}}\n"
                                     "\\end{figure}\n"
                                 )
                             )
@@ -144,6 +144,7 @@ def body(
                                 )
                             out_file.write(f"\n{new_line}\n")
                         else:
+                            line: str = line.replace("_", "\\_")
                             out_file.write(f"\n{line}")
                             break
 
@@ -164,8 +165,8 @@ def format_body(start: int, filepath: str) -> None:
             for line in lines[:start]:
                 file.write(line)
 
-            file.write("\n\\begin{document}")
-            for line in lines[start+1:]:
+            file.write("\n\\begin{document}\n   ")
+            for line in lines[start:]:
                 file.write(f"\t{line}")
 
             file.write("\n\\end{document}")
