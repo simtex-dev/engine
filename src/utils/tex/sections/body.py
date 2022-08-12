@@ -77,13 +77,29 @@ def body(
                 )
             case _:
                 if line.startswith(rules.paragraph_math):
-                    out_file.write(
-                        (
-                            "\n\\begin{equation}\n"
-                            f"\t{line[2:-3]}\n"
-                            "\\end{equation}\n"
+                    if line.strip() == rules.paragraph_math:
+                        out_file.write("\n\\begin{align}\n")
+
+                        eqs: str; j: int
+                        for j, eqs in enumerate(text.copy()[i+1:]):
+                            if eqs.strip() == rules.paragraph_math:
+                                ref = j+i+1
+                                break
+
+                            if "&" not in eqs:
+                                eqs: str = eqs.replace("=", "&=", 1)
+
+                            out_file.write(f"\t{eqs}")
+
+                        out_file.write("\\end{align}\n")
+                    else:
+                        out_file.write(
+                            (
+                                "\n\\begin{equation}\n"
+                                f"\t{line[2:-3]}\n"
+                                "\\end{equation}\n"
+                            )
                         )
-                    )
                 elif line.startswith(rules.code):
                     language: str = line[3:].replace("\n", "")
                     out_file.write(
