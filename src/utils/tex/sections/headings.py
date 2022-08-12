@@ -68,7 +68,7 @@ def headings(
         headings.append(items)
 
     try:
-        print(f"{Signs.PROC} Writing headings to file ...")
+        log.logger("I", "Writing headings to file ...")
         if out_file is not None:
             for items in headings:
                 out_file.write(f"{items}\n")

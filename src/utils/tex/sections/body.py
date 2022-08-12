@@ -3,6 +3,7 @@ from re import findall
 from typing import Any, Optional, TextIO, IO
 
 from src.utils.config import Rules
+from src.utils.logger import Logger
 
 
 def title(
@@ -29,7 +30,7 @@ def title(
 
 
 def body(
-        filepath: str, rules: Rules, out_file: TextIO
+        log: Logger, filepath: str, rules: Rules, out_file: TextIO
     ) -> None:
     """Generate a LaTeX version of the given markdown file.
 
@@ -44,6 +45,8 @@ def body(
         text: list[str] = file.readlines()
 
     ref: int = -1
+
+    log.logger("I", "Writing the body to the document ...")
 
     i: int; line: str
     for i, line in enumerate(text):
@@ -149,7 +152,7 @@ def body(
                             break
 
 
-def format_body(start: int, filepath: str) -> None:
+def format_body(log: Logger, start: int, filepath: str) -> None:
     """Format the document body of the generated LaTeX file."""
 
     try:
@@ -157,8 +160,9 @@ def format_body(start: int, filepath: str) -> None:
         with open(filepath, "r", encoding="utf-8") as ref:
             lines: list[str] = ref.readlines()
     except (FileNotFoundError, OSError, PermissionError, IOError):
-        pass
+        log.logger("E", "Cannot format the document.")
     else:
+        log.logger("I", "Formatting the document ...")
         file: IO[Any]
         with open(filepath, "w", encoding="utf-8") as file:
             line: str
