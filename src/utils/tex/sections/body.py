@@ -112,7 +112,7 @@ def body(
                     )
 
                     code: str; n: int
-                    for n, code in enumerate(text_2[i+1:]):
+                    for n, code in enumerate(text.copy()[i+1:]):
                         if code.strip() == rules.code:
                             out_file.write("\end{lstlisting}\n")
                             ref = n+i+1
