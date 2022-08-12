@@ -146,3 +146,26 @@ def body(
                         else:
                             out_file.write(f"\n{line}")
                             break
+
+
+def format_body(start: int, filepath: str) -> None:
+    """Format the document body of the generated LaTeX file."""
+
+    try:
+        ref: TextIO
+        with open(filepath, "r", encoding="utf-8") as ref:
+            lines: list[str] = ref.readlines()
+    except (FileNotFoundError, OSError, PermissionError, IOError):
+        pass
+    else:
+        file: IO[Any]
+        with open(filepath, "w", encoding="utf-8") as file:
+            line: str
+            for line in lines[:start]:
+                file.write(line)
+
+            file.write("\n\\begin{document}")
+            for line in lines[start+1:]:
+                file.write(f"\t{line}")
+
+            file.write("\n\\end{document}")
