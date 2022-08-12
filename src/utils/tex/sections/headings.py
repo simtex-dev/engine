@@ -1,4 +1,4 @@
-from typing import IO, Any, Optional, TextIO
+from typing import IO, Any, NoReturn, Optional, TextIO
 
 from src.misc.stdout import Signs
 from src.utils.logger import Logger
@@ -10,7 +10,7 @@ def headings(
         conf: Config,
         title: str,
         out_file: Optional[TextIO]
-    ) -> None:
+    ) -> int | NoReturn:
     """Create the headings of the LaTeX file."""
 
     SECTIONS: dict[str, str] = {
@@ -38,6 +38,7 @@ def headings(
     pkgs: str
     for pkgs in conf.packages:
         headings.append(f"\\usepackage{pkgs}")
+
     headings.append(
         f"\\usepackage[scaled={conf.cfont_scale}]{{{conf.code_font}}}"
     )
@@ -53,8 +54,10 @@ def headings(
         )
 
     lstconf: IO[Any]
+    headings.append(f"\n% lst listings config")
     with open(conf.code_conf, "r", encoding="utf-8") as lstconf:
-        headings.append(f"\n% lst listings config\n{lstconf.read()}")
+        for lines in lstconf.readlines():
+            headings.append(lines.replace("\n", ""))
 
     items: str
     for items in [
@@ -85,3 +88,5 @@ def headings(
     ) as Err:
         log.logger("E", f"Encountered {Err}, aborting ...")
         raise SystemExit
+    else:
+        return len(headings)+10 # 10 is the number of newlines created.
