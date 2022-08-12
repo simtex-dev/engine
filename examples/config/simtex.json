@@ -51,6 +51,6 @@
         "PARAGRAPH": "####",
         "SUBPARAGRAPH": "#####",
         "INLINE_MATH": "$",
-        "PARAGRAPH_MATH": "$"
+        "PARAGRAPH_MATH": "$$"
     }
 ]
