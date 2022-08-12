@@ -5,8 +5,6 @@ from os.path import exists
 
 from rich.logging import RichHandler
 
-from src.misc.stdout import Signs
-
 
 class Logger:
     """Custom logger."""
@@ -54,8 +52,8 @@ class Logger:
 
         match exception_:
             case "E": # for major error
-                self.log.error("%s %s" % (Signs.FAIL, message))
+                self.log.error("%s" % (message))
             case "P": # for major processes
-                self.log.info("%s %s" % (Signs.PROC, message))
+                self.log.info("%s" % (message))
             case "I": # to print information in the terminal
-                self.log.info("%s %s" % (Signs.INFO, message))
+                self.log.info("%s" % (message))
