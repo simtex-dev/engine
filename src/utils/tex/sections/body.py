@@ -5,6 +5,29 @@ from typing import Any, Optional, TextIO, IO
 from src.utils.config import Rules
 
 
+def title(
+        line: str,
+        command: str,
+        def_rule: Optional[str] = None,
+        params: Optional[str] = None,
+        env: bool = False
+    ) -> str:
+    """Get the title from the line."""
+
+    if env:
+        attach: str = f"[{params}]\n" if params is not None else "\n"
+        return f"\n\\begin{{{command}}}{attach}"
+
+    stripped_line: str = (
+            line
+                .replace(
+                    def_rule if def_rule is not None else "", ""
+                )
+                .replace("\n", "").strip()
+        )
+    return f"\n\\{command}{{{stripped_line}}}\n"
+
+
 def body(
         filepath: str, rules: Rules, out_file: TextIO
     ) -> None:
@@ -17,33 +40,10 @@ def body(
     """
     # TODO: figure out to efficiently write the body into the file
 
-    def title(
-            line: str,
-            command: str,
-            def_rule: Optional[str] = None,
-            params: Optional[str] = None,
-            env: bool = False
-        ) -> str:
-        """Get the title from the line."""
-
-        if env:
-            attach: str = f"[{params}]\n" if params is not None else "\n"
-            return f"\n\\begin{{{command}}}{attach}"
-
-        stripped_line: str = (
-                line
-                    .replace(
-                        def_rule if def_rule is not None else "", ""
-                    )
-                    .replace("\n", "").strip()
-            )
-        return f"\n\\{command}{{{stripped_line}}}\n"
-
     file: IO[Any]
     with open(filepath, "r", encoding="utf-8") as file:
         text: list[str] = file.readlines()
 
-    text_2: list[str] = text.copy()
     ref: int = -1
 
     i: int; line: str
