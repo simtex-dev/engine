@@ -82,11 +82,11 @@ def body(
                         eqs: str; j: int
                         for j, eqs in enumerate(text.copy()[i+1:]):
                             if eqs.strip() == rules.paragraph_math:
-                                ref: int = j+i+1
+                                ref = j+i+1
                                 break
 
                             if "&" not in eqs:
-                                eqs: str = eqs.replace("=", "&=", 1)
+                                eqs = eqs.replace("=", "&=", 1)
 
                             out_file.write(f"\t{eqs}\\\\")
 
@@ -114,7 +114,7 @@ def body(
                     for n, code in enumerate(text.copy()[i+1:]):
                         if code.strip() == rules.code:
                             out_file.write("\end{lstlisting}\n")
-                            ref: int = n+i+1
+                            ref = n+i+1
                             break
 
                         out_file.write(code)
@@ -144,7 +144,7 @@ def body(
                                 )
                             out_file.write(f"\n{new_line}\n")
                         else:
-                            line: str = line.replace("_", "\\_")
+                            line = line.replace("_", "\\_")
                             out_file.write(f"\n{line}")
                             break
 
