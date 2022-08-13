@@ -21,9 +21,7 @@ def title(
 
     stripped_line: str = (
             line
-                .replace(
-                    def_rule if def_rule is not None else "", ""
-                )
+                .replace(def_rule, "")
                 .replace("\n", "").strip()
         )
     return f"\n\\{command}{{{stripped_line}}}\n"
@@ -82,7 +80,7 @@ def body(
                     maths: list[str] = []
 
                     if line.strip() == rules.paragraph_math: # for align
-                        out_file.write("\n\\begin{align}\n")
+                        out_file.write("\\begin{align}\n")
 
                         eqs: str; j: int
                         for j, eqs in enumerate(text.copy()[i+1:]):
@@ -104,7 +102,7 @@ def body(
                     else: # for single line/equation
                         out_file.write(
                             (
-                                "\n\\begin{equation}\n"
+                                "\\begin{equation}\n"
                                 f"\t{line[2:-3]}\n"
                                 "\\end{equation}\n"
                             )
@@ -142,7 +140,7 @@ def body(
 
                             if (img_results := findall(rules.image, part)):
                                 out_file.write(
-                                    "\n\\begin{figure}[h]\n"
+                                    "\\begin{figure}[h]\n"
                                     "\t\\includegraphics[width=\\textwidth]"
                                     f"{{{img_results[0][1]}}}\n"
                                     f"\t\\caption{{{img_results[0][0]}}}\n"
@@ -171,7 +169,11 @@ def body(
                                         )
                     finally:
                         if not skip_line:
-                            new_line = new_line.replace("_", r"\_")
+                            new_line = (
+                                    new_line
+                                        .replace("_", r"\_")
+                                        .replace("\n", "\n")
+                                )
                             out_file.write(f"\n{new_line}\n")
 
 
@@ -199,16 +201,19 @@ def format_body(log: Logger, start: int, filepath: str) -> None:
 
             i: int
             for i, line in enumerate(lines[start:]):
-                if ignore > i:
+                print(i, ignore)
+                if i < ignore:
                     continue
 
                 if line.startswith(r"\begin{lstlisting}"):
                     for j, codes in enumerate(lines.copy()[i+start:]):
-                        if codes.startswith(r"\begin{lstlisting}"):
-                            ignore = i+start+1+j
                         file.write(codes)
+                        if codes.startswith(r"\end{lstlisting}"):
+                            ignore = j+i+1
+                            break
+
                     continue
 
                 file.write(f"\t{line}")
 
-            file.write("\n\\end{document}")
+            file.write("\\end{document}")
