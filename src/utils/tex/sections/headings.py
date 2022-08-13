@@ -1,3 +1,4 @@
+from datetime import datetime
 from typing import IO, Any, NoReturn, TextIO
 
 from src.utils.logger import Logger
@@ -34,8 +35,20 @@ def headings(
             f"% font\n\\usepackage{{{conf.doc_font}}}\n\n% packages"
         ]
 
+    if "<NOW>" in conf.date:
+        conf.__setattr__("date", datetime.now().strftime("%B %d, %Y"))
+
     pkgs: str
     for pkgs in conf.packages:
+        if "margin" in pkgs:
+            pkgs = (
+                    pkgs
+                        .replace("<MARGIN>", f"{conf.margin}in")
+                        .replace("<PAPER_SIZE>", conf.paper_size)
+                )
+        elif "colorlinks" in pkgs:
+            pkgs = pkgs.replace("<LINK_COLORS>", conf.link_color)
+
         headings.append(f"\\usepackage{pkgs}")
 
     headings.append(
@@ -46,11 +59,7 @@ def headings(
     for sec_sizes, sec_val in zip(
             conf.section_sizes.values(), SECTIONS.values()
         ):
-        headings.append(
-            sec_val.replace(
-                "<SECTION_SIZES>", str(sec_sizes)
-            )
-        )
+        headings.append(sec_val.replace("<SECTION_SIZES>", str(sec_sizes)))
 
     headings.append(
         f"\n% basic config\n\setlength\parindent{{{conf.indent_size}pt}}"
