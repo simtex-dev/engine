@@ -53,7 +53,9 @@ def headings(
             )
         )
 
-    headings.append(f"\n\setlength\parindent{{{conf.indent_size}pt}}")
+    headings.append(
+        f"\n% basic config\n\setlength\parindent{{{conf.indent_size}pt}}"
+    )
     headings.append(
         f"\\renewcommand{{\\thefootnote}}{{\\fnsymbol{{{conf.footnote}}}}}"
     )
@@ -97,4 +99,4 @@ def headings(
         log.logger("E", f"Encountered {Err}, aborting ...")
         raise SystemExit
     else:
-        return len(headings)+10 # 10 is the number of newlines created.
+        return len(headings)+11 # 11 is the number of newlines created.
