@@ -21,7 +21,7 @@ def title(
 
     stripped_line: str = (
             line
-                .replace(def_rule, "")
+                .replace(def_rule if def_rule is not None else "", "")
                 .replace("\n", "").strip()
         )
     return f"\n\\{command}{{{stripped_line}}}\n"
@@ -152,7 +152,7 @@ def body(
                             if (link_results := findall(rules.links, part)):
                                 link: tuple[str, str]
                                 for link in link_results:
-                                    new_line: str = new_line.replace(
+                                    new_line = new_line.replace(
                                             f"[{link[0]}]({link[1]})",
                                             f"\\href{{{link[0]}}}{{{link[1]}}}"
                                         )
@@ -163,7 +163,7 @@ def body(
                                 ):
                                 codes: tuple[str]
                                 for codes in inline_codes:
-                                    new_line: str = new_line.replace(
+                                    new_line = new_line.replace(
                                             f"`{codes}`",
                                             f"\\texttt{{{codes}}}"
                                         )
