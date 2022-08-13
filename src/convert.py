@@ -16,13 +16,10 @@ def convert(
     ) -> None:
     """Main program."""
 
+    OFILE_PATH: str = f"{conf.output_folder}/{conf.filename}"
     out_file: TextIO
-    with open(
-            f"{conf.output_folder}/{conf.filename}",
-            "w",
-            encoding="utf-8"
-        ) as out_file:
+    with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
         start: int = headings(log, conf, title, out_file)
         body(log, rules, in_file, out_file)
 
-    format_body(log, start, out_file)
+    format_body(log, start, OFILE_PATH)

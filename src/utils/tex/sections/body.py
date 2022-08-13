@@ -28,7 +28,7 @@ def title(
 
 
 def body(
-        log: Logger, rules: Rules, in_file: TextIO, out_file: TextIO
+        log: Logger, rules: Rules, in_file: str, out_file: TextIO
     ) -> None:
     """Generate a LaTeX version of the given markdown file.
 
@@ -38,9 +38,9 @@ def body(
     out_file: textio -- where the output will be written.
     """
 
-    in_file: IO[Any]
-    with open(in_file, "r", encoding="utf-8") as in_file:
-        text: list[str] = in_file.readlines()
+    for_convert: TextIO
+    with open(in_file, "r", encoding="utf-8") as for_convert:
+        text: list[str] = for_convert.readlines()
 
     ref: int = -1
 
