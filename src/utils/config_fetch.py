@@ -63,7 +63,7 @@ class ConfParse:
     def rules(self) -> Rules:
         """Parse the config of the rules of converter."""
 
-        raw_conf: dict[str, Any] = self.parse()[0]
+        raw_conf: dict[str, Any] = self.fetch()[0]
 
         return Rules(
             raw_conf["FOR"],
@@ -83,7 +83,7 @@ class ConfParse:
     def conf(self) -> Config:
         """Parse the config of the LaTeX file."""
 
-        raw_conf: dict[str, Any] = self.parse()[1]
+        raw_conf: dict[str, Any] = self.fetch()[1]
 
         return Config(
             raw_conf["DOC_CLASS"],
@@ -100,7 +100,7 @@ class ConfParse:
             raw_conf["FOOTNOTE"],
             raw_conf["SECTION_SIZES"],
             raw_conf["LINKS"],
-            raw_conf["LINK_COLORS"],
+            raw_conf["LINK_COLOR"],
             raw_conf["AUTHOR"],
             raw_conf["DATE"],
             raw_conf["MAKE_TITLE"],
