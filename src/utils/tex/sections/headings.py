@@ -53,9 +53,17 @@ def headings(
             )
         )
 
+    headings.append(f"\n\setlength\parindent{{{conf.indent_size}pt}}")
+    headings.append(
+        f"\\renewcommand{{\\thefootnote}}{{\\fnsymbol{{{conf.footnote}}}}}"
+    )
+
+    if conf.sloppy:
+        headings.append(r"\sloppy")
+
     lstconf: IO[Any]
-    headings.append(f"\n% lst listings config")
     with open(conf.code_conf, "r", encoding="utf-8") as lstconf:
+        headings.append(f"\n% lst listings config")
         for lines in lstconf.readlines():
             headings.append(lines.replace("\n", ""))
 

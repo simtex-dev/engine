@@ -7,10 +7,13 @@ class Config:
     doc_class: str
     doc_font: str
     font_size: int
+    indent_size: int
+    sloppy: bool
     code_font: str
     cfont_scale: float
     code_conf: str
     packages: list[str]
+    footnote: str
     section_sizes: dict[str, int]
     links: bool
     link_color: str

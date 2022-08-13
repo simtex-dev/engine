@@ -5,9 +5,11 @@
         "FONT_SIZE": 12,
         "MARGIN": 1,
         "PAPER_SIZE": "a4paper",
+        "INDENT_SIZE": 24,
+        "SLOPPY": true,
         "CODE_FONT": "DejaVuSansMono",
         "CFONT_SCALE": 0.9,
-        "CODE_CONF": "./code_conf.txt",
+        "CODE_CONF": "./examples/config/code_conf.txt",
         "PACKAGES": [
                 "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
                 "{indentfirst}",
@@ -21,6 +23,7 @@
                 "{caption}",
                 "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
             ],
+        "FOOTNOTE": "footnote",
         "SECTION_SIZES": {
                 "main": 12,
                 "sub": 12,
