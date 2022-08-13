@@ -79,10 +79,10 @@ def body(
                     title(line, "subparagraph", rules.subparagraph)
                 )
             case _:
-                if line.startswith(rules.paragraph_math):
+                if line.startswith(rules.paragraph_math): # math mode
                     maths: list[str] = []
 
-                    if line.strip() == rules.paragraph_math:
+                    if line.strip() == rules.paragraph_math: # for align
                         out_file.write("\n\\begin{align}\n")
 
                         eqs: str; j: int
@@ -102,7 +102,7 @@ def body(
                             out_file.write(f"\t{eqs}")
 
                         out_file.write("\\end{align}\n")
-                    else:
+                    else: # for single line/equation
                         out_file.write(
                             (
                                 "\n\\begin{equation}\n"
@@ -110,7 +110,7 @@ def body(
                                 "\\end{equation}\n"
                             )
                         )
-                elif line.startswith(rules.code):
+                elif line.startswith(rules.code): # for code blocks
                     language: str = line[3:].replace("\n", "")
                     out_file.write(
                         title(
@@ -147,17 +147,20 @@ def body(
                                     "\\end{figure}\n"
                                 )
                             )
-                        elif (link_results := findall(rules.links, part)):
-                            links: tuple[str, str] = link_results[0]
-                            new_line: str = line.replace(
-                                    f"[{links[0]}]({links[1]})",
-                                    f"\\href{{{links[0]}}}{{{links[1]}}}"
-                                )
-                            out_file.write(f"\n{new_line}\n")
-                        else:
-                            line = line.replace("_", "\\_")
-                            out_file.write(f"\n{line}")
                             break
+                        elif (link_results := findall(rules.links, part)):
+                            print(link_results)
+                            link: tuple[str, str]
+                            for link in link_results:
+                                new_line: str = line.replace(
+                                        f"[{link[0]}]({link[1]})",
+                                        f"\\href{{{link[0]}}}{{{link[1]}}}"
+                                    )
+                            out_file.write(f"\n{new_line}\n")
+                            break
+                    else:
+                        line = line.replace("_", "\\_")
+                        out_file.write(f"\n{line}")
 
 
 def format_body(log: Logger, start: int, filepath: str) -> None:
