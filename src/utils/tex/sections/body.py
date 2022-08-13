@@ -28,19 +28,19 @@ def title(
 
 
 def body(
-        log: Logger, filepath: str, rules: Rules, out_file: TextIO
+        log: Logger, rules: Rules, in_file: TextIO, out_file: TextIO
     ) -> None:
     """Generate a LaTeX version of the given markdown file.
 
     Arguments:
-    filepath: str -- the path of the file to convert (reference file).
+    out_file: str -- the path of the file to convert (reference file).
     rules: object -- the rules to follow for parsing.
     out_file: textio -- where the output will be written.
     """
 
-    file: IO[Any]
-    with open(filepath, "r", encoding="utf-8") as file:
-        text: list[str] = file.readlines()
+    in_file: IO[Any]
+    with open(in_file, "r", encoding="utf-8") as in_file:
+        text: list[str] = in_file.readlines()
 
     ref: int = -1
 
@@ -177,12 +177,12 @@ def body(
                             out_file.write(f"\n{new_line}\n")
 
 
-def format_body(log: Logger, start: int, filepath: str) -> None:
+def format_body(log: Logger, start: int, out_file: str) -> None:
     """Format the document body of the generated LaTeX file."""
 
     try:
         ref: TextIO
-        with open(filepath, "r", encoding="utf-8") as ref:
+        with open(out_file, "r", encoding="utf-8") as ref:
             lines: list[str] = ref.readlines()
     except (FileNotFoundError, OSError, PermissionError, IOError):
         log.logger("E", "Cannot format the document.")
@@ -192,7 +192,7 @@ def format_body(log: Logger, start: int, filepath: str) -> None:
         ignore: int = -1
 
         file: IO[Any]
-        with open(filepath, "w", encoding="utf-8") as file:
+        with open(out_file, "w", encoding="utf-8") as file:
             line: str
             for line in lines[:start]:
                 file.write(line)

@@ -1,6 +1,5 @@
-from typing import IO, Any, NoReturn, Optional, TextIO
+from typing import IO, Any, NoReturn, TextIO
 
-from src.misc.stdout import Signs
 from src.utils.logger import Logger
 from src.utils.config import Config
 
@@ -9,7 +8,7 @@ def headings(
         log: Logger,
         conf: Config,
         title: str,
-        out_file: Optional[TextIO]
+        out_file: TextIO
     ) -> int | NoReturn:
     """Create the headings of the LaTeX file."""
 
