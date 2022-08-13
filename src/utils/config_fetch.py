@@ -43,7 +43,7 @@ class ConfParse:
             except FileNotFoundError:
                 self.log.logger("E", "Backup file does not exists.")
 
-    def parse(self) -> list[dict[str, Any]] | NoReturn:
+    def fetch(self) -> list[dict[str, Any]] | NoReturn:
         """Parse and replace the overriden parameters in the CLI."""
 
         try:
