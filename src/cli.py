@@ -1,83 +1,191 @@
 from argparse import ArgumentParser
+from shutil import which
+from subprocess import (
+    run,
+    CalledProcessError,
+    Popen
+)
+from typing import Any, Callable
+
+from src.utils.config_fetch import ConfParse
+from src.utils.logger import Logger
+from src.misc.stdout import Signs
+from src.convert import convert
+from src.utils.config import Config, Rules
 
 
+class Cli:
+    """Commandline interface of the program."""
 
-def cli() -> None:
-    """Commandline interface for the program."""
+    def __init__(self) -> None:
+        self.log: Logger = Logger()
+        conf_parse: ConfParse = ConfParse(self.log)
+        self.config: Config = conf_parse.conf()
+        self.rules: Rules = conf_parse.rules()
 
-    description: str = (
-            "Generate a LaTeX file from your notes with few commands!"
+        description: str = (
+                "Generate a LaTeX file from your notes with few commands!"
+            )
+        self.parser: ArgumentParser = ArgumentParser(
+                prog="simtex",
+                usage="simtex [OPTIONS]",
+                description=description
+            )
+
+    def create_parser(self) -> None:
+        """Create the parser."""
+
+        self.parser.add_argument( # commands
+            "-c", "--convert",
+            help="Convert the input to LaTeX.",
+            action="store_true"
         )
-    parser: ArgumentParser = ArgumentParser(
-            prog="simtex",
-            usage="simtex [OPTIONS]",
-            description=description
+        self.parser.add_argument(
+            "-b", "--build",
+            help="Build the generated LaTeX file.",
+            action="store_true"
+        )
+        self.parser.add_argument(
+            "-B", "--buildnview",
+            help="Build the generated LaTeX file and view the output.",
+            action="store_true"
+        ) # starts here are the options
+        self.parser.add_argument(
+            "-i", "--input",
+            help="File to be converted into LaTeX.",
+            action="store"
+        )
+        self.parser.add_argument(
+            "-T", "--title",
+            help="Set the title of the document.",
+            action="store",
+        )
+        self.parser.add_argument(
+            "-f", "--filename",
+            help="Use different name for the output file.",
+            action="store"
+        )
+        self.parser.add_argument(
+            "-of", "--outputfolder",
+            help="Change the output folder for the output file.",
+            action="store"
+        )
+        self.parser.add_argument(
+            "-a", "--author",
+            help="Set the author name of the document.",
+            action="store"
+        )
+        self.parser.add_argument(
+            "-d", "--date",
+            help="Set the date of the document.",
+            action="store"
+        )
+        self.parser.add_argument(
+            "-F", "--font",
+            help="Use different font package.",
+            action="store"
+        )
+        self.parser.add_argument(
+            "-s", "--fontsize",
+            help="Use different font size.",
+            action="store"
+        )
+        self.parser.add_argument(
+            "-p", "--papersize",
+            help="Use different paper size.",
+            action="store"
+        )
+        self.parser.add_argument(
+            "-I", "--indent",
+            help="Indent size to be used.",
+            action="store"
+        )
+        self.parser.add_argument(
+            "-m", "--margin",
+            help="Margin size to be used.",
+            action="store"
         )
 
-    parser.add_argument(
-        "-f", "--file",
-        type=str,
-        help="File to be converted into LaTeX.",
-        action="store"
-    )
-    parser.add_argument(
-        "-c", "--convert",
-        type=bool,
-        help="Convert the input to LaTeX.",
-        action="store_true"
-    )
-    parser.add_argument(
-        "-b", "--build",
-        type=bool,
-        help="Build the generated LaTeX file.",
-        action="store_true"
-    )
-    parser.add_argument(
-        "-B", "--build-nview",
-        type=bool,
-        help="Build the generated LaTeX file and view the output.",
-        action="store_true"
-    )
-    parser.add_argument(
-        "-o", "--output",
-        type=str,
-        help="Use different name for the output file.",
-        action="store"
-    )
-    parser.add_argument(
-        "-T", "--title",
-        type=str,
-        help="Set the title of the document.",
-        action="store",
-    )
-    parser.add_argument(
-        "-a", "--author",
-        type=str,
-        help="Set the author name of the document.",
-        action="store"
-    )
-    parser.add_argument(
-        "-d", "--date",
-        type=str,
-        help="Set the date of the document.",
-        action="store"
-    )
-    parser.add_argument(
-        "-F", "--font",
-        type=str,
-        help="Use different font package.",
-        action="store"
-    )
-    parser.add_argument(
-        "-s", "--font-size",
-        type=int,
-        help="Use different font size.",
-        action="store"
-    )
-    parser.add_argument(
-        "-p", "--paper-size",
-        type=str,
-        help="Use different paper size.",
-        action="store"
-    )
+        self.args = self.parser.parse_args()
 
+    def update_conf(self) -> None:
+        """Update the overrides of the program."""
+
+        PARAMETERS: dict[str, Any] = {
+            "filename": self.args.filename,
+            "output_folder": self.args.outputfolder,
+            "author": self.args.author,
+            "date": self.args.date,
+            "doc_font": self.args.font,
+            "font_size": self.args.fontsize,
+            "paper_size": self.args.papersize,
+            "margin": self.args.margin,
+            "indent_size": self.args.indent,
+            "doc_font": self.args.font
+        }
+
+        key_: str; param: Any
+        for key_, param in PARAMETERS.items(): # for overrides
+            if param is not None:
+                self.log.logger(
+                    "E", f"{self.config.__getattribute__(key_)} -> {param}"
+                )
+                self.config.__setattr__(key_, param)
+        print(self.config)
+
+    def cli(self) -> None:
+        """Commandline interface of the program."""
+
+        self.create_parser() # create the arguments
+        self.update_conf() # update the config for overrides
+
+        def build_file() -> None:
+            """Build the LaTeX file using pdflatex."""
+
+            if which("pdflatex") is None:
+                self.log.logger(
+                    "E", "PdfLaTeX does not exists, cannot build file."
+                )
+                raise SystemExit
+
+            rcode = run(
+                    [
+                        "pdflatex",
+                        "-output-directory=",
+                        self.config.output_folder,
+                        self.config.filename
+                    ],
+                    capture_output=True
+                )
+            if rcode.returncode == 0:
+                self.log.logger("P", "Successfully built the file.")
+
+        converter: Callable[..., None] = lambda: convert(
+                self.log,
+                self.rules,
+                self.config,
+                self.args.title,
+                self.args.file
+            )
+
+        try:
+            if self.args.convert:
+                converter()
+            elif self.args.build:
+                converter()
+                build_file()
+            elif self.args.buildnview:
+                converter()
+                build_file()
+                Popen(["xgd-open", self.args.file])
+            else:
+                print(f"{Signs.FAIL} Unknown option.")
+        except KeyboardInterrupt:
+            self.log.logger("E", "Process aborted, aborting ...")
+        except CalledProcessError:
+            self.log.logger("E", "Cannot call the process, aborting ...")
+
+
+if __name__ == "__main__":
+    cli: Cli = Cli()
+    cli.cli()
