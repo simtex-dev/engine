@@ -24,7 +24,8 @@ class Cli:
         self.rules: Rules = conf_parse.rules()
 
         description: str = (
-                "Generate a LaTeX file from your notes with few commands!"
+                "Convert your mardown or text lectures"
+                " into LaTeX/pdf with one command.!"
             )
         self.parser: ArgumentParser = ArgumentParser(
                 prog="simtex",
