@@ -78,17 +78,8 @@ def headings(
 
     try:
         log.logger("I", "Writing headings to file ...")
-        if out_file is not None:
-            for items in headings:
-                out_file.write(f"{items}\n")
-        else:
-            with open(
-                    f"{conf.output_folder}/{conf.filename}",
-                    "w",
-                    encoding="utf-8"
-                ) as out_file:
-                for items in headings:
-                    out_file.write(f"{items}\n")
+        for items in headings:
+            out_file.write(f"{items}\n")
     except (
         IOError,
         SystemError,
