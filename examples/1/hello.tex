@@ -21,6 +21,8 @@
 \sectionfont{\fontsize{12}{15}\selectfont}
 \subsectionfont{\fontsize{12}{15}\selectfont}
 \subsubsectionfont{\fontsize{12}{15}\selectfont}
+
+% basic config
 \setlength\parindent{24pt}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \sloppy
@@ -56,19 +58,17 @@
 \author{John Doe}
 \date{August 13, 2022}
 
-
 \begin{document}
+	
 	\section{This is a section: Math}
 	
 	This program is planned to support the most basic LaTeX features, you can use inline math with $a + b = c^2$. And this will be the paragraph math:
-	
 	
 	\begin{equation}
 		\oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0
 	\end{equation}
 	
 	And this is for align:
-	
 	
 	\begin{align}
 		\sum_{i} \vec{B_{i}} \cdot \vec{\ell_{i}} &= \mu_{0} \bigg(I + \varepsilon_{0} \frac{\Delta E \cdot A}{\Delta t} \bigg)\\
@@ -80,7 +80,6 @@
 	\subsection{This is subsection: Images}
 	
 	You can also insert images with:
-	
 	
 	\begin{figure}[h]
 		\includegraphics[width=\textwidth]{./sample_image.jpeg}
@@ -116,10 +115,9 @@ int main() {
     return 0;
 }
 \end{lstlisting}
-
-\paragraph{This is paragraph}
-
-Check \href{example.tex}{./example.tex} for the LaTeX rendition of this markdown file. The output of the command is always placed in \texttt{./out/}.
-
-
+	
+	\paragraph{This is paragraph}
+	
+	Check \href{example.tex}{./example.tex} for the LaTeX rendition of this markdown file. The output of the command is always placed in \texttt{./out/}.
+	
 \end{document}
