@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass(frozen=True)
+@dataclass
 class Config:
     """dataclass for configuration of the latex file."""
     doc_class: str
