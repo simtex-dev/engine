@@ -36,3 +36,4 @@ class Rules:
     subparagraph: str
     inline_math: str
     paragraph_math: str
+    inline_code: str
