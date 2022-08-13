@@ -1,5 +1,25 @@
 [
     {
+        "FOR": [
+                "markdown",
+                "md",
+                "rst",
+                "txt",
+                "text"
+            ],
+        "CODE_BLOCKS": "```",
+        "IMAGE": "!\\[([^]]+)\\]\\(([^]]+)\\)",
+        "LINKS": "\\[([^]]+)\\]\\(([^]]+)\\)",
+        "SECTION": "#",
+        "SUBSECTION": "##",
+        "SUBSUBSECTION": "###",
+        "PARAGRAPH": "####",
+        "SUBPARAGRAPH": "#####",
+        "INLINE_MATH": "$",
+        "PARAGRAPH_MATH": "$$",
+        "INLINE_CODE": "`(.*?)`"
+    },
+    {
         "DOC_CLASS": "article",
         "DEF_FONT": "lmodern",
         "FONT_SIZE": 12,
@@ -29,32 +49,12 @@
                 "sub": 12,
                 "subsub": 12
             },
-        "COLOR_LINKS": true,
-        "LINK_COLORS": "BLUE",
+        "LINKS": true,
+        "LINK_COLOR": "BLUE",
         "AUTHOR": "John Doe",
         "DATE": "<NOW>",
         "MAKE_TITLE": true,
         "FILE_NAME": "a.tex",
         "OUTPUT_FOLDER": "./out/"
-    },
-    {
-        "FOR": [
-                "markdown",
-                "md",
-                "rst",
-                "txt",
-                "text"
-            ],
-        "CODE_BLOCKS": "```",
-        "IMAGE": "!\\[([^]]+)\\]\\(([^]]+)\\)",
-        "LINKS": "\\[([^]]+)\\]\\(([^]]+)\\)",
-        "SECTION": "#",
-        "SUBSECTION": "##",
-        "SUBSUBSECTION": "###",
-        "PARAGRAPH": "####",
-        "SUBPARAGRAPH": "#####",
-        "INLINE_MATH": "$",
-        "PARAGRAPH_MATH": "$$",
-        "INLINE_CODE": "`(.*?)`"
     }
 ]

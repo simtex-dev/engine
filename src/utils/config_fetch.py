@@ -64,7 +64,7 @@ class ConfParse:
     def rules(self) -> Rules:
         """Parse the config of the rules of converter."""
 
-        raw_conf: dict[str, Any] = self.parse()[1]
+        raw_conf: dict[str, Any] = self.parse()[0]
 
         return Rules(
             raw_conf["FOR"],
@@ -84,7 +84,7 @@ class ConfParse:
     def conf(self) -> Config:
         """Parse the config of the LaTeX file."""
 
-        raw_conf: dict[str, Any] = self.parse()[0]
+        raw_conf: dict[str, Any] = self.parse()[1]
         packages: list[str] = raw_conf["PACKAGES"]
 
         packages[0] = (
