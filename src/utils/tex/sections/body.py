@@ -1,4 +1,3 @@
-import math
 from re import findall
 
 from typing import Any, Optional, TextIO, IO
@@ -187,14 +186,29 @@ def format_body(log: Logger, start: int, filepath: str) -> None:
         log.logger("E", "Cannot format the document.")
     else:
         log.logger("I", "Formatting the document ...")
+
+        ignore: int = -1
+
         file: IO[Any]
         with open(filepath, "w", encoding="utf-8") as file:
             line: str
             for line in lines[:start]:
                 file.write(line)
 
-            file.write("\n\\begin{document}\n   ")
-            for line in lines[start:]:
+            file.write("\n\\begin{document}\n")
+
+            i: int
+            for i, line in enumerate(lines[start:]):
+                if ignore > i:
+                    continue
+
+                if line.startswith(r"\begin{lstlisting}"):
+                    for j, codes in enumerate(lines.copy()[i+start:]):
+                        if codes.startswith(r"\begin{lstlisting}"):
+                            ignore = i+start+1+j
+                        file.write(codes)
+                    continue
+
                 file.write(f"\t{line}")
 
             file.write("\n\\end{document}")
