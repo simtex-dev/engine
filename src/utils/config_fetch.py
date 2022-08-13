@@ -3,27 +3,23 @@ from pathlib import Path
 from os.path import exists
 from shutil import copy
 from json import load
-from typing import IO, Any, NoReturn, Optional
+from typing import IO, Any, NoReturn
 from datetime import datetime
 
 from src.utils.config import Config, Rules
-from src.misc.stdout import Signs
 from src.utils.logger import Logger
 
 
 class ConfParse:
     """Parse the JSON configuration file."""
 
-    def __init__(
-            self, log: Logger, overrides: Optional[dict[str, Any]] = None
-        ) -> None:
+    def __init__(self, log: Logger) -> None:
         """Check the config file in instantiation before proceeding."""
 
         self.log: Logger = log
         self.HOME: Path = Path.home()
         self.BASE_CONF_PATH: str = f"{self.HOME}/.config"
         self.CONF_PATH: str = f"{self.BASE_CONF_PATH}/simtex"
-        self.overrides: Optional[dict[str, Any]] = overrides
 
         paths: str
         for paths in [self.BASE_CONF_PATH, self.CONF_PATH]:
@@ -59,18 +55,6 @@ class ConfParse:
                 ) as conf_file:
                 raw_conf: list[dict[str, Any]] = load(conf_file)
 
-            conf: dict[str, Any] = raw_conf[0]
-            if self.overrides is not None:
-                val: str
-                for val in self.overrides.keys():
-                    if val in list(conf.keys()):
-                        print(
-                            (
-                                f"{Signs.INFO} {conf[val]}"
-                                f"-> {self.overrides[val]}"
-                            )
-                        )
-                        conf[val] = self.overrides[val]
         except (FileNotFoundError, PermissionError) as Err:
             self.log.logger("E", f"Encountered {Err}, aborting ...")
             raise SystemExit
