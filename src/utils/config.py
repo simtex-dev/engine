@@ -7,6 +7,8 @@ class Config:
     doc_class: str
     doc_font: str
     font_size: int
+    margin: int
+    paper_size: str
     indent_size: int
     sloppy: bool
     code_font: str

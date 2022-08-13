@@ -4,7 +4,6 @@ from os.path import exists
 from shutil import copy
 from json import load
 from typing import IO, Any, NoReturn
-from datetime import datetime
 
 from src.utils.config import Config, Rules
 from src.utils.logger import Logger
@@ -85,38 +84,25 @@ class ConfParse:
         """Parse the config of the LaTeX file."""
 
         raw_conf: dict[str, Any] = self.parse()[1]
-        packages: list[str] = raw_conf["PACKAGES"]
-
-        packages[0] = (
-                packages[0]
-                    .replace("<MARGIN>", f"{raw_conf['MARGIN']}in")
-                    .replace("<PAPER_SIZE>", raw_conf["PAPER_SIZE"])
-            )
-        if raw_conf["COLOR_LINKS"]:
-            packages[-1] = packages[-1].replace(
-                    "<LINK_COLORS>", raw_conf["LINK_COLORS"].lower()
-                )
-        else:
-            packages.pop(-1)
 
         return Config(
             raw_conf["DOC_CLASS"],
             raw_conf["DEF_FONT"],
             raw_conf["FONT_SIZE"],
+            raw_conf["MARGIN"],
+            raw_conf["PAPER_SIZE"],
             raw_conf["INDENT_SIZE"],
             raw_conf["SLOPPY"],
             raw_conf["CODE_FONT"],
             raw_conf["CFONT_SCALE"],
             raw_conf["CODE_CONF"],
-            packages,
+            raw_conf["PACKAGES"],
             raw_conf["FOOTNOTE"],
             raw_conf["SECTION_SIZES"],
-            raw_conf["COLOR_LINKS"],
+            raw_conf["LINKS"],
             raw_conf["LINK_COLORS"],
             raw_conf["AUTHOR"],
-            raw_conf["DATE"].replace(
-                "<NOW>", datetime.now().strftime("%B %d, %Y")
-            ),
+            raw_conf["DATE"],
             raw_conf["MAKE_TITLE"],
             raw_conf["FILE_NAME"],
             raw_conf["OUTPUT_FOLDER"]
