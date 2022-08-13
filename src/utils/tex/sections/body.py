@@ -1,3 +1,4 @@
+import math
 from re import findall
 
 from typing import Any, Optional, TextIO, IO
@@ -79,6 +80,8 @@ def body(
                 )
             case _:
                 if line.startswith(rules.paragraph_math):
+                    maths: list[str] = []
+
                     if line.strip() == rules.paragraph_math:
                         out_file.write("\n\\begin{align}\n")
 
@@ -91,7 +94,12 @@ def body(
                             if "&" not in eqs:
                                 eqs = eqs.replace("=", "&=", 1)
 
-                            out_file.write(f"\t{eqs}\\\\")
+                            eqs = eqs.replace("\n", "")
+                            maths.append(f"{eqs}\\\\\n")
+
+                        maths[-1] = maths[-1].replace("\\\\\n", "\n")
+                        for eqs in maths:
+                            out_file.write(f"\t{eqs}")
 
                         out_file.write("\\end{align}\n")
                     else:
