@@ -50,7 +50,7 @@
                 "subsub": 12
             },
         "LINKS": true,
-        "LINK_COLOR": "BLUE",
+        "LINK_COLOR": "blue",
         "AUTHOR": "John Doe",
         "DATE": "<NOW>",
         "MAKE_TITLE": true,
