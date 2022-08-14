@@ -55,6 +55,6 @@
         "DATE": "<NOW>",
         "MAKE_TITLE": true,
         "FILE_NAME": "a.tex",
-        "OUTPUT_FOLDER": "./out/"
+        "OUTPUT_FOLDER": "./out"
     }
 ]
