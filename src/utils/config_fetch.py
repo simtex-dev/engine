@@ -3,7 +3,7 @@ from pathlib import Path
 from os.path import exists
 from shutil import copy
 from json import load
-from typing import IO, Any, NoReturn
+from typing import IO, Any, NoReturn, Optional
 
 from src.utils.config import Config, Rules
 from src.utils.logger import Logger
@@ -12,7 +12,7 @@ from src.utils.logger import Logger
 class ConfParse:
     """Parse the JSON configuration file."""
 
-    def __init__(self, log: Logger) -> None:
+    def __init__(self, log: Logger, test: Optional[bool] = False) -> None:
         """Check the config file in instantiation before proceeding."""
 
         self.log: Logger = log
@@ -41,6 +41,9 @@ class ConfParse:
                 )
             except FileNotFoundError:
                 self.log.logger("E", "Backup file does not exists.")
+
+        if test:
+            self.CONF_PATH = "./examples/config"
 
     def fetch(self) -> list[dict[str, Any]] | NoReturn:
         """Parse and replace the overriden parameters in the CLI."""
