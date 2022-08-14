@@ -2,7 +2,7 @@ from re import findall
 
 from typing import Any, Optional, TextIO, IO
 
-from src.utils.config import Rules
+from src.utils.config import Config, Rules
 from src.utils.logger import Logger
 
 
@@ -177,7 +177,9 @@ def body(
                             out_file.write(f"\n{new_line}\n")
 
 
-def format_body(log: Logger, start: int, out_file: str) -> None:
+def format_body(
+        log: Logger, config: Config, start: int, out_file: str
+    ) -> None:
     """Format the document body of the generated LaTeX file."""
 
     try:
@@ -198,6 +200,9 @@ def format_body(log: Logger, start: int, out_file: str) -> None:
                 file.write(line)
 
             file.write("\n\\begin{document}\n")
+
+            if config.make_title:
+                file.write("\t\maketitle\n")
 
             i: int
             for i, line in enumerate(lines[start:]):
