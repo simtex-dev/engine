@@ -3,7 +3,7 @@ from os.path import exists
 from os import mkdir
 from .misc.stdout import Signs
 
-from src.utils.config import Config, Rules
+from src.config import Config, Rules
 from src.utils.logger import Logger
 from src.utils.tex.sections.headings import headings
 from src.utils.tex.sections.body import body, format_body

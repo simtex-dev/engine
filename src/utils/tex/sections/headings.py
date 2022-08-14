@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import IO, Any, NoReturn, TextIO
 
 from src.utils.logger import Logger
-from src.utils.config import Config
+from src.config import Config
 
 
 def headings(

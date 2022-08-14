@@ -1,8 +1,8 @@
-from typing import Any
 from shutil import which
-from subprocess import run, CalledProcessError
+from subprocess import CalledProcessError, run
+from typing import Any
 
-from src.utils.config import Config
+from src.config import Config
 from src.utils.logger import Logger
 
 

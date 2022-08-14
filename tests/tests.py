@@ -1,6 +1,6 @@
 import unittest
 
-from src.utils.config import Config, Rules
+from src.config import Config, Rules
 
 from src.utils.config_fetch import ConfParse
 from src.utils.logger import Logger

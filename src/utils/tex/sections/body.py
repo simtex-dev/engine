@@ -2,7 +2,7 @@ from re import findall
 
 from typing import Any, Optional, TextIO, IO
 
-from src.utils.config import Config, Rules
+from src.config import Config, Rules
 from src.utils.logger import Logger
 
 

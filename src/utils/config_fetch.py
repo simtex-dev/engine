@@ -5,7 +5,7 @@ from shutil import copy
 from json import load
 from typing import IO, Any, NoReturn, Optional
 
-from src.utils.config import Config, Rules
+from src.config import Config, Rules
 from src.utils.logger import Logger
 
 

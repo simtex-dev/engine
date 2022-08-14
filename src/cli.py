@@ -7,7 +7,7 @@ from src.utils.config_fetch import ConfParse
 from src.utils.logger import Logger
 from src.misc.stdout import Signs
 from src.convert import convert
-from src.utils.config import Config, Rules
+from src.config import Config, Rules
 from src.mutils.functions import build_file
 
 
