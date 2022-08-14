@@ -14,13 +14,14 @@ class Logger:
             format="%(message)s",
             level=logging.INFO,
             datefmt="[%X]",
-            handlers=[RichHandler()]
+            handlers=[RichHandler(show_time=False)]
         )
-        RichHandler.KEYWORDS = [
+        RichHandler.KEYWORDS: list[str] = [
                 "[ PROC ]",
                 "[ INPT ]",
                 "[ FAIL ]",
             ]
+
         self.log: logging.Logger = logging.getLogger("rich")
 
         BASE_PATH: Path = Path.home()/".simtex"
@@ -52,8 +53,10 @@ class Logger:
 
         match exception_:
             case "E": # for major error
+                self.log.critical("%s" % (message))
+            case "e":
                 self.log.error("%s" % (message))
             case "P": # for major processes
-                self.log.info("%s" % (message))
+                self.log.debug("%s" % (message))
             case "I": # to print information in the terminal
                 self.log.info("%s" % (message))
