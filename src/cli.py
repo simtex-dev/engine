@@ -149,10 +149,18 @@ class Cli:
                 converter()
             elif self.args.build:
                 converter()
-                build_file()
+                build_file(
+                    self.log,
+                    self.config.output_folder,
+                    self.config.filename
+                )
             elif self.args.buildnview:
                 converter()
-                build_file()
+                build_file(
+                    self.log,
+                    self.config.output_folder,
+                    self.config.filename
+                )
                 Popen(["xgd-open", self.args.filename])
             else:
                 print(f"{Signs.FAIL} Unknown option.")
