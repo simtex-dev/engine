@@ -1,10 +1,5 @@
 from argparse import ArgumentParser
-from shutil import which
-from subprocess import (
-    run,
-    CalledProcessError,
-    Popen
-)
+from subprocess import CalledProcessError, Popen
 from typing import Any, Callable
 
 from src.utils.config_fetch import ConfParse
@@ -12,6 +7,7 @@ from src.utils.logger import Logger
 from src.misc.stdout import Signs
 from src.convert import convert
 from src.utils.config import Config, Rules
+from src.mutils.functions import build_file
 
 
 class Cli:
@@ -140,33 +136,12 @@ class Cli:
         self.create_parser() # create the arguments
         self.update_conf() # update the config for overrides
 
-        def build_file() -> None:
-            """Build the LaTeX file using pdflatex."""
-
-            if which("pdflatex") is None:
-                self.log.logger(
-                    "E", "PdfLaTeX does not exists, cannot build file."
-                )
-                raise SystemExit
-
-            rcode = run(
-                    [
-                        "pdflatex",
-                        "-output-directory=",
-                        self.config.output_folder,
-                        self.config.filename
-                    ],
-                    capture_output=True
-                )
-            if rcode.returncode == 0:
-                self.log.logger("P", "Successfully built the file.")
-
         converter: Callable[..., None] = lambda: convert(
                 self.log,
                 self.rules,
                 self.config,
                 self.args.title,
-                self.args.file
+                self.args.filename
             )
 
         try:
@@ -178,7 +153,7 @@ class Cli:
             elif self.args.buildnview:
                 converter()
                 build_file()
-                Popen(["xgd-open", self.args.file])
+                Popen(["xgd-open", self.args.filename])
             else:
                 print(f"{Signs.FAIL} Unknown option.")
         except KeyboardInterrupt:
