@@ -16,7 +16,7 @@ class Logger:
             datefmt="[%X]",
             handlers=[RichHandler(show_time=False)]
         )
-        RichHandler.KEYWORDS: list[str] = [
+        RichHandler.KEYWORDS = [
                 "[ PROC ]",
                 "[ INPT ]",
                 "[ FAIL ]",

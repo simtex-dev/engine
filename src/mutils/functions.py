@@ -31,7 +31,7 @@ def build_file(log: Logger, output_folder: str, filename: str) -> None:
         log.logger("E", f"{Err}, aborting ...")
 
 
-def update_conf(log: Logger, config: Config, args) -> None:
+def update_conf(log: Logger, config: Config, args: Any) -> None:
     """Update the overrides of the program."""
 
     PARAMETERS: dict[str, Any] = {

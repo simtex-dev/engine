@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import IO, Any, NoReturn, TextIO
+from typing import IO, Any, TextIO
 
 from src.config import Config
 from src.utils.logger import Logger
@@ -10,7 +10,7 @@ def headings(
         config: Config,
         title: str,
         out_file: TextIO
-    ) -> int | NoReturn:
+    ) -> int:
     """Create the headings of the LaTeX file."""
 
     SECTIONS: dict[str, str] = {
@@ -96,5 +96,5 @@ def headings(
         PermissionError
     ) as Err:
         log.logger("E", f"Encountered {Err}, aborting ...")
-    else:
-        return len(headings)+11 # 11 is the number of newlines created.
+
+    return len(headings)+11 # 11 is the number of newlines created.

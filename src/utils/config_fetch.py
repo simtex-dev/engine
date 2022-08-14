@@ -3,7 +3,7 @@ from os.path import exists
 from pathlib import Path
 from shutil import copy
 from json import load
-from typing import IO, Any, NoReturn, Optional
+from typing import IO, Any, Optional
 
 from src.config import Config, Rules
 from src.utils.logger import Logger
@@ -47,7 +47,7 @@ class ConfParse:
         if test:
             self.CONF_PATH = "./examples/config"
 
-    def fetch(self) -> list[dict[str, Any]] | NoReturn:
+    def fetch(self) -> list[dict[str, Any]]:
         """Parse and replace the overriden parameters in the CLI."""
 
         try:
@@ -61,8 +61,8 @@ class ConfParse:
 
         except (FileNotFoundError, PermissionError) as Err:
             self.log.logger("E", f"{Err}, aborting ...")
-        else:
-            return raw_conf
+
+        return raw_conf
 
     def rules(self) -> Rules:
         """Parse the config of the rules of converter."""
