@@ -1,5 +1,5 @@
-from shutil import which
 from subprocess import CalledProcessError, run
+from shutil import which
 from typing import Any
 
 from src.config import Config

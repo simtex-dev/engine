@@ -1,6 +1,6 @@
 from os import mkdir
-from pathlib import Path
 from os.path import exists
+from pathlib import Path
 from shutil import copy
 from json import load
 from typing import IO, Any, NoReturn, Optional

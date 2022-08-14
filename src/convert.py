@@ -1,12 +1,12 @@
-from typing import TextIO
-from os.path import exists
 from os import mkdir
-from .misc.stdout import Signs
+from os.path import exists
+from typing import TextIO
 
 from src.config import Config, Rules
-from src.utils.logger import Logger
 from src.utils.tex.sections.headings import headings
 from src.utils.tex.sections.body import body, format_body
+from src.utils.logger import Logger
+from src.misc.stdout import Signs
 
 
 def convert(

@@ -4,6 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class Config:
     """dataclass for configuration of the latex file."""
+
     doc_class: str
     doc_font: str
     font_size: int

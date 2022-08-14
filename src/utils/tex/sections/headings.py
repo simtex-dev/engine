@@ -1,13 +1,13 @@
 from datetime import datetime
 from typing import IO, Any, NoReturn, TextIO
 
-from src.utils.logger import Logger
 from src.config import Config
+from src.utils.logger import Logger
 
 
 def headings(
         log: Logger,
-        conf: Config,
+        config: Config,
         title: str,
         out_file: TextIO
     ) -> int | NoReturn:
@@ -31,48 +31,48 @@ def headings(
         }
 
     headings: list[str] = [
-            f"\documentclass[{conf.font_size}pt]{{{conf.doc_class}}}\n",
-            f"% font\n\\usepackage{{{conf.doc_font}}}\n\n% packages"
+            f"\documentclass[{config.font_size}pt]{{{config.doc_class}}}\n",
+            f"% font\n\\usepackage{{{config.doc_font}}}\n\n% packages"
         ]
 
-    if "<NOW>" in conf.date:
-        conf.__setattr__("date", datetime.now().strftime("%B %d, %Y"))
+    if "<NOW>" in config.date:
+        config.__setattr__("date", datetime.now().strftime("%B %d, %Y"))
 
     pkgs: str
-    for pkgs in conf.packages:
+    for pkgs in config.packages:
         if "margin" in pkgs:
             pkgs = (
                     pkgs
-                        .replace("<MARGIN>", f"{conf.margin}in")
-                        .replace("<PAPER_SIZE>", conf.paper_size)
+                        .replace("<MARGIN>", f"{config.margin}in")
+                        .replace("<PAPER_SIZE>", config.paper_size)
                 )
         elif "colorlinks" in pkgs:
-            pkgs = pkgs.replace("<LINK_COLORS>", conf.link_color)
+            pkgs = pkgs.replace("<LINK_COLORS>", config.link_color)
 
         headings.append(f"\\usepackage{pkgs}")
 
     headings.append(
-        f"\\usepackage[scaled={conf.cfont_scale}]{{{conf.code_font}}}"
+        f"\\usepackage[scaled={config.cfont_scale}]{{{config.code_font}}}"
     )
 
     sec_sizes: int; sec_val: str
     for sec_sizes, sec_val in zip(
-            conf.section_sizes.values(), SECTIONS.values()
+            config.section_sizes.values(), SECTIONS.values()
         ):
         headings.append(sec_val.replace("<SECTION_SIZES>", str(sec_sizes)))
 
     headings.append(
-        f"\n% basic config\n\setlength\parindent{{{conf.indent_size}pt}}"
+        f"\n% basic config\n\setlength\parindent{{{config.indent_size}pt}}"
     )
     headings.append(
-        f"\\renewcommand{{\\thefootnote}}{{\\fnsymbol{{{conf.footnote}}}}}"
+        f"\\renewcommand{{\\thefootnote}}{{\\fnsymbol{{{config.footnote}}}}}"
     )
 
-    if conf.sloppy:
+    if config.sloppy:
         headings.append(r"\sloppy")
 
     lstconf: IO[Any]
-    with open(conf.code_conf, "r", encoding="utf-8") as lstconf:
+    with open(config.code_conf, "r", encoding="utf-8") as lstconf:
         headings.append(f"\n% lst listings config")
         for lines in lstconf.readlines():
             headings.append(lines.replace("\n", ""))
@@ -80,8 +80,8 @@ def headings(
     items: str
     for items in [
             f"\n% paper info\n\\title{{{title}}}",
-            f"\\author{{{conf.author}}}",
-            f"\date{{{conf.date}}}"
+            f"\\author{{{config.author}}}",
+            f"\date{{{config.date}}}"
         ]:
         headings.append(items)
 

@@ -38,16 +38,16 @@ def body(
     out_file: textio -- where the output will be written.
     """
 
-    for_convert: TextIO
-    with open(in_file, "r", encoding="utf-8") as for_convert:
-        text: list[str] = for_convert.readlines()
+    ref_file: TextIO
+    with open(in_file, "r", encoding="utf-8") as ref_file:
+        ref_tex: list[str] = ref_file.readlines()
 
     ref: int = -1
 
     log.logger("I", "Writing the body to the document ...")
 
     i: int; line: str
-    for i, line in enumerate(text):
+    for i, line in enumerate(ref_tex):
         if line in ["", "\n"]:
             continue
 
@@ -83,7 +83,7 @@ def body(
                         out_file.write("\\begin{align}\n")
 
                         eqs: str; j: int
-                        for j, eqs in enumerate(text.copy()[i+1:]):
+                        for j, eqs in enumerate(ref_tex.copy()[i+1:]):
                             if eqs.strip() == rules.paragraph_math:
                                 ref = j+i+1
                                 break
@@ -119,7 +119,7 @@ def body(
                     )
 
                     code: str; n: int
-                    for n, code in enumerate(text.copy()[i+1:]):
+                    for n, code in enumerate(ref_tex.copy()[i+1:]):
                         if code.strip() == rules.code:
                             out_file.write("\end{lstlisting}\n")
                             ref = n+i+1
@@ -185,7 +185,7 @@ def format_body(
     try:
         ref: TextIO
         with open(out_file, "r", encoding="utf-8") as ref:
-            lines: list[str] = ref.readlines()
+            ref_tex: list[str] = ref.readlines()
     except (FileNotFoundError, OSError, PermissionError, IOError):
         log.logger("E", "Cannot format the document, aborting ...")
     else:
@@ -196,7 +196,7 @@ def format_body(
         file: IO[Any]
         with open(out_file, "w", encoding="utf-8") as file:
             line: str
-            for line in lines[:start]:
+            for line in ref_tex[:start]:
                 file.write(line)
 
             file.write("\n\\begin{document}\n")
@@ -205,12 +205,12 @@ def format_body(
                 file.write("\t\maketitle\n")
 
             i: int
-            for i, line in enumerate(lines[start:]):
+            for i, line in enumerate(ref_tex[start:]):
                 if i < ignore:
                     continue
 
                 if line.startswith(r"\begin{lstlisting}"):
-                    for j, codes in enumerate(lines.copy()[i+start:]):
+                    for j, codes in enumerate(ref_tex.copy()[i+start:]):
                         file.write(codes)
                         if codes.startswith(r"\end{lstlisting}"):
                             ignore = j+i+1
