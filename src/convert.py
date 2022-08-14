@@ -1,4 +1,6 @@
 from typing import TextIO
+from os.path import exists
+from os import mkdir
 
 from src.utils.config import Config, Rules
 from src.utils.config import Config
@@ -15,6 +17,9 @@ def convert(
         in_file: str,
     ) -> None:
     """Main program."""
+
+    if not exists(conf.output_folder):
+        mkdir(conf.output_folder)
 
     OFILE_PATH: str = f"{conf.output_folder}/{conf.filename}"
     out_file: TextIO
