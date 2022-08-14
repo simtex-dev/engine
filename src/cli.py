@@ -50,12 +50,14 @@ class Cli:
         self.parser.add_argument(
             "-i", "--input",
             help="File to be converted into LaTeX.",
-            action="store"
+            action="store",
+            required=True
         )
         self.parser.add_argument(
             "-T", "--title",
             help="Set the title of the document.",
             action="store",
+            required=True
         )
         self.parser.add_argument(
             "-f", "--filename",
