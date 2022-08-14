@@ -38,6 +38,22 @@ options:
                         Margin size to be used.
 ```
 
+# Examples
+
+You can view the output of the program [here](./examples/1/hello.pdf) using the command:
+
+![](./imgs/sample.png)
+
+```
+simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -of="./examples/1" -f="hello.tex" -a="iaacornus" -d="August 15, 2552"
+```
+
+To convert a LaTeX file, and rename the default author defined in `$CONF_PATH/simtex.json`, add `-a="iaacornus (or your name)`, and with the date, `-d="August 15, 2552`. See the [documentation of arguments and configuration file](./examples/config/README.md).
+
+# Installation
+
+See [INSTALL.md](INSTALL.md) for details.
+
 # Notes
 
 This program is currently a concept/idea on development being worked on a free time of a full time university student.
