@@ -55,7 +55,7 @@ class TestCases(unittest.TestCase):
                 date="<NOW>",
                 make_title=True,
                 filename="a.tex",
-                output_folder="./out/"
+                output_folder="./out"
             ),
             conf
         )
