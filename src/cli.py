@@ -1,7 +1,8 @@
 from argparse import ArgumentParser
 from subprocess import CalledProcessError, Popen
-from typing import Any, Callable
+from typing import Callable
 
+from src.mutils.functions import update_conf
 from src.utils.config_fetch import ConfParse
 from src.utils.logger import Logger
 from src.misc.stdout import Signs
@@ -107,35 +108,12 @@ class Cli:
 
         self.args = self.parser.parse_args()
 
-    def update_conf(self) -> None:
-        """Update the overrides of the program."""
-
-        PARAMETERS: dict[str, Any] = {
-            "filename": self.args.filename,
-            "output_folder": self.args.outputfolder,
-            "author": self.args.author,
-            "date": self.args.date,
-            "doc_font": self.args.font,
-            "font_size": self.args.fontsize,
-            "paper_size": self.args.papersize,
-            "margin": self.args.margin,
-            "indent_size": self.args.indent,
-            "doc_font": self.args.font
-        }
-
-        key_: str; param: Any
-        for key_, param in PARAMETERS.items(): # for overrides
-            if param is not None:
-                self.log.logger(
-                    "I", f"{self.config.__getattribute__(key_)} -> {param}"
-                )
-                self.config.__setattr__(key_, param)
-
     def cli(self) -> None:
         """Commandline interface of the program."""
 
         self.create_parser() # create the arguments
-        self.update_conf() # update the config for overrides
+        # update the config for overrides
+        update_conf(self.log, self.config, self.args)
 
         converter: Callable[..., None] = lambda: convert(
                 self.log,
