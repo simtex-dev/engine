@@ -128,7 +128,6 @@ class Cli:
                     "E", f"{self.config.__getattribute__(key_)} -> {param}"
                 )
                 self.config.__setattr__(key_, param)
-        print(self.config)
 
     def cli(self) -> None:
         """Commandline interface of the program."""
