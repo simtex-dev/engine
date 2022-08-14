@@ -140,7 +140,7 @@ class Cli:
                 self.rules,
                 self.config,
                 self.args.title,
-                self.args.filename
+                self.args.input
             )
 
         try:
