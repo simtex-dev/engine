@@ -9,7 +9,7 @@ def build_file(log: Logger, output_folder: str, filename: str) -> None:
 
     if which("pdflatex") is None:
         log.logger(
-            "E", "PdfLaTeX does not exists, cannot build file."
+            "e", "PdfLaTeX does not exists, cannot build file."
         )
         raise SystemExit
 
@@ -26,4 +26,4 @@ def build_file(log: Logger, output_folder: str, filename: str) -> None:
         if rcode.returncode == 0:
             log.logger("P", "Successfully built the file.")
     except CalledProcessError as Err:
-        log.logger("E", f"CalledProcessError raised: {Err}, aborting ...")
+        log.logger("E", f"{Err}, aborting ...")

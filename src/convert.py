@@ -24,9 +24,9 @@ def convert(
     OFILE_PATH: str
     if exists((OFILE_PATH := f"{config.output_folder}/{config.filename}")):
         if input(
-                f"{Signs.INPT} File: {OFILE_PATH} already exists, overwrite?"
-            ).lower() == "n":
-            log.logger("E", f"File: {OFILE_PATH} already exists.")
+                f"{Signs.INPT} File: {OFILE_PATH} already exists, overwrite? "
+            ).lower() != "y":
+            log.logger("e", f"File: {OFILE_PATH} already exists.")
             raise SystemExit
 
     out_file: TextIO

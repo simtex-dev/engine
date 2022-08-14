@@ -27,12 +27,12 @@ class ConfParse:
                     mkdir(paths)
                 except (SystemError, OSError, IOError) as Err:
                     self.log.logger(
-                        "E", f"Encountered: {Err}. Cannot create: {paths}"
+                        "E", f"{Err}. Cannot create: {paths}, aborting ..."
                     )
 
         if not exists(f"{self.CONF_PATH}/simtex.json"):
             self.log.logger(
-                "E", f"Config file not found, used the default."
+                "I", f"Config file not found, used the default."
             )
             try:
                 copy(
@@ -40,7 +40,9 @@ class ConfParse:
                     f"{self.CONF_PATH}/simtex.json"
                 )
             except FileNotFoundError:
-                self.log.logger("E", "Backup file does not exists.")
+                self.log.logger(
+                    "E", "Backup file does not exists, aborting ..."
+                )
 
         if test:
             self.CONF_PATH = "./examples/config"
@@ -58,8 +60,7 @@ class ConfParse:
                 raw_conf: list[dict[str, Any]] = load(conf_file)
 
         except (FileNotFoundError, PermissionError) as Err:
-            self.log.logger("E", f"Encountered {Err}, aborting ...")
-            raise SystemExit
+            self.log.logger("E", f"{Err}, aborting ...")
         else:
             return raw_conf
 

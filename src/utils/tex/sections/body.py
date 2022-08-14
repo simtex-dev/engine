@@ -187,7 +187,7 @@ def format_body(
         with open(out_file, "r", encoding="utf-8") as ref:
             lines: list[str] = ref.readlines()
     except (FileNotFoundError, OSError, PermissionError, IOError):
-        log.logger("E", "Cannot format the document.")
+        log.logger("E", "Cannot format the document, aborting ...")
     else:
         log.logger("I", "Formatting the document ...")
 

@@ -96,6 +96,5 @@ def headings(
         PermissionError
     ) as Err:
         log.logger("E", f"Encountered {Err}, aborting ...")
-        raise SystemExit
     else:
         return len(headings)+11 # 11 is the number of newlines created.
