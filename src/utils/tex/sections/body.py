@@ -201,7 +201,6 @@ def format_body(log: Logger, start: int, out_file: str) -> None:
 
             i: int
             for i, line in enumerate(lines[start:]):
-                print(i, ignore)
                 if i < ignore:
                     continue
 
