@@ -4,9 +4,9 @@ from pathlib import Path
 from json import load
 from typing import IO, Any, Optional
 
-from config import Config, Rules
-from mutils.functions import fix_missing_config
-from utils.logger import Logger
+from src.config import Config, Rules
+from src.mutils.functions import fix_missing_config
+from src.utils.logger import Logger
 
 
 class ConfParse:

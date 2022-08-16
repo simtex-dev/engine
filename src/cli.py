@@ -2,13 +2,13 @@ from argparse import ArgumentParser
 from subprocess import CalledProcessError, Popen
 from typing import Any, Callable
 
-from config import Config, Rules
-from utils.config_fetch import ConfParse
-from convert import convert
-from mutils.functions import build_file
-from mutils.functions import update_conf
-from utils.logger import Logger
-from misc.stdout import Signs
+from src.config import Config, Rules
+from src.utils.config_fetch import ConfParse
+from src.convert import convert
+from src.mutils.functions import build_file
+from src.mutils.functions import update_conf
+from src.utils.logger import Logger
+from src.misc.stdout import Signs
 
 
 class Cli:

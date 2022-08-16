@@ -4,9 +4,9 @@ from typing import Any
 
 from requests import get
 
-from config import Config
-from utils.logger import Logger
-from misc.stdout import Signs
+from src.config import Config
+from src.utils.logger import Logger
+from src.misc.stdout import Signs
 
 
 def build_file(log: Logger, output_folder: str, filename: str) -> None:

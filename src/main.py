@@ -1,4 +1,4 @@
-from cli import Cli
+from src.cli import Cli
 
 
 def main() -> None:
