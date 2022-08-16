@@ -58,7 +58,6 @@ class Cli:
             "-T", "--title",
             help="Set the title of the document.",
             action="store",
-            required=True
         )
         self.parser.add_argument(
             "-f", "--filename",
