@@ -2,11 +2,11 @@ from os import mkdir
 from os.path import exists
 from typing import TextIO
 
-from src.config import Config, Rules
-from src.utils.tex.sections.headings import headings
-from src.utils.tex.sections.body import body, format_body
-from src.utils.logger import Logger
-from src.misc.stdout import Signs
+from config import Config, Rules
+from utils.tex.sections.headings import headings
+from utils.tex.sections.body import body, format_body
+from utils.logger import Logger
+from misc.stdout import Signs
 
 
 def convert(

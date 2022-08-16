@@ -5,8 +5,8 @@ from shutil import copy
 from json import load
 from typing import IO, Any, Optional
 
-from src.config import Config, Rules
-from src.utils.logger import Logger
+from config import Config, Rules
+from utils.logger import Logger
 
 
 class ConfParse:

@@ -2,8 +2,8 @@ from re import findall
 
 from typing import Any, Optional, TextIO, IO
 
-from src.config import Config, Rules
-from src.utils.logger import Logger
+from config import Config, Rules
+from utils.logger import Logger
 
 
 def title(

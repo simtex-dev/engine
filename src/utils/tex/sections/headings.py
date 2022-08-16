@@ -1,8 +1,8 @@
 from datetime import datetime
 from typing import IO, Any, TextIO
 
-from src.config import Config
-from src.utils.logger import Logger
+from config import Config
+from utils.logger import Logger
 
 
 def headings(

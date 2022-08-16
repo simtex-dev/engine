@@ -2,8 +2,8 @@ from subprocess import CalledProcessError, run
 from shutil import which
 from typing import Any
 
-from src.config import Config
-from src.utils.logger import Logger
+from config import Config
+from utils.logger import Logger
 
 
 def build_file(log: Logger, output_folder: str, filename: str) -> None:
