@@ -29,7 +29,7 @@ def title(
 
 def body(
         log: Logger, rules: Rules, in_file: str, out_file: TextIO
-    ) -> None:
+    ) -> list[str]:
     """Generate a LaTeX version of the given markdown file.
 
     Arguments:
@@ -37,6 +37,8 @@ def body(
     rules: object -- the rules to follow for parsing.
     out_file: textio -- where the output will be written.
     """
+
+    files: list[str] = []
 
     ref_file: TextIO
     with open(in_file, "r", encoding="utf-8") as ref_file:
@@ -147,6 +149,7 @@ def body(
                                     "\\end{figure}\n"
                                 )
                                 skip_line = True
+                                files.append(img_results[0][1])
                                 break
 
                             if (link_results := findall(rules.links, part)):
@@ -175,6 +178,8 @@ def body(
                                         .replace("\n", "\n")
                                 )
                             out_file.write(f"\n{new_line}\n")
+
+    return files
 
 
 def format_body(
