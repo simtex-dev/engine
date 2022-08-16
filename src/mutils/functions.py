@@ -1,6 +1,8 @@
 from subprocess import CalledProcessError, run
-from shutil import which
+from shutil import which, copy
 from typing import Any
+
+from httpx import get
 
 from config import Config
 from utils.logger import Logger
@@ -54,3 +56,56 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
                 "I", f"{config.__getattribute__(key_)} -> {param}"
             )
             config.__setattr__(key_, param)
+
+
+def fix_missing_config(
+        log: Logger,
+        CONF_PATH: str,
+        conf: bool = False,
+        code_conf: bool = False
+    ) -> None:
+    """Fetch the backup copy of the config file or download the file."""
+
+    if conf:
+        link: str = (
+                "https://github.com/iaacornus/simtex/"
+                "blob/devel/examples/config/simtex.json"
+            )
+        filename: str = "simtex.json"
+    elif code_conf:
+        link = (
+                "https://github.com/iaacornus/simtex/"
+                "blob/devel/examples/config/code_conf.txt"
+            )
+        filename = "code_conf.txt"
+
+    log.logger(
+        "I", f"{filename} not found, using the default."
+    )
+
+    for _ in range(3):
+        try:
+            copy(
+                f"{CONF_PATH}/{filename}.bak",
+                f"{CONF_PATH}/{filename}"
+            )
+        except FileNotFoundError:
+            try:
+                log.logger(
+                    "E", "Backup file not found, fetching original config ..."
+                )
+                with get(link, stream=True) as d_file:
+                    with open(
+                            f"{CONF_PATH}/{filename}", "wb"
+                        ) as conf_file:
+                        for chunk in d_file.iter_content(chunk_size=1024):
+                            if chunk:
+                                conf_file.write(chunk)
+            except ConnectionError as Err:
+                log.logger(
+                    "E", f"{Err}, cannot download {filename}, aborting ..."
+                )
+            else:
+                continue
+        else:
+            break
