@@ -96,7 +96,7 @@ def fix_missing_config(
                 )
                 with get(link, stream=True) as d_file:
                     with open(
-                            f"{CONF_PATH}/{filename}", "wb"
+                            f"{CONF_PATH}/{filename}.bak", "wb"
                         ) as conf_file:
                         for chunk in d_file.iter_content(chunk_size=1024):
                             if chunk:
@@ -106,8 +106,9 @@ def fix_missing_config(
                     "E", f"{Err}, cannot download {filename}, aborting ..."
                 )
             else:
-                return
+                continue
         else:
+            log.logger("I", "Sucessfully fetched the config file.")
             return
 
     raise SystemExit
