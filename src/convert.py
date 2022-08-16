@@ -19,7 +19,13 @@ def convert(
     ) -> None:
     """Main program."""
 
-    OPATH: str = "/".join(in_file.split("/")[:-1])
+    OFILE_PATH: str
+    if exists((OFILE_PATH := f"{config.output_folder}/{config.filename}")):
+        if input(
+                f"{Signs.INPT} File: {OFILE_PATH} already exists, overwrite? "
+            ).lower() != "y":
+            log.logger("e", f"File: {OFILE_PATH} already exists.")
+            raise SystemExit
 
     if not exists(config.output_folder):
         mkdir(config.output_folder)
@@ -30,13 +36,7 @@ def convert(
             f"{Signs.INFO} Title is none, using the {_title} as title ..."
         )
 
-    OFILE_PATH: str
-    if exists((OFILE_PATH := f"{config.output_folder}/{config.filename}")):
-        if input(
-                f"{Signs.INPT} File: {OFILE_PATH} already exists, overwrite? "
-            ).lower() != "y":
-            log.logger("e", f"File: {OFILE_PATH} already exists.")
-            raise SystemExit
+    OPATH: str = "/".join(in_file.split("/")[:-1])
 
     out_file: TextIO
     with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
