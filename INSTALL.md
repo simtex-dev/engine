@@ -1,5 +1,34 @@
 # Installation
 
+# Simple install
+
+The project can be installed using the `.whl` in releases section using your python package manager
+
+## From source
+
+### 1
+
+One way to install the project from source is by building it using the build system. Install the dependencies with:
+
+```
+pip install build setuptools rich==12.4.4
+```
+
+Then inside the project dir, to build the `.whl` file do:
+
+```
+python -m build
+```
+
+or to package the project:
+
+```
+python setup.py build
+```
+
+And finally if the former was used, the resulting `.whl` file under `dists/` dir can be installed via `pip`.
+
+### 2
 Since the current version of simtex, is under alpha (v0.1.0a), there is no package and install script yet. Clone the repository:
 
 ```
