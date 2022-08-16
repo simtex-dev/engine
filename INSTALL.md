@@ -1,6 +1,6 @@
 # Installation
 
-Since the current version of simtex, is under alpha (v0.0.0a), there is no package and install script yet. Clone the repository:
+Since the current version of simtex, is under alpha (v0.1.0a), there is no package and install script yet. Clone the repository:
 
 ```
 git clone -b devel https://github.com/iaacornus/simtex
