@@ -139,7 +139,12 @@ class Cli:
                     self.config.output_folder,
                     self.config.filename
                 )
-                Popen(["xgd-open", self.args.filename])
+                try:
+                    Popen(["xgd-open", self.args.filename])
+                except FileNotFoundError:
+                    self.log.logger(
+                        "e", "No PDF view found, cannot view file."
+                    )
             else:
                 print(f"{Signs.FAIL} Unknown option.")
         except KeyboardInterrupt:
