@@ -19,6 +19,8 @@ def convert(
     ) -> None:
     """Main program."""
 
+    OPATH: str = "/".join(in_file.split("/")[:-1])
+
     if not exists(config.output_folder):
         mkdir(config.output_folder)
 
@@ -43,14 +45,14 @@ def convert(
 
     format_body(log, config, start, OFILE_PATH)
 
-    print(f"{Signs.INFO} Copying files into {config.output_folder} ...")
-
     file: str
     for file in files:
+        print(f"{Signs.INFO} Copying {file} into {config.output_folder} ...")
         filename: str = file.split("/")[-1]
         try:
             copy(
-                file, f"{config.output_folder}/{filename}"
+                f"{OPATH}/{file.replace('./', '')}",
+                f"{config.output_folder}/{filename}"
             )
         except (FileNotFoundError, OSError, IOError) as Err:
             log.logger("e", f"Encountered: {Err} while moving {file}")
