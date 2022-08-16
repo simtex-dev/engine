@@ -106,6 +106,8 @@ def fix_missing_config(
                     "E", f"{Err}, cannot download {filename}, aborting ..."
                 )
             else:
-                continue
+                return
         else:
-            break
+            return
+
+    raise SystemExit
