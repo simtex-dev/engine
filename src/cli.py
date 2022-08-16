@@ -147,8 +147,3 @@ class Cli:
             self.log.logger("E", "Process aborted, aborting ...")
         except CalledProcessError:
             self.log.logger("E", "Cannot call the process, aborting ...")
-
-
-if __name__ == "__main__":
-    cli: Cli = Cli()
-    cli.cli()
