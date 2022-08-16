@@ -6,6 +6,7 @@ from requests import get
 
 from config import Config
 from utils.logger import Logger
+from misc.stdout import Signs
 
 
 def build_file(log: Logger, output_folder: str, filename: str) -> None:
@@ -18,11 +19,13 @@ def build_file(log: Logger, output_folder: str, filename: str) -> None:
         raise SystemExit
 
     try:
+        print(
+            f"{Signs.INFO} Building latex file with pdflatex."
+        )
         rcode = run(
                 [
                     "pdflatex",
-                    "-output-directory=",
-                    output_folder,
+                    f"-output-directory={output_folder}",
                     filename
                 ],
                 capture_output=True
