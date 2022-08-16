@@ -14,7 +14,12 @@ class Logger:
             format="%(message)s",
             level=logging.INFO,
             datefmt="[%X]",
-            handlers=[RichHandler(show_time=False)]
+            handlers=[
+                    RichHandler(
+                        show_time=False,
+                        show_path=False
+                    )
+                ]
         )
         RichHandler.KEYWORDS = [
                 "[ PROC ]",
