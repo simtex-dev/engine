@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 from subprocess import CalledProcessError, Popen
-from typing import Callable
+from typing import Any, Callable
 
 from config import Config, Rules
 from utils.config_fetch import ConfParse
@@ -115,7 +115,7 @@ class Cli:
         # update the config for overrides
         update_conf(self.log, self.config, self.args)
 
-        converter: Callable[..., None] = lambda: convert(
+        converter: Callable[..., Any] = lambda: convert(
                 self.log,
                 self.rules,
                 self.config,
