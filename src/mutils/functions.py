@@ -2,7 +2,7 @@ from subprocess import CalledProcessError, run
 from shutil import which, copy
 from typing import Any
 
-from httpx import get
+from requests import get
 
 from config import Config
 from utils.logger import Logger
@@ -68,14 +68,14 @@ def fix_missing_config(
 
     if conf:
         link: str = (
-                "https://github.com/iaacornus/simtex/"
-                "blob/devel/examples/config/simtex.json"
+                "https://raw.githubusercontent.com/iaacornus"
+                "/simtex/devel/examples/config/simtex.json"
             )
         filename: str = "simtex.json"
     elif code_conf:
         link = (
-                "https://github.com/iaacornus/simtex/"
-                "blob/devel/examples/config/code_conf.txt"
+            "https://raw.githubusercontent.com/iaacornus"
+            "/simtex/devel/examples/config/code_conf.txt"
             )
         filename = "code_conf.txt"
 
@@ -92,7 +92,7 @@ def fix_missing_config(
         except FileNotFoundError:
             try:
                 log.logger(
-                    "E", "Backup file not found, fetching original config ..."
+                    "e", "Backup file not found, fetching original config ..."
                 )
                 with get(link, stream=True) as d_file:
                     with open(
