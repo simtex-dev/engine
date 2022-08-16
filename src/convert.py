@@ -1,3 +1,4 @@
+from shutil import copy
 from os import mkdir
 from os.path import exists
 from typing import TextIO
@@ -22,9 +23,9 @@ def convert(
         mkdir(config.output_folder)
 
     if _title is None:
-        _title = "".join(in_file.split("/")[-1])
+        _title = in_file.split("/")[-1]
         print(
-            f"{Signs.INFO} Title is none, using the {_title} as title."
+            f"{Signs.INFO} Title is none, using the {_title} as title ..."
         )
 
     OFILE_PATH: str
@@ -38,6 +39,18 @@ def convert(
     out_file: TextIO
     with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
         start: int = headings(log, config, _title, out_file)
-        body(log, rules, in_file, out_file)
+        files: list[str] = body(log, rules, in_file, out_file)
 
     format_body(log, config, start, OFILE_PATH)
+
+    print(f"{Signs.INFO} Copying files into {config.output_folder} ...")
+
+    file: str
+    for file in files:
+        filename: str = file.split("/")[-1]
+        try:
+            copy(
+                file, f"{config.output_folder}/{filename}"
+            )
+        except (FileNotFoundError, OSError, IOError) as Err:
+            log.logger("e", f"Encountered: {Err} while moving {file}")
