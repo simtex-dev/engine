@@ -26,9 +26,6 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install flake8 mypy types-requests types-setuptools
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: Setup mypy types, if there is missed.
-      run: |
-        mypy --strict $(git ls-files "*.py") --install-types
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
