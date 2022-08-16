@@ -1,11 +1,11 @@
 from os import mkdir
 from os.path import exists
 from pathlib import Path
-from shutil import copy
 from json import load
 from typing import IO, Any, Optional
 
 from config import Config, Rules
+from mutils.functions import fix_missing_config
 from utils.logger import Logger
 
 
@@ -31,18 +31,9 @@ class ConfParse:
                     )
 
         if not exists(f"{self.CONF_PATH}/simtex.json"):
-            self.log.logger(
-                "I", f"Config file not found, used the default."
-            )
-            try:
-                copy(
-                    f"{self.CONF_PATH}/simtex.json.bak",
-                    f"{self.CONF_PATH}/simtex.json"
-                )
-            except FileNotFoundError:
-                self.log.logger(
-                    "E", "Backup file does not exists, aborting ..."
-                )
+            fix_missing_config(self.log, self.CONF_PATH, True)
+        elif not exists(f"{self.CONF_PATH}/code_conf.txt"):
+            fix_missing_config(self.log, self.CONF_PATH, code_conf=True)
 
         if test:
             self.CONF_PATH = "./examples/config"
