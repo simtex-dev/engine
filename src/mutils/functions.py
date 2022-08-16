@@ -1,4 +1,4 @@
-from subprocess import CalledProcessError, run
+from os import system
 from shutil import which, copy
 from typing import Any
 
@@ -22,17 +22,18 @@ def build_file(log: Logger, output_folder: str, filename: str) -> None:
         print(
             f"{Signs.INFO} Building latex file with pdflatex."
         )
-        rcode = run(
-                [
-                    "pdflatex",
-                    f"-output-directory={output_folder}",
-                    filename
-                ],
-                capture_output=True
+        rcode = system(
+                (
+                    "pdflatex "
+                    "-synctex=1 "
+                    "-interaction=nonstopmode "
+                    f"-output-directory={output_folder} "
+                    f"{filename}"
+                ),
             )
-        if rcode.returncode == 0:
+        if rcode == 0:
             log.logger("P", "Successfully built the file.")
-    except CalledProcessError as Err:
+    except OSError as Err:
         log.logger("E", f"{Err}, aborting ...")
 
 
