@@ -21,30 +21,17 @@ setup(
     author_email="iaacornus.devel@gmail.com",
     license="GPL v3",
     py_modules=[
-            "main",
-            "cli",
-            "convert",
-            "config",
-            "utils/tex/sections/body",
-            "utils/tex/sections/headings",
-            "utils/config_fetch",
-            "utils/logger",
-            "mutils/functions",
-            "misc/stdout"
+            "src/main",
+            "src/cli",
+            "src/convert",
+            "src/config",
+            "src/utils/tex/sections/body",
+            "src/utils/tex/sections/headings",
+            "src/utils/config_fetch",
+            "src/utils/logger",
+            "src/mutils/functions",
+            "src/misc/stdout"
         ],
-    package_dir={
-            "": "src"
-        },
-    packages=find_packages(
-            where="src",
-            include=[
-                    "misc",
-                    "mutils",
-                    "utils",
-                    "utils/tex",
-                    "utils/tex/sections"
-                ]
-        ),
     python_requires=">=3.10",
     install_requires=[
             "rich==12.4.4",
@@ -60,7 +47,7 @@ setup(
         ],
     entry_points={
         "console_scripts" : [
-            "simtex=main:main",
+            "simtex=src.main:main",
         ]
     },
 )
