@@ -4,6 +4,8 @@
 
 simtex (simplified LaTeX) allows you to convert your markdown or text lectures into LaTeX file with one command, configured with simple `.json` file.
 
+> Note: This program does not exist to replace the LaTeX system, this do exist to simplify the process of turning your already existing markdown/text file into PDF with LaTeX.
+
 # Program Options
 
 ```
@@ -53,7 +55,3 @@ To convert a LaTeX file, and rename the default author defined in `$CONF_PATH/si
 # Installation
 
 See [INSTALL.md](INSTALL.md) for details.
-
-# Notes
-
-This program is currently a concept/idea on development being worked on a free time of a full time university student.
