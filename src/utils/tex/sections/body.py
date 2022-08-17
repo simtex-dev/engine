@@ -191,8 +191,10 @@ def format_body(
         ref: TextIO
         with open(out_file, "r", encoding="utf-8") as ref:
             ref_tex: list[str] = ref.readlines()
-    except (FileNotFoundError, OSError, PermissionError, IOError):
-        log.logger("E", "Cannot format the document, aborting ...")
+    except (FileNotFoundError, OSError, PermissionError, IOError) as Err:
+        log.logger(
+            "E", f"{Err}. Cannot format the document, aborting ..."
+        )
     else:
         log.logger("I", "Formatting the document ...")
 

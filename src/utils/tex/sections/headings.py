@@ -95,6 +95,9 @@ def headings(
         BlockingIOError,
         PermissionError
     ) as Err:
-        log.logger("E", f"Encountered {Err}, aborting ...")
+        log.logger(
+            "E", f"{Err}. Cannot write headings to file, aborting ..."
+        )
+        raise SystemExit
 
     return len(headings)+11 # 11 is the number of newlines created.

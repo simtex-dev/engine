@@ -49,9 +49,10 @@ class ConfParse:
                     encoding="utf-8"
                 ) as conf_file:
                 raw_conf: list[dict[str, Any]] = load(conf_file)
-
         except (FileNotFoundError, PermissionError) as Err:
-            self.log.logger("E", f"{Err}, aborting ...")
+            self.log.logger(
+                "E", f"{Err}. Cannot fetch config file, aborting ..."
+            )
 
         return raw_conf
 

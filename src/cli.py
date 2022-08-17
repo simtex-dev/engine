@@ -143,11 +143,11 @@ class Cli:
                     Popen(["xgd-open", self.args.filename])
                 except FileNotFoundError:
                     self.log.logger(
-                        "e", "No PDF view found, cannot view file."
+                        "e", "No PDF viewer found, cannot view PDF file."
                     )
             else:
                 print(f"{Signs.FAIL} Unknown option.")
         except KeyboardInterrupt:
-            self.log.logger("E", "Process aborted, aborting ...")
+            print(f"{Signs.FAIL} Process aborted.")
         except CalledProcessError:
-            self.log.logger("E", "Cannot call the process, aborting ...")
+            print(f"{Signs.FAIL} Cannot call the process.")

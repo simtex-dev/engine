@@ -19,21 +19,26 @@ def convert(
     ) -> None:
     """Main program."""
 
+    log.logger("I", f"Converting {in_file} ...")
+
     OFILE_PATH: str
     if exists((OFILE_PATH := f"{config.output_folder}/{config.filename}")):
         if input(
                 f"{Signs.INPT} File: {OFILE_PATH} already exists, overwrite? "
             ).lower() != "y":
-            log.logger("e", f"File: {OFILE_PATH} already exists.")
+            log.logger(
+                "e", f"File: {OFILE_PATH} already exists, aborting ..."
+            )
             raise SystemExit
 
     if not exists(config.output_folder):
+        log.logger("I", f"Creating dir: {config.output_folder} ...")
         mkdir(config.output_folder)
 
     if _title is None:
         _title = in_file.split("/")[-1]
-        print(
-            f"{Signs.INFO} Title is none, using the {_title} as title ..."
+        log.logger(
+            "I", f"Title is none, using filename: {_title} as title ..."
         )
 
     OPATH: str = "/".join(in_file.split("/")[:-1])
@@ -47,7 +52,7 @@ def convert(
 
     file: str
     for file in files:
-        print(f"{Signs.INFO} Copying {file} into {config.output_folder} ...")
+        log.logger("I", f"Copying {file} into {config.output_folder} ...")
         filename: str = file.split("/")[-1]
         try:
             copy(
@@ -55,4 +60,6 @@ def convert(
                 f"{config.output_folder}/{filename}"
             )
         except (FileNotFoundError, OSError, IOError) as Err:
-            log.logger("e", f"Encountered: {Err} while moving {file}")
+            log.logger(
+                "e", f"Encountered: {Err} while moving {file}, skipping"
+            )

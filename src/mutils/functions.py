@@ -19,9 +19,7 @@ def build_file(log: Logger, output_folder: str, filename: str) -> None:
         raise SystemExit
 
     try:
-        print(
-            f"{Signs.INFO} Building latex file with pdflatex."
-        )
+        log.logger("P", f"Building {filename} with pdflatex ...")
         rcode = system(
                 (
                     "pdflatex "
@@ -32,9 +30,9 @@ def build_file(log: Logger, output_folder: str, filename: str) -> None:
                 ),
             )
         if rcode == 0:
-            log.logger("P", "Successfully built the file.")
+            log.logger("I", "Successfully built the file.")
     except OSError as Err:
-        log.logger("E", f"{Err}, aborting ...")
+        log.logger("E", f"{Err}. Cannot build LaTeX file.")
 
 
 def update_conf(log: Logger, config: Config, args: Any) -> None:
@@ -57,7 +55,8 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
     for key_, param in PARAMETERS.items(): # for overrides
         if param is not None:
             log.logger(
-                "I", f"{config.__getattribute__(key_)} -> {param}"
+                "I",
+                f"Override: {key_} {config.__getattribute__(key_)} -> {param}"
             )
             config.__setattr__(key_, param)
 
@@ -84,7 +83,7 @@ def fix_missing_config(
         filename = "code_conf.txt"
 
     log.logger(
-        "I", f"{filename} not found, using the default."
+        "e", f"Config file: {filename} not found, fetching the default."
     )
 
     for _ in range(3):
@@ -96,7 +95,9 @@ def fix_missing_config(
         except FileNotFoundError:
             try:
                 log.logger(
-                    "e", "Backup file not found, fetching original config ..."
+                    "e",
+                    f"Backup file for {filename} not found"
+                    ", fetching original config from ..."
                 )
                 with get(link, stream=True) as d_file:
                     with open(
@@ -107,7 +108,7 @@ def fix_missing_config(
                                 conf_file.write(chunk)
             except ConnectionError as Err:
                 log.logger(
-                    "E", f"{Err}, cannot download {filename}, aborting ..."
+                    "E", f"{Err}. Cannot download {filename}, aborting ..."
                 )
             else:
                 continue
