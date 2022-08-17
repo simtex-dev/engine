@@ -21,11 +21,6 @@ class Logger:
                     )
                 ]
         )
-        RichHandler.KEYWORDS = [
-                "[ PROC ]",
-                "[ INPT ]",
-                "[ FAIL ]",
-            ]
 
         self.log: logging.Logger = logging.getLogger("rich")
 
@@ -61,7 +56,5 @@ class Logger:
                 self.log.critical("%s" % (message))
             case "e":
                 self.log.error("%s" % (message))
-            case "P": # for major processes
-                self.log.debug("%s" % (message))
             case "I": # to print information in the terminal
                 self.log.info("%s" % (message))
