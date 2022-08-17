@@ -55,3 +55,9 @@ To convert a LaTeX file, and rename the default author defined in `$CONF_PATH/si
 # Installation
 
 See [INSTALL.md](INSTALL.md) for details.
+
+# Roadmap
+
+1. Include support for quote blocks.
+2. Support for enumerate/lists.
+3. Support for other LaTeX compilers such as XeTex.
