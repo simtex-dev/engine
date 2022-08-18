@@ -1,30 +1,10 @@
 from re import findall
+from turtle import title
 
-from typing import Any, Optional, TextIO, IO
+from typing import Any, Callable, Optional, TextIO, IO
 
 from src.config import Config, Rules
 from src.utils.logger import Logger
-
-
-def title(
-        line: str,
-        command: str,
-        def_rule: Optional[str] = None,
-        params: Optional[str] = None,
-        env: bool = False
-    ) -> str:
-    """Get the title from the line."""
-
-    if env:
-        attach: str = f"[{params}]\n" if params is not None else "\n"
-        return f"\n\\begin{{{command}}}{attach}"
-
-    stripped_line: str = (
-            line
-                .replace(def_rule if def_rule is not None else "", "")
-                .replace("\n", "").strip()
-        )
-    return f"\n\\{command}{{{stripped_line}}}\n"
 
 
 def body(
@@ -37,6 +17,17 @@ def body(
     rules: object -- the rules to follow for parsing.
     out_file: textio -- where the output will be written.
     """
+
+    line: str; def_rule: str
+    striptitle: Callable[..., str] = lambda line, def_rule: (
+            line
+                .replace(def_rule, "")
+                .replace("\n", "")
+                .strip()
+        )
+    title: Callable[..., str] = lambda line, command, def_rule: (
+            f"\n\\{command}{{{striptitle(line, def_rule)}}}\n"
+        )
 
     files: list[str] = []
 
@@ -112,12 +103,8 @@ def body(
                 elif line.startswith(rules.code): # for code blocks
                     language: str = line[3:].replace("\n", "")
                     out_file.write(
-                        title(
-                            line,
-                            "lstlisting",
-                            params=f"language={language}",
-                            env=True
-                        )
+                        f"\n\\begin{{lstlisting}}"
+                        f"[language={language.upper()}]\n"
                     )
 
                     code: str; n: int
