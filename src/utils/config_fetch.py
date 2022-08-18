@@ -73,7 +73,10 @@ class ConfParse:
             raw_conf["SUBPARAGRAPH"],
             raw_conf["INLINE_MATH"],
             raw_conf["PARAGRAPH_MATH"],
-            raw_conf["INLINE_CODE"]
+            raw_conf["INLINE_CODE"],
+            raw_conf["BOLD"],
+            raw_conf["ITALICS"],
+            raw_conf["EMPH"]
         )
 
     def conf(self) -> Config:
