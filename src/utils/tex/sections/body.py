@@ -102,7 +102,7 @@ def body(
                 else:
                     commons(
                         line,
-                        line.split(" "),
+                        len(line.split()),
                         rules,
                         files,
                         out_file
