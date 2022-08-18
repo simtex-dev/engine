@@ -43,9 +43,9 @@ def convert(
         )
 
     if in_file.startswith("./"):
-        OPATH: str = "/".join(in_file.split("/")[:-1])
+        OPATH = "/".join(in_file.split("/")[:-1])
     else:
-        OPATH: str = "./"+"/".join(in_file.split("/")[:-1])
+        OPATH = "./"+"/".join(in_file.split("/")[:-1])
 
     out_file: TextIO
     with open(OFILE_PATH, "w", encoding="utf-8") as out_file:

@@ -21,13 +21,17 @@ def body(
     """
 
     line: str
-    striptitle: Callable[..., str] = lambda line, def_rule: (
+    striptitle: Callable[
+            [str, str], str
+        ] = lambda line, def_rule: (
             line
                 .replace(def_rule, "")
                 .replace("\n", "")
                 .strip()
         )
-    title: Callable[..., str] = lambda line, command, def_rule: (
+    title: Callable[
+            [str, str, str], str
+        ] = lambda line, command, def_rule: (
             f"\n\\{command}{{{striptitle(line, def_rule)}}}\n"
         )
 
@@ -103,6 +107,5 @@ def body(
                         files,
                         out_file
                     )
-
 
     return files
