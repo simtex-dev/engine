@@ -42,7 +42,10 @@ def convert(
             "I", f"Title is none, using filename: {_title} as title ..."
         )
 
-    OPATH: str = "/".join(in_file.split("/")[:-1])
+    if in_file.startswith("."):
+        OPATH: str = "/".join(in_file.split("/")[:-1])
+    else:
+        OPATH: str = "."+"/".join(in_file.split("/")[:-1])
 
     out_file: TextIO
     with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
