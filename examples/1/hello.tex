@@ -63,14 +63,13 @@
 	
 	\section{This is a section: Math}
 	
-	This program is planned to support the most basic LaTeX features, you can use inline math with $a + b = c^2$. And this will be the paragraph math:
+	This program is planned to support the \textbf{most} \textit{basic} LaTeX features, you can use !*inline math!* with $a + b = c^2$. And this will be the !*paragraph math!*:
 	
 	\begin{equation}
 		\oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0
 	\end{equation}
 	
-	And this is for align:
-	
+	And this is for \emph{align}
 	\begin{align}
 		\sum_{i} \vec{B_{i}} \cdot \vec{\ell_{i}} &= \mu_{0} \bigg(I + \varepsilon_{0} \frac{\Delta E \cdot A}{\Delta t} \bigg)\\
 		\sum_{i} \vec{E_{i}} \cdot \vec{\ell_{i}} &= - \frac{\Delta B \cdot A}{\Delta t}\\
@@ -80,7 +79,7 @@
 	
 	\subsection{This is subsection: Images}
 	
-	You can also insert images with:
+	You can also \textit{insert} \textbf{images} with:
 	
 	\begin{figure}[h]
 		\includegraphics[width=\textwidth]{./sample_image.jpeg}
@@ -95,10 +94,10 @@
 	
 	\subsubsection{This is subsubsection: Listings}
 	
-	And code blocks with:
+	And !*code blocks!* with:
 	
 	
-\begin{lstlisting}[language=c]
+\begin{lstlisting}[language=C]
 #include <stdio.h>
 
 
@@ -119,6 +118,5 @@ int main() {
 	
 	\paragraph{This is paragraph}
 	
-	Check \href{example.tex}{./example.tex} for the LaTeX rendition of this markdown file. The output of the command is always placed in \texttt{./out/}.
-	
+	Check [example.tex](./example.tex) for the \textbf{LaTeX} rendition of this markdown file. The output of the command is always placed in `./out/` by \textbf{default}
 \end{document}
