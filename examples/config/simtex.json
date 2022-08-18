@@ -17,7 +17,10 @@
         "SUBPARAGRAPH": "#####",
         "INLINE_MATH": "$",
         "PARAGRAPH_MATH": "$$",
-        "INLINE_CODE": "`(.*?)`"
+        "INLINE_CODE": "`(.*?)`",
+        "BOLD": "\\*\\*(.*?)\\*\\*",
+        "ITALICS": "_(.*?)_",
+        "EMPH": "_\\*(.*?)\\*_"
     },
     {
         "DOC_CLASS": "article",
