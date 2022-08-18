@@ -43,6 +43,6 @@ class Rules:
     inline_math: str
     paragraph_math: str
     inline_code: str
-    bold: str
-    italics: str
-    emph: str
+    bold: dict[str, str]
+    italics: dict[str, str]
+    emph: dict[str, str]
