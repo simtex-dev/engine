@@ -44,3 +44,6 @@ The program, as of writing, provides 12 parameters for the configuration of the 
 10. `INLINE_MATH: str` -- _defaults -> $_, for inline maths, uses equation environment.
 11. `PARAGRAPH_MATH: str` -- _defaults -> \$\$_, for paragraph maths, using align environment. **Note: if there is no `&`, the program will insert `&` in the first `=`**.
 12. `INLINE_CODE: str` -- _defaults -> ``_, for inline code, using `\\textttt`
+13. `BOLD: list[str]` -- _defaults -> [`**`, `**<text>**`]_, for bold text (uses `\textbf{<text>}`). The first item is for marker, and the second item is the pattern. **Uses: regex. Note: do not replace `(.*?)`**,
+14. `ITALICS: list[str]` -- _defaults -> [`_`, `_<text>_`]_, for italized text. The first item is for marker, and the second item is the pattern. **Uses: regex. Note: do not replace `(.*?)`**.
+15. `EMPH: list[str]` -- _defaults -> [`!*`, `!*<text>!*`]_, for emphasized text. The first item is for marker, and the second item is the pattern. **Uses: regex. Note: do not replace `(.*?)`**.
