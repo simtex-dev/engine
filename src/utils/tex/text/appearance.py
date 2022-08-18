@@ -3,8 +3,8 @@ from re import findall
 from src.config import Rules
 
 
-def appearance(line: str, size: int, rules: Rules) -> str:
-    for _ in range(size):
+def appearance(line: str, linelen: int, rules: Rules) -> str:
+    for _ in range(linelen):
         if (bold := findall(rules.bold[1], line)):
             line = line.replace(
                     f"{rules.bold[0]}{bold[0]}{rules.bold[0]}",
