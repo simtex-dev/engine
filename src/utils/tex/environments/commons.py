@@ -2,6 +2,7 @@ from re import findall
 from typing import TextIO
 
 from src.config import Rules
+from src.utils.tex.text.appearance import appearance
 
 
 def commons(
@@ -53,7 +54,7 @@ def commons(
     finally:
         if not skip_line:
             new_line = (
-                    new_line
+                    appearance(line, line.split(" "), rules)
                         .replace("_", r"\_")
                         .replace("\n", "\n")
                 )
