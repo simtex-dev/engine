@@ -63,13 +63,14 @@
 	
 	\section{This is a section: Math}
 	
-	This program is planned to support the \textbf{most} \textit{basic} LaTeX features, you can use !*inline math!* with $a + b = c^2$. And this will be the !*paragraph math!*:
+	This program is planned to support the \textbf{most} \textit{basic} LaTeX features, you can use \emph{inline math} with $a + b = c^2$. And this will be the \emph{paragraph math}:
 	
 	\begin{equation}
 		\oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0
 	\end{equation}
 	
-	And this is for \emph{align}
+	And this is for \emph{align}:
+	
 	\begin{align}
 		\sum_{i} \vec{B_{i}} \cdot \vec{\ell_{i}} &= \mu_{0} \bigg(I + \varepsilon_{0} \frac{\Delta E \cdot A}{\Delta t} \bigg)\\
 		\sum_{i} \vec{E_{i}} \cdot \vec{\ell_{i}} &= - \frac{\Delta B \cdot A}{\Delta t}\\
@@ -94,7 +95,7 @@
 	
 	\subsubsection{This is subsubsection: Listings}
 	
-	And !*code blocks!* with:
+	And \emph{code blocks} with:
 	
 	
 \begin{lstlisting}[language=C]
@@ -118,5 +119,6 @@ int main() {
 	
 	\paragraph{This is paragraph}
 	
-	Check [example.tex](./example.tex) for the \textbf{LaTeX} rendition of this markdown file. The output of the command is always placed in `./out/` by \textbf{default}
+	Check [example.tex](./example.tex) for the \textbf{LaTeX}, rendition of this markdown file. The output of the command is always placed in `./out/` by \textbf{default}.
+	
 \end{document}
