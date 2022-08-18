@@ -54,7 +54,7 @@ def commons(
     finally:
         if not skip_line:
             new_line = (
-                    appearance(line, line.split(" "), rules)
+                    appearance(line, len(parts), rules)
                         .replace("_", r"\_")
                         .replace("\n", "\n")
                 )
