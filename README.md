@@ -42,7 +42,11 @@ options:
 
 # Examples
 
-You can view the output of the program [here](./examples/1/hello.pdf) using the command:
+You can view the output of the program [here](./examples/1/hello.pdf) using the command: `simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -of="./examples/1" -f="hello.tex" -a="iaacornus" -d="August 15, 2552"`
+
+> View [`./examples/1/hello.md`](./examples/1/hello.md)
+
+> View output: [.examples/1/hello.pdf](./examples/1/hello.pdf)
 
 ![](./imgs/sample.png)
 
