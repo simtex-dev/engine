@@ -39,16 +39,16 @@ def format_body(
             if config.make_title:
                 file.write("\t\maketitle\n")
 
-            i: int
-            for i, line in enumerate(ref_tex[start:]):
-                if i < ignore:
+            cur: int
+            for cur, line in enumerate(ref_tex[start:]):
+                if cur < ignore:
                     continue
 
                 if line.startswith(r"\begin{lstlisting}"):
-                    for j, codes in enumerate(ref_tex.copy()[i+start:]):
+                    for cline, codes in enumerate(ref_tex.copy()[cur+start:]):
                         file.write(codes)
                         if codes.startswith(r"\end{lstlisting}"):
-                            ignore = j+i+1
+                            ignore = cline+cur+1
                             break
 
                     continue
