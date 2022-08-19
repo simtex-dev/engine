@@ -88,30 +88,22 @@ def fix_missing_config(
 
     for _ in range(3):
         try:
-            copy(
-                f"{CONF_PATH}/{filename}.bak",
-                f"{CONF_PATH}/{filename}"
+            log.logger(
+                "e",
+                f"Config file {filename} not found, "
+                "fetching original config from GitHub ..."
             )
-        except FileNotFoundError:
-            try:
-                log.logger(
-                    "e",
-                    f"Backup file for {filename} not found"
-                    ", fetching original config from GitHub ..."
-                )
-                with get(link, stream=True) as d_file:
-                    with open(
-                            f"{CONF_PATH}/{filename}.bak", "wb"
-                        ) as conf_file:
-                        for chunk in d_file.iter_content(chunk_size=1024):
-                            if chunk:
-                                conf_file.write(chunk)
-            except ConnectionError as Err:
-                log.logger(
-                    "E", f"{Err}. Cannot download {filename}, aborting ..."
-                )
-            else:
-                continue
+            with get(link, stream=True) as d_file:
+                with open(
+                        f"{CONF_PATH}/{filename}", "wb"
+                    ) as conf_file:
+                    for chunk in d_file.iter_content(chunk_size=1024):
+                        if chunk:
+                            conf_file.write(chunk)
+        except ConnectionError as Err:
+            log.logger(
+                "E", f"{Err}. Cannot download {filename}, aborting ..."
+            )
         else:
             log.logger("I", "Sucessfully fetched the config file.")
             return
