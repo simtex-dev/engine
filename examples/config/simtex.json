@@ -1,0 +1,63 @@
+[
+    {
+        "FOR": [
+                "markdown",
+                "md",
+                "rst",
+                "txt",
+                "text"
+            ],
+        "CODE_BLOCKS": "```",
+        "IMAGE": "!\\[([^]]+)\\]\\(([^]]+)\\)",
+        "LINKS": "\\[([^]]+)\\]\\(([^]]+)\\)",
+        "SECTION": "#",
+        "SUBSECTION": "##",
+        "SUBSUBSECTION": "###",
+        "PARAGRAPH": "####",
+        "SUBPARAGRAPH": "#####",
+        "INLINE_MATH": "$",
+        "PARAGRAPH_MATH": "$$",
+        "INLINE_CODE": "`(.*?)`",
+        "BOLD": ["**", "\\*\\*(.*?)\\*\\*"],
+        "ITALICS": ["_", "_(.*?)_"],
+        "EMPH": ["!*", "!\\*(.*?)!\\*"]
+    },
+    {
+        "DOC_CLASS": "article",
+        "DEF_FONT": "lmodern",
+        "FONT_SIZE": 12,
+        "MARGIN": 1,
+        "PAPER_SIZE": "a4paper",
+        "INDENT_SIZE": 24,
+        "SLOPPY": true,
+        "CODE_FONT": "DejaVuSansMono",
+        "CFONT_SCALE": 0.9,
+        "CODE_CONF": "<HOME>/.config/simtex/code_conf.txt",
+        "PACKAGES": [
+                "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
+                "{indentfirst}",
+                "{amsmath}",
+                "{mathtools}",
+                "{sectsty}",
+                "{footmisc}",
+                "{gensymb}",
+                "{xcolor}",
+                "{listings}",
+                "{caption}",
+                "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
+            ],
+        "FOOTNOTE": "footnote",
+        "SECTION_SIZES": {
+                "main": 12,
+                "sub": 12,
+                "subsub": 12
+            },
+        "LINKS": true,
+        "LINK_COLOR": "blue",
+        "AUTHOR": "John Doe",
+        "DATE": "<NOW>",
+        "MAKE_TITLE": true,
+        "FILE_NAME": "a.tex",
+        "OUTPUT_FOLDER": "./out"
+    }
+]
