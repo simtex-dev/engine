@@ -1,9 +1,6 @@
-from re import findall
-from turtle import title
+from typing import Callable, TextIO
 
-from typing import Any, Callable, TextIO, IO
-
-from src.config import Config, Rules
+from src.config import Rules
 from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.commons import commons
 from src.utils.logger import Logger

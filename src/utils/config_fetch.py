@@ -5,7 +5,7 @@ from json import load
 from typing import IO, Any, Optional
 
 from src.config import Config, Rules
-from src.mutils.functions import fix_missing_config
+from src.mutils.fix_missing_conf import fix_missing_config
 from src.utils.logger import Logger
 
 

@@ -8,7 +8,6 @@ from src.utils.tex.sections.headings import headings
 from src.utils.tex.sections.body import body
 from src.mutils.format_body import format_body
 from src.utils.logger import Logger
-from src.misc.stdout import Signs
 
 
 def convert(
@@ -34,7 +33,10 @@ def convert(
     OFILE_PATH: str
     if exists((OFILE_PATH := f"{config.output_folder}/{config.filename}")):
         if input(
-                f"{Signs.INPT} File: {OFILE_PATH} already exists, overwrite? "
+                (
+                    f"\033[1m[ INPT ]\033[0m File: {OFILE_PATH}"
+                    " already exists, overwrite? "
+                )
             ).lower() != "y":
             log.logger(
                 "e", f"File: {OFILE_PATH} already exists, aborting ..."
