@@ -1,4 +1,5 @@
 import unittest
+from os.path import expanduser
 
 from src.config import Config, Rules
 
@@ -29,7 +30,7 @@ class TestCases(unittest.TestCase):
                 sloppy=True,
                 code_font="DejaVuSansMono",
                 cfont_scale=0.9,
-                code_conf="./examples/config/code_conf.txt",
+                code_conf=f"{expanduser('~')}/.config/simtex/code_conf.txt",
                 packages=[
                         "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
                         "{indentfirst}",
