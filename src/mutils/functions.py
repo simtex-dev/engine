@@ -97,7 +97,7 @@ def fix_missing_config(
                 log.logger(
                     "e",
                     f"Backup file for {filename} not found"
-                    ", fetching original config from ..."
+                    ", fetching original config from GitHub ..."
                 )
                 with get(link, stream=True) as d_file:
                     with open(
