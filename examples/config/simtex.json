@@ -32,7 +32,7 @@
         "SLOPPY": true,
         "CODE_FONT": "DejaVuSansMono",
         "CFONT_SCALE": 0.9,
-        "CODE_CONF": "./examples/config/code_conf.txt",
+        "CODE_CONF": "<HOME>/.config/simtex/code_conf.txt",
         "PACKAGES": [
                 "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
                 "{indentfirst}",
