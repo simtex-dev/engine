@@ -49,21 +49,21 @@ The program allows the user to convert simple file such as markdown or text file
 3. Graphics and figures, as well as links with captions.
 4. Sections, subsections and paragraphs.
 5. Basic document metadata and properties that can be provided in a configuration file for default value, this includes, author, date, font, among others, view the [short documentation](./examples/config/README.md) for full list.
-6. Simple [config file]((./examples/config/simtex.json)) using JSON, which defines the rules that should be followed on how the program should parse the input, as well as how to format the document.
+6. Simple [config file](./examples/config/simtex.json) using JSON, which defines the rules that should be followed on how the program should parse the input, as well as how to format the document.
 
 # Examples
 
-You can view the output of the program [here](./examples/1/hello.pdf) using the command: `simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -of="./examples/1" -f="hello.tex" -a="iaacornus" -d="August 15, 2552"`
-
-> View [`./examples/1/hello.md`](./examples/1/hello.md)
-
-> View output: [.examples/1/hello.pdf](./examples/1/hello.pdf)
-
 ![](./imgs/sample.png)
+
+You can view the output of the program [here](./examples/1/hello.pdf) using the command":
 
 ```
 simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -of="./examples/1" -f="hello.tex" -a="iaacornus" -d="August 15, 2552"
 ```
+
+> View [`./examples/1/hello.md`](./examples/1/example.md)
+
+> View output: [.examples/1/hello.pdf](./examples/1/hello.pdf)
 
 To convert a LaTeX file, and rename the default author defined in `$CONF_PATH/simtex.json`, add `-a="iaacornus (or your name)`, and with the date, `-d="August 15, 2552`. See the [documentation of arguments and configuration file](./examples/config/README.md).
 
