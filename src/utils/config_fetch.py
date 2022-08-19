@@ -1,5 +1,5 @@
 from os import mkdir
-from os.path import exists
+from os.path import exists, expanduser
 from pathlib import Path
 from json import load
 from typing import IO, Any, Optional
@@ -94,7 +94,9 @@ class ConfParse:
             raw_conf["SLOPPY"],
             raw_conf["CODE_FONT"],
             raw_conf["CFONT_SCALE"],
-            raw_conf["CODE_CONF"],
+            raw_conf["CODE_CONF"].replace(
+                "<HOME>", expanduser("~")
+            ),
             raw_conf["PACKAGES"],
             raw_conf["FOOTNOTE"],
             raw_conf["SECTION_SIZES"],
