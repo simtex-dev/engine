@@ -15,10 +15,19 @@ def convert(
         log: Logger,
         rules: Rules,
         config: Config,
-        _title: str,
+        title: str,
         in_file: str,
     ) -> None:
-    """Main program."""
+    """This unifies all the modules.
+
+    Arguments:
+    log: Logger -- for logging.
+    rules: Rules -- rules that needs to be followed in translation.
+    config: Config -- configuration of the document metadata, which includes,
+         formatting, packages to use among others, refer to simtex.json.
+    title: str -- title of the document.
+    in_file: str -- path of the file to be converted to LaTeX.
+    """
 
     log.logger("I", f"Converting {in_file} ...")
 
@@ -36,10 +45,10 @@ def convert(
         log.logger("I", f"Creating dir: {config.output_folder} ...")
         mkdir(config.output_folder)
 
-    if _title is None:
-        _title = in_file.split("/")[-1]
+    if title is None:
+        title = in_file.split("/")[-1]
         log.logger(
-            "I", f"Title is none, using filename: {_title} as title ..."
+            "I", f"Title is none, using filename: {title} as title ..."
         )
 
     if in_file.startswith("./"):
@@ -49,7 +58,7 @@ def convert(
 
     out_file: TextIO
     with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
-        start: int = headings(log, config, _title, out_file)
+        start: int = headings(log, config, title, out_file)
         files: list[str] = body(log, rules, in_file, out_file)
 
     format_body(log, config, start, OFILE_PATH)

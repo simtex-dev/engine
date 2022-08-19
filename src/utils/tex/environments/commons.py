@@ -12,6 +12,17 @@ def commons(
         files: list[str],
         out_file: TextIO
     ) -> None:
+    """Common markdown things that needed to be translated to LaTeX.
+
+    Arguments:
+    line: str -- line that will be analyzed and translated.
+    linelen: int -- the number of words in the input line.
+    rules: Rules -- rules that needs to be followed in translation.
+    files: list[str] -- where the files referenced in the line will
+        be appended to.
+    out_file: TextIO -- where the translated line will be written.
+    """
+
     try:
         skip_line: bool = False
 

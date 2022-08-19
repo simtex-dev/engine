@@ -3,8 +3,17 @@ from re import findall
 from src.config import Rules
 
 
-def appearance(line: str, linelen: int, rules: Rules) -> str:
-    for _ in range(linelen):
+def appearance(line: str, wc: int, rules: Rules) -> str:
+    """Formats the text in a line.
+
+    Arguments:
+    line: str -- line that needs to be translated.
+    wc: int -- the number of words in line.
+    rules: Rules -- rules that needs to be followed in translation.
+
+    Returns the translated line.
+    """
+    for _ in range(wc):
         if (bold := findall(rules.bold[1], line)):
             line = line.replace(
                     f"{rules.bold[0]}{bold[0]}{rules.bold[0]}",

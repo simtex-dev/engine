@@ -13,7 +13,13 @@ class ConfParse:
     """Parse the JSON configuration file."""
 
     def __init__(self, log: Logger, test: Optional[bool] = False) -> None:
-        """Check the config file in instantiation before proceeding."""
+        """Check the config file in instantiation before proceeding.
+
+        Arguments:
+        log: Logger -- for logging.
+        test: Optional[bool] = False -- to know if the execution is for
+            unit testing.
+        """
 
         self.log: Logger = log
         self.HOME: Path = Path.home()
@@ -39,7 +45,7 @@ class ConfParse:
             self.CONF_PATH = "./examples/config"
 
     def fetch(self) -> list[dict[str, Any]]:
-        """Parse and replace the overriden parameters in the CLI."""
+        """Fetch the config file."""
 
         try:
             conf_file: IO[Any]

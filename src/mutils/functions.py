@@ -10,7 +10,13 @@ from src.misc.stdout import Signs
 
 
 def build_file(log: Logger, output_folder: str, filename: str) -> None:
-    """Build the LaTeX file using pdflatex."""
+    """Build the LaTeX file using pdflatex, if exists.
+
+    Arguments:
+    log: Logger -- for logging.
+    output_folder: str -- where the built pdf and its file will be placed.
+    filename: str -- name of the LaTeX file.
+    """
 
     if which("pdflatex") is None:
         log.logger(
@@ -36,7 +42,14 @@ def build_file(log: Logger, output_folder: str, filename: str) -> None:
 
 
 def update_conf(log: Logger, config: Config, args: Any) -> None:
-    """Update the overrides of the program."""
+    """Update the overrides of the program.
+
+    Arguments:
+    log: Logger -- for logging.
+    config: Config -- configuration of the document metadata, which includes,
+        formatting, packages to use among others, refer to simtex.json.
+    args: Any -- overrides received from arguments.
+    """
 
     PARAMETERS: dict[str, Any] = {
         "filename": args.filename,
@@ -67,7 +80,14 @@ def fix_missing_config(
         conf: bool = False,
         code_conf: bool = False
     ) -> None:
-    """Fetch the backup copy of the config file or download the file."""
+    """Downloads the original config file from github if not found.
+
+    Arguments:
+    log: Logger -- for logging.
+    CONF_PATH: str -- path of the config file.
+    conf, code_conf: bool = False -- whether the missing config is the
+        code config or the main, simtex.json.
+    """
 
     if conf:
         link: str = (

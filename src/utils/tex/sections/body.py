@@ -15,9 +15,12 @@ def body(
     """Generate a LaTeX version of the given markdown file.
 
     Arguments:
-    out_file: str -- the path of the file to convert (reference file).
-    rules: object -- the rules to follow for parsing.
-    out_file: textio -- where the output will be written.
+    log: Loger -- for logging.
+    rules: Rules -- rules that needs to be followed in translation.
+    in_file: str -- path of the file to be converted to LaTeX.
+    out_file: TextIO -- where the translated line will be written.
+
+    Returns a list of files found in the input file.
     """
 
     line: str
@@ -41,16 +44,16 @@ def body(
     with open(in_file, "r", encoding="utf-8") as ref_file:
         ref_tex: list[str] = ref_file.readlines()
 
-    ref: int = -1
+    end: int = -1
 
     log.logger("I", "Writing the body to the document ...")
 
-    i: int
-    for i, line in enumerate(ref_tex):
+    cur: int
+    for cur, line in enumerate(ref_tex):
         if line in ["", "\n"]:
             continue
 
-        if i <= ref:
+        if cur <= end:
             continue
 
         match line.split()[0].strip():
@@ -76,13 +79,13 @@ def body(
                 )
             case _:
                 if line.startswith(rules.paragraph_math): # math mode
-                    ref = mathsec(
+                    end = mathsec(
                         line,
                         rules.paragraph_math,
                         out_file,
-                        ref_tex.copy(),
-                        i,
-                        ref
+                        ref_tex,
+                        cur,
+                        end
                     )
                 elif line.startswith(rules.code): # for code blocks
                     language: str = line[3:].replace("\n", "")
@@ -92,10 +95,10 @@ def body(
                     )
 
                     code: str; n: int
-                    for n, code in enumerate(ref_tex.copy()[i+1:]):
+                    for n, code in enumerate(ref_tex[cur+1:]):
                         if code.strip() == rules.code:
                             out_file.write("\end{lstlisting}\n")
-                            ref = n+i+1
+                            end = n+cur+1
                             break
 
                         out_file.write(code)

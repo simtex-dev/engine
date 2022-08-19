@@ -6,18 +6,32 @@ def mathsec(
         rule: str,
         out_file: TextIO,
         sources: list[str],
-        i: int,
-        ref: int
+        start: int,
+        end: int
     ) -> int:
+    """Handles the math found in the input, this includes paragraph math
+    inline math, and aligned paragraph math.
+
+    Arguments:
+    line: str -- line that will be analyzed and translated.
+    rules: Rules -- rules that needs to be followed in translation.
+    out_file: TextIO -- where the translated line will be written.
+    sources: list[str] -- where the other lines of equation would be found.
+    start: int -- where the parser/translator would start.
+    end: int -- for knowing what line(s) to skip.
+
+    Returns an integer that denotes what line to skip.
+    """
+
     maths: list[str] = []
 
     if line.strip() == rule: # for align
         out_file.write("\\begin{align}\n")
 
         eqs: str; j: int
-        for j, eqs in enumerate(sources[i+1:]):
+        for j, eqs in enumerate(sources[start+1:]):
             if eqs.strip() == rule:
-                ref = j+i+1
+                end = j+start+1
                 break
 
             if "&" not in eqs:
@@ -40,4 +54,4 @@ def mathsec(
             )
         )
 
-    return ref
+    return end

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class Config:
-    """dataclass for configuration of the latex file."""
+    """Dataclass for configuration of the latex file."""
 
     doc_class: str
     doc_font: str
@@ -29,7 +29,7 @@ class Config:
 
 @dataclass(frozen=True)
 class Rules:
-    """dataclass for configuration of the parser."""
+    """Dataclass for configuration of the parser."""
 
     files: list[str]
     code: str
