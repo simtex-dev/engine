@@ -41,14 +41,12 @@ def commons(
             files.append(img[0][1])
 
         for _ in range(linelen):
-            print(line)
             if (link := findall(rules.links, line)):
                 line = line.replace(
                         f"[{link[0][0]}]({link[0][1]})",
                         f"\\href{{{link[0][0]}}}{{{link[0][1]}}}"
                     )
             elif (icodes := findall(rules.inline_code, line)):
-                print(icodes)
                 line = line.replace(
                         f"`{icodes[0]}`",
                         f"\\texttt{{{icodes[0]}}}"

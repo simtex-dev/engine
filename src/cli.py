@@ -8,7 +8,6 @@ from src.convert import convert
 from src.mutils.build_tex import build_file
 from src.mutils.update_conf import update_conf
 from src.utils.logger import Logger
-from src.misc.stdout import Signs
 
 
 class Cli:
@@ -146,8 +145,10 @@ class Cli:
                         "e", "No PDF viewer found, cannot view PDF file."
                     )
             else:
-                print(f"{Signs.FAIL} Unknown option.")
+                self.log.logger("E", "Unknown option.")
         except KeyboardInterrupt:
-            print(f"{Signs.FAIL} Process aborted.")
-        except CalledProcessError:
-            print(f"{Signs.FAIL} Cannot call the process.")
+            self.log.logger("E", "Operation interrupted, aborting ...")
+        except CalledProcessError as Err:
+            self.log.logger(
+                "E", f"CalledProcessError: {Err}, aborting ..."
+            )
