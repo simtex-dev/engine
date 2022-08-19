@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 from typing import TextIO
 
 
@@ -6,10 +6,9 @@ desc: TextIO
 with open("README.md", "r", encoding="utf-8") as desc:
     readme: str = desc.read()
 
-
 setup(
     name="simtex",
-    version="v0.1.0a",
+    version="v0.2.0-alpha",
     description=(
             "Convert your mardown or text lectures"
             " into LaTeX/pdf with one command."
