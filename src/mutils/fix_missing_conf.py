@@ -26,8 +26,8 @@ def fix_missing_config(
         filename: str = "simtex.json"
     elif code_conf:
         link = (
-            "https://raw.githubusercontent.com/iaacornus"
-            "/simtex/main/examples/config/code_conf.txt"
+                "https://raw.githubusercontent.com/iaacornus"
+                "/simtex/main/examples/config/code_conf.txt"
             )
         filename = "code_conf.txt"
 
