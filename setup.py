@@ -8,7 +8,7 @@ with open("README.md", "r", encoding="utf-8") as desc:
 
 setup(
     name="simtex",
-    version="v0.2.0-alpha",
+    version="v0.2.1-alpha",
     description=(
             "Convert your mardown or text lectures"
             " into LaTeX/pdf with one command."
@@ -22,14 +22,19 @@ setup(
     py_modules=[
             "src/main",
             "src/cli",
-            "src/convert",
             "src/config",
-            "src/utils/tex/sections/body",
-            "src/utils/tex/sections/headings",
+            "src/convert",
             "src/utils/config_fetch",
             "src/utils/logger",
-            "src/mutils/functions",
-            "src/misc/stdout"
+            "src/utils/tex/environments/commons",
+            "src/utils/tex/environments/mathsec",
+            "src/utils/tex/sections/body",
+            "src/utils/tex/sections/headings",
+            "src/utils/tex/text/appearance",
+            "src/mutils/build_tex",
+            "src/mutils/fix_missing_conf",
+            "src/mutils/format_body",
+            "src/mutils/update_conf"
         ],
     python_requires=">=3.10",
     install_requires=[
