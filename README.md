@@ -55,7 +55,7 @@ The program allows the user to convert simple file such as markdown or text file
 
 ![](./imgs/sample.png)
 
-You can view the output of the program [here](./examples/1/hello.pdf) using the command":
+You can view the output of the program [here](./examples/1/hello.pdf) using the command:
 
 ```
 simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -of="./examples/1" -f="hello.tex" -a="iaacornus" -d="August 15, 2552"
