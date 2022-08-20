@@ -103,6 +103,11 @@ class Cli:
             help="Margin size to be used.",
             action="store"
         )
+        self.parser.add_argument(
+            "-C", "--compiler",
+            help="Use a different LaTeX compiler.",
+            action="store"
+        )
 
         self.args = self.parser.parse_args()
 
