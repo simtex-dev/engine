@@ -59,6 +59,7 @@
         "MAKE_TITLE": true,
         "FILE_NAME": "a.tex",
         "OUTPUT_FOLDER": "./out",
-        "COMPILER": "pdflatex"
+        "COMPILER": "pdflatex",
+        "ENCODE": "UTF8"
     }
 ]
