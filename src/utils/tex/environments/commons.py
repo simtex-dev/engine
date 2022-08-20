@@ -14,13 +14,12 @@ def commons(
     ) -> None:
     """Common markdown things that needed to be translated to LaTeX.
 
-    Arguments:
-    line: str -- line that will be analyzed and translated.
-    words: list[str] -- the number of words in the input line.
-    rules: Rules -- rules that needs to be followed in translation.
-    files: list[str] -- where the files referenced in the line will
-        be appended to.
-    out_file: TextIO -- where the translated line will be written.
+    Args:
+        line -- line that will be analyzed and translated.
+        words -- list of words in the line split by spaces.
+        rules -- rules that needs to be followed in translation.
+        files -- where the files referenced in the line will be appended to.
+        out_file -- where the translated line will be written.
     """
 
     try:

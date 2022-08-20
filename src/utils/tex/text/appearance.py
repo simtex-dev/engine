@@ -7,12 +7,14 @@ def appearance(line: str, words: list[str], rules: Rules) -> str:
     """Formats the text in a line.
 
     Arguments:
-    line: str -- line that needs to be translated.
-    wc: int -- the number of words in line.
-    rules: Rules -- rules that needs to be followed in translation.
+        line -- line that needs to be translated.
+        words -- list of words in the line split by spaces.
+        rules: Rules -- rules that needs to be followed in translation.
 
-    Returns the translated line.
+    Returns:
+        The formatted line.
     """
+
     for word in words:
         if (bold := findall(rules.bold[1], line)):
             line = line.replace(

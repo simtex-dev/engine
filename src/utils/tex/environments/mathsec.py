@@ -13,14 +13,15 @@ def mathsec(
     inline math, and aligned paragraph math.
 
     Arguments:
-    line: str -- line that will be analyzed and translated.
-    rules: Rules -- rules that needs to be followed in translation.
-    out_file: TextIO -- where the translated line will be written.
-    sources: list[str] -- where the other lines of equation would be found.
-    start: int -- where the parser/translator would start.
-    end: int -- for knowing what line(s) to skip.
+        line -- line that will be analyzed and translated.
+        rules -- rules that needs to be followed in translation.
+        out_file -- where the translated line will be written.
+        sources -- where the other lines of equation would be found.
+        start -- where the parser/translator would start.
+        end -- for knowing what line(s) to skip.
 
-    Returns an integer that denotes what line to skip.
+    Returns:
+        An integer that denotes what line to skip.
     """
 
     maths: list[str] = []

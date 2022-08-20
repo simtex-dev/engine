@@ -15,10 +15,9 @@ class ConfParse:
     def __init__(self, log: Logger, test: Optional[bool] = False) -> None:
         """Check the config file in instantiation before proceeding.
 
-        Arguments:
-        log: Logger -- for logging.
-        test: Optional[bool] = False -- to know if the execution is for
-            unit testing.
+        Args:
+            log -- for logging.
+            test -- to know if the execution is for unit testing.
         """
 
         self.log: Logger = log

@@ -9,14 +9,14 @@ def format_body(
     ) -> None:
     """Format the document body of the generated LaTeX file.
 
-    Arguments:
-    log: Logger -- for logging.
-    config: Config -- configuration of the document metadata, which includes,
-        formatting, packages to use among others, refer to simtex.json.
-    start: int -- where the formatter will start, since the formatter
-        simply just emphasize the order and the belongings of each
-        environment using tabs.
-    out_file: str -- where the output will be written.
+    Args:
+        log -- for logging.
+        config -- configuration of the document metadata, which includes,
+            formatting, packages to use among others, refer to simtex.json.
+        start -- where the formatter will start, since the formatter
+            simply just emphasize the order and the belongings of each
+            environment using tabs.
+        out_file -- where the output will be written.
     """
 
     try:

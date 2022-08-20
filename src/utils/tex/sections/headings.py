@@ -13,14 +13,15 @@ def headings(
     ) -> int:
     """Create the headings of the LaTeX file.
 
-    Arguments:
-    log: Logger -- for logging.
-    config: Config -- configuration of the document metadata, which includes,
-         formatting, packages to use among others, refer to simtex.json.
-    title: str -- title of the document.
-    out_file: TextIO -- where the translated line will be written.
+    Args:
+        log -- for logging.
+        config -- configuration of the document metadata, which includes,
+            formatting, packages to use among others, refer to simtex.json.
+        title -- title of the document.
+        out_file -- where the translated line will be written.
 
-    Returns the number of lines of the headings.
+    Returns:
+        The number of lines used by the headings.
     """
 
     SECTIONS: dict[str, str] = {

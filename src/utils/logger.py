@@ -46,9 +46,9 @@ class Logger:
     def logger(self, exception_: str, message: str) -> None:
         """Log the proccesses using passed message and exception_ variable.
 
-        Arguments:
-        exception_: str -- determines what type of log level to use
-        message: str -- message to be logged.
+        Args:
+            exception_ -- determines what type of log level to use
+            message -- message to be logged.
         """
 
         match exception_:

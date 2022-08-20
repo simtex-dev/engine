@@ -11,11 +11,11 @@ def fix_missing_config(
     ) -> None:
     """Downloads the original config file from github if not found.
 
-    Arguments:
-    log: Logger -- for logging.
-    CONF_PATH: str -- path of the config file.
-    conf, code_conf: bool = False -- whether the missing config is the
-        code config or the main, simtex.json.
+    Args:
+        log -- for logging.
+        CONF_PATH -- path of the config file.
+        conf, code_conf -- whether the missing config is the code config
+            or the main, simtex.json.
     """
 
     if conf:

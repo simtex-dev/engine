@@ -11,13 +11,14 @@ def body(
     ) -> list[str]:
     """Generate a LaTeX version of the given markdown file.
 
-    Arguments:
-    log: Loger -- for logging.
-    rules: Rules -- rules that needs to be followed in translation.
-    in_file: str -- path of the file to be converted to LaTeX.
-    out_file: TextIO -- where the translated line will be written.
+    Args:
+        log -- for logging.
+        rules -- rules that needs to be followed in translation.
+        in_file -- path of the file to be converted to LaTeX.
+        out_file -- where the translated line will be written.
 
-    Returns a list of files found in the input file.
+    Returns:
+        A list of files found in the input file.
     """
 
     line: str

@@ -19,13 +19,13 @@ def convert(
     ) -> None:
     """This unifies all the modules.
 
-    Arguments:
-    log: Logger -- for logging.
-    rules: Rules -- rules that needs to be followed in translation.
-    config: Config -- configuration of the document metadata, which includes,
-         formatting, packages to use among others, refer to simtex.json.
-    title: str -- title of the document.
-    in_file: str -- path of the file to be converted to LaTeX.
+    Args:
+        log -- for logging.
+        rules -- rules that needs to be followed in translation.
+        config -- configuration of the document metadata, which includes,
+            formatting, packages to use among others, refer to simtex.json.
+        title -- title of the document.
+        in_file -- path of the file to be converted to LaTeX.
     """
 
     log.logger("I", f"Converting {in_file} ...")

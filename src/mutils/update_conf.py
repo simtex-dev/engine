@@ -7,11 +7,11 @@ from src.utils.logger import Logger
 def update_conf(log: Logger, config: Config, args: Any) -> None:
     """Update the overrides of the program.
 
-    Arguments:
-    log: Logger -- for logging.
-    config: Config -- configuration of the document metadata, which includes,
-        formatting, packages to use among others, refer to simtex.json.
-    args: Any -- overrides received from arguments.
+    Args:
+        log -- for logging.
+        config -- configuration of the document metadata, which includes,
+            formatting, packages to use among others, refer to simtex.json.
+        args -- overrides received from arguments.
     """
 
     PARAMETERS: dict[str, Any] = {

@@ -9,10 +9,11 @@ def build_file(
     ) -> None:
     """Build the LaTeX file using pdflatex, if exists.
 
-    Arguments:
-    log: Logger -- for logging.
-    output_folder: str -- where the built pdf and its file will be placed.
-    filename: str -- name of the LaTeX file.
+    Args:
+        log -- for logging.
+        output_folder -- where the built pdf and its file will be
+            placed.
+        filename -- name of the LaTeX file.
     """
 
     if which("pdflatex") is None:
