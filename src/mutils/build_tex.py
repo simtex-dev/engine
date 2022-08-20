@@ -4,7 +4,9 @@ from os import system
 from src.utils.logger import Logger
 
 
-def build_file(log: Logger, output_folder: str, filename: str) -> None:
+def build_file(
+        log: Logger, compiler: str, output_folder: str, filename: str
+    ) -> None:
     """Build the LaTeX file using pdflatex, if exists.
 
     Arguments:
@@ -23,7 +25,7 @@ def build_file(log: Logger, output_folder: str, filename: str) -> None:
         log.logger("P", f"Building {filename} with pdflatex ...")
         rcode = system(
                 (
-                    "pdflatex "
+                    f"{compiler} "
                     "-synctex=1 "
                     "-interaction=nonstopmode "
                     f"-output-directory={output_folder} "

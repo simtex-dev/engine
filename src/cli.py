@@ -133,6 +133,7 @@ class Cli:
                 converter()
                 build_file(
                     self.log,
+                    self.config.compiler,
                     self.config.output_folder,
                     self.config.filename
                 )

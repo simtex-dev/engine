@@ -25,6 +25,7 @@ class Config:
     make_title: bool
     filename: str
     output_folder: str
+    compiler: str
 
 
 @dataclass(frozen=True)
