@@ -57,9 +57,9 @@ or by:
 
 The !*code blocks!* below presents the source code of the converted markdown file:
 
-```
+\`\`\`
 [RECURSION]
-```
+\`\`\`
 
 #### This is paragraph
 
