@@ -7,7 +7,7 @@ from src.utils.tex.text.appearance import appearance
 
 def commons(
         line: str,
-        linelen: int,
+        words: list[str],
         rules: Rules,
         files: list[str],
         out_file: TextIO
@@ -16,7 +16,7 @@ def commons(
 
     Arguments:
     line: str -- line that will be analyzed and translated.
-    linelen: int -- the number of words in the input line.
+    words: list[str] -- the number of words in the input line.
     rules: Rules -- rules that needs to be followed in translation.
     files: list[str] -- where the files referenced in the line will
         be appended to.
@@ -40,7 +40,7 @@ def commons(
             skip_line = True
             files.append(img[0][1])
 
-        for _ in range(linelen):
+        for _ in range(len(words)):
             if (link := findall(rules.links, line)):
                 line = line.replace(
                         f"[{link[0][0]}]({link[0][1]})",
@@ -54,7 +54,7 @@ def commons(
     finally:
         if not skip_line:
             line = (
-                    appearance(line, linelen, rules)
+                    appearance(line, words, rules)
                         .replace("_", r"\_")
                         .replace("\n", "\n")
                 )
