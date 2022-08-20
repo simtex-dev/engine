@@ -32,17 +32,17 @@ class TestCases(unittest.TestCase):
                 cfont_scale=0.9,
                 code_conf=f"{expanduser('~')}/.config/simtex/code_conf.txt",
                 packages=[
-                        "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
-                        "{indentfirst}",
-                        "{amsmath}",
-                        "{mathtools}",
-                        "{sectsty}",
-                        "{footmisc}",
-                        "{gensymb}",
-                        "{xcolor}",
-                        "{listings}",
-                        "{caption}",
-                        "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
+                        r"[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
+                        r"{indentfirst}",
+                        r"{amsmath}",
+                        r"{mathtools}",
+                        r"{sectsty}",
+                        r"{footmisc}",
+                        r"{gensymb}",
+                        r"{xcolor}",
+                        r"{listings}",
+                        r"{caption}",
+                        r"[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
                     ],
                 footnote="footnote",
                 section_sizes={
