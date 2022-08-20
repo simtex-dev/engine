@@ -3,7 +3,7 @@ from re import findall
 from src.config import Rules
 
 
-def appearance(line: str, wc: int, rules: Rules) -> str:
+def appearance(line: str, words: list[str], rules: Rules) -> str:
     """Formats the text in a line.
 
     Arguments:
@@ -13,7 +13,7 @@ def appearance(line: str, wc: int, rules: Rules) -> str:
 
     Returns the translated line.
     """
-    for _ in range(wc):
+    for word in words:
         if (bold := findall(rules.bold[1], line)):
             line = line.replace(
                     f"{rules.bold[0]}{bold[0]}{rules.bold[0]}",
@@ -29,4 +29,8 @@ def appearance(line: str, wc: int, rules: Rules) -> str:
                     f"{rules.emph[0]}{emph[0]}{rules.emph[0]}",
                     f"\\emph{{{emph[0]}}}"
                 )
+
+        if word.lower().strip() == "latex":
+            line = line.replace(word, r"\LaTeX{}")
+
     return line
