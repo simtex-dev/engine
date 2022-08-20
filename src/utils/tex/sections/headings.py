@@ -41,7 +41,8 @@ def headings(
         }
 
     headings: list[str] = [
-            f"\documentclass[{config.font_size}pt]{{{config.doc_class}}}\n",
+            f"\documentclass[{config.font_size}pt, "
+            f"{config.encode}]{{{config.doc_class}}}\n",
             f"% font\n\\usepackage{{{config.doc_font}}}\n\n% packages"
         ]
 

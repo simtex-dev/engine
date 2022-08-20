@@ -25,7 +25,8 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
         "margin": args.margin,
         "indent_size": args.indent,
         "doc_font": args.font,
-        "compiler": args.compiler
+        "compiler": args.compiler,
+        "encode": args.encoding
     }
 
     key_: str; param: Any

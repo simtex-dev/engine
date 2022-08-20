@@ -26,7 +26,7 @@ class Config:
     filename: str
     output_folder: str
     compiler: str
-
+    encode: str
 
 @dataclass(frozen=True)
 class Rules:

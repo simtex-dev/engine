@@ -108,6 +108,11 @@ class Cli:
             help="Use a different LaTeX compiler.",
             action="store"
         )
+        self.parser.add_argument(
+            "-e", "--encoding",
+            help="Use a different encoding for document.",
+            action="store"
+        )
 
         self.args = self.parser.parse_args()
 
