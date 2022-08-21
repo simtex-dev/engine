@@ -29,7 +29,6 @@ def convert(
     """
 
     log.logger("I", f"Converting {in_file} ...")
-    print(rules)
 
     OFILE_PATH: str
     if exists((OFILE_PATH := f"{config.output_folder}/{config.filename}")):
