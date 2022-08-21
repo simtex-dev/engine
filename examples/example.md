@@ -1,6 +1,6 @@
 # This is a section: Math
 
-This program is planned to support the **most** __basic__ LaTeX features, you can use !*inline math!* with $a + b = c^2$. And this will be the !*paragraph math!*:
+This program is planned to support the ~~all of the~~, no only the **most** __basic__ LaTeX features, you can use !*inline math!* with $a + b = c^2$. And this will be the !*paragraph math!*:
 
 $$\oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0$$
 
