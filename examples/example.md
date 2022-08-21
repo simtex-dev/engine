@@ -1,6 +1,6 @@
 # This is a section: Math
 
-This program is planned to support the **most** _basic_ LaTeX features, you can use !*inline math!* with $a + b = c^2$. And this will be the !*paragraph math!*:
+This program is planned to support the **most** __basic__ LaTeX features, you can use !*inline math!* with $a + b = c^2$. And this will be the !*paragraph math!*:
 
 $$\oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0$$
 
@@ -15,11 +15,11 @@ $$
 
 ## This is subsection: Images
 
-You can also _insert_ **images** with:
+You can also __insert__ **images** with:
 
 ![figure](./sample_image.jpeg)
 
-or by:
+or by^^this is not footnote^^ -^its a superscript-^, ._anyway._:
 
 <img src="./sample_image.jpeg" align="center">
 
@@ -30,7 +30,7 @@ The !*code blocks!* below presents the source code of the converted markdown fil
 ```
 # This is a section: Math
 
-This program is planned to support the **most** _basic_ LaTeX features, you can use !*inline math!* with $a + b = c^2$. And this will be the !*paragraph math!*:
+This program is planned to support the **most** __basic__ LaTeX features, you can use !*inline math!* with $a + b = c^2$. And this will be the !*paragraph math!*:
 
 $$\oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0$$
 
@@ -45,11 +45,11 @@ $$
 
 ## This is subsection: Images
 
-You can also _insert_ **images** with:
+You can also __insert__ **images** with:
 
 ![figure](./sample_image.jpeg)
 
-or by:
+or by^^this is not footnote^^ -^its a superscript-^, ._anyway._:
 
 <img src="./sample_image.jpeg" align="center">
 
@@ -58,7 +58,7 @@ or by:
 The !*code blocks!* below presents the source code of the converted markdown file:
 
 \`\`\`
-[RECURSION]
+[REDACTED TO AVOID RECURSION]
 \`\`\`
 
 #### This is paragraph
