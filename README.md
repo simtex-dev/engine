@@ -71,6 +71,12 @@ To convert a LaTeX file, and rename the default author defined in `$CONF_PATH/si
 
 See [INSTALL.md](INSTALL.md) for details.
 
+# Contribution
+
+1. All contributions are enforced to abide by the [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md)
+2. Opening and reporting issues is regarded as value contribution in this project and is welcomed.
+3. In regards to coding contribution, refer to [CONTRIBUTING](CONTRIBUTING.md)
+
 # Roadmap
 
 1. Include support for quote blocks.
