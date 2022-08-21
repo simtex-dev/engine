@@ -89,7 +89,7 @@ def body(
                     language: str = line[3:].replace("\n", "")
                     out_file.write(
                         f"\n\\begin{{lstlisting}}"
-                        f"[language={language.upper()}]\n"
+                        f"[language={language.title()}]\n"
                     )
 
                     code: str; n: int
