@@ -82,7 +82,9 @@ class ConfParse:
             raw_conf["BOLD"],
             raw_conf["ITALICS"],
             raw_conf["EMPH"],
-            raw_conf["STRIKE"]
+            raw_conf["STRIKE"],
+            raw_conf["SUPSCRIPT"],
+            raw_conf["SUBSCRIPT"]
         )
 
     def conf(self) -> Config:

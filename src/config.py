@@ -28,6 +28,7 @@ class Config:
     compiler: str
     encode: str
 
+
 @dataclass(frozen=True)
 class Rules:
     """Dataclass for configuration of the parser."""
@@ -48,3 +49,5 @@ class Rules:
     italics: list[str]
     emph: list[str]
     strike: list[str]
+    supscript: str
+    subscript: str
