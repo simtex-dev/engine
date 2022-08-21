@@ -59,6 +59,20 @@ def appearance(line: str, words: list[str], rules: Rules) -> str:
                     f"{rules.uline[0]}{uline[0]}{rules.uline[0]}",
                     f"\\underline{{{uline[0]}}}"
                 )
+        elif (link := findall(rules.links, line)):
+            line = line.replace(
+                    f"[{link[0][0]}]({link[0][1]})",
+                    f"\\href{{{link[0][0]}}}{{{link[0][1]}}}"
+                )
+        elif (icodes := findall(rules.inline_code[1], line)):
+            line = line.replace(
+                    (
+                        f"{rules.inline_code[0]}"
+                        f"{icodes[0]}"
+                        f"{rules.inline_code[0]}"
+                    ),
+                    f"\\texttt{{{icodes[0]}}}"
+                )
 
         if word.lower().strip() == "latex":
             line = line.replace(word, r"\LaTeX{}")

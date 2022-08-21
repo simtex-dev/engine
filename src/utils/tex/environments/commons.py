@@ -26,8 +26,6 @@ def commons(
         skip_line: bool = False
 
         img: list[tuple[str, str]]
-        link: list[tuple[str, str]]
-
         if (img := findall(rules.image, line)):
             out_file.write(
                 "\\begin{figure}[h]\n"
@@ -38,22 +36,6 @@ def commons(
             )
             skip_line = True
             files.append(img[0][1])
-
-        for _ in range(len(words)):
-            if (link := findall(rules.links, line)):
-                line = line.replace(
-                        f"[{link[0][0]}]({link[0][1]})",
-                        f"\\href{{{link[0][0]}}}{{{link[0][1]}}}"
-                    )
-            elif (icodes := findall(rules.inline_code[1], line)):
-                line = line.replace(
-                        (
-                            f"{rules.inline_code[0]}"
-                            f"{icodes[0]}"
-                            f"{rules.inline_code[0]}"
-                        ),
-                        f"\\texttt{{{icodes[0]}}}"
-                    )
     finally:
         if not skip_line:
             line = (
