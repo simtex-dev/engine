@@ -44,11 +44,11 @@ class Rules:
     subparagraph: str
     inline_math: str
     paragraph_math: str
-    inline_code: str
+    inline_code: list[str]
     bold: list[str]
     italics: list[str]
     emph: list[str]
     strike: list[str]
-    supscript: str
-    subscript: str
-    uline: str
+    supscript: list[str]
+    subscript: list[str]
+    uline: list[str]
