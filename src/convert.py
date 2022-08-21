@@ -48,7 +48,13 @@ def convert(
         mkdir(config.output_folder)
 
     if title is None:
-        title = in_file.split("/")[-1]
+        if input(
+                "\033[1mINPT\033[0m\t Title is none, use filename as title? "
+            ).lower() == "y":
+            title = in_file.split("/")[-1].split(".")[0]
+        else:
+            title = input("\033[1mINPT\033[0m\t Input title for use: ")
+
         log.logger(
             "I", f"Title is none, using filename: {title} as title ..."
         )
