@@ -45,9 +45,13 @@ def commons(
                         f"[{link[0][0]}]({link[0][1]})",
                         f"\\href{{{link[0][0]}}}{{{link[0][1]}}}"
                     )
-            elif (icodes := findall(rules.inline_code, line)):
+            elif (icodes := findall(rules.inline_code[1], line)):
                 line = line.replace(
-                        f"`{icodes[0]}`",
+                        (
+                            f"{rules.inline_code[0]}"
+                            f"{icodes[0]}"
+                            f"{rules.inline_code[0]}"
+                        ),
                         f"\\texttt{{{icodes[0]}}}"
                     )
     finally:
