@@ -33,33 +33,23 @@ def build_file(
 
     try:
         log.logger("P", f"Building {filename} with pdflatex ...")
+        cmd: list[str] = [
+                compiler,
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                f"-output-directory={output_folder}",
+                f"{filename}"
+            ]
+
         if verbose:
-            rcode: CompletedProcess = run(
-                    [
-                        compiler,
-                        "-synctex=1",
-                        "-interaction=nonstopmode",
-                        f"-output-directory={output_folder}",
-                        f"{filename}"
-                    ]
-                )
+            rcode: CompletedProcess = run(cmd)
         else:
-            rcode: CompletedProcess = run(
-                [
-                    compiler,
-                    "-synctex=1",
-                    "-interaction=nonstopmode",
-                    f"-output-directory={output_folder}",
-                    f"{filename}"
-                ],
-                stdout=DEVNULL
-            )
+            rcode: CompletedProcess = run(cmd, stdout=DEVNULL)
 
         if rcode.returncode != 0:
-            raise CalledProcessError(f"Error from {compiler}.")
-
-        log.logger("I", "Successfully built the file.")
-
+            raise CalledProcessError(rcode.returncode, cmd)
+        else:
+            log.logger("I", "Successfully built the file.")
     except (OSError, CalledProcessError) as Err:
         log.logger("E", f"{Err}. Cannot build LaTeX file.")
 
