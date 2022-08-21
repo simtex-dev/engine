@@ -65,6 +65,9 @@ def appearance(line: str, words: list[str], rules: Rules) -> str:
                     f"\\href{{{link[0][0]}}}{{{link[0][1]}}}"
                 )
         elif (icodes := findall(rules.inline_code[1], line)):
+            if icodes[0] == "":
+                continue
+
             line = line.replace(
                     (
                         f"{rules.inline_code[0]}"
@@ -72,6 +75,11 @@ def appearance(line: str, words: list[str], rules: Rules) -> str:
                         f"{rules.inline_code[0]}"
                     ),
                     f"\\texttt{{{icodes[0]}}}"
+                )
+        elif (quotes := findall(rules.quote[1], line)):
+            line = line.replace(
+                    f"{rules.quote[0]}{quotes[0]}{rules.quote[0]}",
+                    f"``{quotes[0]}''"
                 )
 
         if word.lower().strip() == "latex":
