@@ -38,19 +38,19 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
             )
 
     PARAMETERS: dict[str, Any] = {
-        "filename": args.filename,
-        "output_folder": args.outputfolder,
-        "author": args.author,
-        "date": args.date,
-        "doc_font": args.font,
-        "font_size": args.fontsize,
-        "paper_size": args.papersize,
-        "margin": args.margin,
-        "indent_size": args.indent,
-        "doc_font": args.font,
-        "compiler": args.compiler,
-        "encode": args.encoding
-    }
+            "filename": args.filename,
+            "output_folder": args.outputfolder,
+            "author": args.author,
+            "date": args.date,
+            "doc_font": args.font,
+            "font_size": args.fontsize,
+            "paper_size": args.papersize,
+            "margin": args.margin,
+            "indent_size": args.indent,
+            "doc_font": args.font,
+            "compiler": args.compiler,
+            "encode": args.encoding
+        }
 
     key_: str; param: Any
     for key_, param in PARAMETERS.items(): # for overrides
