@@ -44,6 +44,7 @@
                 "{xcolor}",
                 "{listings}",
                 "{caption}",
+                "{ulem}",
                 "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
             ],
         "FOOTNOTE": "footnote",
