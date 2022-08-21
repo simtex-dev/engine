@@ -85,7 +85,9 @@ class ConfParse:
             raw_conf["STRIKE"],
             raw_conf["SUPSCRIPT"],
             raw_conf["SUBSCRIPT"],
-            raw_conf["ULINE"]
+            raw_conf["ULINE"],
+            raw_conf["QUOTE"],
+            raw_conf["BQUOTE"]
         )
 
     def conf(self) -> Config:

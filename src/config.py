@@ -52,3 +52,5 @@ class Rules:
     supscript: list[str]
     subscript: list[str]
     uline: list[str]
+    quote: list[str]
+    bquote: str
