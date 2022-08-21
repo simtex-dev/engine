@@ -113,6 +113,11 @@ class Cli:
             help="Use a different encoding for document.",
             action="store"
         )
+        self.parser.add_argument(
+            "-v", "--verbose",
+            help="Hide stdout of other processes.",
+            action="store_true"
+        )
 
         self.args = self.parser.parse_args()
 
