@@ -33,7 +33,7 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
     key_: str; param: Any
     for key_, param in PARAMETERS.items(): # for overrides
         if param is not None:
-            if args.compiler not in (
+            if args.compiler is not None and args.compiler not in (
                     compilers := ["xetex", "pdflatex", "luatex"]
                 ): # if compiler is not in options
                 pos_compilers: list[float] = [
