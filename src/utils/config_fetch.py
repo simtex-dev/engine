@@ -81,7 +81,8 @@ class ConfParse:
             raw_conf["INLINE_CODE"],
             raw_conf["BOLD"],
             raw_conf["ITALICS"],
-            raw_conf["EMPH"]
+            raw_conf["EMPH"],
+            raw_conf["STRIKE"]
         )
 
     def conf(self) -> Config:

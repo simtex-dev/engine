@@ -47,3 +47,4 @@ class Rules:
     bold: list[str]
     italics: list[str]
     emph: list[str]
+    strike: list[str]
