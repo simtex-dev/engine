@@ -54,6 +54,11 @@ def appearance(line: str, words: list[str], rules: Rules) -> str:
                     ),
                     f"\\textsubscript{{{subscript[0]}}}"
                 )
+        elif (uline := findall(rules.uline[1], line)):
+            line = line.replace(
+                    f"{rules.uline[0]}{uline[0]}{rules.uline[0]}",
+                    f"\\underline{{{uline[0]}}}"
+                )
 
         if word.lower().strip() == "latex":
             line = line.replace(word, r"\LaTeX{}")
