@@ -2,7 +2,6 @@ from shutil import which
 from subprocess import (
     run,
     CalledProcessError,
-    CompletedProcess,
     DEVNULL
 )
 
@@ -42,12 +41,12 @@ def build_file(
             ]
 
         if verbose:
-            rcode: CompletedProcess = run(cmd)
+            rcode = run(cmd).returncode
         else:
-            rcode: CompletedProcess = run(cmd, stdout=DEVNULL)
+            rcode = run(cmd, stdout=DEVNULL).returncode
 
-        if rcode.returncode != 0:
-            raise CalledProcessError(rcode.returncode, cmd)
+        if rcode != 0:
+            raise CalledProcessError(rcode, cmd)
         else:
             log.logger("I", "Successfully built the file.")
     except (OSError, CalledProcessError) as Err:
