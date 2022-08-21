@@ -16,6 +16,7 @@ def convert(
         config: Config,
         title: str,
         in_file: str,
+        filenametitle: bool
     ) -> None:
     """This unifies all the modules.
 
@@ -47,7 +48,7 @@ def convert(
         log.logger("I", f"Creating dir: {config.output_folder} ...")
         mkdir(config.output_folder)
 
-    if title is None:
+    if title is None and not filenametitle:
         if input(
                 "\033[1mINPT\033[0m\t Title is none, use filename as title? "
             ).lower() == "y":

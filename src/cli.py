@@ -114,6 +114,11 @@ class Cli:
             action="store"
         )
         self.parser.add_argument(
+            "-ft", "--filenametitle",
+            help="Use the filename as title.",
+            action="store_true"
+        )
+        self.parser.add_argument(
             "-v", "--verbose",
             help="Hide stdout of other processes.",
             action="store_true"
@@ -133,7 +138,8 @@ class Cli:
                 self.rules,
                 self.config,
                 self.args.title,
-                self.args.input
+                self.args.input,
+                self.args.filenametitle
             )
 
         try:
