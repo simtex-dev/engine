@@ -1,3 +1,4 @@
+from difflib import SequenceMatcher as SeqMatch
 from typing import Any
 
 from src.config import Config
@@ -32,6 +33,26 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
     key_: str; param: Any
     for key_, param in PARAMETERS.items(): # for overrides
         if param is not None:
+            if args.compiler not in (
+                    compilers := ["xetex", "pdflatex", "luatex"]
+                ): # if compiler is not in options
+                pos_compilers: list[float] = [
+                        SeqMatch(
+                            args.compiler, option
+                        ).ratio() for option in compilers
+                    ]
+                compiler: str = pos_compilers.index(max(pos_compilers))
+
+                if input(
+                        f"\033[1m[ INPT ]\033[0m Did you mean {compiler}? "
+                    ).lower() == "y":
+                    args.compiler = compiler
+                else:
+                    args.compiler = "pdflatex"
+                    log.logger(
+                        "E", "Compiler option not recognized, using pdflatex"
+                    )
+
             log.logger(
                 "I",
                 f"Override: {key_} {config.__getattribute__(key_)} -> {param}"
