@@ -41,7 +41,9 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
                             args.compiler, option
                         ).ratio() for option in compilers
                     ]
-                compiler: str = pos_compilers.index(max(pos_compilers))
+                compiler: str = compilers[
+                        pos_compilers.index(max(pos_compilers))
+                    ]
 
                 if input(
                         f"\033[1m[ INPT ]\033[0m Did you mean {compiler}? "
@@ -50,7 +52,7 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
                 else:
                     args.compiler = "pdflatex"
                     log.logger(
-                        "E", "Compiler option not recognized, using pdflatex"
+                        "e", "Compiler option not recognized, using pdflatex"
                     )
 
             log.logger(
