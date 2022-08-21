@@ -1,5 +1,5 @@
 from shutil import which
-from os import system
+from subprocess import run, CalledProcessError, CompletedProcess
 
 from src.utils.logger import Logger
 
@@ -24,18 +24,22 @@ def build_file(
 
     try:
         log.logger("P", f"Building {filename} with pdflatex ...")
-        rcode = system(
-                (
-                    f"{compiler} "
-                    "-synctex=1 "
-                    "-interaction=nonstopmode "
-                    f"-output-directory={output_folder} "
+        rcode: CompletedProcess = run(
+                [
+                    compiler,
+                    "-synctex=1",
+                    "-interaction=nonstopmode",
+                    f"-output-directory={output_folder}",
                     f"{filename}"
-                ),
+                ]
             )
-        if rcode == 0:
-            log.logger("I", "Successfully built the file.")
-    except OSError as Err:
+
+        if rcode.returncode != 0:
+            raise CalledProcessError(f"Error from {compiler}.")
+
+        log.logger("I", "Successfully built the file.")
+
+    except (OSError, CalledProcessError) as Err:
         log.logger("E", f"{Err}. Cannot build LaTeX file.")
 
 
