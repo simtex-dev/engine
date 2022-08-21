@@ -39,18 +39,18 @@ def appearance(line: str, words: list[str], rules: Rules) -> str:
         elif (supscript := findall(rules.supscript[1], line)):
             line = line.replace(
                     (
-                        f"{rules.supscript[1]}"
+                        f"{rules.supscript[0]}"
                         f"{supscript[0]}"
-                        f"{rules.supscript[1]}"
+                        f"{rules.supscript[0]}"
                     ),
                     f"\\textsuperscript{{{supscript[0]}}}"
                 )
         elif (subscript := findall(rules.subscript[1], line)):
             line = line.replace(
                     (
-                        rules.subscript[0].replace(
-                            "<TEXT>", subscript[0]
-                        )
+                        f"{rules.subscript[0]}"
+                        f"{subscript[0]}"
+                        f"{rules.subscript[0]}"
                     ),
                     f"\\textsubscript{{{subscript[0]}}}"
                 )
