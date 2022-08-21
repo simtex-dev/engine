@@ -2,7 +2,7 @@ from typing import Callable, TextIO
 
 from src.config import Rules
 from src.utils.tex.environments.mathsec import mathsec
-from src.utils.tex.environments.commons import commons
+from src.utils.tex.environments.figure import commons
 from src.utils.logger import Logger
 
 

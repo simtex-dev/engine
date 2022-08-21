@@ -2,7 +2,7 @@ from re import findall
 from typing import TextIO
 
 from src.config import Rules
-from src.utils.tex.text.appearance import appearance
+from src.utils.tex.text.basics import appearance
 
 
 def commons(
