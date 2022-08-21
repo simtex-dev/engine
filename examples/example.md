@@ -25,7 +25,7 @@ or by^^this is not footnote^^ -^its a superscript-^, ._anyway._:
 
 ### This is subsubsection: Listings
 
-The !*code blocks!* below presents the source code of the converted markdown file:
+The !*code blocks!* below presents the source code of the "converted" markdown file:
 
 ```
 # This is a section: Math
