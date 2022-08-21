@@ -47,7 +47,7 @@ def headings(
             f"% font\n\\usepackage{{{config.doc_font}}}\n\n% packages"
         ]
 
-    if "<NOW>" in config.date:
+    if config.date == "<NOW>":
         config.__setattr__("date", datetime.now().strftime("%B %d, %Y"))
 
     pkgs: str

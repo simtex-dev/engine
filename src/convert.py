@@ -50,7 +50,7 @@ def convert(
 
     if filenametitle and title is None:
         title = in_file.split("/")[-1].split(".")[0]
-    else:
+    elif title is None:
         if input(
                 (
                     "\033[1mINPT\033[0m\t Title is"
