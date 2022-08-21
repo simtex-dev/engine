@@ -34,7 +34,7 @@ def convert(
     if exists((OFILE_PATH := f"{config.output_folder}/{config.filename}")):
         if input(
                 (
-                    f"\033[1mINPT\033[0m File: {OFILE_PATH}"
+                    f"\033[1mINPT\033[0m\t File: {OFILE_PATH}"
                     " already exists, overwrite? "
                 )
             ).lower() != "y":
