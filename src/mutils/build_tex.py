@@ -1,11 +1,20 @@
 from shutil import which
-from subprocess import run, CalledProcessError, CompletedProcess
+from subprocess import (
+    run,
+    CalledProcessError,
+    CompletedProcess,
+    DEVNULL
+)
 
 from src.utils.logger import Logger
 
 
 def build_file(
-        log: Logger, compiler: str, output_folder: str, filename: str
+        log: Logger,
+        compiler: str,
+        output_folder: str,
+        filename: str,
+        verbose: bool
     ) -> None:
     """Build the LaTeX file using pdflatex, if exists.
 
@@ -24,14 +33,26 @@ def build_file(
 
     try:
         log.logger("P", f"Building {filename} with pdflatex ...")
-        rcode: CompletedProcess = run(
+        if verbose:
+            rcode: CompletedProcess = run(
+                    [
+                        compiler,
+                        "-synctex=1",
+                        "-interaction=nonstopmode",
+                        f"-output-directory={output_folder}",
+                        f"{filename}"
+                    ]
+                )
+        else:
+            rcode: CompletedProcess = run(
                 [
                     compiler,
                     "-synctex=1",
                     "-interaction=nonstopmode",
                     f"-output-directory={output_folder}",
                     f"{filename}"
-                ]
+                ],
+                stdout=DEVNULL
             )
 
         if rcode.returncode != 0:

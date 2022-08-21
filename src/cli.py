@@ -145,7 +145,8 @@ class Cli:
                     self.log,
                     self.config.compiler,
                     self.config.output_folder,
-                    self.config.filename
+                    self.config.filename,
+                    self.args.verbose
                 )
             elif self.args.buildnview:
                 converter()
@@ -153,7 +154,8 @@ class Cli:
                     self.log,
                     self.config.compiler,
                     self.config.output_folder,
-                    self.config.filename
+                    self.config.filename,
+                    self.args.verbose
                 )
                 try:
                     Popen(["xgd-open", self.args.filename])
