@@ -51,3 +51,4 @@ class Rules:
     strike: list[str]
     supscript: str
     subscript: str
+    uline: str
