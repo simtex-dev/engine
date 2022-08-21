@@ -17,13 +17,13 @@
         "SUBPARAGRAPH": "#####",
         "INLINE_MATH": "$",
         "PARAGRAPH_MATH": "$$",
-        "INLINE_CODE": "`(.*?)`",
+        "INLINE_CODE": ["`" ,"`(.*?)`"],
         "BOLD": ["**", "\\*\\*(.*?)\\*\\*"],
         "ITALICS": ["_", "_(.*?)_"],
         "EMPH": ["!*", "!\\*(.*?)!\\*"],
         "STRIKE": ["~~", "~~(.*?)~~"],
-        "SUPSCRIPT": "\\^\\^{(.*?)}",
-        "SUBSCRIPT": "__{(.*?)}"
+        "SUPSCRIPT": ["^^{<TEXT>}", "\\^\\^{(.*?)}"],
+        "SUBSCRIPT": ["__{<TEXT>}", "__{(.*?)}"]
     },
     {
         "DOC_CLASS": "article",
