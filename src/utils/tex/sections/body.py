@@ -78,13 +78,13 @@ def body(
             case _:
                 if line.startswith(rules.paragraph_math): # math mode
                     end = mathsec(
-                        line,
-                        rules.paragraph_math,
-                        out_file,
-                        ref_tex,
-                        cur,
-                        end
-                    )
+                            line,
+                            rules.paragraph_math,
+                            out_file,
+                            ref_tex,
+                            cur,
+                            end
+                        )
                 elif line.startswith(rules.code): # for code blocks
                     language: str = line[3:].replace("\n", "")
                     out_file.write(
