@@ -46,7 +46,7 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
                     ]
 
                 if input(
-                        f"\033[1m[ INPT ]\033[0m Did you mean {compiler}? "
+                        f"\033[1mINPT\033[0m Did you mean {compiler}? "
                     ).lower() == "y":
                     args.compiler = compiler
                 else:
