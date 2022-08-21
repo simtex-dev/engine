@@ -42,6 +42,7 @@ class TestCases(unittest.TestCase):
                         r"{xcolor}",
                         r"{listings}",
                         r"{caption}",
+                        r"[normalem]{ulem}",
                         r"[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
                     ],
                 footnote="footnote",
@@ -89,11 +90,11 @@ class TestCases(unittest.TestCase):
                 paragraph_math="$$",
                 inline_code=["`", "`(.*?)`"],
                 bold=["**", "\\*\\*(.*?)\\*\\*"],
-                italics=["_", "_(.*?)_"],
                 emph=["!*", "!\\*(.*?)!\\*"],
+                italics=["__", "__(.*?)__"],
                 strike=["~~", "~~(.*?)~~"],
                 supscript=["^^", "\\^\\^(.*?)\\^\\^"],
-                subscript=["__", "__{(.*?)}"],
+                subscript=["-^", "-\\^(.*?)-\\^"],
                 uline=["._", "._(.*?)._"]
             ),
             rules
