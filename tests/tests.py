@@ -95,7 +95,9 @@ class TestCases(unittest.TestCase):
                 strike=["~~", "~~(.*?)~~"],
                 supscript=["^^", "\\^\\^(.*?)\\^\\^"],
                 subscript=["-^", "-\\^(.*?)-\\^"],
-                uline=["._", "._(.*?)._"]
+                uline=["._", "._(.*?)._"],
+                quote=["\"", "\"(.*?)\""],
+                bquote=">"
             ),
             rules
         )
