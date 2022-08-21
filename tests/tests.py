@@ -87,10 +87,14 @@ class TestCases(unittest.TestCase):
                 subparagraph="#####",
                 inline_math="$",
                 paragraph_math="$$",
-                inline_code="`(.*?)`",
+                inline_code=["`", "`(.*?)`"],
                 bold=["**", "\\*\\*(.*?)\\*\\*"],
                 italics=["_", "_(.*?)_"],
-                emph=["!*", "!\\*(.*?)!\\*"]
+                emph=["!*", "!\\*(.*?)!\\*"],
+                strike=["~~", "~~(.*?)~~"],
+                supscript=["^^", "\\^\\^(.*?)\\^\\^"],
+                subscript=["__", "__{(.*?)}"],
+                uline=["._", "._(.*?)._"]
             ),
             rules
         )
