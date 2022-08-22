@@ -29,8 +29,8 @@ class Cli:
                 description=description
             )
 
-    def create_parser(self) -> None:
-        """Create the parser."""
+    def _options(self) -> None:
+        """The options of the program."""
 
         self.parser.add_argument( # commands
             "-c", "--convert",
@@ -46,8 +46,12 @@ class Cli:
             "-B", "--buildnview",
             help="Build the generated LaTeX file and view the output.",
             action="store_true"
-        ) # starts here are the options
-        self.parser.add_argument(
+        )
+
+    def _arguments(self) -> None:
+        """Main and commonly used arguments of the program"""
+
+        self.parser.add_argument( # starts here are the options
             "-i", "--input",
             help="File to be converted into LaTeX.",
             action="store",
@@ -79,6 +83,15 @@ class Cli:
             action="store"
         )
         self.parser.add_argument(
+            "-C", "--compiler",
+            help="Use a different LaTeX compiler.",
+            action="store"
+        )
+
+    def _doc_args(self) -> None:
+        """For modification of document properties."""
+
+        self.parser.add_argument(
             "-F", "--font",
             help="Use different font package.",
             action="store"
@@ -104,15 +117,14 @@ class Cli:
             action="store"
         )
         self.parser.add_argument(
-            "-C", "--compiler",
-            help="Use a different LaTeX compiler.",
-            action="store"
-        )
-        self.parser.add_argument(
             "-e", "--encoding",
             help="Use a different encoding for document.",
             action="store"
         )
+
+    def _misc(self) -> None:
+        """Other arguments."""
+
         self.parser.add_argument(
             "-ft", "--filenametitle",
             help="Use the filename as title.",
@@ -123,6 +135,14 @@ class Cli:
             help="Hide stdout of other processes.",
             action="store_true"
         )
+
+    def create_parser(self) -> None:
+        """Create the parser."""
+
+        self._options()
+        self._doc_args()
+        self._arguments()
+        self._misc()
 
         self.args = self.parser.parse_args()
 
