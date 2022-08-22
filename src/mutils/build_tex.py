@@ -37,7 +37,7 @@ def build_file(
                 "-synctex=1",
                 "-interaction=nonstopmode",
                 f"-output-directory={output_folder}",
-                f"{filename}"
+                filename
             ]
 
         if verbose:

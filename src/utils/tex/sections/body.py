@@ -85,7 +85,7 @@ def body(
                 elif line.startswith(rules.code): # for code blocks
                     language: str = line[3:].replace("\n", "")
                     out_file.write(
-                        f"\n\\begin{{lstlisting}}"
+                        "\n\\begin{lstlisting}"
                         f"[language={language.title()}]\n"
                     )
 

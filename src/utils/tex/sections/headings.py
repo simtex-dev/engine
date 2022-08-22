@@ -26,8 +26,7 @@ def headings(
 
     SECTIONS: dict[str, str] = {
             "main": (
-                    "\n"
-                    r"% size config of sections"
+                    "\n%\ size config of sections"
                     "\n\sectionfont{\\fontsize{"
                     "<SECTION_SIZES>}{15}\selectfont}"
                 ),
@@ -85,7 +84,7 @@ def headings(
 
     lstconf: IO[Any]
     with open(config.code_conf, "r", encoding="utf-8") as lstconf:
-        headings.append(f"\n% lst listings config")
+        headings.append("\n%\ lst listings config")
         for lines in lstconf.readlines():
             headings.append(lines.replace("\n", ""))
 
