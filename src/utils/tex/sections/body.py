@@ -48,10 +48,7 @@ def body(
 
     cur: int
     for cur, line in enumerate(ref_tex):
-        if line in ["", "\n"]:
-            continue
-
-        if cur <= end:
+        if line in ["", "\n"] or cur <= end:
             continue
 
         match line.split()[0].strip():
