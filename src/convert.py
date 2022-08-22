@@ -61,9 +61,9 @@ def convert(
         else:
             title = input("\033[1mINPT\033[0m\t Input title for use: ")
 
-        log.logger(
-            "I", f"Title is none, using filename: {title} as title ..."
-        )
+            log.logger(
+                "I", f"Title is none, using filename: {title} as title ..."
+            )
 
     if in_file.startswith("./"):
         OPATH = "/".join(in_file.split("/")[:-1])
