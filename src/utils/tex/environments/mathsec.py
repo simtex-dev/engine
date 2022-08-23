@@ -2,12 +2,12 @@ from typing import TextIO
 
 
 def mathsec(
-        line: str,
         rule: str,
-        out_file: TextIO,
+        line: str,
         sources: list[str],
         start: int,
-        end: int
+        end: int,
+        out_file: TextIO,
     ) -> int:
     """Handles the math found in the input, this includes paragraph math
     inline math, and aligned paragraph math.
