@@ -67,14 +67,14 @@ def headings(
         f"\\usepackage[scaled={config.cfont_scale}]{{{config.code_font}}}"
     )
 
-    sec_sizes: int; sec_val: str
+    sec_sizes: str | int; sec_val: str
     for sec_sizes, sec_val in zip(
             config.section_sizes.values(), SECTIONS.values()
         ):
-        if sec_sizes != "<DEF>":
-            headings.append(sec_val.replace("<SECTION_SIZES>", str(sec_sizes)))
-        else:
+        if str(sec_sizes) == "<DEF>":
             CONST -= 1
+        else:
+            headings.append(sec_val.replace("<SECTION_SIZES>", str(sec_sizes)))
 
     headings.append(
         f"\n% basic config\n\setlength\parindent{{{config.indent_size}pt}}"

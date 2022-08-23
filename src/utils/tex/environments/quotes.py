@@ -25,9 +25,11 @@ def quotation(
     for end, quote in enumerate(sources[start:]):
         if not quote.startswith(rule):
             out_file.write("\\end{displayquote}\n")
-            return end+start
+            break
         else:
             out_file.write(
                 f"\t{quote.replace(rule, '').strip()}\n"
             )
+
+    return end+start
 
