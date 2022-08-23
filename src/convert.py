@@ -33,18 +33,22 @@ def convert(
 
     OFILE_PATH: str
     if exists((OFILE_PATH := f"{config.output_folder}/{config.filename}")):
-        if input(
+        match input(
                 (
                     f"\033[1mINPT\033[0m\t File: {OFILE_PATH}"
-                    " already exists, overwrite? "
+                    " already exists, overwrite (o)? [y/n/o] "
                 )
-            ).lower() != "y":
-            new_filename = input(
-                    "\033[1mINPT\033[0m\t Input another file name: "
+            ).lower():
+            case "y":
+                log.logger(
+                    "I", f"Overwriting: {OFILE_PATH} with the new file ..."
                 )
-            if new_filename != "":
+            case "o":
+                new_filename = input(
+                        "\033[1mINPT\033[0m\t Input another file name: "
+                    )
                 OFILE_PATH = f"{config.output_folder}/{new_filename}"
-            else:
+            case _:
                 log.logger(
                     "e", f"File: {OFILE_PATH} already exists, aborting ..."
                 )
