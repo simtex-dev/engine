@@ -17,7 +17,7 @@ class Config:
     code_conf: str
     packages: list[str]
     footnote: str
-    section_sizes: dict[str, int]
+    section_sizes: dict[str, int | str]
     links: bool
     link_color: str
     author: str
