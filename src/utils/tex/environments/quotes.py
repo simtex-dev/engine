@@ -21,11 +21,15 @@ def quotation(
         An integer that marks the lines that should be skipped.
     """
 
+    out_file.write("\n\\begin{displayquote}\n")
+
     end: int; quote: str
     for end, quote in enumerate(sources[start:]):
         if not quote.startswith(rules.bquote):
+            out_file.write("\\end{displayquote}\n")
             return end+start
         else:
             out_file.write(
                 f"\t{quote.replace(rules.bquote, '').strip()}\n"
             )
+
