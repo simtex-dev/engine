@@ -28,7 +28,7 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
             ]
 
         if input(
-                f"\033[1mINPT\033[0m\t Did you mean {compiler}? "
+                f"\033[1mINPT\033[0m\t Did you mean {compiler}? [y/n]"
             ).lower() == "y":
             args.compiler = compiler
         else:
@@ -57,6 +57,10 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
         if param is not None:
             log.logger(
                 "I",
-                f"Override: {key_} {config.__getattribute__(key_)} -> {param}"
+                (
+                    f"Overriding default {key_}: "
+                    f"{config.__getattribute__(key_)}"
+                    f" -> {param} ..."
+                )
             )
             config.__setattr__(key_, param)

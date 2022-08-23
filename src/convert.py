@@ -63,8 +63,8 @@ def convert(
     elif title is None:
         if input(
                 (
-                    "\033[1mINPT\033[0m\t Title is"
-                    " none, use filename as title? "
+                    "\033[1mINPT\033[0m\t Title is none"
+                    ", use filename as title? [y/n]"
                 )
             ).lower() == "y":
             title = in_file.split("/")[-1].split(".")[0]
@@ -98,5 +98,5 @@ def convert(
             )
         except (FileNotFoundError, OSError, IOError) as Err:
             log.logger(
-                "e", f"Encountered: {Err} while moving {file}, skipping"
+                "e", f"Encountered: {Err} while moving {file}, skipping ..."
             )
