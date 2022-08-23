@@ -87,6 +87,17 @@ def body(
                             cur,
                             end
                         )
+                elif line.startswith(rules.bquote):
+                    out_file.write("\n\\begin{displayquote}\n")
+                    end = quotation(
+                            log,
+                            line,
+                            rules,
+                            ref_tex,
+                            cur,
+                            out_file
+                        )
+                    out_file.write("\\end{displayquote}\n")
                 elif line.startswith(rules.code): # for code blocks
                     language: str = line[3:].replace("\n", "")
                     out_file.write(
