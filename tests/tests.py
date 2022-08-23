@@ -42,14 +42,15 @@ class TestCases(unittest.TestCase):
                         r"{xcolor}",
                         r"{listings}",
                         r"{caption}",
+                        r"{csquotes}",
                         r"[normalem]{ulem}",
                         r"[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
                     ],
                 footnote="footnote",
                 section_sizes={
-                        "main": 12,
-                        "sub": 12,
-                        "subsub": 12
+                        "main": "<DEF>",
+                        "sub": "<DEF>",
+                        "subsub": "<DEF>"
                     },
                 links=True,
                 link_color="blue",
