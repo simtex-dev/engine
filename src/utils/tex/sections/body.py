@@ -3,8 +3,10 @@ from typing import Callable, TextIO
 
 from src.config import Rules
 from src.utils.tex.environments.mathsec import mathsec
-from src.utils.tex.environments.common_envs import commons
+from src.utils.tex.environments.figure import figure
 from src.utils.tex.environments.quotes import quotation
+from src.utils.tex.environments.listings import listings
+from src.utils.tex.text.format import format
 from src.utils.logger import Logger
 
 
@@ -44,13 +46,13 @@ def body(
     with open(in_file, "r", encoding="utf-8") as ref_file:
         ref_tex: list[str] = ref_file.readlines()
 
-    end: int = -1
+    ignore: int = -1
 
     log.logger("I", "Writing the body to the document ...")
 
     cur: int # current index
     for cur, line in enumerate(ref_tex):
-        if line in ["", "\n"] or cur <= end:
+        if line in ["", "\n"] or cur <= ignore:
             continue
 
         # replace numerous \n, if there is any, with one \n
@@ -79,47 +81,40 @@ def body(
                 )
             case _:
                 if line.startswith(rules.paragraph_math): # math mode
-                    end = mathsec(
-                            line,
+                    ignore = mathsec(
                             rules.paragraph_math,
-                            out_file,
+                            line,
                             ref_tex,
                             cur,
-                            end
+                            out_file
                         )
                 elif line.startswith(rules.bquote):
-                    out_file.write("\n\\begin{displayquote}\n")
-                    end = quotation(
-                            log,
-                            line,
+                    ignore = quotation(
                             rules,
                             ref_tex,
                             cur,
                             out_file
                         )
-                    out_file.write("\\end{displayquote}\n")
                 elif line.startswith(rules.code): # for code blocks
-                    language: str = line[3:].replace("\n", "")
-                    out_file.write(
-                        "\n\\begin{lstlisting}"
-                        f"[language={language.title()}]\n"
-                    )
-
-                    code: str; n: int
-                    for n, code in enumerate(ref_tex[cur+1:]):
-                        if code.strip() == rules.code:
-                            out_file.write("\end{lstlisting}\n")
-                            end = n+cur+1
-                            break
-
-                        out_file.write(code)
+                    ignore = listings(
+                            rules,
+                            line,
+                            cur,
+                            ref_tex,
+                            out_file
+                        )
                 else:
-                    commons(
-                        line,
-                        line.split(),
-                        rules,
-                        files,
-                        out_file
-                    )
+                    skip_line: bool = figure(
+                            rules,
+                            line,
+                            files,
+                            out_file
+                        )
+                    if not skip_line:
+                        line = (
+                                format(rules, line, line.split())
+                                    .replace("_", r"\_")
+                            )
+                        out_file.write(f"\n{line}\n")
 
     return files
