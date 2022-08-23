@@ -90,14 +90,14 @@ def body(
                         )
                 elif line.startswith(rules.bquote):
                     ignore = quotation(
-                            rules,
+                            rules.bquote,
                             ref_tex,
                             cur,
                             out_file
                         )
                 elif line.startswith(rules.code): # for code blocks
                     ignore = listings(
-                            rules,
+                            rules.code,
                             line,
                             cur,
                             ref_tex,
@@ -105,7 +105,7 @@ def body(
                         )
                 else:
                     skip_line: bool = figure(
-                            rules,
+                            rules.image,
                             line,
                             files,
                             out_file

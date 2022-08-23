@@ -4,7 +4,7 @@ from typing import TextIO
 def mathsec(
         rule: str,
         line: str,
-        sources: list[str],
+        source: list[str],
         start: int,
         out_file: TextIO,
     ) -> int:
@@ -12,10 +12,10 @@ def mathsec(
     inline math, and aligned paragraph math.
 
     Arguments:
+        rule -- rule that needs to be followed in translation.
         line -- line that will be analyzed and translated.
-        rules -- rules that needs to be followed in translation.
         out_file -- where the translated line will be written.
-        sources -- where the other lines of equation would be found.
+        source -- where the other lines of equation would be found.
         start -- where the parser/translator would start.
         ignore -- for knowing what line(s) to skip.
 
@@ -29,7 +29,7 @@ def mathsec(
         out_file.write("\n\\begin{align}\n")
 
         eqs: str; mline: int
-        for mline, eqs in enumerate(sources[start+1:]):
+        for mline, eqs in enumerate(source[start+1:]):
             if eqs.strip() == rule:
                 end = mline+1+start
                 break

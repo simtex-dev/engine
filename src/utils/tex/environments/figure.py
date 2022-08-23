@@ -1,17 +1,15 @@
 from re import findall
 from typing import TextIO
 
-from src.config import Rules
-
 
 def figure(
-        rules: Rules, line: str, files: list[str], out_file: TextIO
+        rule: str, line: str, files: list[str], out_file: TextIO
     ) -> bool:
     """Common markdown things that needed to be translated to LaTeX.
 
     Args:
+        rule -- rule that needs to be followed in translation.
         line -- line that will be analyzed and translated.
-        rules -- rules that needs to be followed in translation.
         files -- where the files referenced in the line will be appended to.
         out_file -- where the translated line will be written.
     """
@@ -19,7 +17,7 @@ def figure(
     skip_line: bool = False
 
     img: list[tuple[str, str]]
-    if (img := findall(rules.image, line)):
+    if (img := findall(rule, line)):
         out_file.write(
             "\n\\begin{figure}[h]\n"
             "\t\\includegraphics[width=\\textwidth]"

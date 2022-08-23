@@ -1,10 +1,8 @@
 from typing import TextIO
 
-from src.config import Rules
-
 
 def quotation(
-        rules: Rules,
+        rule: str,
         sources: list[str],
         start: int,
         out_file: TextIO
@@ -12,7 +10,7 @@ def quotation(
     """For typesetting of block quotes using csquotes package.
 
     Args:
-        rules -- rules that needs to be followed in translation.
+        rule -- rule that needs to be followed in translation.
         sources -- where the other lines of equation would be found.
         start -- where the parser/translator would start.
         out_file -- where the translated line will be written.
@@ -25,11 +23,11 @@ def quotation(
 
     end: int; quote: str
     for end, quote in enumerate(sources[start:]):
-        if not quote.startswith(rules.bquote):
+        if not quote.startswith(rule):
             out_file.write("\\end{displayquote}\n")
             return end+start
         else:
             out_file.write(
-                f"\t{quote.replace(rules.bquote, '').strip()}\n"
+                f"\t{quote.replace(rule, '').strip()}\n"
             )
 

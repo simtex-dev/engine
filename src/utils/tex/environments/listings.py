@@ -1,10 +1,8 @@
 from typing import TextIO
 
-from src.config import Rules
-
 
 def listings(
-        rules: Rules,
+        rule: str,
         line: str,
         start: int,
         source: list[str],
@@ -13,21 +11,27 @@ def listings(
     """For formatting of code blocks.
 
     Args:
+        rule -- rule that needs to be followed in translation.
         line -- line that will be analyzed and translated.
-        rules -- rules that needs to be followed in translation.
         start -- where the parser/translator would start.
+        source -- where the other lines of equation would be found.
         out_file -- where the translated line will be written.
     """
 
     language: str = line[3:].replace("\n", "")
-    out_file.write(
-        "\n\\begin{lstlisting}"
-        f"[language={language.title()}]\n"
-    )
+    if language:
+        out_file.write(
+            "\n\\begin{lstlisting}"
+            f"[language={language.title()}]\n"
+        )
+    else:
+        out_file.write(
+            "\n\\begin{lstlisting}\n"
+        )
 
     code: str; cline: int
     for cline, code in enumerate(source[start+1:]):
-        if code.strip() == rules.code:
+        if code.strip() == rule:
             out_file.write("\end{lstlisting}\n")
             return cline+start+1
 
