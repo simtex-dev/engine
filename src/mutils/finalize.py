@@ -4,13 +4,25 @@ from src.utils.logger import Logger
 
 
 def finalize(
-        log: Logger, files: list[str], output_folder: str, ORIGIN: str
+        log: Logger, files: list[str], output_folder: str, origin: str
     ) -> None:
+    """Finishes the job of conversion, which includes copying the
+    referenced file into the outfule folder among others.
 
-    if ORIGIN.startswith("./"):
-        OPATH = "/".join(ORIGIN.split("/")[:-1])
+    Args:
+        log -- for logging.
+        files -- list of paths of referenced files.
+        output_folder -- where the file will be written.
+        origin -- the path of the input file.
+
+    Returns:
+        The path of the file, or raises systemexit.
+    """
+
+    if origin.startswith("./"):
+        OPATH = "/".join(origin.split("/")[:-1])
     else:
-        OPATH = "./"+"/".join(ORIGIN.split("/")[:-1])
+        OPATH = "./"+"/".join(origin.split("/")[:-1])
 
     file: str
     for file in files:
