@@ -127,6 +127,10 @@ Images can be inserted with^^The first one is in codeblocks using lstlisting, th
 
 The !*code blocks!* below presents the source code of the "converted" markdown file:
 
+\`\`\`
+[REDACTED TO AVOID RECURSION]
+\`\`\`
+
 #### This is paragraph
 
 Check [example.tex](./example.tex) for the **LaTeX**, rendition of this markdown file. Since the program is configured via JSON file, the user can modify the behavior of the program in multitude of ways, this includes defining or giving a default value for arguments of the document for easier conversion. Check [simtex.json](https://github.com/iaacornus/simtex/blob/devel/examples/config/simtex.json).
