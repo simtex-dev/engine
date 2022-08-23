@@ -50,6 +50,7 @@
                 "{xcolor}",
                 "{listings}",
                 "{caption}",
+                "{csquotes}",
                 "[normalem]{ulem}",
                 "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
             ],
