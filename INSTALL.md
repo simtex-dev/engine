@@ -2,7 +2,7 @@
 
 # Simple install
 
-The project can be installed using the `.whl` in releases section using your python package manager
+The project can be installed using the `.whl` in releases section using your python package manager or using `pip install simtex`, since the project has been on [PyPI](https://pypi.org/project/simtex/) since 0.2.0
 
 ## From source
 
