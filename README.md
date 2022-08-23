@@ -15,13 +15,24 @@ into PDF with LaTeX.
 ```
 usage: simtex [OPTIONS]
 
-Generate a LaTeX file from your notes with few commands!
+Convert your mardown or text lectures into LaTeX/pdf with one command.!
 
 options:
   -h, --help            show this help message and exit
   -c, --convert         Convert the input to LaTeX.
   -b, --build           Build the generated LaTeX file.
   -B, --buildnview      Build the generated LaTeX file and view the output.
+  -F FONT, --font FONT  Use different font package.
+  -s FONTSIZE, --fontsize FONTSIZE
+                        Use different font size.
+  -p PAPERSIZE, --papersize PAPERSIZE
+                        Use different paper size.
+  -I INDENT, --indent INDENT
+                        Indent size to be used.
+  -m MARGIN, --margin MARGIN
+                        Margin size to be used.
+  -e ENCODING, --encoding ENCODING
+                        Use a different encoding for document.
   -i INPUT, --input INPUT
                         File to be converted into LaTeX.
   -T TITLE, --title TITLE
@@ -33,15 +44,10 @@ options:
   -a AUTHOR, --author AUTHOR
                         Set the author name of the document.
   -d DATE, --date DATE  Set the date of the document.
-  -F FONT, --font FONT  Use different font package.
-  -s FONTSIZE, --fontsize FONTSIZE
-                        Use different font size.
-  -p PAPERSIZE, --papersize PAPERSIZE
-                        Use different paper size.
-  -I INDENT, --indent INDENT
-                        Indent size to be used.
-  -m MARGIN, --margin MARGIN
-                        Margin size to be used.
+  -C COMPILER, --compiler COMPILER
+                        Use a different LaTeX compiler.
+  -ft, --filenametitle  Use the filename as title.
+  -v, --verbose         Hide stdout of other processes.
 ```
 
 # Features
@@ -55,12 +61,12 @@ input. Currently, the program has features that can satisfy conversion of basic
 inputs:
 
 1. Supports the most basic commands, such as **bold**, _italics_,
-**_emphasize_**, `inline code`.
+**_emphasize_**, `inline code`, quotes, as well as hyperlinks.
 2. Environments, the program supports a multiline math environment using
 `align`, single line math equation using `equation` environment, as well as
 code blocks using `lstlisting` with syntax highlighting.
-3. Graphics and figures, as well as links with captions.
-4. Sections, subsections and paragraphs.
+3. Figures.
+4. Sections, subsections upto subparagraphs.
 5. Basic document metadata and properties that can be provided in a
 configuration file for default value, this includes, author, date, font, among
 others, view the [short documentation](./examples/config/README.md) for full
@@ -69,12 +75,12 @@ list.
 defines the rules that should be followed on how the program should parse the
 input, as well as how to format the document.
 
+Refer to the [PDF](./examples/1/hello.pdf) for more details.
+
 # Examples
 
-![](./imgs/sample.png)
-
-You can view the output of the program [here](./examples/1/hello.pdf) using
-the command:
+You can view the output of the program [here](./examples/1/hello.pdf) which was
+generated using the command:
 
 ```
 simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -of="./examples/1" -f="hello.tex" -a="iaacornus" -d="August 15, 2552"
