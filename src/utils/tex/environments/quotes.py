@@ -30,7 +30,7 @@ def quotation(
                 return end+start
             else:
                 out_file.write(
-                    quote.replace(rules.bquote, "")
+                    f"\t{quote.replace(rules.bquote, '').strip()}\n"
                 )
     except IOError as Err:
         log.logger("E", f"{Err}. Cannot write to file, aborting ...")

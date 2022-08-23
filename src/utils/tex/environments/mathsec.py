@@ -27,7 +27,7 @@ def mathsec(
     maths: list[str] = []
 
     if line.strip() == rule: # for align
-        out_file.write("\\begin{align}\n")
+        out_file.write("\n\\begin{align}\n")
 
         eqs: str; j: int
         for j, eqs in enumerate(sources[start+1:]):
@@ -49,7 +49,7 @@ def mathsec(
     else:
         out_file.write(
             (
-                "\\begin{equation}\n"
+                "\n\\begin{equation}\n"
                 f"\t{line[2:-3]}\n"
                 "\\end{equation}\n"
             )

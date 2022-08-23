@@ -1,8 +1,10 @@
+from re import sub
 from typing import Callable, TextIO
 
 from src.config import Rules
 from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.common_envs import commons
+from src.utils.tex.environments.quotes import quotation
 from src.utils.logger import Logger
 
 
@@ -46,10 +48,13 @@ def body(
 
     log.logger("I", "Writing the body to the document ...")
 
-    cur: int
+    cur: int # current index
     for cur, line in enumerate(ref_tex):
         if line in ["", "\n"] or cur <= end:
             continue
+
+        # replace numerous \n, if there is any, with one \n
+        line = sub(r"\n{2, 10}", "\n", line).strip()
 
         match line.split()[0].strip():
             case rules.section:

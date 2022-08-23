@@ -53,7 +53,7 @@ def format_body(
 
                     continue
                 file.write(f"\t{line}")
-            file.write("\\end{document}")
+            file.write("\n\\end{document}")
     except (FileNotFoundError, OSError, PermissionError, IOError) as Err:
         log.logger(
             "E", f"{Err}. Cannot format the document, aborting ..."
