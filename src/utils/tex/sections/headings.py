@@ -24,7 +24,7 @@ def headings(
         The number of lines used by the headings.
     """
 
-    CONST: int = 11
+    CONST: int = 12
     SECTIONS: dict[str, str] = {
             "main": (
                     "\n%\ size config of sections"
