@@ -1,12 +1,11 @@
-from shutil import copy
-from os import mkdir
-from os.path import exists
 from typing import TextIO
 
 from src.config import Config, Rules
 from src.utils.tex.parser.headings import headings
 from src.utils.tex.parser.body import body
 from src.mutils.format_body import format_body
+from src.mutils.preparation import prep
+from src.mutils.finalize import finalize
 from src.utils.logger import Logger
 
 
@@ -31,34 +30,9 @@ def convert(
 
     log.logger("I", f"Converting {in_file} ...")
 
-    OFILE_PATH: str
-    if exists((OFILE_PATH := f"{config.output_folder}/{config.filename}")):
-        match input(
-                (
-                    f"\033[1mINPT\033[0m\t File: {OFILE_PATH}"
-                    " already exists, overwrite (o)? [y/n/o] "
-                )
-            ).lower():
-            case "y":
-                log.logger(
-                    "I", f"Overwriting: {OFILE_PATH} with the new file ..."
-                )
-            case "o":
-                new_filename: str = input(
-                        "\033[1mINPT\033[0m\t Input another file name: "
-                    )
-                if not new_filename.endswith(".tex"):
-                    new_filename = f"{new_filename}.tex"
-                OFILE_PATH = f"{config.output_folder}/{new_filename}"
-            case _:
-                log.logger(
-                    "e", f"File: {OFILE_PATH} already exists, aborting ..."
-                )
-                raise SystemExit
-
-    if not exists(config.output_folder):
-        log.logger("I", f"Creating dir: {config.output_folder} ...")
-        mkdir(config.output_folder)
+    OFILE_PATH: str = prep(
+            log, config.output_folder, config.filenames
+        )
 
     if filenametitle and title is None:
         title = in_file.split("/")[-1].split(".")[0]
@@ -76,28 +50,10 @@ def convert(
                 "I", f"Title is none, using filename: {title} as title ..."
             )
 
-    if in_file.startswith("./"):
-        OPATH = "/".join(in_file.split("/")[:-1])
-    else:
-        OPATH = "./"+"/".join(in_file.split("/")[:-1])
-
     out_file: TextIO
     with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
         start: int = headings(log, config, title, out_file)
         files: list[str] = body(log, rules, in_file, out_file)
 
     format_body(log, config, start, OFILE_PATH)
-
-    file: str
-    for file in files:
-        log.logger("I", f"Copying {file} into {config.output_folder} ...")
-        filename: str = file.split("/")[-1]
-        try:
-            copy(
-                f"{OPATH}/{file.replace('./', '')}",
-                f"{config.output_folder}/{filename}"
-            )
-        except (FileNotFoundError, OSError, IOError) as Err:
-            log.logger(
-                "e", f"Encountered: {Err} while moving {file}, skipping ..."
-            )
+    finalize(log, files, config.output_folder, in_file)
