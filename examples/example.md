@@ -1,5 +1,10 @@
 # This is a section: Math
 
+> It is my conviction that pure mathematical construction enables us to discover
+> the concepts and laws connecting them which helps us in understanding of nature... .
+> In a certain sense, therefore I hold it true, that pure thought
+> can grasp reality as ancient dreamed.
+
 This program is planned to support the ~~all of the~~, no only the **most** __basic__ LaTeX features, you can use !*inline math!* with $a + b = c^2$. And this will be the !*paragraph math!*:
 
 $$\oint \boldsymbol{B} \cdot d \boldsymbol{A} = 0$$
