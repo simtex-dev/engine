@@ -3,7 +3,7 @@ from re import findall
 from src.config import Rules
 
 
-def format(line: str, words: list[str], rules: Rules) -> str:
+def format(rules: Rules, line: str, words: list[str]) -> str:
     """Formats the text in a line.
 
     Arguments:
