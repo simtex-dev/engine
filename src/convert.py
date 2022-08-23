@@ -39,10 +39,16 @@ def convert(
                     " already exists, overwrite? "
                 )
             ).lower() != "y":
-            log.logger(
-                "e", f"File: {OFILE_PATH} already exists, aborting ..."
-            )
-            raise SystemExit
+            new_filename = input(
+                    "\033[1mINPT\033[0m\t Input another file name: "
+                )
+            if new_filename != "":
+                OFILE_PATH = f"{config.output_folder}/{new_filename}"
+            else:
+                log.logger(
+                    "e", f"File: {OFILE_PATH} already exists, aborting ..."
+                )
+                raise SystemExit
 
     if not exists(config.output_folder):
         log.logger("I", f"Creating dir: {config.output_folder} ...")
