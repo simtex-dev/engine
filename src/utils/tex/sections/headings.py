@@ -24,6 +24,7 @@ def headings(
         The number of lines used by the headings.
     """
 
+    CONST: int = 11
     SECTIONS: dict[str, str] = {
             "main": (
                     "\n%\ size config of sections"
@@ -70,7 +71,10 @@ def headings(
     for sec_sizes, sec_val in zip(
             config.section_sizes.values(), SECTIONS.values()
         ):
-        headings.append(sec_val.replace("<SECTION_SIZES>", str(sec_sizes)))
+        if sec_sizes != "<DEF>":
+            headings.append(sec_val.replace("<SECTION_SIZES>", str(sec_sizes)))
+        else:
+            CONST -= 1
 
     headings.append(
         f"\n% basic config\n\setlength\parindent{{{config.indent_size}pt}}"
@@ -111,4 +115,4 @@ def headings(
         )
         raise SystemExit
 
-    return len(headings)+11 # 11 is the number of newlines created.
+    return len(headings)+CONST # 11 is the number of newlines created.
