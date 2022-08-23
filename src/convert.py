@@ -4,8 +4,8 @@ from os.path import exists
 from typing import TextIO
 
 from src.config import Config, Rules
-from src.utils.tex.sections.headings import headings
-from src.utils.tex.sections.body import body
+from src.utils.tex.parser.headings import headings
+from src.utils.tex.parser.body import body
 from src.mutils.format_body import format_body
 from src.utils.logger import Logger
 
