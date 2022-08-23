@@ -62,7 +62,7 @@ def format(line: str, words: list[str], rules: Rules) -> str:
         elif (link := findall(rules.links, line)):
             line = line.replace(
                     f"[{link[0][0]}]({link[0][1]})",
-                    f"\\href{{{link[0][0]}}}{{{link[0][1]}}}"
+                    f"\\href{{{link[0][1]}}}{{{link[0][0]}}}"
                 )
         elif (icodes := findall(rules.inline_code[1], line)):
             if icodes[0] == "":
