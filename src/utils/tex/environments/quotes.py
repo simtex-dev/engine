@@ -12,7 +12,8 @@ def quotation(
     """For typesetting of block quotes using csquotes package.
 
     Args:
-        line -- line that will be analyzed and translated.
+        rules -- rules that needs to be followed in translation.
+        sources -- where the other lines of equation would be found.
         start -- where the parser/translator would start.
         out_file -- where the translated line will be written.
 
