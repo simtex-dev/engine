@@ -31,7 +31,7 @@ def build_file(
         raise SystemExit
 
     try:
-        log.logger("P", f"Building {filename} with pdflatex ...")
+        log.logger("I", f"Building {filename} with pdflatex ...")
         cmd: list[str] = [
                 compiler,
                 "-synctex=1",
