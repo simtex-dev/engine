@@ -1,12 +1,9 @@
 from typing import TextIO
 
 from src.config import Rules
-from src.utils.logger import Logger
 
 
 def quotation(
-        log: Logger,
-        line: str,
         rules: Rules,
         sources: list[str],
         start: int,
@@ -23,15 +20,11 @@ def quotation(
         An integer that marks the lines that should be skipped.
     """
 
-    end: int
-    try:
-        for end, quote in enumerate(sources[start:]):
-            if not quote.startswith(rules.bquote):
-                return end+start
-            else:
-                out_file.write(
-                    f"\t{quote.replace(rules.bquote, '').strip()}\n"
-                )
-    except IOError as Err:
-        log.logger("E", f"{Err}. Cannot write to file, aborting ...")
-        raise SystemExit
+    end: int; quote: str
+    for end, quote in enumerate(sources[start:]):
+        if not quote.startswith(rules.bquote):
+            return end+start
+        else:
+            out_file.write(
+                f"\t{quote.replace(rules.bquote, '').strip()}\n"
+            )
