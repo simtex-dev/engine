@@ -31,7 +31,7 @@ def convert(
     log.logger("I", f"Converting {in_file} ...")
 
     OFILE_PATH: str = prep(
-            log, config.output_folder, config.filenames
+            log, config.output_folder, config.filename
         )
 
     if filenametitle and title is None:
