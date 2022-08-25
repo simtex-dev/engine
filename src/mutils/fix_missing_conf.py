@@ -5,8 +5,8 @@ from src.utils.logger import Logger
 
 def fix_missing_config(
         log: Logger,
-        CONF_PATH: str,
         log_msg: str,
+        CONF_PATH: str,
         conf: bool = False,
         code_conf: bool = False,
         devel: bool = False,
