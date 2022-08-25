@@ -2,7 +2,7 @@ from os import mkdir
 from os.path import exists, expanduser
 from pathlib import Path
 from json import load
-from typing import IO, Any, Optional
+from typing import IO, Any, Callable, Optional
 
 from src.config import Config, Rules
 from src.mutils.fix_missing_conf import fix_missing_config
@@ -62,8 +62,40 @@ class ConfParse:
                 True
             )
 
-        if test:
-            self.CONF_PATH = "./examples/config"
+    def _fallback(self, function: Callable) -> None:
+        """If a key is not found in the current config file, fetch the
+        new one from main branch, if error is still encountered, fetch
+        the config from development branch.
+
+        Arguments:
+            function -- the function that did not found the key.
+        """
+
+        trials: int
+        for trials in range(3):
+            try:
+                function()
+            except KeyError as Err:
+                source: tuple[bool, str] = (
+                        (
+                            True, "development branch"
+                        ) if trials > 0 else (
+                            False, "main branch"
+                        )
+                    )
+                fix_missing_config(
+                    self.log,
+                    (
+                        f"Missing {Err}. Some parameters are missing,"
+                        f" fetching the new config file from {source[1]} ..."
+                    ),
+                    self.CONF_PATH,
+                    conf=True,
+                    devel=source[0]
+                )
+                continue
+            else:
+                return
 
     def _fetch(self) -> list[dict[str, Any]]:
         """Fetch the config file."""
