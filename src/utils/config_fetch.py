@@ -62,7 +62,7 @@ class ConfParse:
                 True
             )
 
-    def _fallback(self, function: Callable) -> None:
+    def _fallback(self, function: Callable) -> Config | Rules:
         """If a key is not found in the current config file, fetch the
         new one from main branch, if error is still encountered, fetch
         the config from development branch.
@@ -74,7 +74,7 @@ class ConfParse:
         trials: int
         for trials in range(3):
             try:
-                function()
+                fetched_values: Config | Rules = function()
             except KeyError as Err:
                 source: tuple[bool, str] = (
                         (
@@ -95,7 +95,7 @@ class ConfParse:
                 )
                 continue
             else:
-                return
+                return fetched_values
 
     def _fetch(self) -> list[dict[str, Any]]:
         """Fetch the config file."""
@@ -183,4 +183,4 @@ class ConfParse:
         rules: Rules = self._fallback(self._rules)
         config: Config = self._fallback(self._conf)
 
-        return rules, config
+        return config, rules
