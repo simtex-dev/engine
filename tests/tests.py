@@ -12,12 +12,12 @@ class TestCases(unittest.TestCase):
 
     def setUp(self) -> None:
         self.log: Logger = Logger()
-        self.config: ConfParse = ConfParse(self.log, True)
+        conf_parser: ConfParse = ConfParse(self.log, True)
+        self.config: Config; self.rules: Rules
+        self.config, self.rules = conf_parser.fetched_conf()
 
     def test_config(self) -> None:
         """Test case for config."""
-
-        conf: Config = self.config.conf()
 
         self.assertEqual(
             Config(
@@ -62,13 +62,11 @@ class TestCases(unittest.TestCase):
                 compiler="pdflatex",
                 encode="UTF8"
             ),
-            conf
+            self.config
         )
 
     def test_rules(self) -> None:
         """Test case for rules."""
-
-        rules: Rules = self.config.rules()
 
         self.assertEqual(
             Rules(
@@ -100,6 +98,6 @@ class TestCases(unittest.TestCase):
                 quote=["\"", "\"(.*?)\""],
                 bquote=">"
             ),
-            rules
+            self.rules
         )
 
