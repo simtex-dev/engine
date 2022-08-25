@@ -65,7 +65,7 @@ class ConfParse:
         if test:
             self.CONF_PATH = "./examples/config"
 
-    def fetch(self) -> list[dict[str, Any]]:
+    def _fetch(self) -> list[dict[str, Any]]:
         """Fetch the config file."""
 
         try:
@@ -83,10 +83,10 @@ class ConfParse:
 
         return raw_conf
 
-    def rules(self) -> Rules:
+    def _rules(self) -> Rules:
         """Parse the config of the rules of converter."""
 
-        raw_conf: dict[str, Any] = self.fetch()[0]
+        raw_conf: dict[str, Any] = self._fetch()[0]
 
         return Rules(
             raw_conf["FOR"],
@@ -112,10 +112,10 @@ class ConfParse:
             raw_conf["BQUOTE"]
         )
 
-    def conf(self) -> Config:
+    def _conf(self) -> Config:
         """Parse the config of the LaTeX file."""
 
-        raw_conf: dict[str, Any] = self.fetch()[1]
+        raw_conf: dict[str, Any] = self._fetch()[1]
 
         return Config(
             raw_conf["DOC_CLASS"],
