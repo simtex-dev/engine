@@ -175,3 +175,12 @@ class ConfParse:
             raw_conf["COMPILER"],
             raw_conf["ENCODE"]
         )
+
+    def fetched_conf(self) -> tuple[Rules, Config]:
+        """Fetch the values from config file, and give fallback method
+        for its respective function, which is simpler than decorators."""
+
+        rules: Rules = self._fallback(self._rules)
+        config: Config = self._fallback(self._conf)
+
+        return rules, config
