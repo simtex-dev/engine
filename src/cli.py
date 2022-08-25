@@ -16,8 +16,8 @@ class Cli:
     def __init__(self) -> None:
         self.log: Logger = Logger()
         conf_parse: ConfParse = ConfParse(self.log)
-        self.config: Config = conf_parse.conf()
-        self.rules: Rules = conf_parse.rules()
+        self.config: Config; self.rules: Rules
+        self.config, self.rules = conf_parse.fetched_conf()
 
         description: str = (
                 "Convert your mardown or text lectures"
