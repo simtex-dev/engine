@@ -15,6 +15,7 @@ def fix_missing_config(
 
     Args:
         log -- for logging.
+        log_msg -- message that will be logged.
         CONF_PATH -- path of the config file.
         conf, code_conf -- whether the missing config is the code config
             or the main, simtex.json.

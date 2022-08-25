@@ -69,6 +69,9 @@ class ConfParse:
 
         Arguments:
             function -- the function that did not found the key.
+
+        Returns:
+            The return value of the function that was called.
         """
 
         trials: int
@@ -98,7 +101,12 @@ class ConfParse:
                 return fetched_values
 
     def _fetch(self) -> list[dict[str, Any]]:
-        """Fetch the config file."""
+        """Fetch the values from config file.
+
+        Returns:
+            The list of all values found in the defined array in JSON
+            config file.
+        """
 
         try:
             conf_file: IO[Any]
@@ -116,7 +124,11 @@ class ConfParse:
         return raw_conf
 
     def _rules(self) -> Rules:
-        """Parse the config of the rules of converter."""
+        """Parse the config of the rules of converter.
+
+        Returns:
+            The dataclass of rules with updated values.
+        """
 
         raw_conf: dict[str, Any] = self._fetch()[0]
 
@@ -145,7 +157,11 @@ class ConfParse:
         )
 
     def _conf(self) -> Config:
-        """Parse the config of the LaTeX file."""
+        """Parse the config of the LaTeX file.
+
+        Returns:
+            The dataclass of config with update values.
+        """
 
         raw_conf: dict[str, Any] = self._fetch()[1]
 
@@ -178,7 +194,11 @@ class ConfParse:
 
     def fetched_conf(self) -> tuple[Rules, Config]:
         """Fetch the values from config file, and give fallback method
-        for its respective function, which is simpler than decorators."""
+        for its respective function, which is simpler than decorators.
+
+        Returns:
+            The fetched values of configs in dataclasses.
+        """
 
         rules: Rules = self._fallback(self._rules)
         config: Config = self._fallback(self._conf)
