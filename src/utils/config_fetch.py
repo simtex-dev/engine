@@ -42,9 +42,25 @@ class ConfParse:
                     )
 
         if not exists(f"{self.CONF_PATH}/simtex.json"):
-            fix_missing_config(self.log, self.CONF_PATH, True)
+            fix_missing_config(
+                self.log,
+                (
+                    "Cannot find simtex.json in PATH"
+                    ", fetching original config  ..."
+                ),
+                self.CONF_PATH,
+                True
+            )
         elif not exists(f"{self.CONF_PATH}/code_conf.txt"):
-            fix_missing_config(self.log, self.CONF_PATH, code_conf=True)
+            fix_missing_config(
+                self.log,
+                (
+                    "Cannot find code_conf.txt in PATH"
+                    ", fetching original config  ..."
+                ),
+                self.CONF_PATH,
+                True
+            )
 
         if test:
             self.CONF_PATH = "./examples/config"
