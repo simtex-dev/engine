@@ -6,9 +6,10 @@ from src.utils.logger import Logger
 def fix_missing_config(
         log: Logger,
         CONF_PATH: str,
+        log_msg: str,
         conf: bool = False,
         code_conf: bool = False,
-        devel: bool = False
+        devel: bool = False,
     ) -> None:
     """Downloads the original config file from github if not found.
 
@@ -42,17 +43,9 @@ def fix_missing_config(
             )
         filename = "code_conf.txt"
 
-    log.logger(
-        "e", f"Config file: {filename} not found, fetching the default ..."
-    )
-
     for _ in range(3):
         try:
-            log.logger(
-                "e",
-                f"Config file {filename} not found, "
-                "fetching original config from GitHub ..."
-            )
+            log.logger("e", log_msg)
             with get(link, stream=True) as d_file:
                 with open(
                         f"{CONF_PATH}/{filename}", "wb"
