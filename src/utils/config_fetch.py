@@ -62,46 +62,6 @@ class ConfParse:
                 True
             )
 
-    def _fallback(
-            self, function: Callable[..., Config | Rules]
-        ) -> Config | Rules:
-        """If a key is not found in the current config file, fetch the
-        new one from main branch, if error is still encountered, fetch
-        the config from development branch.
-
-        Arguments:
-            function -- the function that did not found the key.
-
-        Returns:
-            The return value of the function that was called.
-        """
-
-        trials: int
-        for trials in range(3):
-            try:
-                fetched_values: Config | Rules = function()
-            except KeyError as Err:
-                source: tuple[bool, str] = (
-                        (
-                            True, "development branch"
-                        ) if trials > 0 else (
-                            False, "main branch"
-                        )
-                    )
-                fix_missing_config(
-                    self.log,
-                    (
-                        f"Missing {Err}. Some parameters are missing,"
-                        f" fetching the new config file from {source[1]} ..."
-                    ),
-                    self.CONF_PATH,
-                    conf=True,
-                    devel=source[0]
-                )
-                continue
-
-        return fetched_values
-
     def _fetch(self) -> list[dict[str, Any]]:
         """Fetch the values from config file.
 
@@ -196,10 +156,32 @@ class ConfParse:
 
     def fetched_conf(self) -> tuple[Config, Rules]:
         """Fetch the values from config file, and give fallback method
-        for its respective function, which is simpler than decorators.
+        for its respective function"""
 
-        Returns:
-            The fetched values of configs in dataclasses.
-        """
+        trials: int
+        for trials in range(3):
+            try:
+                config_values: Config = self._conf()
+                rules_values: Rules = self._rules()
+            except KeyError as Err:
+                source: tuple[bool, str] = (
+                        (
+                            True, "development branch"
+                        ) if trials > 0 else (
+                            False, "main branch"
+                        )
+                    )
+                fix_missing_config(
+                    self.log,
+                    (
+                        f"Missing {Err}. Some parameters are missing,"
+                        f" fetching the new config file from {source[1]} ..."
+                    ),
+                    self.CONF_PATH,
+                    conf=True,
+                    devel=source[0]
+                )
+                continue
 
-        return self._fallback(self._conf), self._fallback(self._rules)
+        return config_values, rules_values
+
