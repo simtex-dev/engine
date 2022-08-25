@@ -23,7 +23,13 @@ class ConfParse:
         self.log: Logger = log
         self.HOME: Path = Path.home()
         self.BASE_CONF_PATH: str = f"{self.HOME}/.config"
-        self.CONF_PATH: str = f"{self.BASE_CONF_PATH}/simtex"
+        self.CONF_PATH: str = (
+                (
+                    f"{self.BASE_CONF_PATH}/simtex"
+                ) if not test else (
+                    "./examples/config"
+                )
+            )
 
         paths: str
         for paths in [self.BASE_CONF_PATH, self.CONF_PATH]:
