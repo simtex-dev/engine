@@ -62,7 +62,9 @@ class ConfParse:
                 True
             )
 
-    def _fallback(self, function: Callable) -> Config | Rules:
+    def _fallback(
+            self, function: Callable[..., Config | Rules]
+        ) -> Config | Rules:
         """If a key is not found in the current config file, fetch the
         new one from main branch, if error is still encountered, fetch
         the config from development branch.
@@ -97,8 +99,8 @@ class ConfParse:
                     devel=source[0]
                 )
                 continue
-            else:
-                return fetched_values
+
+        return fetched_values
 
     def _fetch(self) -> list[dict[str, Any]]:
         """Fetch the values from config file.
@@ -192,7 +194,7 @@ class ConfParse:
             raw_conf["ENCODE"]
         )
 
-    def fetched_conf(self) -> tuple[Rules, Config]:
+    def fetched_conf(self) -> tuple[Config, Rules]:
         """Fetch the values from config file, and give fallback method
         for its respective function, which is simpler than decorators.
 
@@ -200,7 +202,4 @@ class ConfParse:
             The fetched values of configs in dataclasses.
         """
 
-        rules: Rules = self._fallback(self._rules)
-        config: Config = self._fallback(self._conf)
-
-        return config, rules
+        return self._fallback(self._conf), self._fallback(self._rules)
