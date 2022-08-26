@@ -107,6 +107,6 @@ See [INSTALL.md](INSTALL.md) for details.
 
 # Roadmap
 
-1. Include support for quote blocks.
-2. Support for enumerate/lists.
-3. Support for other LaTeX compilers such as XeTex.
+1. Support for enumerate/lists.
+2. Support Windows
+3. Add templates
