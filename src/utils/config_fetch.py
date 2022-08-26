@@ -2,7 +2,7 @@ from os import mkdir
 from os.path import exists, expanduser
 from pathlib import Path
 from json import load
-from typing import IO, Any, Callable, NoReturn, Optional
+from typing import IO, Any, NoReturn, Optional
 
 from src.config import Config, Rules
 from src.mutils.fix_missing_conf import fix_missing_config
@@ -162,28 +162,20 @@ class ConfParse:
             Both of the parsed data from the raw JSON config file.
         """
 
-        trials: int
-        for trials in range(3):
+        for _ in range(3):
             try:
                 config_values: Config = self._conf()
                 rules_values: Rules = self._rules()
             except KeyError as Err:
-                source: tuple[bool, str] = (
-                        (
-                            True, "development branch"
-                        ) if trials > 1 else (
-                            False, "main branch"
-                        )
-                    )
                 fix_missing_config(
                     self.log,
                     (
                         f"Missing {Err}. Some parameters are missing,"
-                        f" fetching the new config file from {source[1]} ..."
+                        f" fetching the new config file from development ..."
                     ),
                     self.CONF_PATH,
                     conf=True,
-                    devel=source[0]
+                    missing=False
                 )
                 continue
             else:
