@@ -10,7 +10,6 @@ def fix_missing_config(
         CONF_PATH: str,
         conf: bool = False,
         code_conf: bool = False,
-        devel: bool = False,
         missing: bool = True
     ) -> None:
     """Downloads the original config file from github if not found.
@@ -21,17 +20,14 @@ def fix_missing_config(
         CONF_PATH -- path of the config file.
         conf, code_conf -- whether the missing config is the code config
             or the main, simtex.json.
-        devel -- whether to pull from devel or stable branch.
+        missing -- whether the config file is missing or there are just
+            missing parameters.
     """
 
     # this was done instead of packaging the config from
     # package data, so that the user will be able to
     # interact with the config file easily.
-
-    if devel:
-        branch: str = "devel"
-    else:
-        branch = "main"
+    branch: str = "devel" if not missing else "main"
 
     if conf:
         link: str = (
