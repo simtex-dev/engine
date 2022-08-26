@@ -1,4 +1,4 @@
-from json import load, dump
+from json import JSONDecodeError, load, dump
 from typing import Any, TextIO
 
 from src.utils.logger import Logger
@@ -18,7 +18,7 @@ def merge_conf(log: Logger, CONF_PATH: str) -> None:
     try:
         # in this context, Any type hint implies the value is either
         #   int, list[Any], float, dict[str, Any].
-        temp_conf: dict[str, Any] = {}
+        conf: dict[str, list[Any]] = []
 
         new_conf: TextIO; conf_ref: TextIO;
         with open(
@@ -26,26 +26,25 @@ def merge_conf(log: Logger, CONF_PATH: str) -> None:
             ) as new_conf, open(
                 f"{CONF_PATH}/simtex.json", "r", encoding="utf-8"
             ) as conf_ref:
-            conf_ref_: dict[str, Any] = load(conf_ref)
             new_conf_: dict[str, Any] = load(new_conf)
+            conf_ref_: dict[str, Any] = load(conf_ref)
 
-        param: str; new_val: Any; conf_val: Any
+        param: str; new_val: Any; conf_val: Any; old_conf: Any; new_conf: Any
         for old_conf, new_conf in zip(
                 [ref for ref in conf_ref_], [new for new in new_conf_]
             ):
-            for param, new_val in new_conf.items():
-                if (conf_val := old_conf.get(param, new_val)) != new_val:
-                    temp_conf[param] = conf_val
-                else:
-                    temp_conf[param] = new_val
+            temp_conf: list[str | Any] = {}
 
-        print(temp_conf)
+            for param, new_val in new_conf.items():
+                temp_conf[param] = old_conf.get(param, new_val)
+            conf.append(temp_conf)
+
         fixed_conf: TextIO
         with open(
                 f"{CONF_PATH}/simtex.json", "w", encoding="utf-8"
             ) as fixed_conf:
-            dump(temp_conf, fixed_conf, indent=4)
-    except FileNotFoundError as Err:
+            dump(conf, fixed_conf, indent=4)
+    except (FileNotFoundError, IOError, JSONDecodeError) as Err:
         log.logger(
             "e", f"{Err}. Cannot merge the two config files, skipping ..."
         )
