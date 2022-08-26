@@ -18,22 +18,22 @@ def merge_conf(log: Logger, CONF_PATH: str) -> None:
     try:
         # in this context, Any type hint implies the value is either
         #   int, list[Any], float, dict[str, Any].
-        conf: dict[str, list[Any]] = []
+        conf: list[dict[str, Any]] = []
 
-        new_conf: TextIO; conf_ref: TextIO;
+        _new_conf: TextIO; _conf_ref: TextIO;
         with open(
                 f"{CONF_PATH}/simtex.json.bak", "r", encoding="utf-8"
-            ) as new_conf, open(
+            ) as _new_conf, open(
                 f"{CONF_PATH}/simtex.json", "r", encoding="utf-8"
-            ) as conf_ref:
-            new_conf_: dict[str, Any] = load(new_conf)
-            conf_ref_: dict[str, Any] = load(conf_ref)
+            ) as _conf_ref:
+            new_conf_: dict[str, Any] = load(_new_conf)
+            conf_ref_: dict[str, Any] = load(_conf_ref)
 
-        param: str; new_val: Any; conf_val: Any; old_conf: Any; new_conf: Any
+        param: str; new_val: Any; old_conf: Any; new_conf: Any
         for old_conf, new_conf in zip(
                 [ref for ref in conf_ref_], [new for new in new_conf_]
             ):
-            temp_conf: list[str | Any] = {}
+            temp_conf: dict[str, Any] = {}
 
             for param, new_val in new_conf.items():
                 temp_conf[param] = old_conf.get(param, new_val)
