@@ -61,7 +61,7 @@ def fix_missing_config(
                 "E", f"{Err}. Cannot download {filename}, aborting ..."
             )
         else:
-            log.logger("I", "Sucessfully fetched the config file.")
+            log.logger("I", f"Sucessfully fetched: {filename}.")
             if not missing:
                 log.logger("I", "Updating existing config file ...")
                 merge_conf(log, CONF_PATH)
