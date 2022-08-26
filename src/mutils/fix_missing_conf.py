@@ -1,5 +1,6 @@
 from requests import get
 
+from src.mutils.merge_conf import merge_conf
 from src.utils.logger import Logger
 
 
@@ -10,6 +11,7 @@ def fix_missing_config(
         conf: bool = False,
         code_conf: bool = False,
         devel: bool = False,
+        missing: bool = True
     ) -> None:
     """Downloads the original config file from github if not found.
 
@@ -36,7 +38,7 @@ def fix_missing_config(
                 "https://raw.githubusercontent.com/iaacornus"
                 f"/simtex/{branch}/examples/config/simtex.json"
             )
-        filename: str = "simtex.json"
+        filename: str = "simtex.json" if missing else "simtex.json.bak"
     elif code_conf:
         link = (
                 "https://raw.githubusercontent.com/iaacornus"
@@ -60,6 +62,9 @@ def fix_missing_config(
             )
         else:
             log.logger("I", "Sucessfully fetched the config file.")
+            if not missing:
+                log.logger("I", "Updating existing config file ...")
+                merge_conf(log, CONF_PATH)
             return
 
     raise SystemExit
