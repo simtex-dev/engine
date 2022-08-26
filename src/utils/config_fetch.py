@@ -156,7 +156,11 @@ class ConfParse:
 
     def fetched_conf(self) -> tuple[Config, Rules]:
         """Fetch the values from config file, and give fallback method
-        for its respective function"""
+        for its respective function.
+
+        Returns:
+            Both of the parsed data from the raw JSON config file.
+        """
 
         trials: int
         for trials in range(3):
