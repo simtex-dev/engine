@@ -83,9 +83,9 @@
         ],
         "FOOTNOTE": "footnote",
         "SECTION_SIZES": {
-            "main": 12,
-            "sub": 12,
-            "subsub": 12
+            "main": "<DEF>",
+            "sub": "<DEF>",
+            "subsub": "<DEF>"
         },
         "LINKS": true,
         "LINK_COLOR": "blue",
