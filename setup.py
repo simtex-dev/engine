@@ -1,14 +1,37 @@
 from setuptools import setup
+from os import walk
+from os.path import join
 from typing import TextIO
 
 
+def find_module(PATH: str = "src") -> list[str]:
+    """Find modules in the given path.
+
+    Args:
+        PATH -- where to look from.
+
+    Returns:
+        The list of all modules found.
+    """
+
+    modules: list[str] = []
+
+    root: str; dir: str | list[str]
+    for root, _, dir in walk(PATH):
+        for file in dir:
+            if file.endswith(".py") and not file.endswith("__init__.py"):
+                modules.append(join(root, file).removesuffix(".py"))
+
+    return modules
+
+
 desc: TextIO
-with open("pypi_README.md", "r", encoding="utf-8") as desc:
+with open("README.md", "r", encoding="utf-8") as desc:
     readme: str = desc.read()
 
 setup(
     name="simtex",
-    version="v0.3.0-beta",
+    version="v0.3.1-beta",
     description=(
             "Convert your mardown or text lectures"
             " into LaTeX/pdf with one command."
@@ -19,28 +42,7 @@ setup(
     author="iaacornus",
     author_email="iaacornus.devel@gmail.com",
     license="GPL v3",
-    py_modules=[
-            "src/main",
-            "src/cli",
-            "src/config",
-            "src/convert",
-            "src/utils/config_fetch",
-            "src/utils/logger",
-            "src/utils/tex/environments/figure",
-            "src/utils/tex/environments/mathsec",
-            "src/utils/tex/environments/quotes",
-            "src/utils/tex/environments/listings",
-            "src/utils/tex/parser/body",
-            "src/utils/tex/parser/headings",
-            "src/utils/tex/text/format",
-            "src/mutils/build_tex",
-            "src/mutils/fix_missing_conf",
-            "src/mutils/format_body",
-            "src/mutils/update_conf",
-            "src/mutils/finalize",
-            "src/mutils/preparation",
-            "src/mutils/merge_conf"
-        ],
+    py_modules=find_module(),
     python_requires=">=3.10",
     install_requires=[
             "rich==12.4.4",
@@ -59,3 +61,4 @@ setup(
         ]
     },
 )
+
