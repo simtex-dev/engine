@@ -3,7 +3,7 @@ from typing import TextIO
 
 
 desc: TextIO
-with open("README.md", "r", encoding="utf-8") as desc:
+with open("pypi_README.md", "r", encoding="utf-8") as desc:
     readme: str = desc.read()
 
 setup(
@@ -38,7 +38,8 @@ setup(
             "src/mutils/format_body",
             "src/mutils/update_conf",
             "src/mutils/finalize",
-            "src/mutils/preparation"
+            "src/mutils/preparation",
+            "src/mutils/merge_conf"
         ],
     python_requires=">=3.10",
     install_requires=[
