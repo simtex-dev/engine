@@ -2,7 +2,7 @@ from os import mkdir
 from os.path import exists, expanduser
 from pathlib import Path
 from json import load
-from typing import IO, Any, Callable, Optional
+from typing import IO, Any, Callable, NoReturn, Optional
 
 from src.config import Config, Rules
 from src.mutils.fix_missing_conf import fix_missing_config
@@ -154,7 +154,7 @@ class ConfParse:
             raw_conf["ENCODE"]
         )
 
-    def fetched_conf(self) -> tuple[Config, Rules]:
+    def fetched_conf(self) -> tuple[Config, Rules] | NoReturn:
         """Fetch the values from config file, and give fallback method
         for its respective function.
 
@@ -186,6 +186,10 @@ class ConfParse:
                     devel=source[0]
                 )
                 continue
+            else:
+                return config_values, rules_values
 
-        return config_values, rules_values
-
+        self.log.logger(
+            "E", "There is an error with in the config file, aborting ..."
+        )
+        raise SystemExit
