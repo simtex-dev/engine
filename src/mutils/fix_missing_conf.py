@@ -54,7 +54,7 @@ def fix_missing_config(
                     for chunk in d_file.iter_content(chunk_size=1024):
                         if chunk:
                             conf_file.write(chunk)
-        except ConnectionError as Err:
+        except (ConnectionError, IOError, PermissionError) as Err:
             log.logger(
                 "E", f"{Err}. Cannot download {filename}, aborting ..."
             )
