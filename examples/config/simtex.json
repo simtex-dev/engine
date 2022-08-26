@@ -1,12 +1,12 @@
 [
     {
         "FOR": [
-                "markdown",
-                "md",
-                "rst",
-                "txt",
-                "text"
-            ],
+            "markdown",
+            "md",
+            "rst",
+            "txt",
+            "text"
+        ],
         "CODE_BLOCKS": "```",
         "IMAGE": "!\\[([^]]+)\\]\\(([^]]+)\\)",
         "LINKS": "\\[([^]]+)\\]\\(([^]]+)\\)",
@@ -17,15 +17,42 @@
         "SUBPARAGRAPH": "#####",
         "INLINE_MATH": "$",
         "PARAGRAPH_MATH": "$$",
-        "INLINE_CODE": ["`" ,"`(.*?)`"],
-        "BOLD": ["**", "\\*\\*(.*?)\\*\\*"],
-        "ITALICS": ["__", "__(.*?)__"],
-        "EMPH": ["!*", "!\\*(.*?)!\\*"],
-        "STRIKE": ["~~", "~~(.*?)~~"],
-        "SUPSCRIPT": ["^^", "\\^\\^(.*?)\\^\\^"],
-        "SUBSCRIPT": ["-^", "-\\^(.*?)-\\^"],
-        "ULINE": ["._", "._(.*?)._"],
-        "QUOTE": ["\"", "\"(.*?)\""],
+        "INLINE_CODE": [
+            "`",
+            "`(.*?)`"
+        ],
+        "BOLD": [
+            "**",
+            "\\*\\*(.*?)\\*\\*"
+        ],
+        "ITALICS": [
+            "__",
+            "__(.*?)__"
+        ],
+        "EMPH": [
+            "!*",
+            "!\\*(.*?)!\\*"
+        ],
+        "STRIKE": [
+            "~~",
+            "~~(.*?)~~"
+        ],
+        "SUPSCRIPT": [
+            "^^",
+            "\\^\\^(.*?)\\^\\^"
+        ],
+        "SUBSCRIPT": [
+            "-^",
+            "-\\^(.*?)-\\^"
+        ],
+        "ULINE": [
+            "._",
+            "._(.*?)._"
+        ],
+        "QUOTE": [
+            "\"",
+            "\"(.*?)\""
+        ],
         "BQUOTE": ">"
     },
     {
@@ -40,26 +67,26 @@
         "CFONT_SCALE": 0.9,
         "CODE_CONF": "<HOME>/.config/simtex/code_conf.txt",
         "PACKAGES": [
-                "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
-                "{indentfirst}",
-                "{amsmath}",
-                "{mathtools}",
-                "{sectsty}",
-                "{footmisc}",
-                "{gensymb}",
-                "{xcolor}",
-                "{listings}",
-                "{caption}",
-                "{csquotes}",
-                "[normalem]{ulem}",
-                "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
-            ],
+            "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
+            "{indentfirst}",
+            "{amsmath}",
+            "{mathtools}",
+            "{sectsty}",
+            "{footmisc}",
+            "{gensymb}",
+            "{xcolor}",
+            "{listings}",
+            "{caption}",
+            "{csquotes}",
+            "[normalem]{ulem}",
+            "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
+        ],
         "FOOTNOTE": "footnote",
         "SECTION_SIZES": {
-                "main": "<DEF>",
-                "sub": "<DEF>",
-                "subsub": "<DEF>"
-            },
+            "main": 12,
+            "sub": 12,
+            "subsub": 12
+        },
         "LINKS": true,
         "LINK_COLOR": "blue",
         "AUTHOR": "John Doe",
