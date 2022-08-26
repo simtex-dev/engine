@@ -171,7 +171,7 @@ class ConfParse:
                 source: tuple[bool, str] = (
                         (
                             True, "development branch"
-                        ) if trials > 0 else (
+                        ) if trials > 1 else (
                             False, "main branch"
                         )
                     )
