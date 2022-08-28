@@ -1,4 +1,4 @@
-# Rationale
+#* Rationale
 
 As echoed by Linus Torvalds:
 
