@@ -27,17 +27,20 @@ def body(
 
     line: str
     striptitle: Callable[
-            [str, str], str
-        ] = lambda line, def_rule: (
+            [str, str, str], str
+        ] = lambda line, def_rule, adef_rule: (
             line
+                .replace(adef_rule, "")
                 .replace(def_rule, "")
                 .replace("\n", "")
                 .strip()
         )
     section: Callable[
-            [str, str, str], str
-        ] = lambda line, command, def_rule: (
-            f"\n\\{command}{{{striptitle(line, def_rule)}}}\n"
+            [str, str, str, str, str], str
+        ] = lambda symbol, line, command, def_rule, adef_rule: (
+            f"\n\\{command}"
+            f"{'*' if symbol.endswith('*') else ''}"
+            f"{{{striptitle(line, def_rule, adef_rule)}}}\n"
         )
 
     files: list[str] = []
@@ -58,26 +61,56 @@ def body(
         # replace numerous \n, if there is any, with one \n
         line = sub(r"\n{2, 10}", "\n", line).strip()
 
-        match line.split()[0].strip():
-            case rules.section:
+        match (symbol := line.split()[0].strip()):
+            case rules.section | rules.sectionn:
                 out_file.write(
-                    section(line, "section", rules.section)
+                    section(
+                        symbol,
+                        line,
+                        "section",
+                        rules.section,
+                        rules.sectionn
+                    )
                 )
-            case rules.subsection:
+            case rules.subsection | rules.subsectionn:
                 out_file.write(
-                    section(line, "subsection", rules.subsection)
+                    section(
+                        symbol,
+                        line,
+                        "subsection",
+                        rules.subsection,
+                        rules.subsection
+                    )
                 )
-            case rules.subsubsection:
+            case rules.subsubsection | rules.subsubsectionn:
                 out_file.write(
-                    section(line, "subsubsection", rules.subsubsection)
+                    section(
+                        symbol,
+                        line,
+                        "subsubsection",
+                        rules.subsubsection,
+                        rules.subsubsectionn
+                    )
                 )
-            case rules.paragraph:
+            case rules.paragraph | rules.paragraphn:
                 out_file.write(
-                    section(line, "paragraph", rules.paragraph)
+                    section(
+                        symbol,
+                        line,
+                        "paragraph",
+                        rules.paragraph,
+                        rules.paragraphn
+                    )
                 )
-            case rules.subparagraph:
+            case rules.subparagraph | rules.subparagraphn:
                 out_file.write(
-                    section(line, "subparagraph", rules.subparagraph)
+                    section(
+                        symbol,
+                        line,
+                        "subparagraph",
+                        rules.subparagraph,
+                        rules.subparagraphn
+                    )
                 )
             case _:
                 if line.startswith(rules.paragraph_math): # math mode

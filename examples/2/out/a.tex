@@ -19,11 +19,6 @@
 \usepackage[colorlinks, allcolors=blue]{hyperref}
 \usepackage[scaled=0.9]{DejaVuSansMono}
 
-%\ size config of sections
-\sectionfont{\fontsize{12}{15}\selectfont}
-\subsectionfont{\fontsize{12}{15}\selectfont}
-\subsubsectionfont{\fontsize{12}{15}\selectfont}
-
 % basic config
 \setlength\parindent{24pt}
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}
@@ -60,17 +55,17 @@
 \author{iaacornus}
 \date{August 28, 2022}
 
-
 \begin{document}
 	\maketitle
-	\section{A Practical Example}
+	
+	\section*{A Practical Example}
 	
 	1. Prove that $\frac{sin A}{1 + cos A} + \frac{cos A}{sin A} = csc A$:
 	
 	\textbf{Solution}
 	
 	\begin{align}
-		\text{Starting from left:} \\
+		\text{Starting from left:} -- \\
 		\frac{sin A}{1 + cos A} + \frac{cos A}{sin A} &= \frac{sin A \cdot sin A + cos A (1 + cos A)}{(1 + cos A) sin A} \\
 		\frac{sin^2 A + cos A + cos^2 A}{(1 + cos A) sin A} \\
 		\text{Then cancelling both $1 + cos A$:} \\
