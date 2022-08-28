@@ -75,11 +75,11 @@ list.
 defines the rules that should be followed on how the program should parse the
 input, as well as how to format the document.
 
-Refer to the [PDF](./examples/1/hello.pdf) for more details.
+Refer to the [PDF](./examples/1/out/hello.pdf) for more details.
 
 # Examples
 
-You can view the output of the program [here](./examples/1/hello.pdf) which was
+You can view the output of the program [here](./examples/1/out/hello.pdf) which was
 generated using the command:
 
 ```
@@ -88,7 +88,7 @@ simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -of="./examples/1" -f="h
 
 > View [`./examples/1/hello.md`](./examples/1/example.md)
 
-> View output: [.examples/1/hello.pdf](./examples/1/hello.pdf)
+> View output: [.examples/1/hello.pdf](./examples/1/out/hello.pdf)
 
 To convert a LaTeX file, and rename the default author defined in
 `$CONF_PATH/simtex.json`, add `-a="iaacornus (or your name)`, and with the
