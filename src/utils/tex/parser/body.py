@@ -34,7 +34,7 @@ def body(
                 .replace("\n", "")
                 .strip()
         )
-    title: Callable[
+    section: Callable[
             [str, str, str], str
         ] = lambda line, command, def_rule: (
             f"\n\\{command}{{{striptitle(line, def_rule)}}}\n"
@@ -61,23 +61,23 @@ def body(
         match line.split()[0].strip():
             case rules.section:
                 out_file.write(
-                    title(line, "section", rules.section)
+                    section(line, "section", rules.section)
                 )
             case rules.subsection:
                 out_file.write(
-                    title(line, "subsection", rules.subsection)
+                    section(line, "subsection", rules.subsection)
                 )
             case rules.subsubsection:
                 out_file.write(
-                    title(line, "subsubsection", rules.subsubsection)
+                    section(line, "subsubsection", rules.subsubsection)
                 )
             case rules.paragraph:
                 out_file.write(
-                    title(line, "paragraph", rules.paragraph)
+                    section(line, "paragraph", rules.paragraph)
                 )
             case rules.subparagraph:
                 out_file.write(
-                    title(line, "subparagraph", rules.subparagraph)
+                    section(line, "subparagraph", rules.subparagraph)
                 )
             case _:
                 if line.startswith(rules.paragraph_math): # math mode
