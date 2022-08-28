@@ -4,7 +4,7 @@ from typing import TextIO
 from src.utils.logger import Logger
 
 
-def enumerate(
+def tex_enumerate(
         start: int, source: list[str], out_file: TextIO
     ) -> int:
     """For enumerate/lists environment.
