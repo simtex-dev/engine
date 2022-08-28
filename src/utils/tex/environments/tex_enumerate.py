@@ -22,7 +22,7 @@ def tex_enumerate(
 
     end: int; line: str
     for end, line in enumerate(source[start:]):
-        if end.split()[1].startswith([f"{num}." for num in digits]):
+        if line.split()[1].startswith(""):
             out_file.write(
                 f"\t\\item {line}\n"
             )

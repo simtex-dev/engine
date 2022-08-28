@@ -39,7 +39,7 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
 
     if args.outputfolder is None:
         BASE_OUT_FOLDER: str = "/".join(args.input.split("/")[:-1])
-        args.outputfolder: str = f"{BASE_OUT_FOLDER}/{config.output_folder}"
+        args.outputfolder = f"{BASE_OUT_FOLDER}/{config.output_folder}"
 
     PARAMETERS: dict[str, Any] = {
             "filename": args.filename,

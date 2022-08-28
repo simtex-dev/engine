@@ -58,7 +58,7 @@ class TestCases(unittest.TestCase):
                 date="<NOW>",
                 make_title=True,
                 filename="a.tex",
-                output_folder="./out",
+                output_folder="out",
                 compiler="pdflatex",
                 encode="UTF8"
             ),
@@ -81,10 +81,15 @@ class TestCases(unittest.TestCase):
                 image="!\\[([^]]+)\\]\\(([^]]+)\\)",
                 links="\\[([^]]+)\\]\\(([^]]+)\\)",
                 section="#",
+                sectionn="#*",
                 subsection="##",
+                subsectionn="##*",
                 subsubsection="###",
+                subsubsectionn="###*",
                 paragraph="####",
+                paragraphn="####*",
                 subparagraph="#####",
+                subparagraphn="#####*",
                 inline_math="$",
                 paragraph_math="$$",
                 inline_code=["`", "`(.*?)`"],
@@ -100,4 +105,5 @@ class TestCases(unittest.TestCase):
             ),
             self.rules
         )
+
 
