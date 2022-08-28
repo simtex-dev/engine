@@ -38,7 +38,10 @@ def mathsec(
                 eqs = eqs.replace("=", "&=", 1)
 
             eqs = eqs.replace("\n", "")
-            maths.append(f"{eqs}\\\\\n")
+            if not eqs.strip().endswith(r"\\"):
+                maths.append(f"{eqs} \\\\\n")
+            else:
+                maths.append(f"{eqs}\n")
 
         maths[-1] = maths[-1].replace("\\\\\n", "\n")
         for eqs in maths:
