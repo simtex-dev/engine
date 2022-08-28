@@ -37,11 +37,11 @@ class Rules:
     code: str
     image: str
     links: str
-    section: str
-    subsection: str
-    subsubsection: str
-    paragraph: str
-    subparagraph: str
+    section: list[str]
+    subsection: list[str]
+    subsubsection: list[str]
+    paragraph: list[str]
+    subparagraph: list[str]
     inline_math: str
     paragraph_math: str
     inline_code: list[str]
