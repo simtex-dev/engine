@@ -13,4 +13,4 @@ $$
 \frac{1}{sin A} = csc A
 $$
 
-This example is generated with: `simtex -b -i examples/2/example_2.md  -T A practical example -a iaacornus`
+This example is generated with: `simtex -b -i='examples/2/example_2.md'  -T='A practical example' -a='iaacornus'`

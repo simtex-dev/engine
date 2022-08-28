@@ -60,7 +60,7 @@ Images can be inserted with^^The first one is in codeblocks using lstlisting, th
 
 ### This is subsubsection: Listings
 
-The !*code blocks!* below presents the source code of the "converted" markdown file, which was generated using the one command: `simtex -b -i="examples/1/hello.md" -T="Hello Simtex!" -of="examples/1" -f="hello.tex" -a="iaacornus" -d="August 15, 2552`:
+The !*code blocks!* below presents the source code of the "converted" markdown file, which was generated using the one command: `simtex -b -i="examples/1/hello.md" -T="Hello Simtex!" -f="hello.tex" -a="iaacornus" -d="August 15, 2552`:
 
 ```
 # Rationale
