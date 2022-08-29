@@ -24,14 +24,14 @@ def build_file(
         filename -- name of the LaTeX file.
     """
 
-    if which("pdflatex") is None:
+    if which(compiler) is None:
         log.logger(
-            "e", "PdfLaTeX does not exists, cannot build file."
+            "e", f"{compiler} does not exists, cannot build file."
         )
         raise SystemExit
 
     try:
-        log.logger("I", f"Building {filename} with pdflatex ...")
+        log.logger("I", f"Building {filename} with {compiler} ...")
         cmd: list[str] = [
                 compiler,
                 "-synctex=1",
@@ -51,6 +51,10 @@ def build_file(
             log.logger("I", "Successfully built the file.")
     except (OSError, CalledProcessError) as Err:
         log.logger("E", f"{Err}. Cannot build LaTeX file.")
+        print(
+            "\033[34mINFO\033[0m\t Try updating "
+            "the compiler parameter in simtex.json"
+        )
 
 
 
