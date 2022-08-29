@@ -57,3 +57,6 @@ The program, as of writing, provides 12 parameters for the configuration of the 
 18. `OUTPUT_FOLDER: str` -- _defaults -> `./out`_, where the files/generated output will be saved.
 19. `COMPILER: str` -- _defaults -> `pdflatex`_, the compiler the program will use to compile the source, currently supports `xetex`, `luatex`, and `pdflatex`, although virtually allows for anything given that the compiler is on `PATH` and is installed and is functional.
 20. `ENCODE: str` -- _defaults -> `UTF8`_, encoding of the document, although not necessary to be changed.
+
+> For number-less sections, simply include `*` in the markdown, since the functionality is hard coded
+in the program
