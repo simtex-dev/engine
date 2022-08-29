@@ -104,6 +104,21 @@ which can be installed using `pip` or `pip3`:
 pip install --user simtex
 ```
 
+Other options, specifically `-b` and `-B` requires `pdflatex`, which is provided
+by any TeX distributions that can be installed, but `texlive` package is recommended
+which can be installed via:
+
+```
+# fedora
+sudo dnf install texlive-scheme-full
+
+# arch linux
+sudo pacman -S texlive-most
+
+# debian
+sudo apt install texlive
+```
+
 For other installation method, see [INSTALL.md](INSTALL.md) for details.
 
 # Contribution
