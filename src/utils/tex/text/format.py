@@ -1,4 +1,4 @@
-from re import findall
+from re import findall, sub
 
 from src.config import Rules
 
@@ -82,7 +82,7 @@ def format(rules: Rules, line: str, words: list[str]) -> str:
                     f"``{quotes[0]}''"
                 )
 
-        if word.lower().strip() == "latex":
-            line = line.replace(word, r"\LaTeX{}")
+        if word.strip() == "LaTeX":
+            line = sub("LaTeX", r"\LaTeX{}", line)
 
     return line
