@@ -2,7 +2,6 @@ from argparse import ArgumentParser
 from subprocess import CalledProcessError, Popen
 from typing import Any, Callable
 
-from src.config import Config, Rules
 from src.utils.config_fetch import ConfParse
 from src.convert import convert
 from src.mutils.build_tex import build_file
