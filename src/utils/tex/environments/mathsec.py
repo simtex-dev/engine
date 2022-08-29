@@ -53,7 +53,7 @@ def mathsec(
         out_file.write(
             (
                 "\n\\begin{equation}\n"
-                f"\t{line[2:-3]}\n"
+                f"\t{line.replace(rule, '')}\n"
                 "\\end{equation}\n"
             )
         )
