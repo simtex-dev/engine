@@ -90,12 +90,21 @@ simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -f="hello.tex" -a="iaaco
 
 To convert a LaTeX file, and rename the default author defined in
 `$CONF_PATH/simtex.json`, add `-a="iaacornus (or your name)`, and with the
-date, `-d="August 15, 2552`. See the
+date, `-d="August 15, 2552` to provide other date instead of the present. The
+program will output the `tex` file, as well as `pdf`, if `-b` was used, in `./out`
+inside the folder of the input if there is no output folder given. See the
 [documentation of arguments and configuration file](./examples/config/README.md).
 
 # Installation
 
-See [INSTALL.md](INSTALL.md) for details.
+The project is published on [PyPI](https://pypi.org/project/simtex/) since v0.2.0-alpha,
+which can be installed using `pip` or `pip3`:
+
+```
+pip install --user simtex
+```
+
+For other installation method, see [INSTALL.md](INSTALL.md) for details.
 
 # Contribution
 
