@@ -117,7 +117,7 @@ class Cli:
         )
         self.parser.add_argument(
             "-e", "--encoding",
-            help="Use a different encoding for document.",
+            help="Use a different encoding for the document.",
             action="store"
         )
 
@@ -131,7 +131,7 @@ class Cli:
         )
         self.parser.add_argument(
             "-v", "--verbose",
-            help="Hide stdout of other processes.",
+            help="Show the stdout of processes.",
             action="store_true"
         )
 

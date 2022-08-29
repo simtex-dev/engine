@@ -6,13 +6,14 @@
 simtex (simplified LaTeX) allows you to convert your markdown or text lectures
 into LaTeX file with one command, configured with simple `.json` file.
 
-> Note: This program does not exist to replace the LaTeX system, this do exist
-to simplify the process of turning your already existing markdown/text file
+> Note: This program does not intend to replace the LaTeX system, but to
+simplify the process of turning your already existing markdown/text file
 into PDF with LaTeX.
 
 # Program Options
 
 ```
+❯ simtex --help
 usage: simtex [OPTIONS]
 
 Convert your mardown or text lectures into LaTeX/pdf with one command.!
@@ -32,7 +33,7 @@ options:
   -m MARGIN, --margin MARGIN
                         Margin size to be used.
   -e ENCODING, --encoding ENCODING
-                        Use a different encoding for document.
+                        Use a different encoding for the document.
   -i INPUT, --input INPUT
                         File to be converted into LaTeX.
   -T TITLE, --title TITLE
@@ -47,25 +48,22 @@ options:
   -C COMPILER, --compiler COMPILER
                         Use a different LaTeX compiler.
   -ft, --filenametitle  Use the filename as title.
-  -v, --verbose         Hide stdout of other processes.
+  -v, --verbose         Show the stdout of processes.
 ```
 
 # Features
 
 The program allows the user to convert simple file such as markdown or text
-file of its assignment/lecture into PDF using LaTeX. This program does not
-intend to compete with pandoc, which essential does the same, but on a higher
-level, however, produces a very complex transcription of the input, another
-reason why this program is created, to create a simple LaTeX transcript of the
-input. Currently, the program has features that can satisfy conversion of basic
-inputs:
+file into PDF using LaTeX. This program does not intend to compete with pandoc,
+which essentially does the same but on higher level. Currently, the program
+has features that can satisfy conversion of basic inputs:
 
 1. Supports the most basic commands, such as **bold**, _italics_,
-**_emphasize_**, `inline code`, quotes, as well as hyperlinks.
+**_emphasize_**, `inline code`, quotes, as well as [hyperlinks](hyperlinks).
 2. Environments, the program supports a multiline math environment using
 `align`, single line math equation using `equation` environment, as well as
 code blocks using `lstlisting` with syntax highlighting.
-3. Figures.
+3. Figures with captions.
 4. Sections, subsections upto subparagraphs.
 5. Basic document metadata and properties that can be provided in a
 configuration file for default value, this includes, author, date, font, among
@@ -83,7 +81,7 @@ You can view the output of the program [here](./examples/1/out/hello.pdf) which 
 generated using the command:
 
 ```
-simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -of="./examples/1" -f="hello.tex" -a="iaacornus" -d="August 15, 2552"
+simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -f="hello.tex" -a="iaacornus" -d="August 15, 2552"
 ```
 
 > View [`./examples/1/hello.md`](./examples/1/example.md)
@@ -92,8 +90,8 @@ simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -of="./examples/1" -f="h
 
 To convert a LaTeX file, and rename the default author defined in
 `$CONF_PATH/simtex.json`, add `-a="iaacornus (or your name)`, and with the
-date, `-d="August 15, 2552`.
-See the [documentation of arguments and configuration file](./examples/config/README.md).
+date, `-d="August 15, 2552`. See the
+[documentation of arguments and configuration file](./examples/config/README.md).
 
 # Installation
 
@@ -101,9 +99,10 @@ See [INSTALL.md](INSTALL.md) for details.
 
 # Contribution
 
-1. All contributions are enforced to abide by the [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md)
-2. Opening and reporting issues is regarded as value contribution in this project and is welcomed.
-3. In regards to coding contribution, refer to [CONTRIBUTING](CONTRIBUTING.md)
+Refer to [CONTRIBUTING](CONTRIBUTING.md).
+
+1. All contributions are required to abide by the [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md)
+2. Opening and reporting issues is welcomed and considered as valuable contribution in this project.
 
 # Roadmap
 
