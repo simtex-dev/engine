@@ -164,6 +164,11 @@ class Cli:
         try:
             if self.args.convert:
                 converter()
+                print(
+                    "\033[34mINFO \033[0m\t To compile the output, you "
+                    "can overleaf: \033[36mhttps://www.overleaf.com/ "
+                    "\033[0muse (not sponsored) to compile the output."
+                )
             elif self.args.build:
                 converter()
                 build_file(
