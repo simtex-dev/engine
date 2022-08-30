@@ -1,0 +1,126 @@
+\documentclass[12pt, UTF8]{article}
+
+% font
+\usepackage{lmodern}
+
+% packages
+\usepackage[margin=1in, a4paper]{geometry}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{sectsty}
+\usepackage{footmisc}
+\usepackage{gensymb}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage[normalem]{ulem}
+\usepackage[colorlinks, allcolors=blue]{hyperref}
+\usepackage[scaled=0.9]{DejaVuSansMono}
+
+% basic config
+\setlength\parindent{24pt}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\sloppy
+
+%\ lst listings config
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{lstlistings_stylesheet}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=lstlistings_stylesheet}
+
+% paper info
+\title{Sieves of Erastothenes}
+\author{iaacornus}
+\date{August 31, 2022}
+
+\begin{document}
+	\maketitle
+	
+	\section*{Prime Numbers}
+	
+	Given a number $N$, find all the prime numbers smaller than $N$, where $N$ is an integer $< 10^6$.
+	
+	\textbf{Solution}
+	
+	Using sieves of erastothenes, the prime numbers smaller than $N$ can be found:
+	
+\begin{lstlisting}[language=Python]
+def sieves_of_erastothenes(N: int) -> list[int]:
+    """Finds the prime numbers from range N
+
+    Args:
+        N -- the upper limit
+
+    Returns:
+        The list of primes smaller than N.
+    """
+
+    not_primes: list[int] = [True]*N
+    for i in range(2, N):
+        if not_primes[i]:
+            for j in range(i, N, i):
+                not_primes[j] = False
+
+    return [x for x in range(N) if not_primes[x]]
+\end{lstlisting}
+	
+	Sieves of erastothenes can also be implemented in C:
+	
+\begin{lstlisting}[language=C]
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ARR_LIMIT 10000000
+
+int main(){
+    unsigned long long int i,j;
+    int *primes;
+    int z = 1;
+
+    primes = malloc(sizeof(int)*LIMIT);
+
+    for (i=2;i<limit;i++) {
+        primes[i]=1;
+    }
+
+    for (i=2;i<limit;i++) {
+        if (primes[i]) {
+            for (j=i;i*j<limit;j++) {
+                primes[i*j]=0;
+            }
+        }
+    }
+
+    for (i=2;i<limit;i++) {
+        if (primes[i]) {
+            printf("%dth prime = %dn",z++,i);
+        }
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\end{document}
