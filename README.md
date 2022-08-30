@@ -97,8 +97,17 @@ inside the folder of the input if there is no output folder given. See the
 
 # Installation
 
-The project is published on [PyPI](https://pypi.org/project/simtex/) since v0.2.0-alpha,
-which can be installed using `pip` or `pip3`:
+Starting `v0.3.2-beta`, there is a released frozen code which can be easily downloaded
+and executed directly with `./simtex [OPTIONS]`:
+
+```
+./simtex --help
+```
+
+> All of the dependency needed is packaged with in this build.
+
+Another method to install the project is with `pip`. Since the package is
+published on [PyPI](https://pypi.org/project/simtex/) since v0.2.0-alpha:
 
 ```
 pip install --user simtex
