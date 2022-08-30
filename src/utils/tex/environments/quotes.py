@@ -1,8 +1,11 @@
 from typing import TextIO
 
+from src.config import Rules
+from src.utils.tex.text.format import format
+
 
 def quotation(
-        rule: str,
+        rules: Rules,
         sources: list[str],
         start: int,
         out_file: TextIO
@@ -23,13 +26,16 @@ def quotation(
 
     end: int; quote: str
     for end, quote in enumerate(sources[start:]):
-        if not quote.startswith(rule):
+        if not quote.startswith(rules.bquote):
             out_file.write("\\end{displayquote}\n")
             break
         else:
-            out_file.write(
-                f"\t{quote.replace(rule, '').strip()}\n"
-            )
+            line: str = format(
+                    rules,
+                    quote.replace(rules.bquote, '').strip(),
+                    quote.split()
+                )
+            out_file.write(f"\t{line}\n")
 
     return end+start
 

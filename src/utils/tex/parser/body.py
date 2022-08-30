@@ -82,7 +82,7 @@ def body(
                         )
                 elif line.startswith(rules.bquote):
                     ignore = quotation(
-                            rules.bquote,
+                            rules,
                             ref_tex,
                             cur,
                             out_file
