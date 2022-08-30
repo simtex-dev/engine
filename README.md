@@ -16,7 +16,7 @@ into PDF with LaTeX.
 ❯ simtex --help
 usage: simtex [OPTIONS]
 
-Convert your mardown or text lectures into LaTeX/pdf with one command.!
+Convert your markdown or text files into LaTeX/pdf with one command!
 
 options:
   -h, --help            show this help message and exit
