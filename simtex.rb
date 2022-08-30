@@ -7,6 +7,8 @@ class Simtex < Formula
     sha256 "9513c0c778dc80d6d05e1b1560690d098aba0a61646d1d07efe112ba6b8fab45"
     license "GPL-3.0"
 
+    depends_on "python@3.10"
+
     resource "requests" do
         url "https://files.pythonhosted.org/packages/a5/61/a867851fd5ab77277495a8709ddda0861b28163c4613b011bc00228cc724/requests-2.28.1.tar.gz"
         sha256 "7c5599b102feddaa661c826c56ab4fee28bfd17f5abca1ebbe3e7f19d7c97983"
