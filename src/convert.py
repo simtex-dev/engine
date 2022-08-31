@@ -40,7 +40,7 @@ def convert(
         if input(
                 (
                     "\033[1mINPT\033[0m\t Title is none"
-                    ", use filename as title? [y/n]"
+                    ", use filename as title? [y/n] "
                 )
             ).lower() == "y":
             title = in_file.split("/")[-1].split(".")[0]

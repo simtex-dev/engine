@@ -30,8 +30,8 @@ def prep(
     if exists(file_path):
         match input(
                 (
-                    f"\033[1mINPT\033[0m\t File: {file_path}"
-                    " already exists, overwrite (o)? [y/n/o] "
+                    f"\033[1mINPT\033[0m\t File: {file_path} already exists"
+                    "overwrite (y), abort (n), or rename (r)? [y/n/r] "
                 )
             ).lower():
             case "y":
