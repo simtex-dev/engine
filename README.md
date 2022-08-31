@@ -10,6 +10,9 @@ into LaTeX file with one command, configured with simple `.json` file.
 simplify the process of turning your already existing markdown/text file
 into PDF with LaTeX.
 
+> Note: The program currently only supports basic markdown syntax and
+features, and not HTML tags.
+
 # Program Options
 
 ```
