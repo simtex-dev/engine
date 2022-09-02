@@ -46,7 +46,7 @@ class Rules:
     paragraphn: str
     subparagraph: str
     subparagraphn: str
-    inline_math: str
+    inline_math: list[str]
     paragraph_math: str
     inline_code: list[str]
     bold: list[str]
