@@ -1,6 +1,6 @@
 from argparse import ArgumentParser
 from subprocess import CalledProcessError, Popen
-from typing import Any, Callable
+from typing import Callable
 
 from src.utils.config_fetch import ConfParse
 from src.convert import convert
@@ -151,7 +151,7 @@ class Cli:
         # update the config for overrides
         update_conf(self.log, self.config, self.args)
 
-        converter: Callable[..., Any] = lambda: convert(
+        converter: Callable[[],str] = lambda: convert(
                 self.log,
                 self.args,
                 self.rules,
@@ -163,28 +163,28 @@ class Cli:
 
         try:
             if self.args.convert:
-                converter()
+                output_filename: str = converter()
                 print(
                     "\033[34mINFO \033[0m\t To compile the output, you "
                     "use can overleaf: \033[36mhttps://www.overleaf.com/"
                     "\033[0m (not sponsored) to compile the output."
                 )
             elif self.args.build:
-                converter()
+                output_filename = converter()
                 build_file(
                     self.log,
                     self.config.compiler,
                     self.config.output_folder,
-                    self.config.filename,
+                    self.args.filename,
                     self.args.verbose
                 )
             elif self.args.buildnview:
-                converter()
+                output_filename = converter()
                 build_file(
                     self.log,
                     self.config.compiler,
                     self.config.output_folder,
-                    self.config.filename,
+                    self.args.filename,
                     self.args.verbose
                 )
                 try:
@@ -200,4 +200,9 @@ class Cli:
         except CalledProcessError as Err:
             self.log.logger(
                 "E", f"CalledProcessError: {Err}, aborting ..."
+            )
+        else:
+            print(
+                f"\033[34mINFO\033[0m\t File {self.args.input} converted"
+                f" successfully and can be found in: {output_filename}."
             )
