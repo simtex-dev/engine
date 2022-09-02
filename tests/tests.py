@@ -57,7 +57,6 @@ class TestCases(unittest.TestCase):
                 author="John Doe",
                 date="<NOW>",
                 make_title=True,
-                filename="a.tex",
                 output_folder="out",
                 compiler="pdflatex",
                 encode="UTF8"
