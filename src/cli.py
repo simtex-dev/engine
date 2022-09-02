@@ -175,7 +175,7 @@ class Cli:
                     self.log,
                     self.config.compiler,
                     self.config.output_folder,
-                    self.args.filename,
+                    output_filename,
                     self.args.verbose
                 )
             elif self.args.buildnview:
@@ -184,11 +184,11 @@ class Cli:
                     self.log,
                     self.config.compiler,
                     self.config.output_folder,
-                    self.args.filename,
+                    output_filename,
                     self.args.verbose
                 )
                 try:
-                    Popen(["xgd-open", self.args.filename])
+                    Popen(["xgd-open", output_filename])
                 except FileNotFoundError:
                     self.log.logger(
                         "e", "No PDF viewer found, cannot view PDF file."
