@@ -157,7 +157,6 @@ class ConfParse:
             raw_conf["AUTHOR"],
             raw_conf["DATE"],
             raw_conf["MAKE_TITLE"],
-            raw_conf["FILE_NAME"],
             raw_conf["OUTPUT_FOLDER"],
             raw_conf["COMPILER"],
             raw_conf["ENCODE"]
