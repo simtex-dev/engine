@@ -28,13 +28,13 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
             ]
 
         if input(
-                f"\033[1mINPT\033[0m\t Did you mean {compiler}? [y/n]"
+                f"\033[1mINPT\033[0m\t Did you mean {compiler}? [y/n] "
             ).lower() == "y":
             args.compiler = compiler
         else:
             args.compiler = "pdflatex"
             log.logger(
-                "e", "Compiler option not recognized, using pdflatex"
+                "e", "Compiler option not recognized, using pdflatex."
             )
 
     if args.outputfolder is None:
@@ -45,7 +45,6 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
             args.outputfolder = f"./{args.outputfolder}"
 
     PARAMETERS: dict[str, Any] = {
-            "filename": args.filename,
             "output_folder": args.outputfolder,
             "author": args.author,
             "date": args.date,
@@ -71,3 +70,10 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
                 )
             )
             config.__setattr__(key_, param)
+
+    if args.filename is None:
+        config.__setattr__(
+            "filename", args.title.replace(" ", "_")
+        )
+    else:
+        config.__setattr__("filename", args.filename)
