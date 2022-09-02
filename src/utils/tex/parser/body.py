@@ -61,15 +61,15 @@ def body(
 
         match (symbol := line.split()[0].strip()):
             case rules.section | rules.sectionn:
-                out_file.write(section(symbol, line, "section"))
+                line = section(symbol, line, "section")
             case rules.subsection | rules.subsectionn:
-                out_file.write(section(symbol, line, "subsection"))
+                line = section(symbol, line, "subsection")
             case rules.subsubsection | rules.subsubsectionn:
-                out_file.write(section(symbol, line, "subsubsection"))
+                line = section(symbol, line, "subsubsection")
             case rules.paragraph | rules.paragraphn:
-                out_file.write(section(symbol, line, "paragraph"))
+                line = section(symbol, line, "paragraph")
             case rules.subparagraph | rules.subparagraphn:
-                out_file.write(section(symbol, line, "subparagraph"))
+                line = section(symbol, line, "subparagraph")
             case _:
                 if line.startswith(rules.paragraph_math): # math mode
                     ignore = mathsec(
@@ -102,10 +102,8 @@ def body(
                             out_file
                         )
                     if not skip_line:
-                        line = (
-                                format(rules, line, line.split())
-                                    .replace("_", r"\_")
-                            )
-                        out_file.write(f"\n{line}\n")
+                        line = f"\n{line}\n"
+
+        out_file.write(format(rules, line, line.split()))
 
     return files
