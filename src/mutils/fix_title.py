@@ -5,7 +5,7 @@ from src.utils.logger import Logger
 
 def fix_title(
         log: Logger, title: Any, in_file: str, filenametitle: bool
-    ) -> str:
+    ) -> str | Any:
     """Update the title of the document.
 
     Args:

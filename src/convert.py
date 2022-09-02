@@ -36,7 +36,7 @@ def convert(
 
     log.logger("I", f"Converting {in_file} ...")
 
-    title: str = fix_title(log, title, in_file, filenametitle)
+    title = fix_title(log, title, in_file, filenametitle)
     OFILE_PATH: str = fix_file_path(
             log, in_file, config.output_folder, args.filename
         )

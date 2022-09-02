@@ -30,7 +30,7 @@ def fix_file_path(
 
     if not filename or filename is None:
         in_filename: str = in_file.split("/")[-1].split(".")[0].strip()
-        new_filename: str = sub(
+        new_filename = sub(
                 r"( ?) +", r"_", in_filename
             ).removesuffix(".tex")
         file_path: str = f"{output_folder}/{new_filename}.tex"
@@ -40,7 +40,7 @@ def fix_file_path(
             f": {in_filename} as filename."
         )
     else:
-        file_path: str = f"{output_folder}/{filename.removesuffix('.tex')}.tex"
+        file_path = f"{output_folder}/{filename.removesuffix('.tex')}.tex"
 
     if exists(file_path):
         match input(
@@ -55,7 +55,7 @@ def fix_file_path(
                     f"Overwriting: {file_path} with the new file ..."
                 )
             case "r":
-                new_filename: str = input(
+                new_filename = input(
                         "\033[1mINPT\033[0m\t Input another file name: "
                     ).removesuffix(".tex")
                 file_path = f"{output_folder}/{new_filename}.tex"
