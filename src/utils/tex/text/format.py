@@ -82,4 +82,7 @@ def format(rules: Rules, line: str, words: list[str]) -> str:
                     f"``{quotes[0]}''"
                 )
 
+        if "_" in word and word not in (findall(rules.inline_math[1], line)):
+            line = line.replace(word, word.replace("_", r"\_"))
+
     return line.replace("LaTeX", r"\LaTeX{}")
