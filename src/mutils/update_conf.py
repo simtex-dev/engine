@@ -5,7 +5,9 @@ from src.config import Config
 from src.utils.logger import Logger
 
 
-def update_conf(log: Logger, config: Config, args: Any) -> None:
+def update_conf(
+        log: Logger, config: Config, args: Any
+    ) -> None:
     """Update the overrides of the program.
 
     Args:
@@ -70,10 +72,3 @@ def update_conf(log: Logger, config: Config, args: Any) -> None:
                 )
             )
             config.__setattr__(key_, param)
-
-    if args.filename is None:
-        config.__setattr__(
-            "filename", args.title.replace(" ", "_")
-        )
-    else:
-        config.__setattr__("filename", args.filename)
