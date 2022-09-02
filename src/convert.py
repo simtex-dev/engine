@@ -1,4 +1,4 @@
-from typing import Any, TextIO
+from typing import Any, TextIO, NoReturn
 
 from src.config import Config, Rules
 from src.utils.tex.parser.headings import headings
@@ -18,7 +18,7 @@ def convert(
         title: str,
         in_file: str,
         filenametitle: bool
-    ) -> None:
+    ) -> str | NoReturn:
     """This unifies all the modules.
 
     Args:
@@ -29,6 +29,9 @@ def convert(
             formatting, packages to use among others, refer to simtex.json.
         title -- title of the document.
         in_file -- path of the file to be converted to LaTeX.
+
+    Returns:
+        The filepath of the output file.
     """
 
     log.logger("I", f"Converting {in_file} ...")
@@ -38,10 +41,16 @@ def convert(
             log, in_file, config.output_folder, args.filename
         )
 
-    out_file: TextIO
-    with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
-        start: int = headings(log, config, title, out_file)
-        files: list[str] = body(log, rules, in_file, out_file)
+    try:
+        out_file: TextIO
+        with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
+            start: int = headings(log, config, title, out_file)
+            files: list[str] = body(log, rules, in_file, out_file)
 
-    format_body(log, config, start, OFILE_PATH)
-    finalize(log, files, config.output_folder, in_file)
+        format_body(log, config, start, OFILE_PATH)
+        finalize(log, files, config.output_folder, in_file)
+    except (IOError, PermissionError) as Err:
+        log.logger("E", f"{Err}. Cannot convert the file to LaTeX.")
+        raise SystemExit
+
+    return OFILE_PATH
