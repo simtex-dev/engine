@@ -29,15 +29,19 @@ def fix_file_path(
         mkdir(output_folder)
 
     if not filename or filename is None:
-        log.logger(
-            "I", "Filename is None, using input filename as filename."
-        )
+        in_filename: str = in_file.split("/")[-1].split(".")[0].strip()
         new_filename: str = sub(
-                r"( ?) +", r"_", in_file.split("/")[-1].strip()
+                r"( ?) +", r"_", in_filename
             ).removesuffix(".tex")
         file_path: str = f"{output_folder}/{new_filename}.tex"
+
+        log.logger(
+            "I",
+            f"Filename is None, using input filename"
+            f": {in_filename} as filename."
+        )
     else:
-        file_path: str = f"{output_folder}/{filename}"
+        file_path: str = f"{output_folder}/{filename.removesuffix('.tex')}.tex"
         if exists(file_path):
             match input(
                     (
