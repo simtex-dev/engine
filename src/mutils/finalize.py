@@ -19,10 +19,10 @@ def finalize(
         The path of the file, or raises systemexit.
     """
 
-    if origin.startswith("./"):
+    if origin.startswith((".", "./")):
         OPATH = "/".join(origin.split("/")[:-1])
     else:
-        OPATH = "./"+"/".join(origin.split("/")[:-1])
+        OPATH = "."+"/".join(origin.split("/")[:-1])
 
     file: str
     for file in files:

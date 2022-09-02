@@ -25,6 +25,11 @@ def body(
         A list of files found in the input file.
     """
 
+    log.logger("I", "Writing the body to the document ...")
+
+    files: list[str] = []
+    ignore: int = -1
+
     line: str
     striptitle: Callable[
             [str, str], str
@@ -42,15 +47,9 @@ def body(
             f"{{{striptitle(line, symbol)}}}\n"
         )
 
-    files: list[str] = []
-
     ref_file: TextIO
     with open(in_file, "r", encoding="utf-8") as ref_file:
         ref_tex: list[str] = ref_file.readlines()
-
-    ignore: int = -1
-
-    log.logger("I", "Writing the body to the document ...")
 
     cur: int # current index
     for cur, line in enumerate(ref_tex):
