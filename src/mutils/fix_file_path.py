@@ -34,7 +34,6 @@ def fix_file_path(
                 r"( ?) +", r"_", in_filename
             ).removesuffix(".tex")
         file_path: str = f"{output_folder}/{new_filename}.tex"
-
         log.logger(
             "I",
             f"Filename is None, using input filename"
@@ -42,28 +41,29 @@ def fix_file_path(
         )
     else:
         file_path: str = f"{output_folder}/{filename.removesuffix('.tex')}.tex"
-        if exists(file_path):
-            match input(
-                    (
-                        f"\033[1mINPT\033[0m\t File: {file_path} exists "
-                        "overwrite (y), abort (n), or rename (r)? [y/n/r] "
-                    )
-                ).lower():
-                case "y":
-                    log.logger(
-                        "I",
-                        f"Overwriting: {file_path} with the new file ..."
-                    )
-                case "o":
-                    new_filename: str = input(
-                            "\033[1mINPT\033[0m\t Input another file name: "
-                        ).removesuffix(".tex")
-                    file_path = f"{output_folder}/{new_filename}.tex"
-                case _:
-                    log.logger(
-                        "e",
-                        f"File: {file_path} already exists, aborting ..."
-                    )
-                    raise SystemExit
+
+    if exists(file_path):
+        match input(
+                (
+                    f"\033[1mINPT\033[0m\t File: {file_path} exists "
+                    "overwrite (y), abort (n), or rename (r)? [y/n/r] "
+                )
+            ).lower():
+            case "y":
+                log.logger(
+                    "I",
+                    f"Overwriting: {file_path} with the new file ..."
+                )
+            case "r":
+                new_filename: str = input(
+                        "\033[1mINPT\033[0m\t Input another file name: "
+                    ).removesuffix(".tex")
+                file_path = f"{output_folder}/{new_filename}.tex"
+            case _:
+                log.logger(
+                    "e",
+                    f"File: {file_path} already exists, aborting ..."
+                )
+                raise SystemExit
 
     return file_path
