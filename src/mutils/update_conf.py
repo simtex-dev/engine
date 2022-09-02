@@ -40,11 +40,11 @@ def update_conf(
             )
 
     if args.outputfolder is None:
-        BASE_OUT_FOLDER: str = "./".join(args.input.split("/")[:-1])
+        BASE_OUT_FOLDER: str = "/".join(args.input.split("/")[:-1])
         args.outputfolder = f"{BASE_OUT_FOLDER}/{config.output_folder}"
 
         if not args.outputfolder.startswith(("./", ".")):
-            args.outputfolder = f"./{args.outputfolder}"
+            args.outputfolder = f".{args.outputfolder}"
 
     PARAMETERS: dict[str, Any] = {
             "output_folder": args.outputfolder,
