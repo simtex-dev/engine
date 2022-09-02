@@ -79,6 +79,7 @@ def body(
                             cur,
                             out_file
                         )
+                    continue
                 elif line.startswith(rules.bquote):
                     ignore = quotation(
                             rules,
@@ -86,6 +87,7 @@ def body(
                             cur,
                             out_file
                         )
+                    continue
                 elif line.startswith(rules.code): # for code blocks
                     ignore = listings(
                             rules.code,
@@ -94,6 +96,7 @@ def body(
                             ref_tex,
                             out_file
                         )
+                    continue
                 else:
                     skip_line: bool = figure(
                             rules.image,
@@ -103,6 +106,8 @@ def body(
                         )
                     if not skip_line:
                         line = f"\n{line}\n"
+                    else:
+                        continue
 
         out_file.write(format(rules, line, line.split()))
 
