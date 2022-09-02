@@ -153,6 +153,7 @@ class Cli:
 
         converter: Callable[..., Any] = lambda: convert(
                 self.log,
+                self.args,
                 self.rules,
                 self.config,
                 self.args.title,
