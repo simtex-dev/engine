@@ -1,16 +1,18 @@
-from typing import TextIO
+from typing import Any, TextIO
 
 from src.config import Config, Rules
 from src.utils.tex.parser.headings import headings
 from src.utils.tex.parser.body import body
 from src.mutils.format_body import format_body
-from src.mutils.preparation import prep
+from src.mutils.fix_file_path import fix_file_path
+from src.mutils.fix_title import fix_title
 from src.mutils.finalize import finalize
 from src.utils.logger import Logger
 
 
 def convert(
         log: Logger,
+        args: Any,
         rules: Rules,
         config: Config,
         title: str,
@@ -21,6 +23,7 @@ def convert(
 
     Args:
         log -- for logging.
+        args -- overrides received from arguments.
         rules -- rules that needs to be followed in translation.
         config -- configuration of the document metadata, which includes,
             formatting, packages to use among others, refer to simtex.json.
@@ -30,25 +33,10 @@ def convert(
 
     log.logger("I", f"Converting {in_file} ...")
 
-    OFILE_PATH: str = prep(
-            log, config.output_folder, config.filename
+    title: str = fix_title(log, title, in_file, filenametitle)
+    OFILE_PATH: str = fix_file_path(
+            log, in_file, config.output_folder, args.filename
         )
-
-    if filenametitle and title is None:
-        title = in_file.split("/")[-1].split(".")[0]
-    elif title is None:
-        if input(
-                (
-                    "\033[1mINPT\033[0m\t Title is none"
-                    ", use filename as title? [y/n] "
-                )
-            ).lower() == "y":
-            title = in_file.split("/")[-1].split(".")[0]
-        else:
-            title = input("\033[1mINPT\033[0m\t Input title for use: ")
-            log.logger(
-                "I", f"Title is none, using filename: {title} as title ..."
-            )
 
     out_file: TextIO
     with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
