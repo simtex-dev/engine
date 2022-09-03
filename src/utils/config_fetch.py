@@ -4,7 +4,7 @@ from pathlib import Path
 from json import JSONDecodeError, load
 from typing import IO, Any, NoReturn, Optional
 
-from src.config import Config, Rules
+from src.config import Config, Rules, Replacements
 from src.mutils.fix_missing_conf import fix_missing_config
 from src.utils.logger import Logger
 
@@ -89,6 +89,11 @@ class ConfParse:
 
         return raw_conf
 
+    def _fetch_raw_conf(self) -> None:
+        """Fetch the raw configuration file."""
+
+        self.raw_conf_ = self._fetch()
+
     def _rules(self) -> Rules:
         """Parse the config of the rules of converter.
 
@@ -96,7 +101,7 @@ class ConfParse:
             The dataclass of rules with updated values.
         """
 
-        raw_conf: dict[str, Any] = self._fetch()[0]
+        raw_conf: dict[str, Any] = self.raw_conf_[0]
 
         return Rules(
             raw_conf["FOR"],
@@ -134,7 +139,7 @@ class ConfParse:
             The dataclass of config with update values.
         """
 
-        raw_conf: dict[str, Any] = self._fetch()[1]
+        raw_conf: dict[str, Any] = self.raw_conf_[1]
 
         return Config(
             raw_conf["DOC_CLASS"],
