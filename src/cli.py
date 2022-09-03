@@ -18,12 +18,12 @@ class Cli:
         self.config, self.rules = conf_parse.fetched_conf()
 
         description: str = (
-                "Convert your mardown or text lectures"
-                " into LaTeX/pdf with one command.!"
+                "Convert your mardown or text files"
+                " into PDF using LaTeX with one command!"
             )
         self.parser: ArgumentParser = ArgumentParser(
                 prog="simtex",
-                usage="simtex [OPTIONS]",
+                usage="simtex [OPTIONS] [INPUT] FILE [ARGUMENTS]",
                 description=description
             )
 
