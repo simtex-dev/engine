@@ -49,7 +49,8 @@ def fix_missing_config(
         log.logger("E", "Cannot fix config error, aborting ...")
         raise SystemExit
 
-    for _ in range(3):
+    trial: int
+    for trial in range(3):
         try:
             log.logger("e", log_msg)
             with get(link, stream=True) as d_file:
@@ -60,6 +61,9 @@ def fix_missing_config(
                         if chunk:
                             conf_file.write(chunk)
         except (ConnectionError, IOError, PermissionError) as Err:
+            if trial < 2:
+                continue
+
             log.logger(
                 "E", f"{Err}. Cannot download {filename}, aborting ..."
             )
