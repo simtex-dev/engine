@@ -1,0 +1,241 @@
+\documentclass[12pt, UTF8]{article}
+
+% font
+\usepackage{lmodern}
+
+% packages
+\usepackage[margin=1in, a4paper]{geometry}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{sectsty}
+\usepackage{footmisc}
+\usepackage{gensymb}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage[normalem]{ulem}
+\usepackage[colorlinks, allcolors=blue]{hyperref}
+\usepackage[scaled=0.9]{DejaVuSansMono}
+
+% basic config
+\setlength\parindent{24pt}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\sloppy
+
+%\ lst listings config
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{lstlistings_stylesheet}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=lstlistings_stylesheet}
+
+% paper info
+\title{biol-1200-lab-lec-2}
+\author{John Doe}
+\date{September 03, 2022}
+
+\begin{document}
+	\maketitle
+	
+	\section{Basic Biological Chemistry}
+	
+	Matter - anything that occupies space and has mass.
+	
+	Energy - the ability to do work. Some energy in living organisms are:
+	
+	- Chemical - change of one chemical form to another, e.g. Food to glucose/glycogen/ATP (adenosine triphosphate).
+	
+	- Electrical - in nervous system that relays signals to other parts.
+	
+	- Mechanical - movement of body.
+	
+	- Radiation - is emitted by other cells, but more common in plants that photosynthesize and fungi that radiosynthesize.
+	
+	A living system is constantly in work, thus it would die without energy.
+	
+	Elements -- are atoms that is the fundamental units of matter.
+	
+	96\\% of the body is made from four elements: Carbon, Oxygen, Hydrogen, and Nitrogen. Although living organisms is really made up of CHNOPS (Carbon, Hydrogen, Nitrogen, Oxygen, Phosphorous, and Sulfur).
+	
+	\subsection*{Atomic Structure}
+	
+	Nucleus is made up of protons (+) and neutrons (0), where electrons (-) exists outside of it in the electron cloud.
+	
+	Usually $N_{p^{+}} \equiv N_{n^{0}}$, and $N_{e^{-}} \equiv N_{p^{+}}$. Thus $A_{m} = N_{p^{+}} + N_{n^{0}}$, and $A_{n} = N_{p^{+}}$.
+	
+	- The behavior and number of electrons in the outer most shells determines the behavior of atom.
+	
+	\subsection*{Isotopes and Atomic Weight}
+	
+	Isotopes are atoms that does not obey: $N_{p^{+}} \equiv N_{n^{0}}$, thus can be said as variant of atom that has the same atomic number but different atomic mass.
+	
+	- Isotopes sometimes do emit particles.
+	
+	Atomic weight is close to mass number of most abundant isotope, and refects natural isotope variation.
+	
+	$_{12}C$ is the normal carbon found in living organisms. Radioisotope, heavy isotope that is unstable and emits particles.
+	
+	Radioactivity is the process of spontaneous atomic decay.
+	
+	$_{14}C$ allows for radioactive dating since using its half time ($T^{\frac{1}{2}}$) which allows for estimation of the age of particular artifact.
+	
+	Not every artifact that exceeds the half-life of $_{14}C$ can be carbon dated, but can still be radioactive dating to determine its age.
+	
+	\subsection*{Molecules and Compounds}
+	
+	Molecules are two or more like atoms combined chemically. While compounds are two or more different atoms combined chemically.
+	
+	\subsection*{Chemical Reactions}
+	
+	Molecules are formed by chemical bonds, and it disassociates when other the chemical bonds of other atoms are broken.
+	
+	\subsection*{Electrons}
+	
+	Electrons occupy energy levels that are called electron shells.
+	
+	Electrons closest to the nucleus are most strongly attracted.
+	
+	Each shell has distinct properties, the number of electrons has an upper limit per shell, and shells closest to nucleus gets filled first.
+	
+	Bonding involves interactions between electrons in the outer shell (valence shell). Full valence shells do not form bonds since they are extremely stable, while atoms with the same number of electron in the outer most shell behaves the same way with another.
+	
+	- Shell 1 - 2 $e^{-}$
+	
+	- Shell 2 - 8 $e^{-}$
+	
+	- Shell 3 - 18 $e^{-}$
+	
+	The more unstable the atom is, the more reactive it is.
+	
+	Atoms will gain, lose, or share electrons to complete their outermost orbitals and reach a stable state.
+	
+	Rule of Eights
+	
+	- Atoms are considered stable when their outermost orbital has 8 $e^{-}$.
+	
+	- the exception to this rule of eights is Shell 1, which can only hold 2 $e^{-}$ -- the helium.
+	
+	\subsection*{Reactive Elements}
+	
+	Valence shells are not full and are unstable.
+	
+	Tend to gain electrons if they lack, lose if they have excess, or share when either lack or have excess. This allows for bond formation, which produces stable molecule.
+	
+	\subsection*{Chemical Bonds}
+	
+	1. Ionic bonds form when electrons are completely transferred from one atom to another. Ionic bonds are weak bonds.
+	
+	Ions are charged particles, which are produced when the valence bond is disassociated. There are two types of ions:
+	
+	- Anions are negative, such as $Na$
+	
+	- Cations are positive, such as $Cl$
+	
+	- They either donate or accept $e^{-}$
+	
+	They are also part of the chemical system in our body which provides the electrolytes that allows electrical conduct in the body.
+	
+	2. Covalent Bonds, atoms that are stableo through shared $e^{-}$. Single covalent bonds share one pair of $e^{-}$, while double covalent bonds shares two pairs of $e^{-}$.
+	
+	Carbon is the central core of biological molecules due to its 4 valence that gives its stability, since it allows for four bonds. Then with that capability, carbon can form multitude of different chemical compounds, which the cells can use.
+	
+	\subsection*{Polarity}
+	
+	In covelentl bonded molecules, not every share of $e^{-}$ is equal, some are non polar -- electrically neutral as a molecule. While some a polar -- have a positive and a negative side (the charge is not equally distributed.)
+	
+	Polarity allows for different expression of electronegativity since the two poles have
+	
+	The polarity of water is vital in performing of its function in living organisms.
+	
+	Hydrogen Bonds are weak chemical bonds, and is attracted to the negative portion of polar molecule. This also accounts for the cohesion of the water molecules.
+	
+	\subsection*{Pattern of Chemical Reactions}
+	
+	1. Synthesis reaction ($A + B \longrightarrow AB$). Atoms or molecules combine, and energy is absorbed. Example of synthesis is formation of protein molecule from amino acids (building blocks of protein).
+	
+	2. Decomposition ($AB \longrightarrow A + B$). Molecule is broken down, and chemical energy is released. Example of decomposition is breakdown of glycogen (stored form of glucose in liver) to release glucose units.
+	
+	3. Exchange Reaction/Single Replacement Reaction ($AB + C \longrightarrow AC + B$), this involves both synthesis and decomposition reactions. Switch is made between molecule parts and different molecules are made. Example is transfer of ATP's terminal phosphate group to glucose to form glucose phosphate: $C_{6}H_{12} + ATP \longrightarrow Glucouse Phosphate + ADP$
+	
+	\subsection*{Factors that Affects Chemical Reactions}
+	
+	1. Temperature determines the kinetic energy of molecules, from Kinetic Theory by James Clerk Maxwell:
+	
+	\begin{align}
+		K.E. &= \frac{1}{2}mv^{2} 
+	\end{align}
+	
+	2. Concentration of reacting particles, since it increases the number of possible collisions.
+	
+	3. Particle size, have more kinectic energy and move faster than larger ones, thus higher probability of successful reaction via collision.
+	
+	4. Presence of catalysts, such as enzymes, which lower the needed activation energy that needed for reaction to happen.
+	
+	\subsection*{Biochemistry: Essentials for Life}
+	
+	1. Organic compounds: contains carbon, specifically has a functional group of hydrocarbons, most are covalently bonded. Example: glucose
+	
+	- Some organic compounds have a weak and strong bond that allows it to be reacted when needed, thus they are stable and reactive.
+	
+	2. Inorganic commpunds: lack carbon, tend to be simple compounds -- usually minerals. Example: water.
+	
+	- Even they are simple, does not necessarily means that they also have simpler function in living organisms.
+	
+	\subsubsection*{Important Inorganic Compounds}
+	
+	1. Water -- most abundant inorganic compound
+	
+	- High heat capacity -- high amount energy is needed to break down the hydrogen bonds in the water molecules, or to undergo phase transition. (Another reason why the temperature of our body does not change fast.)
+	
+	- Polarity/solvent properties (not actually universal solvent.)
+	
+	- Chemical reactivity
+	
+	- Cushioning
+	
+	2. Salts, which are found in the body that has vital functions, that easily disassociates into ions in the presence of water.
+	
+	- It provides the electrolytes which conduct electrical currents in the body.
+	
+	3. Acids releases hydrogen ions ($H^{+}$), which are positive, thus proton donors.
+	
+	The stomach is acidic since pepsin cannot be activated into pepsinogen if the environment is not acidic.
+	
+	4. Bases releses hydroxyl ions ($OH^{-}$), thus they are proton acceptors.
+	
+	5. Neutralization reaction -- acids and bases react to form water and a salt.
+	
+	pH - measures the relative concentration of hydrogen ions, $7 > pH$ is basic, while $pH < 7$ is acidic.
+	
+	Buffers are the chemicals that can regulate pH change, the body contains a lot of buffers to maintain homeostatis.
+	
+	6. Carbohydrates -- contain carbon, hydrogen, and oxygen. Include sugards and starches, and is classified according to size.
+	
+	- Monosaccharides are simply sugards
+	
+	- Disaccharides are two simple sugards joined by dehydration synthesis.
+	
+	- Polysaccharides are long branching chains of linked simple sugars.
+
+\end{document}
