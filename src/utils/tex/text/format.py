@@ -1,4 +1,5 @@
 from re import findall
+from typing import Callable
 
 from src.config import Rules
 from src.mutils.check_if_eq import check_if_eq
@@ -16,6 +17,16 @@ def format(rules: Rules, line: str, words: list[str]) -> str:
         The formatted line.
     """
 
+    rule: str; line_: str; phrase: str; command: str
+    rparse: Callable[
+            [str, str, str, str], str
+        ] = lambda rule, line_, phrase, command: (
+            line_.replace(
+                    f"{rule}{phrase}{rule}",
+                    f"\\{command}{{{phrase}}}"
+                )
+        )
+
     inline_maths_: list[str] = findall(rules.inline_math[1], line)
     inline_maths: list[str] = []
     for eq_ in inline_maths_:
@@ -29,48 +40,23 @@ def format(rules: Rules, line: str, words: list[str]) -> str:
 
     for word in words:
         if (bold := findall(rules.bold[1], line)):
-            line = line.replace(
-                    f"{rules.bold[0]}{bold[0]}{rules.bold[0]}",
-                    f"\\textbf{{{bold[0]}}}"
-                )
+            line = rparse(rules.bold[0], line, bold[0], "textbf")
         elif (italics := findall(rules.italics[1], line)):
-            line = line.replace(
-                    f"{rules.italics[0]}{italics[0]}{rules.italics[0]}",
-                    f"\\textit{{{italics[0]}}}"
-                )
+            line = rparse(rules.italics[0], line, italics[0], "textit")
         elif (emph := findall(rules.emph[1], line)):
-            line = line.replace(
-                    f"{rules.emph[0]}{emph[0]}{rules.emph[0]}",
-                    f"\\emph{{{emph[0]}}}"
-                )
+            line = rparse(rules.emph[0], line, emph[0], "emph")
         elif (strike := findall(rules.strike[1], line)):
-            line = line.replace(
-                    f"{rules.strike[0]}{strike[0]}{rules.strike[0]}",
-                    f"\\sout{{{strike[0]}}}"
-                )
+            line = rparse(rules.strike[0], line, strike[0], "sout")
         elif (supscript := findall(rules.supscript[1], line)):
-            line = line.replace(
-                    (
-                        f"{rules.supscript[0]}"
-                        f"{supscript[0]}"
-                        f"{rules.supscript[0]}"
-                    ),
-                    f"\\textsuperscript{{{supscript[0]}}}"
+            line = rparse(
+                    rules.supscript[0], line, supscript[0], "textsuperscript"
                 )
         elif (subscript := findall(rules.subscript[1], line)):
-            line = line.replace(
-                    (
-                        f"{rules.subscript[0]}"
-                        f"{subscript[0]}"
-                        f"{rules.subscript[0]}"
-                    ),
-                    f"\\textsubscript{{{subscript[0]}}}"
+            line = rparse(
+                    rules.subscript[0], line, subscript[0], "textsubscript"
                 )
         elif (uline := findall(rules.uline[1], line)):
-            line = line.replace(
-                    f"{rules.uline[0]}{uline[0]}{rules.uline[0]}",
-                    f"\\underline{{{uline[0]}}}"
-                )
+            line = rparse(rules.uline[0], line, uline[0], "underline")
         elif (link := findall(rules.links, line)):
             line = line.replace(
                     f"[{link[0][0]}]({link[0][1]})",
@@ -79,15 +65,7 @@ def format(rules: Rules, line: str, words: list[str]) -> str:
         elif (icodes := findall(rules.inline_code[1], line)):
             if icodes[0] == "":
                 continue
-
-            line = line.replace(
-                    (
-                        f"{rules.inline_code[0]}"
-                        f"{icodes[0]}"
-                        f"{rules.inline_code[0]}"
-                    ),
-                    f"\\texttt{{{icodes[0]}}}"
-                )
+            line = rparse(rules.inline_code[0], line, icodes[0], "texttt")
         elif (quotes := findall(rules.quote[1], line)):
             line = line.replace(
                     f"{rules.quote[0]}{quotes[0]}{rules.quote[0]}",
