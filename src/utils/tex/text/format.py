@@ -1,15 +1,18 @@
 from re import findall
 from typing import Callable
 
-from src.config import Rules
+from src.config import Replacements, Rules
 from src.mutils.check_if_eq import check_if_eq
 
 
-def format(rules: Rules, line: str, words: list[str]) -> str:
+def format(
+        rules: Rules, replacements: Replacements, line: str, words: list[str]
+    ) -> str:
     """Formats the text in a line.
 
     Arguments:
         line -- line that needs to be translated.
+        replacements -- math symbols that will be replaced with latex commands.
         words -- list of words in the line split by spaces.
         rules: Rules -- rules that needs to be followed in translation.
 
@@ -74,5 +77,24 @@ def format(rules: Rules, line: str, words: list[str]) -> str:
 
         if not check_if_eq(rules.inline_math[0], word, inline_maths):
             line = line.replace(word, word.replace("_", r"\_"))
+
+        math_symb: str
+        if (
+                (
+                    math_symb := word.replace(
+                            rules.inline_math[0], ""
+                        )
+                ) in replacements.replacements.keys()
+            ):
+            line = line.replace(
+                    word,
+                    (
+                        "$"
+                        +replacements.replacements.get(
+                            math_symb, word
+                        )
+                        +"$"
+                    )
+                )
 
     return line.replace("LaTeX", r"\LaTeX{}").replace("%", r"\%")
