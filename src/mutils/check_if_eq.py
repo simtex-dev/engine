@@ -21,7 +21,6 @@ def check_if_eq(rule: str, word: str, references: list[str]) -> bool:
     eq: str
     for eq in references:
         if match(f".?|.+{pattern}.?|.+", eq):
-            print(pattern, eq)
             return True
 
     return False
