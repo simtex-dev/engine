@@ -97,4 +97,4 @@ def format(rules: Rules, line: str, words: list[str]) -> str:
         if not check_if_eq(rules.inline_math[0], word, inline_maths):
             line = line.replace(word, word.replace("_", r"\_"))
 
-    return line.replace("LaTeX", r"\LaTeX{}")
+    return line.replace("LaTeX", r"\LaTeX{}").replace("%", r"\%")
