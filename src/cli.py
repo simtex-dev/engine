@@ -203,6 +203,7 @@ class Cli:
             )
         else:
             print(
-                f"\033[34mINFO\033[0m\t File {self.args.input} converted"
-                f" successfully and can be found in: {output_filename}."
+                f"\033[34mINFO\033[0m\t File {self.args.input}"
+                f" converted successfully and can be found in:"
+                f" \033[1;36m{output_filename}\033[0m."
             )
