@@ -3,7 +3,7 @@ from subprocess import CalledProcessError, Popen
 from typing import Callable
 
 from src.utils.config_fetch import ConfParse
-from src.convert import convert
+from src.utils.convert import convert
 from src.mutils.build_tex import build_file
 from src.mutils.update_conf import update_conf
 from src.utils.logger import Logger
