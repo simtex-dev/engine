@@ -94,8 +94,9 @@
         "MAKE_TITLE": true,
         "OUTPUT_FOLDER": "out",
         "COMPILER": "pdflatex",
-        "ENCODE": "UTF8"
-    }
+        "ENCODE": "UTF8",
+        "REPLACE": true
+    },
     {
         "-->": "\\longrightarrow",
         "<--": "\\longleftarrow",
@@ -128,6 +129,6 @@
         "...": "\\dots",
         ":::": "\\vdots",
         "^...": "\\cdots",
-        "^.": "\\cdots",
+        "^.": "\\cdots"
     }
 ]

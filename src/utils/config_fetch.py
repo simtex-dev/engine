@@ -159,7 +159,8 @@ class ConfParse:
             raw_conf["MAKE_TITLE"],
             raw_conf["OUTPUT_FOLDER"],
             raw_conf["COMPILER"],
-            raw_conf["ENCODE"]
+            raw_conf["ENCODE"],
+            raw_conf["REPLACE"]
         )
 
     def fetched_conf(self) -> tuple[Config, Rules] | NoReturn:

@@ -26,6 +26,7 @@ class Config:
     output_folder: str
     compiler: str
     encode: str
+    replace: bool
 
 
 @dataclass(frozen=True)
