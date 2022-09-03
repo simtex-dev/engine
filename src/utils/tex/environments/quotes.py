@@ -1,11 +1,12 @@
 from typing import TextIO
 
-from src.config import Rules
+from src.config import Rules, Replacements
 from src.utils.tex.text.format import format
 
 
 def quotation(
         rules: Rules,
+        replacements: Replacements,
         sources: list[str],
         start: int,
         out_file: TextIO
@@ -14,6 +15,7 @@ def quotation(
 
     Args:
         rule -- rule that needs to be followed in translation.
+        replacements -- math symbols that will be replaced with latex commands.
         sources -- where the other lines of equation would be found.
         start -- where the parser/translator would start.
         out_file -- where the translated line will be written.
@@ -32,6 +34,7 @@ def quotation(
         else:
             line: str = format(
                     rules,
+                    replacements,
                     quote.replace(rules.bquote, '').strip(),
                     quote.split()
                 )
