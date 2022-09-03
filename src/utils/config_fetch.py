@@ -168,6 +168,18 @@ class ConfParse:
             raw_conf["REPLACE"]
         )
 
+    def _replacements(self) -> Replacements:
+        """Fetch the data of the replacements for some math symbols
+        defined in the config file.
+
+        Returns:
+            The updated dataclass with the data of the replacements.
+        """
+
+        raw_conf: dict[str, Any] = self.raw_conf_[2]
+
+        return Replacements(raw_conf)
+
     def fetched_conf(self) -> tuple[Config, Rules] | NoReturn:
         """Fetch the values from config file, and give fallback method
         for its respective function.

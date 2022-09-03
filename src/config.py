@@ -59,3 +59,10 @@ class Rules:
     uline: list[str]
     quote: list[str]
     bquote: str
+
+
+@dataclass
+class Replacements:
+    """Replacement of some math symbols and their respective LaTeX commands."""
+
+    replacements: dict[str, str]
