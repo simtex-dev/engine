@@ -89,11 +89,6 @@ class ConfParse:
 
         return raw_conf
 
-    def _fetch_raw_conf(self) -> None:
-        """Fetch the raw configuration file."""
-
-        self.raw_conf_ = self._fetch()
-
     def _rules(self) -> Rules:
         """Parse the config of the rules of converter.
 
@@ -180,7 +175,7 @@ class ConfParse:
 
         return Replacements(raw_conf)
 
-    def fetched_conf(self) -> tuple[Config, Rules] | NoReturn:
+    def fetched_conf(self) -> tuple[Config, Rules, Replacements] | NoReturn:
         """Fetch the values from config file, and give fallback method
         for its respective function.
 
@@ -190,8 +185,10 @@ class ConfParse:
 
         for _ in range(3):
             try:
+                self.raw_conf_ = self._fetch()
                 config_values: Config = self._conf()
                 rules_values: Rules = self._rules()
+                replacements: Replacements = self._replacements()
             except KeyError as Err:
                 fix_missing_config(
                     self.log,
@@ -205,8 +202,9 @@ class ConfParse:
                 )
                 continue
             else:
-                return config_values, rules_values
+                return config_values, rules_values, replacements
 
         self.log.logger(
             "E", "There is an error with in the config file, aborting ..."
         )
+        raise SystemExit
