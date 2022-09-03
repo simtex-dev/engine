@@ -40,6 +40,7 @@ class ConfParse:
                     self.log.logger(
                         "E", f"{Err}. Cannot create: {paths}, aborting ..."
                     )
+                    raise SystemExit
 
         if not exists(f"{self.CONF_PATH}/simtex.json"):
             fix_missing_config(
@@ -62,7 +63,7 @@ class ConfParse:
                 True
             )
 
-    def _fetch(self) -> list[dict[str, Any]]:
+    def _fetch(self) -> list[dict[str, Any]] | NoReturn:
         """Fetch the values from config file.
 
         Returns:
@@ -86,6 +87,7 @@ class ConfParse:
             self.log.logger(
                 "E", f"{Err}. Cannot fetch config file, aborting ..."
             )
+            raise SystemExit
 
         return raw_conf
 

@@ -2,7 +2,6 @@ import logging
 from pathlib import Path
 from os import mkdir
 from os.path import exists
-from typing import NoReturn
 
 from rich.logging import RichHandler
 
@@ -44,7 +43,7 @@ class Logger:
         )
         self.log.addHandler(file_log)
 
-    def logger(self, exception_: str, message: str) -> None | NoReturn:
+    def logger(self, exception_: str, message: str) -> None:
         """Log the proccesses using passed message and exception_ variable.
 
         Args:
@@ -55,7 +54,6 @@ class Logger:
         match exception_:
             case "E": # for major error
                 self.log.critical("%s" % (message))
-                raise SystemExit
             case "e":
                 self.log.error("%s" % (message))
             case "I": # to print information in the terminal

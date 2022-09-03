@@ -1,4 +1,4 @@
-from typing import Any, TextIO
+from typing import Any, TextIO, NoReturn
 
 from src.config import Config, Rules
 from src.utils.tex.parser.headings import headings
@@ -18,7 +18,7 @@ def convert(
         title: str,
         in_file: str,
         filenametitle: bool
-    ) -> str:
+    ) -> str | NoReturn:
     """This unifies all the modules.
 
     Args:
@@ -50,6 +50,9 @@ def convert(
         format_body(log, config, start, OFILE_PATH)
         finalize(log, files, config.output_folder, in_file)
     except (IOError, PermissionError) as Err:
-        log.logger("E", f"{Err}. Cannot convert the file to LaTeX.")
+        log.logger(
+            "E", f"{Err}. Cannot convert the file to LaTeX, aborting ..."
+        )
+        raise SystemExit
 
     return OFILE_PATH

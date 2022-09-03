@@ -1,4 +1,4 @@
-from typing import TextIO, Any, IO
+from typing import TextIO, Any, IO, NoReturn
 
 from src.config import Config
 from src.utils.logger import Logger
@@ -6,7 +6,7 @@ from src.utils.logger import Logger
 
 def format_body(
         log: Logger, config: Config, start: int, out_file: str
-    ) -> None:
+    ) -> None | NoReturn:
     """Format the document body of the generated LaTeX file.
 
     Args:
@@ -58,3 +58,6 @@ def format_body(
         log.logger(
             "E", f"{Err}. Cannot format the document, aborting ..."
         )
+        raise SystemExit
+
+    return None

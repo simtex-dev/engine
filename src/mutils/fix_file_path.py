@@ -11,7 +11,7 @@ def fix_file_path(
         in_file: str,
         output_folder: str,
         filename: str
-    ) -> NoReturn | str:
+    ) -> str | NoReturn:
     """Update the path of the output file if there are any errors or
     exceptions that is deemed to be encountered.
 
@@ -64,5 +64,6 @@ def fix_file_path(
                     "E",
                     f"File: {file_path} already exists, aborting ..."
                 )
+                raise SystemExit
 
     return file_path

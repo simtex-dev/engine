@@ -1,3 +1,5 @@
+from typing import NoReturn
+
 from requests import get
 
 from src.mutils.merge_conf import merge_conf
@@ -11,7 +13,7 @@ def fix_missing_config(
         conf: bool = False,
         code_conf: bool = False,
         missing: bool = True
-    ) -> None:
+    ) -> None | NoReturn:
     """Downloads the original config file from github if not found.
 
     Args:
@@ -72,6 +74,6 @@ def fix_missing_config(
             if not missing:
                 log.logger("I", "Updating existing config file ...")
                 merge_conf(log, CONF_PATH)
-            return
+            return None
 
     raise SystemExit
