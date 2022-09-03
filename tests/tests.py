@@ -14,7 +14,7 @@ class TestCases(unittest.TestCase):
         self.log: Logger = Logger()
         conf_parser: ConfParse = ConfParse(self.log, True)
         self.config: Config; self.rules: Rules
-        self.config, self.rules = conf_parser.fetched_conf()
+        self.config, self.rules, self.replacement = conf_parser.fetched_conf()
 
     def test_config(self) -> None:
         """Test case for config."""
@@ -59,7 +59,8 @@ class TestCases(unittest.TestCase):
                 make_title=True,
                 output_folder="out",
                 compiler="pdflatex",
-                encode="UTF8"
+                encode="UTF8",
+                replace=True
             ),
             self.config
         )
@@ -89,8 +90,8 @@ class TestCases(unittest.TestCase):
                 paragraphn="####*",
                 subparagraph="#####",
                 subparagraphn="#####*",
-                inline_math="$",
                 paragraph_math="$$",
+                inline_math=["$", "\\$(.*?)\\$"],
                 inline_code=["`", "`(.*?)`"],
                 bold=["**", "\\*\\*(.*?)\\*\\*"],
                 emph=["!*", "!\\*(.*?)!\\*"],
