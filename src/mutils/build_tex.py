@@ -26,9 +26,8 @@ def build_file(
 
     if which(compiler) is None:
         log.logger(
-            "e", f"{compiler} does not exists, cannot build file."
+            "E", f"{compiler} does not exists, cannot build file."
         )
-        raise SystemExit
 
     try:
         log.logger("I", f"Building {filename} with {compiler} ...")

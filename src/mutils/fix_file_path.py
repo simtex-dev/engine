@@ -61,9 +61,8 @@ def fix_file_path(
                 file_path = f"{output_folder}/{new_filename}.tex"
             case _:
                 log.logger(
-                    "e",
+                    "E",
                     f"File: {file_path} already exists, aborting ..."
                 )
-                raise SystemExit
 
     return file_path

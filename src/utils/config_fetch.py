@@ -193,4 +193,3 @@ class ConfParse:
         self.log.logger(
             "E", "There is an error with in the config file, aborting ..."
         )
-        raise SystemExit
