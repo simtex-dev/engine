@@ -42,7 +42,12 @@ def format(
     inline_maths_.clear()
 
     for word in words:
-        if (bold := findall(rules.bold[1], line)):
+        if (quotes := findall(rules.quote[1], line)):
+            line = line.replace(
+                    f"{rules.quote[0]}{quotes[0]}{rules.quote[0]}",
+                    f"``{quotes[0]}''"
+                )
+        elif (bold := findall(rules.bold[1], line)):
             line = rparse(rules.bold[0], line, bold[0], "textbf")
         elif (italics := findall(rules.italics[1], line)):
             line = rparse(rules.italics[0], line, italics[0], "textit")
@@ -69,11 +74,6 @@ def format(
             if icodes[0] == "":
                 continue
             line = rparse(rules.inline_code[0], line, icodes[0], "texttt")
-        elif (quotes := findall(rules.quote[1], line)):
-            line = line.replace(
-                    f"{rules.quote[0]}{quotes[0]}{rules.quote[0]}",
-                    f"``{quotes[0]}''"
-                )
 
         if not check_if_eq(rules.inline_math[0], word, inline_maths):
             line = line.replace(word, word.replace("_", r"\_"))
