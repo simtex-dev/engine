@@ -45,8 +45,8 @@ def fix_missing_config(
         filename = "code_conf.txt"
 
     if input(
-            "\033[1mINPT\033[0m\t Config is missing. Download "
-            f"the base config ({filename}) from {link}? [y/n] "
+            "\033[1mINPT\033[0m\t Config is missing. Download the base config"
+            f" (\033[36m{filename}\033[0m) from \033[36m{link}\033[0m? [y/n] "
         ).lower() != "y":
         log.logger("E", "Cannot fix config error, aborting ...")
         raise SystemExit
