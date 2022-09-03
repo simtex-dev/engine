@@ -1,6 +1,7 @@
 from re import findall
 
 from src.config import Rules
+from src.mutils.check_if_eq import check_if_eq
 
 
 def format(rules: Rules, line: str, words: list[str]) -> str:
@@ -14,6 +15,17 @@ def format(rules: Rules, line: str, words: list[str]) -> str:
     Returns:
         The formatted line.
     """
+
+    inline_maths_: list[str] = findall(rules.inline_math[1], line)
+    inline_maths: list[str] = []
+    for eq_ in inline_maths_:
+        if isinstance(eqs := eq_.split(), list):
+            for eq in eqs:
+                inline_maths.append(eq)
+        else:
+            inline_maths.append(eq_)
+
+    inline_maths_.clear()
 
     for word in words:
         if (bold := findall(rules.bold[1], line)):
@@ -82,7 +94,7 @@ def format(rules: Rules, line: str, words: list[str]) -> str:
                     f"``{quotes[0]}''"
                 )
 
-        if "_" in word and word not in (findall(rules.inline_math[1], line)):
+        if not check_if_eq(rules.inline_math[0], word, inline_maths):
             line = line.replace(word, word.replace("_", r"\_"))
 
     return line.replace("LaTeX", r"\LaTeX{}")
