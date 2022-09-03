@@ -156,6 +156,7 @@ class Cli:
                 self.args,
                 self.rules,
                 self.config,
+                self.replacement,
                 self.args.title,
                 self.args.input,
                 self.args.filenametitle

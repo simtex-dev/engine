@@ -1,7 +1,7 @@
 from re import sub
 from typing import Callable, TextIO
 
-from src.config import Rules
+from src.config import Rules, Replacements
 from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.figure import figure
 from src.utils.tex.environments.quotes import quotation
@@ -11,13 +11,18 @@ from src.utils.logger import Logger
 
 
 def body(
-        log: Logger, rules: Rules, in_file: str, out_file: TextIO
+        log: Logger,
+        rules: Rules,
+        replacements: Replacements,
+        in_file: str,
+        out_file: TextIO
     ) -> list[str]:
     """Generate a LaTeX version of the given markdown file.
 
     Args:
         log -- for logging.
         rules -- rules that needs to be followed in translation.
+        replacements -- math symbols that will be replaced with latex commands.
         in_file -- path of the file to be converted to LaTeX.
         out_file -- where the translated line will be written.
 
@@ -109,6 +114,6 @@ def body(
                     else:
                         continue
 
-        out_file.write(format(rules, line, line.split()))
+        out_file.write(format(rules, replacements, line, line.split()))
 
     return files
