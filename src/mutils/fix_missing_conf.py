@@ -1,3 +1,5 @@
+from typing import NoReturn
+
 from requests import get
 
 from src.mutils.merge_conf import merge_conf
@@ -11,7 +13,7 @@ def fix_missing_config(
         conf: bool = False,
         code_conf: bool = False,
         missing: bool = True
-    ) -> None:
+    ) -> None | NoReturn:
     """Downloads the original config file from github if not found.
 
     Args:
@@ -42,7 +44,15 @@ def fix_missing_config(
             )
         filename = "code_conf.txt"
 
-    for _ in range(3):
+    if input(
+            "\033[1mINPT\033[0m\t Config is missing. Download the base config"
+            f" (\033[36m{filename}\033[0m) from \033[36m{link}\033[0m? [y/n] "
+        ).lower() != "y":
+        log.logger("E", "Cannot fix config error, aborting ...")
+        raise SystemExit
+
+    trial: int
+    for trial in range(3):
         try:
             log.logger("e", log_msg)
             with get(link, stream=True) as d_file:
@@ -53,6 +63,9 @@ def fix_missing_config(
                         if chunk:
                             conf_file.write(chunk)
         except (ConnectionError, IOError, PermissionError) as Err:
+            if trial < 2:
+                continue
+
             log.logger(
                 "E", f"{Err}. Cannot download {filename}, aborting ..."
             )
@@ -61,6 +74,6 @@ def fix_missing_config(
             if not missing:
                 log.logger("I", "Updating existing config file ...")
                 merge_conf(log, CONF_PATH)
-            return
+            return None
 
     raise SystemExit

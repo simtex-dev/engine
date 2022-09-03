@@ -3,8 +3,8 @@
 ![](https://api.codiga.io/project/34276/score/svg)
 ![](https://github.com/iaacornus/simtex/actions/workflows/pytest.yaml/badge.svg)
 
-simtex (simplified LaTeX) allows you to convert your markdown or text lectures
-into LaTeX file with one command, configured with simple `.json` file.
+simtex (simplified LaTeX) allows you to convert your mardown or text files
+into PDF using LaTeX with one command, configured with simple `.json` file.
 
 > Note: This program does not intend to replace the LaTeX system, but to
 simplify the process of turning your already existing markdown/text file

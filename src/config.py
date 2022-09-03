@@ -23,10 +23,10 @@ class Config:
     author: str
     date: str
     make_title: bool
-    filename: str
     output_folder: str
     compiler: str
     encode: str
+    replace: bool
 
 
 @dataclass(frozen=True)
@@ -47,8 +47,8 @@ class Rules:
     paragraphn: str
     subparagraph: str
     subparagraphn: str
-    inline_math: str
     paragraph_math: str
+    inline_math: list[str]
     inline_code: list[str]
     bold: list[str]
     italics: list[str]
@@ -59,3 +59,10 @@ class Rules:
     uline: list[str]
     quote: list[str]
     bquote: str
+
+
+@dataclass
+class Replacements:
+    """Replacement of some math symbols and their respective LaTeX commands."""
+
+    replacements: dict[str, str]

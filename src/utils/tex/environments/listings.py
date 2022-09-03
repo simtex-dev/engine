@@ -18,11 +18,11 @@ def listings(
         out_file -- where the translated line will be written.
     """
 
-    language: str = line[3:].replace("\n", "")
+    language: str = line.removeprefix("```").replace("\n", "").title()
     if language:
         out_file.write(
             "\n\\begin{lstlisting}"
-            f"[language={language.title()}]\n"
+            f"[language={language}]\n"
         )
     else:
         out_file.write(

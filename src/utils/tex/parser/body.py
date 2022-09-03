@@ -1,7 +1,7 @@
 from re import sub
 from typing import Callable, TextIO
 
-from src.config import Rules
+from src.config import Rules, Replacements
 from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.figure import figure
 from src.utils.tex.environments.quotes import quotation
@@ -11,19 +11,29 @@ from src.utils.logger import Logger
 
 
 def body(
-        log: Logger, rules: Rules, in_file: str, out_file: TextIO
+        log: Logger,
+        rules: Rules,
+        replacements: Replacements,
+        in_file: str,
+        out_file: TextIO
     ) -> list[str]:
     """Generate a LaTeX version of the given markdown file.
 
     Args:
         log -- for logging.
         rules -- rules that needs to be followed in translation.
+        replacements -- math symbols that will be replaced with latex commands.
         in_file -- path of the file to be converted to LaTeX.
         out_file -- where the translated line will be written.
 
     Returns:
         A list of files found in the input file.
     """
+
+    log.logger("I", "Writing the body to the document ...")
+
+    files: list[str] = []
+    ignore: int = -1
 
     line: str
     striptitle: Callable[
@@ -42,15 +52,9 @@ def body(
             f"{{{striptitle(line, symbol)}}}\n"
         )
 
-    files: list[str] = []
-
     ref_file: TextIO
     with open(in_file, "r", encoding="utf-8") as ref_file:
         ref_tex: list[str] = ref_file.readlines()
-
-    ignore: int = -1
-
-    log.logger("I", "Writing the body to the document ...")
 
     cur: int # current index
     for cur, line in enumerate(ref_tex):
@@ -62,15 +66,15 @@ def body(
 
         match (symbol := line.split()[0].strip()):
             case rules.section | rules.sectionn:
-                out_file.write(section(symbol, line, "section"))
+                line = section(symbol, line, "section")
             case rules.subsection | rules.subsectionn:
-                out_file.write(section(symbol, line, "subsection"))
+                line = section(symbol, line, "subsection")
             case rules.subsubsection | rules.subsubsectionn:
-                out_file.write(section(symbol, line, "subsubsection"))
+                line = section(symbol, line, "subsubsection")
             case rules.paragraph | rules.paragraphn:
-                out_file.write(section(symbol, line, "paragraph"))
+                line = section(symbol, line, "paragraph")
             case rules.subparagraph | rules.subparagraphn:
-                out_file.write(section(symbol, line, "subparagraph"))
+                line = section(symbol, line, "subparagraph")
             case _:
                 if line.startswith(rules.paragraph_math): # math mode
                     ignore = mathsec(
@@ -80,13 +84,16 @@ def body(
                             cur,
                             out_file
                         )
+                    continue
                 elif line.startswith(rules.bquote):
                     ignore = quotation(
                             rules,
+                            replacements,
                             ref_tex,
                             cur,
                             out_file
                         )
+                    continue
                 elif line.startswith(rules.code): # for code blocks
                     ignore = listings(
                             rules.code,
@@ -95,6 +102,7 @@ def body(
                             ref_tex,
                             out_file
                         )
+                    continue
                 else:
                     skip_line: bool = figure(
                             rules.image,
@@ -103,10 +111,10 @@ def body(
                             out_file
                         )
                     if not skip_line:
-                        line = (
-                                format(rules, line, line.split())
-                                    .replace("_", r"\_")
-                            )
-                        out_file.write(f"\n{line}\n")
+                        line = f"\n{line}\n"
+                    else:
+                        continue
+
+        out_file.write(format(rules, replacements, line, line.split()))
 
     return files

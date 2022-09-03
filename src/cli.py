@@ -1,9 +1,9 @@
 from argparse import ArgumentParser
 from subprocess import CalledProcessError, Popen
-from typing import Any, Callable
+from typing import Callable
 
 from src.utils.config_fetch import ConfParse
-from src.convert import convert
+from src.utils.convert import convert
 from src.mutils.build_tex import build_file
 from src.mutils.update_conf import update_conf
 from src.utils.logger import Logger
@@ -15,15 +15,15 @@ class Cli:
     def __init__(self) -> None:
         self.log: Logger = Logger()
         conf_parse: ConfParse = ConfParse(self.log)
-        self.config, self.rules = conf_parse.fetched_conf()
+        self.config, self.rules, self.replacement = conf_parse.fetched_conf()
 
         description: str = (
-                "Convert your mardown or text lectures"
-                " into LaTeX/pdf with one command.!"
+                "Convert your mardown or text files"
+                " into PDF using LaTeX with one command!"
             )
         self.parser: ArgumentParser = ArgumentParser(
                 prog="simtex",
-                usage="simtex [OPTIONS]",
+                usage="simtex [OPTIONS] [INPUT] FILE [ARGUMENTS]",
                 description=description
             )
 
@@ -151,10 +151,12 @@ class Cli:
         # update the config for overrides
         update_conf(self.log, self.config, self.args)
 
-        converter: Callable[..., Any] = lambda: convert(
+        converter: Callable[[],str] = lambda: convert(
                 self.log,
+                self.args,
                 self.rules,
                 self.config,
+                self.replacement,
                 self.args.title,
                 self.args.input,
                 self.args.filenametitle
@@ -162,32 +164,32 @@ class Cli:
 
         try:
             if self.args.convert:
-                converter()
+                output_filename: str = converter()
                 print(
                     "\033[34mINFO \033[0m\t To compile the output, you "
-                    "can overleaf: \033[36mhttps://www.overleaf.com/ "
-                    "\033[0muse (not sponsored) to compile the output."
+                    "use can overleaf: \033[36mhttps://www.overleaf.com/"
+                    "\033[0m (not sponsored) to compile the output."
                 )
             elif self.args.build:
-                converter()
+                output_filename = converter()
                 build_file(
                     self.log,
                     self.config.compiler,
                     self.config.output_folder,
-                    self.config.filename,
+                    output_filename,
                     self.args.verbose
                 )
             elif self.args.buildnview:
-                converter()
+                output_filename = converter()
                 build_file(
                     self.log,
                     self.config.compiler,
                     self.config.output_folder,
-                    self.config.filename,
+                    output_filename,
                     self.args.verbose
                 )
                 try:
-                    Popen(["xgd-open", self.args.filename])
+                    Popen(["xgd-open", output_filename])
                 except FileNotFoundError:
                     self.log.logger(
                         "e", "No PDF viewer found, cannot view PDF file."
@@ -199,4 +201,10 @@ class Cli:
         except CalledProcessError as Err:
             self.log.logger(
                 "E", f"CalledProcessError: {Err}, aborting ..."
+            )
+        else:
+            print(
+                f"\033[34mINFO\033[0m\t File {self.args.input}"
+                f" converted successfully and can be found in:"
+                f" \033[1;36m{output_filename}\033[0m."
             )

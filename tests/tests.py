@@ -1,7 +1,7 @@
 import unittest
 from os.path import expanduser
 
-from src.config import Config, Rules
+from src.config import Config, Replacements, Rules
 
 from src.utils.config_fetch import ConfParse
 from src.utils.logger import Logger
@@ -13,8 +13,8 @@ class TestCases(unittest.TestCase):
     def setUp(self) -> None:
         self.log: Logger = Logger()
         conf_parser: ConfParse = ConfParse(self.log, True)
-        self.config: Config; self.rules: Rules
-        self.config, self.rules = conf_parser.fetched_conf()
+        self.config: Config; self.rules: Rules; self.replacement: Replacements
+        self.config, self.rules, self.replacement = conf_parser.fetched_conf()
 
     def test_config(self) -> None:
         """Test case for config."""
@@ -57,10 +57,10 @@ class TestCases(unittest.TestCase):
                 author="John Doe",
                 date="<NOW>",
                 make_title=True,
-                filename="a.tex",
                 output_folder="out",
                 compiler="pdflatex",
-                encode="UTF8"
+                encode="UTF8",
+                replace=True
             ),
             self.config
         )
@@ -90,8 +90,8 @@ class TestCases(unittest.TestCase):
                 paragraphn="####*",
                 subparagraph="#####",
                 subparagraphn="#####*",
-                inline_math="$",
                 paragraph_math="$$",
+                inline_math=["$", "\\$(.*?)\\$"],
                 inline_code=["`", "`(.*?)`"],
                 bold=["**", "\\*\\*(.*?)\\*\\*"],
                 emph=["!*", "!\\*(.*?)!\\*"],
@@ -106,4 +106,45 @@ class TestCases(unittest.TestCase):
             self.rules
         )
 
+    def test_replacements(self) -> None:
+        """Test case for replacements."""
 
+        self.assertEqual(
+            Replacements(
+                replacements={
+                    "-->": "\\longrightarrow",
+                    "<--": "\\longleftarrow",
+                    "===": "\\equiv",
+                    "~==": "\\approxeq",
+                    "<<": "\\ll",
+                    "<=": "\\leq",
+                    ">=": "\\geq",
+                    ".=": "\\doteq",
+                    "~~": "\\approx",
+                    "~=": "\\simeq",
+                    "~~=": "\\cong",
+                    ">>": "\\gg",
+                    "+-": "\\pm",
+                    "./.": "\\div",
+                    "-+": "\\mp",
+                    "|>": "\\triangleleft",
+                    "<|": "\\triangleright",
+                    "<-": "\\leftarrow",
+                    "->": "\\rightarrow",
+                    "<->": "\\leftrightarrow",
+                    "<==": "\\Leftarrow",
+                    "==>": "\\Rightarrow",
+                    "<=>": "\\Leftrightarrow",
+                    "|->": "\\mapsto",
+                    "===>": "\\Longrightarrow",
+                    "<===": "\\Longleftarrow",
+                    "<===>": "\\Longleftrightarrow",
+                    "~~>": "\\leadsto",
+                    "...": "\\dots",
+                    ":::": "\\vdots",
+                    "^...": "\\cdots",
+                    "^.": "\\cdots"
+                }
+            ),
+            self.replacement
+        )

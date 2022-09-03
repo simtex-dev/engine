@@ -113,6 +113,5 @@ def headings(
         log.logger(
             "E", f"{Err}. Cannot write headings to file, aborting ..."
         )
-        raise SystemExit
 
     return len(headings)+CONST # 11 is the number of newlines created.

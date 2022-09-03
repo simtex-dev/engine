@@ -4,6 +4,7 @@ from subprocess import (
     CalledProcessError,
     DEVNULL
 )
+from typing import NoReturn
 
 from src.utils.logger import Logger
 
@@ -14,7 +15,7 @@ def build_file(
         output_folder: str,
         filename: str,
         verbose: bool
-    ) -> None:
+    ) -> None | NoReturn:
     """Build the LaTeX file using pdflatex, if exists.
 
     Args:
@@ -26,7 +27,7 @@ def build_file(
 
     if which(compiler) is None:
         log.logger(
-            "e", f"{compiler} does not exists, cannot build file."
+            "E", f"{compiler} does not exists, cannot build file."
         )
         raise SystemExit
 
@@ -55,6 +56,6 @@ def build_file(
             "\033[34mINFO\033[0m\t Try updating "
             "the compiler parameter in simtex.json"
         )
+        raise SystemExit
 
-
-
+    return None

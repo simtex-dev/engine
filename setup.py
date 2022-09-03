@@ -31,7 +31,7 @@ with open("README.md", "r", encoding="utf-8") as desc:
 
 setup(
     name="simtex",
-    version="v0.3.2.2-beta",
+    version="0.3.3-beta",
     description=(
             "Convert your markdown or text files"
             " into LaTeX/pdf with one command!"

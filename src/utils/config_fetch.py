@@ -4,7 +4,7 @@ from pathlib import Path
 from json import JSONDecodeError, load
 from typing import IO, Any, NoReturn, Optional
 
-from src.config import Config, Rules
+from src.config import Config, Rules, Replacements
 from src.mutils.fix_missing_conf import fix_missing_config
 from src.utils.logger import Logger
 
@@ -40,6 +40,7 @@ class ConfParse:
                     self.log.logger(
                         "E", f"{Err}. Cannot create: {paths}, aborting ..."
                     )
+                    raise SystemExit
 
         if not exists(f"{self.CONF_PATH}/simtex.json"):
             fix_missing_config(
@@ -62,7 +63,7 @@ class ConfParse:
                 True
             )
 
-    def _fetch(self) -> list[dict[str, Any]]:
+    def _fetch(self) -> list[dict[str, Any]] | NoReturn:
         """Fetch the values from config file.
 
         Returns:
@@ -86,6 +87,7 @@ class ConfParse:
             self.log.logger(
                 "E", f"{Err}. Cannot fetch config file, aborting ..."
             )
+            raise SystemExit
 
         return raw_conf
 
@@ -96,7 +98,7 @@ class ConfParse:
             The dataclass of rules with updated values.
         """
 
-        raw_conf: dict[str, Any] = self._fetch()[0]
+        raw_conf: dict[str, Any] = self.raw_conf_[0]
 
         return Rules(
             raw_conf["FOR"],
@@ -113,8 +115,8 @@ class ConfParse:
             f"{raw_conf['PARAGRAPH']}*",
             raw_conf["SUBPARAGRAPH"],
             f"{raw_conf['SUBPARAGRAPH']}*",
-            raw_conf["INLINE_MATH"],
             raw_conf["PARAGRAPH_MATH"],
+            raw_conf["INLINE_MATH"],
             raw_conf["INLINE_CODE"],
             raw_conf["BOLD"],
             raw_conf["ITALICS"],
@@ -134,7 +136,7 @@ class ConfParse:
             The dataclass of config with update values.
         """
 
-        raw_conf: dict[str, Any] = self._fetch()[1]
+        raw_conf: dict[str, Any] = self.raw_conf_[1]
 
         return Config(
             raw_conf["DOC_CLASS"],
@@ -157,13 +159,25 @@ class ConfParse:
             raw_conf["AUTHOR"],
             raw_conf["DATE"],
             raw_conf["MAKE_TITLE"],
-            raw_conf["FILE_NAME"],
             raw_conf["OUTPUT_FOLDER"],
             raw_conf["COMPILER"],
-            raw_conf["ENCODE"]
+            raw_conf["ENCODE"],
+            raw_conf["REPLACE"]
         )
 
-    def fetched_conf(self) -> tuple[Config, Rules] | NoReturn:
+    def _replacements(self) -> Replacements:
+        """Fetch the data of the replacements for some math symbols
+        defined in the config file.
+
+        Returns:
+            The updated dataclass with the data of the replacements.
+        """
+
+        raw_conf: dict[str, Any] = self.raw_conf_[2]
+
+        return Replacements(raw_conf)
+
+    def fetched_conf(self) -> tuple[Config, Rules, Replacements] | NoReturn:
         """Fetch the values from config file, and give fallback method
         for its respective function.
 
@@ -173,8 +187,10 @@ class ConfParse:
 
         for _ in range(3):
             try:
+                self.raw_conf_ = self._fetch()
                 config_values: Config = self._conf()
                 rules_values: Rules = self._rules()
+                replacements: Replacements = self._replacements()
             except KeyError as Err:
                 fix_missing_config(
                     self.log,
@@ -188,7 +204,7 @@ class ConfParse:
                 )
                 continue
             else:
-                return config_values, rules_values
+                return config_values, rules_values, replacements
 
         self.log.logger(
             "E", "There is an error with in the config file, aborting ..."
