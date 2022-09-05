@@ -34,17 +34,16 @@ def mathsec(
                 end = mline+1+start
                 break
 
+            eqs = eqs.replace("\n", "").strip()
             if "&" not in eqs:
                 if "=" in eqs and "\\text{" not in eqs:
                     eqs = eqs.replace("=", "&=", 1)
                 else:
                     eqs = f"&{eqs}"
 
-            eqs = eqs.replace("\n", "").strip()
-
             terminator: str
-            for terminator in ["--\\", "--", "\\--"]:
-                if eqs.endswith(terminator) or eqs.startswith("\\text{"):
+            for terminator in [r"--\\", r"--", r"\\--"]:
+                if eqs.startswith((r"&\text", r"\text")) or eqs.endswith(terminator):
                     eqs = eqs.removesuffix(terminator)
                     eqs = f"{eqs} \\nonumber"
                     break
