@@ -95,7 +95,7 @@
         "OUTPUT_FOLDER": "out",
         "COMPILER": "pdflatex",
         "ENCODE": "UTF8",
-        "REPLACE": true
+        "REPLACE": false
     },
     {
         "-->": "\\longrightarrow",

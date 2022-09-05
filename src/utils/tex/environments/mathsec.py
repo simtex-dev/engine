@@ -35,15 +35,32 @@ def mathsec(
                 break
 
             if "&" not in eqs:
-                eqs = eqs.replace("=", "&=", 1)
+                if "=" in eqs:
+                    eqs = eqs.replace("=", "&=", 1)
+                else:
+                    eqs = f"&{eqs}"
 
             eqs = eqs.replace("\n", "").strip()
-            if not eqs.endswith(r"\\"):
-                maths.append(f"{eqs} \\\\\n")
-            else:
-                maths.append(f"{eqs}\n")
 
-        maths[-1] = maths[-1].replace("\\\\\n", "\n")
+            terminator: str
+            for terminator in ["--\\", "--", "\\--"]:
+                if eqs.endswith(terminator) or eqs.startswith("\\text{"):
+                    eqs = eqs.strip().removesuffix(terminator)
+                    eqs = f"{eqs} \\nonumber"
+                    break
+
+            if not eqs.endswith(r"\\"):
+                eqs = f"{eqs} \\\\\n"
+            else:
+                eqs = f"{eqs} \n"
+
+            maths.append(eqs)
+
+        try:
+            maths[-1] = maths[-1].replace("\\\\\n", "\n")
+        except IndexError:
+            pass
+
         for eqs in maths:
             out_file.write(f"\t{eqs}")
 
