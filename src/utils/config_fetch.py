@@ -99,6 +99,7 @@ class ConfParse:
         """
 
         raw_conf: dict[str, Any] = self.raw_conf_[0]
+        nonum: str = raw_conf["NONUM"]
 
         return Rules(
             raw_conf["FOR"],
@@ -106,15 +107,15 @@ class ConfParse:
             raw_conf["IMAGE"],
             raw_conf["LINKS"],
             raw_conf["SECTION"],
-            f"{raw_conf['SECTION']}*",
+            f"{raw_conf['SECTION']}{nonum}",
             raw_conf["SUBSECTION"],
-            f"{raw_conf['SUBSECTION']}*",
+            f"{raw_conf['SUBSECTION']}{nonum}",
             raw_conf["SUBSUBSECTION"],
-            f"{raw_conf['SUBSUBSECTION']}*",
+            f"{raw_conf['SUBSUBSECTION']}{nonum}",
             raw_conf["PARAGRAPH"],
-            f"{raw_conf['PARAGRAPH']}*",
+            f"{raw_conf['PARAGRAPH']}{nonum}",
             raw_conf["SUBPARAGRAPH"],
-            f"{raw_conf['SUBPARAGRAPH']}*",
+            f"{raw_conf['SUBPARAGRAPH']}{nonum}",
             raw_conf["PARAGRAPH_MATH"],
             raw_conf["INLINE_MATH"],
             raw_conf["INLINE_CODE"],
@@ -126,7 +127,8 @@ class ConfParse:
             raw_conf["SUBSCRIPT"],
             raw_conf["ULINE"],
             raw_conf["QUOTE"],
-            raw_conf["BQUOTE"]
+            raw_conf["BQUOTE"],
+            nonum
         )
 
     def _conf(self) -> Config:

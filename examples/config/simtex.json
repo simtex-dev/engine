@@ -53,7 +53,8 @@
             "\"",
             "\"(.*?)\""
         ],
-        "BQUOTE": ">"
+        "BQUOTE": ">",
+        "NONUM": "*"
     },
     {
         "DOC_CLASS": "article",

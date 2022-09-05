@@ -59,6 +59,7 @@ class Rules:
     uline: list[str]
     quote: list[str]
     bquote: str
+    nonum: str
 
 
 @dataclass
