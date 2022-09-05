@@ -3,6 +3,7 @@ from os.path import exists
 from re import sub
 from typing import NoReturn
 
+from src.mutils.prompts import prompt
 from src.utils.logger import Logger
 
 
@@ -10,7 +11,8 @@ def fix_file_path(
         log: Logger,
         in_file: str,
         output_folder: str,
-        filename: str
+        filename: str,
+        assume_yes: bool
     ) -> str | NoReturn:
     """Update the path of the output file if there are any errors or
     exceptions that is deemed to be encountered.
@@ -19,6 +21,7 @@ def fix_file_path(
         log -- for logging.
         output_folder -- where the file will be written.
         filename -- name of the file that will be written.
+        assume_yes -- whether to assume yes or not.
 
     Returns:
         The path of the file, or raises systemexit.
@@ -43,12 +46,14 @@ def fix_file_path(
         file_path = f"{output_folder}/{filename.removesuffix('.tex')}.tex"
 
     if exists(file_path):
-        match input(
+        match prompt(
                 (
-                    f"\033[1mINPT\033[0m\t File: {file_path} exists "
-                    "overwrite (y), abort (n), or rename (r)? [y/n/r] "
-                )
-            ).lower():
+                    f"File: {file_path} exists overwrite (y)"
+                    ", abort (n), or rename (r)? [y/n/r] "
+                ),
+                assume_yes,
+                True
+            ):
             case "y":
                 log.logger(
                     "I",

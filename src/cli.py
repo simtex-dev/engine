@@ -14,8 +14,7 @@ class Cli:
 
     def __init__(self) -> None:
         self.log: Logger = Logger()
-        conf_parse: ConfParse = ConfParse(self.log)
-        self.config, self.rules, self.replacement = conf_parse.fetched_conf()
+        self.conf_parse: ConfParse = ConfParse(self.log)
 
         description: str = (
                 "Convert your mardown or text files"
@@ -158,8 +157,16 @@ class Cli:
         """Commandline interface of the program."""
 
         self.create_parser() # create the arguments
+        self.config, self.rules, self.replacement = (
+                self.conf_parse.fetched_conf(
+                    self.args.assumeyes
+                )
+            )
+
         # update the config for overrides
-        update_conf(self.log, self.config, self.args)
+        update_conf(
+            self.log, self.config, self.args, self.args.assumeyes
+        )
 
         converter: Callable[[],str] = lambda: convert(
                 self.log,

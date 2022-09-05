@@ -2,11 +2,12 @@ from difflib import SequenceMatcher as SeqMatch
 from typing import Any
 
 from src.config import Config
+from src.mutils.prompts import prompt
 from src.utils.logger import Logger
 
 
 def update_conf(
-        log: Logger, config: Config, args: Any
+        log: Logger, config: Config, args: Any, assume_yes: bool
     ) -> None:
     """Update the overrides of the program.
 
@@ -15,6 +16,7 @@ def update_conf(
         config -- configuration of the document metadata, which includes,
             formatting, packages to use among others, refer to simtex.json.
         args -- overrides received from arguments.
+        assume_yes -- whether to assume yes or not.
     """
 
     if args.compiler is not None and args.compiler not in (
@@ -29,9 +31,10 @@ def update_conf(
                 pos_compilers.index(max(pos_compilers))
             ]
 
-        if input(
-                f"\033[1mINPT\033[0m\t Did you mean {compiler}? [y/n] "
-            ).lower() == "y":
+        if prompt(
+                f"\033[1mINPT\033[0m\t Did you mean {compiler}? [y/n] ",
+                assume_yes
+            ):
             args.compiler = compiler
         else:
             args.compiler = "pdflatex"

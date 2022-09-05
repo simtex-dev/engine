@@ -181,9 +181,14 @@ class ConfParse:
 
         return Replacements(raw_conf)
 
-    def fetched_conf(self) -> tuple[Config, Rules, Replacements] | NoReturn:
+    def fetched_conf(
+            self, assume_yes: bool
+        ) -> tuple[Config, Rules, Replacements] | NoReturn:
         """Fetch the values from config file, and give fallback method
         for its respective function.
+
+        Args:
+            assume_yes -- whether to assume yes or not.
 
         Returns:
             Both of the parsed data from the raw JSON config file.
@@ -203,6 +208,7 @@ class ConfParse:
                         f" fetching the new config file from development ..."
                     ),
                     self.CONF_PATH,
+                    assume_yes,
                     conf=True,
                     missing=False
                 )
