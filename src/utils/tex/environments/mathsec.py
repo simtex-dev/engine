@@ -51,7 +51,13 @@ def mathsec(
             else:
                 eqs = f"{eqs} \n"
 
-        maths[-1] = maths[-1].replace("\\\\\n", "\n")
+            maths.append(eqs)
+
+        try:
+            maths[-1] = maths[-1].replace("\\\\\n", "\n")
+        except IndexError:
+            pass
+
         for eqs in maths:
             out_file.write(f"\t{eqs}")
 
