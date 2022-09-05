@@ -60,7 +60,7 @@ class TestCases(unittest.TestCase):
                 output_folder="out",
                 compiler="pdflatex",
                 encode="UTF8",
-                replace=True
+                replace=False
             ),
             self.config
         )
@@ -101,7 +101,8 @@ class TestCases(unittest.TestCase):
                 subscript=["-^", "-\\^(.*?)-\\^"],
                 uline=["._", "._(.*?)._"],
                 quote=["\"", "\"(.*?)\""],
-                bquote=">"
+                bquote=">",
+                nonum="*"
             ),
             self.rules
         )
