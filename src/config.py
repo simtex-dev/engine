@@ -27,6 +27,8 @@ class Config:
     compiler: str
     encode: str
     replace: bool
+    twocols: bool
+    assume_yes: bool
 
 
 @dataclass(frozen=True)

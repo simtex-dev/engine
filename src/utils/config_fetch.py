@@ -164,7 +164,9 @@ class ConfParse:
             raw_conf["OUTPUT_FOLDER"],
             raw_conf["COMPILER"],
             raw_conf["ENCODE"],
-            raw_conf["REPLACE"]
+            raw_conf["REPLACE"],
+            raw_conf["TWOCOLS"],
+            raw_conf["ASSUME_YES"]
         )
 
     def _replacements(self) -> Replacements:
