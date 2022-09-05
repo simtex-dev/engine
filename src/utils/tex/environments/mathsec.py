@@ -42,11 +42,14 @@ def mathsec(
                     eqs = f"&{eqs}"
 
             terminator: str
-            for terminator in [r"--\\", r"--", r"\\--"]:
-                if eqs.startswith((r"&\text", r"\text")) or eqs.endswith(terminator):
+            for terminator in [r"--\\", "--", r"\\--"]:
+                if eqs.endswith(terminator):
                     eqs = eqs.removesuffix(terminator)
                     eqs = f"{eqs} \\nonumber"
                     break
+
+            if eqs.startswith((r"&\text", r"\text")):
+                eqs = f"{eqs} \\nonumber"
 
             if not eqs.endswith(r"\\"):
                 eqs = f"{eqs} \\\\\n"
