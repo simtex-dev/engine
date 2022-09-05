@@ -97,7 +97,7 @@
         "COMPILER": "pdflatex",
         "ENCODE": "UTF8",
         "REPLACE": false,
-        "TWOCOLS": true,
+        "TWOCOLS": false,
         "ASSUME_YES": false
     },
     {
