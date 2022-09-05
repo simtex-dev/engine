@@ -133,6 +133,11 @@ class Cli:
             help="Show the stdout of processes.",
             action="store_true"
         )
+        self.parser.add_argument(
+            "-y", "--assumeyes",
+            help="Assume yes to every prompt.",
+            action="store_true"
+        )
 
     def create_parser(self) -> None:
         """Create the parser."""
