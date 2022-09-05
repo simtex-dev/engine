@@ -17,9 +17,9 @@ features, and not HTML tags.
 
 ```
 ❯ simtex --help
-usage: simtex [OPTIONS]
+usage: simtex [OPTIONS] [INPUT] FILE [ARGUMENTS]
 
-Convert your markdown or text files into LaTeX/pdf with one command!
+Convert your mardown or text files into PDF using LaTeX with one command!
 
 options:
   -h, --help            show this help message and exit
@@ -37,6 +37,7 @@ options:
                         Margin size to be used.
   -e ENCODING, --encoding ENCODING
                         Use a different encoding for the document.
+  -tc, --twocolumns     Use two columns in the document.
   -i INPUT, --input INPUT
                         File to be converted into LaTeX.
   -T TITLE, --title TITLE
@@ -52,6 +53,7 @@ options:
                         Use a different LaTeX compiler.
   -ft, --filenametitle  Use the filename as title.
   -v, --verbose         Show the stdout of processes.
+  -y, --assumeyes       Assume yes to every prompt.
 ```
 
 # Features
