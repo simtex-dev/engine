@@ -35,7 +35,10 @@ def mathsec(
                 break
 
             if "&" not in eqs:
-                eqs = eqs.replace("=", "&=", 1)
+                if "=" in eqs:
+                    eqs = eqs.replace("=", "&=", 1)
+                else:
+                    eqs = f"&{eqs}"
 
             eqs = eqs.replace("\n", "").strip()
 
