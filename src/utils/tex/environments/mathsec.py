@@ -41,8 +41,8 @@ def mathsec(
 
             terminator: str
             for terminator in ["--\\", "--", "\\--"]:
-                if eqs.endswith(terminator):
-                    eqs = eqs.removesuffix(terminator)
+                if eqs.endswith(terminator) or eqs.startswith("\\text{"):
+                    eqs = eqs.strip().removesuffix(terminator)
                     eqs = f"{eqs} \\nonumber"
                     break
 
