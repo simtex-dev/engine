@@ -26,8 +26,8 @@ def quotation(
 
     out_file.write("\n\\begin{displayquote}\n")
 
-    end: int; quote: str
-    for end, quote in enumerate(sources[start:]):
+    cur: int; quote: str
+    for cur, quote in enumerate(sources[start:]):
         if not quote.startswith(rules.bquote):
             out_file.write("\\end{displayquote}\n")
             break
@@ -40,5 +40,5 @@ def quotation(
                 )
             out_file.write(f"\t{line}\n")
 
-    return end+start
+    return cur+start
 

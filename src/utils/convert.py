@@ -16,9 +16,6 @@ def convert(
         rules: Rules,
         config: Config,
         replacement: Replacements,
-        title: str,
-        in_file: str,
-        filenametitle: bool,
     ) -> str | NoReturn:
     """This unifies all the modules.
 
@@ -29,19 +26,23 @@ def convert(
         config -- configuration of the document metadata, which includes,
             formatting, packages to use among others, refer to simtex.json.
         replacements -- math symbols that will be replaced with latex commands.
-        title -- title of the document.
-        in_file -- path of the file to be converted to LaTeX.
 
     Returns:
         The filepath of the output file.
     """
 
-    log.logger("I", f"Converting {in_file} ...")
+    log.logger("I", f"Converting {args.in_file} ...")
 
-    title = fix_title(log, title, in_file, filenametitle, args.assumeyes)
+    title = fix_title(
+            log,
+            args.title,
+            args.in_file,
+            args.filenametitle,
+            args.assumeyes
+        )
     OFILE_PATH: str = fix_file_path(
             log,
-            in_file,
+            args.in_file,
             config.output_folder,
             args.filename,
             args.assumeyes
@@ -52,11 +53,11 @@ def convert(
         with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
             start: int = headings(log, config, title, out_file)
             files: list[str] = body(
-                    log, rules, replacement, in_file, out_file
+                    log, rules, replacement, args.in_file, out_file
                 )
 
         format_body(log, config, start, OFILE_PATH)
-        finalize(log, files, config.output_folder, in_file)
+        finalize(log, files, config.output_folder, args.in_file)
     except (IOError, PermissionError) as Err:
         log.logger(
             "E", f"{Err}. Cannot convert the file to LaTeX, aborting ..."

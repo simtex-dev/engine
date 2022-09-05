@@ -29,12 +29,12 @@ def listings(
             "\n\\begin{lstlisting}\n"
         )
 
-    code: str; cline: int
-    for cline, code in enumerate(source[start+1:]):
+    code: str; cur: int
+    for cur, code in enumerate(source[start+1:]):
         if code.strip() == rule:
             out_file.write("\end{lstlisting}\n")
             break
 
         out_file.write(code)
 
-    return cline+start+1
+    return cur+start+1

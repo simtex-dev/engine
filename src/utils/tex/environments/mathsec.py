@@ -28,43 +28,43 @@ def mathsec(
     if line.strip() == rule: # for align
         out_file.write("\n\\begin{align}\n")
 
-        eqs: str; mline: int
-        for mline, eqs in enumerate(source[start+1:]):
-            if eqs.strip() == rule:
-                end = mline+1+start
+        eq: str; cur: int
+        for cur, eq in enumerate(source[start+1:]):
+            if eq.strip() == rule:
+                end = cur+1+start
                 break
 
-            eqs = eqs.replace("\n", "").strip()
-            if "&" not in eqs:
-                if "=" in eqs and "\\text{" not in eqs:
-                    eqs = eqs.replace("=", "&=", 1)
+            eq = eq.replace("\n", "").strip()
+            if "&" not in eq:
+                if "=" in eq and "\\text{" not in eq:
+                    eq = eq.replace("=", "&=", 1)
                 else:
-                    eqs = f"&{eqs}"
+                    eq = f"&{eq}"
 
             terminator: str
             for terminator in [r"--\\", "--", r"\\--"]:
-                if eqs.endswith(terminator):
-                    eqs = eqs.removesuffix(terminator)
-                    eqs = f"{eqs} \\nonumber"
+                if eq.endswith(terminator):
+                    eq = eq.removesuffix(terminator)
+                    eq = f"{eq} \\nonumber"
                     break
 
-            if eqs.startswith((r"&\text", r"\text")):
-                eqs = f"{eqs} \\nonumber"
+            if eq.startswith((r"&\text", r"\text")):
+                eq = f"{eq} \\nonumber"
 
-            if not eqs.endswith(r"\\"):
-                eqs = f"{eqs} \\\\\n"
+            if not eq.endswith(r"\\"):
+                eq = f"{eq} \\\\\n"
             else:
-                eqs = f"{eqs} \n"
+                eq = f"{eq} \n"
 
-            maths.append(eqs)
+            maths.append(eq)
 
         try:
             maths[-1] = maths[-1].replace("\\\\\n", "\n")
         except IndexError:
             pass
 
-        for eqs in maths:
-            out_file.write(f"\t{eqs}")
+        for eq in maths:
+            out_file.write(f"\t{eq}")
 
         out_file.write("\\end{align}\n")
     else:
