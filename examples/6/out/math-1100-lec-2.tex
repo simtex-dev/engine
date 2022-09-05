@@ -78,19 +78,19 @@
 	
 	Golden Ratio, also known as Divine Proportion exists when a line is divided into two parts and the ratio of the longer part, $a$, to shorter part, $b$, is equal to the ratio of the sum $a+b$ to $a$:
 	
-	The value of Golden Ratio is given by the irrational number (cannot be expressed by ratio of two whole numbers), $\Phi = 1.6180339887$:
+	The value of Golden Ratio is given by the irrational number (cannot be expressed by ratio of two whole numbers), $\Phi = 1.6180339887$, that can be derived as:
 	
 	\begin{align}
 		\frac{a}{b} &= \frac{a + b}{a} = \Phi  \nonumber \\
-		\Phi &= \frac{a}{b} and \Phi = \frac{a+b}{a}  \nonumber \\
-		&\text{From $\Phi \frac{a}{b}$, we get $\frac{1}{\Phi} \frac{b}{a}$}  \nonumber \\
-		&\text{Using $\Phi \frac{a+b}{a}$}  \nonumber \\
+		&\text{$\Phi = \frac{a}{b}$ and $\Phi = \frac{a+b}{a}$}  \nonumber \nonumber \\
+		&\text{From $\Phi = \frac{a}{b}$, we get $\frac{1}{\Phi} = \frac{b}{a}$}  \nonumber \nonumber \\
+		&\text{Using $\Phi \frac{a+b}{a}$}  \nonumber \nonumber \\
 		\Phi &= \frac{a}{a} + \frac{b}{a}  \nonumber \\
 		&= 1 + \frac{b}{a}  \nonumber \\
 		&= 1 + \frac{1}{\Phi}  \nonumber \\
 		\Phi^{2} &= \Phi + 1  \nonumber \\
 		\Phi^{2} - \Phi -1 &= 0  \nonumber \\
-		&\text{Solving the quadratic equation:}  \nonumber \\
+		&\text{Solving the quadratic equation:}  \nonumber \nonumber \\
 		\Phi &= \frac{1 + \sqrt{5}}{2} = 1.6180339887... 
 	\end{align}
 	
@@ -160,42 +160,56 @@
 		P(t) = \frac{K}{1 + Ae^{-kt}}
 	\end{equation}
 	
-	Where $P(t)$ is the population after time, $t$. $K$ is the constraint or the limiting value, $k$ is the relative growth rate coefficient, $P_{0}$ is the initial population at $t = 0$, and $A$:
+	Where $P(t)$ is the population after time, $t$. $K$ is the constraint or the limiting value, $k$ is the relative growth rate coefficient, $P_{0}$ is the initial population at $t = 0$, and $A = \frac{K - P_{0}}{P_{0}}$. Then, $P(t)$ is:
 	
 	\begin{equation}
-		A = \frac{K - P_{0}}{P_{0}}
+		P(t) = \frac{K}{1 + \big(\frac{K - P_{0}}{P_{0}}\big)e^{-kt}}
 	\end{equation}
 	
-	Then, $P(t)$ is:
-	
-	\begin{equation}
-		P(t) = \frac{K}{1 + \bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt}}
-	\end{equation}
-	
-	In missing $t$:
+	In missing $t$, $t$ can be isolated by:
 	
 	\begin{align}
-		P(t) &= \frac{K}{1 + \bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt}}  \nonumber \\
-		P(t) \cdot 1 + \bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt} &= K  \nonumber \\
-		1 + \bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt} &= \frac{K}{P(t)}  \nonumber \\
-		\bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt} &= \frac{K}{P(t)} - 1  \nonumber \\
-		e^{-kt} &= \frac{\frac{K}{P(t)} - 1}{\bigg(\frac{K - P_{0}}{P_{0}}\bigg)} \longrightarrow \frac{\frac{K}{P(t)} - 1}{A} \\
-		&= \frac{\frac{K - P(t)}{P(t)}}{A}  \nonumber \\
-		e^{-kt} &= \frac{K - P(t)}{P(t) \cdot A}  \nonumber \\
-		ln(e^{-kt}) &= ln\bigg(\frac{K - P(t)}{P(t) \cdot A}\bigg)  \nonumber \\
-		-kt &= ln\bigg(\frac{K - P(t)}{P(t) \cdot A}\bigg) 
+		P(t) &= \frac{K}{1 + \Big(\frac{K - P_{0}}{P_{0}}\Big)e^{-kt}}  \nonumber \\
+		K &= P(t) \cdot 1 + \Big(\frac{K - P_{0}}{P_{0}}\Big)e^{-kt}  \nonumber \\
+		\frac{K}{P(t)} &= 1 + \Big(\frac{K - P_{0}}{P_{0}}\Big)e^{-kt}  \nonumber 
+	\end{align}
+	
+	Then subtracting $1$ to the other side of the equation:
+	
+	\begin{equation}
+		\Big(\frac{K - P_{0}}{P_{0}}\Big)e^{-kt} = \frac{K}{P(t)} - 1
+	\end{equation}
+	
+	Let $\frac{K - P_{0}}{P_0} = A$:
+	
+	\begin{align}
+		e^{-kt} &= \frac{\frac{K}{P(t)} - 1}{\big(\frac{K - P_{0}}{P_{0}}\big)} \longrightarrow \frac{\frac{K}{P(t)} - 1}{A} \\ 
+		&= \frac{\frac{K - P(t)}{P(t)}}{A} 
+	\end{align}
+	
+	Simplifying, $\frac{K}{P(t)} -1 = \frac{K - P(t)}{P(t)}$:
+	
+	\begin{align}
+		e^{-kt} &= \frac{K - P(t)}{P(t) \cdot A} 
+	\end{align}
+	
+	And taking the natural logarithm of both sides, since: $ln_{e} X = Y \longrightarrow e^{y} = X$
+	
+	\begin{align}
+		ln(e^{-kt}) &= ln\big(\frac{K - P(t)}{P(t) \cdot A}\big)  \nonumber \\
+		-kt &= ln\big(\frac{K - P(t)}{P(t) \cdot A}\big) 
 	\end{align}
 	
 	Then with the equation, we can easily find $t$:
 	
 	\begin{equation}
-		\boldsymbol{t} = \boldsymbol{ln\bigg(\frac{K - P(t)}{P(t) \cdot A}\bigg) \cdot \frac{1}{|-k|}}
+		\boldsymbol{t} = \boldsymbol{ln\big(\frac{K - P(t)}{P(t) \cdot A}\big) \cdot \frac{1}{|-k|}}
 	\end{equation}
 	
 	And $k$:
 	
 	\begin{equation}
-		\boldsymbol{-k} = \boldsymbol{ln\bigg(\frac{K - P(t)}{P(t) \cdot A}\bigg) \cdot \frac{1}{t}}
+		\boldsymbol{-k} = \boldsymbol{ln\big(\frac{K - P(t)}{P(t) \cdot A}\big) \cdot \frac{1}{t}}
 	\end{equation}
 	
 	\subsubsection*{Exponential Decay}
@@ -212,19 +226,19 @@
 	
 	\begin{align}
 		e^{-rt} &= \frac{P(t)}{P_{0}}  \nonumber \\
-		-rt &= ln\bigg(\frac{P(t)}{P_{0}}\bigg)  \nonumber 
+		-rt &= ln\big(\frac{P(t)}{P_{0}}\big)  \nonumber 
 	\end{align}
 	
 	Then we can find $t$ as:
 	
 	\begin{equation}
-		t = ln\bigg(\bigg[\frac{P(t)}{P_{0}}\bigg]\bigg) \frac{1}{|-r|}
+		t = ln\big(\big[\frac{P(t)}{P_{0}}\big]\big) \frac{1}{|-r|}
 	\end{equation}
 	
 	And $r$ as:
 	
 	\begin{equation}
-		-r = ln\bigg(\bigg[\frac{P(t)}{P_{0}}\bigg]\bigg) \frac{1}{t}
+		-r = ln\big(\big[\frac{P(t)}{P_{0}}\big]\big) \frac{1}{t}
 	\end{equation}
 
 \end{document}
