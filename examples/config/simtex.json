@@ -97,7 +97,8 @@
         "COMPILER": "pdflatex",
         "ENCODE": "UTF8",
         "REPLACE": false,
-        "TWOCOLS": true
+        "TWOCOLS": true,
+        "ASSUME_YES": false
     },
     {
         "-->": "\\longrightarrow",
