@@ -14,7 +14,9 @@ class TestCases(unittest.TestCase):
         self.log: Logger = Logger()
         conf_parser: ConfParse = ConfParse(self.log, True)
         self.config: Config; self.rules: Rules; self.replacement: Replacements
-        self.config, self.rules, self.replacement = conf_parser.fetched_conf()
+        self.config, self.rules, self.replacement = (
+                conf_parser.fetched_conf(assume_yes=True)
+            )
 
     def test_config(self) -> None:
         """Test case for config."""
@@ -60,7 +62,9 @@ class TestCases(unittest.TestCase):
                 output_folder="out",
                 compiler="pdflatex",
                 encode="UTF8",
-                replace=False
+                replace=False,
+                twocols=False,
+                assume_yes=False
             ),
             self.config
         )
