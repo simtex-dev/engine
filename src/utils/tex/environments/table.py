@@ -24,7 +24,7 @@ def table(
         An integer that denotes what line to skip.
     """
 
-    out_file.write("\\begin{center}\n")
+    out_file.write("\n\\begin{center}\n")
 
     cur: int; row: str
     for cur, row in enumerate(source[start:]):
@@ -38,7 +38,7 @@ def table(
 
         if isinstance(parsed, tuple):
             cols: str = " | ".join(["c" for _ in parsed[1]])
-            out_file.write(f"\n\t\\begin{{tabular}}{{{cols}}}\n")
+            out_file.write(f"\t\\begin{{tabular}}{{{cols}}}\n")
         elif isinstance(parsed, str):
             out_file.write(f"\t\t{parsed}\n")
 
