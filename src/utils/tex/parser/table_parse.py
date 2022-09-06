@@ -29,4 +29,4 @@ def table_parse(start: int, line: str) -> str | tuple[int, list[str]]:
     elif Counter(line)["-"] > 3:
         return r"\hline"
 
-    return item
+    return sub(r"\n{2,10}", r"\n", item).strip()
