@@ -39,6 +39,8 @@ def convert(
             args.in_file,
             args.filenametitle,
             args.assumeyes
+        ).replace(
+            "_", r"\_"
         )
     OFILE_PATH: str = fix_file_path(
             log,
