@@ -17,7 +17,7 @@ def table_parse(start: int, line: str) -> str | tuple[int, list[str]]:
             " +",
             " ",
             (
-                line
+                line.strip()
                     .removesuffix("|")
                     .removeprefix("|")
                     .replace("|", " & ")
