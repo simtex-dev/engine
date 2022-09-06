@@ -52,7 +52,7 @@ def fix_file_path(
                     ", abort (n), or rename (r)? [y/n/r] "
                 ),
                 assume_yes,
-                True
+                other_cases=True
             ):
             case "y":
                 log.logger(
