@@ -19,7 +19,11 @@ def find_module(PATH: str = "src") -> list[str]:
     root: str; dir: str | list[str]
     for root, _, dir in walk(PATH):
         for file in dir:
-            if file.endswith(".py") and not file.endswith("__init__.py"):
+            if (
+                    file.endswith(".py")
+                    and file != "__init__.py"
+                    and not file.endswith(".pyc")
+                ):
                 modules.append(join(root, file).removesuffix(".py"))
 
     return modules
@@ -31,7 +35,7 @@ with open("README.md", "r", encoding="utf-8") as desc:
 
 setup(
     name="simtex",
-    version="0.3.3.1-beta",
+    version="0.3.3.2-beta",
     description=(
             "Convert your markdown or text files"
             " into LaTeX/pdf with one command!"
