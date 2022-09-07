@@ -36,12 +36,20 @@ def table(
         formatted_row: str = format(
                 rules, replacements, row, row.split("|")
             )
-        parsed: str | tuple[int, list[str]] = table_parse(cur, formatted_row)
+        parsed: str | tuple[
+                int, list[str]
+            ] = table_parse(cur, formatted_row)
+
         if isinstance(parsed, tuple):
             cols: str = " | ".join(["c" for _ in parsed[1]])
-            out_file.write(f"\t\\begin{{tabular}}{{{cols}}}")
+            line: str = (
+                    f"\t\\begin{{tabular}}{{{cols}}}"
+                    f"\n\t\t{parsed[2]} \\\\"
+                )
         elif isinstance(parsed, str):
-            out_file.write(f"\n\t\t{parsed} \\\\")
+            line = f"\n\t\t{parsed} \\\\"
+
+        out_file.write(line)
 
     out_file.write("\n\t\\end{tabular}\n\\end{center}\n")
     return end
