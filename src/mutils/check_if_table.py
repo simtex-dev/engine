@@ -1,22 +1,21 @@
 from collections import Counter
 
 
-def check_if_table(start: int, source: list[str]) -> bool:
+def check_if_table(cur_line: str, sec_line: str) -> bool:
     """Check if the line is a beginning of a table.
 
+    This works by evaluating if the current line and the second
+    line contains a marker of a table, which is | and ---.
+
     Args:
-        start -- where the parser/translator would start.
-        source -- where the other lines of table may be found
+        cur_line -- the current line.
+        sec_line -- the line after the current line.
 
     Returns:
         Whether the line is a beginning of table or not.
     """
 
-    cur: int; table: str
-    for cur, table in enumerate(source[start:]):
-        # determine if the set of lines is
-        # table using "-" and "|" as marker
-        if Counter(table)["|"] > 1 and Counter(source[cur+1])["-"] > 1:
-            return True
+    if Counter(cur_line)["|"] > 1 and Counter(sec_line)["-"] > 3:
+        return True
 
     return False
