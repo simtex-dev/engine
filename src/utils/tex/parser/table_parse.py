@@ -2,7 +2,7 @@ from re import sub
 from collections import Counter
 
 
-def table_parse(start: int, line: str) -> str | tuple[int, list[str]]:
+def table_parse(start: int, line: str) -> str | tuple[int, list[str], str]:
     """Parse the list of strings evaluated to be as table.
 
     Args:
@@ -23,10 +23,11 @@ def table_parse(start: int, line: str) -> str | tuple[int, list[str]]:
                     .replace("|", " & ")
             )
         )
+    item = sub(r"\n{2,10}", r"\n", item).strip()
     if start == 0:
         items: list[str] = item.split("&")
-        return len(items), [item.strip() for item in items]
+        return len(items), [item.strip() for item in items], item
     elif Counter(line)["-"] > 3:
         return r"\hline"
 
-    return sub(r"\n{2,10}", r"\n", item).strip()
+    return item
