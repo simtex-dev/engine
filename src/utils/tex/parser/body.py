@@ -2,6 +2,8 @@ from re import sub
 from typing import Callable, TextIO
 
 from src.config import Rules, Replacements
+from src.mutils.check_if_table import check_if_table
+from src.utils.tex.environments.table import table
 from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.figure import figure
 from src.utils.tex.environments.quotes import quotation
@@ -111,9 +113,16 @@ def body(
                             out_file
                         )
                     if not skip_line:
-                        line = f"\n{line}\n"
-                    else:
-                        continue
+                        try:
+                            if check_if_table(ref_tex[cur], ref_tex[cur+1]):
+                                ignore = table(
+                                        rules, replacements, cur, ref_tex, out_file
+                                    )
+                                continue
+                            else:
+                                line = f"\n{line}\n"
+                        except IndexError:
+                            pass
 
         out_file.write(format(rules, replacements, line, line.split()))
 
