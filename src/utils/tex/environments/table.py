@@ -1,8 +1,10 @@
+from collections import Counter
 from typing import TextIO
 
 from src.config import Rules, Replacements
 from src.utils.tex.text.format import format
 from src.utils.tex.parser.table_parse import table_parse
+
 
 def table(
         rules: Rules,
@@ -28,19 +30,18 @@ def table(
 
     cur: int; row: str
     for cur, row in enumerate(source[start:]):
-        if "|" not in row:
-            end: int = cur+start
+        if Counter(row)["|"] < 1:
+            end: int = cur+start+2
 
         formatted_row: str = format(
                 rules, replacements, row, row.split("|")
             )
         parsed: str | tuple[int, list[str]] = table_parse(cur, formatted_row)
-
         if isinstance(parsed, tuple):
             cols: str = " | ".join(["c" for _ in parsed[1]])
-            out_file.write(f"\t\\begin{{tabular}}{{{cols}}}\n")
+            out_file.write(f"\t\\begin{{tabular}}{{{cols}}}")
         elif isinstance(parsed, str):
-            out_file.write(f"\t\t{parsed}\n")
+            out_file.write(f"\n\t\t{parsed} \\\\")
 
-    out_file.write("\t\\end{tabular}\n\\end{center}\n")
+    out_file.write("\n\t\\end{tabular}\n\\end{center}\n")
     return end
