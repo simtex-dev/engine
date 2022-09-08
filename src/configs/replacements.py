@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Replacements:
     """Replacement of some math symbols and their respective LaTeX commands."""
 
