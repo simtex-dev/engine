@@ -1,6 +1,7 @@
 from typing import TextIO
 
-from src.config import Rules, Replacements
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
 from src.utils.tex.text.format import format
 
 

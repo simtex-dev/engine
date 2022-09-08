@@ -1,8 +1,9 @@
 import unittest
 from os.path import expanduser
 
-from src.config import Config, Replacements, Rules
-
+from src.configs.config import Config
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
 from src.utils.config_fetch import ConfParse
 from src.utils.logger import Logger
 

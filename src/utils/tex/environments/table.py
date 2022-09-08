@@ -1,7 +1,8 @@
 from collections import Counter
 from typing import TextIO
 
-from src.config import Rules, Replacements
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
 from src.utils.tex.text.format import format
 from src.utils.tex.parser.table_parse import table_parse
 

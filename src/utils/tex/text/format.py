@@ -1,7 +1,8 @@
 from re import findall
 from typing import Callable
 
-from src.config import Replacements, Rules
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
 from src.mutils.check_if_eq import check_if_eq
 
 

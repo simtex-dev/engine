@@ -1,6 +1,8 @@
 from typing import Any, TextIO, NoReturn
 
-from src.config import Config, Replacements, Rules
+from src.configs.config import Config
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
 from src.utils.tex.parser.headings import headings
 from src.utils.tex.parser.body import body
 from src.mutils.format_body import format_body

@@ -4,7 +4,9 @@ from pathlib import Path
 from json import JSONDecodeError, load
 from typing import IO, Any, NoReturn, Optional
 
-from src.config import Config, Rules, Replacements
+from src.configs.config import Config
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
 from src.mutils.fix_missing_conf import fix_missing_config
 from src.utils.logger import Logger
 

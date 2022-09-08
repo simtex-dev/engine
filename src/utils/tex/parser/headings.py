@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import IO, Any, TextIO
 
-from src.config import Config
+from src.configs.config import Config
 from src.utils.logger import Logger
 
 
