@@ -29,6 +29,10 @@ class Config:
     replace: bool
     twocols: bool
     assume_yes: bool
+    hline: bool
+    hline_ec: int
+    collinec: int
+    thead_for: str
 
 
 @dataclass(frozen=True)
