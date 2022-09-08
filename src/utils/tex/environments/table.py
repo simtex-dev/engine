@@ -38,7 +38,7 @@ def table(
                 rules, replacements, row, row.split("|")
             )
         parsed: str | tuple[
-                int, list[str]
+                int, list[str], str
             ] = table_parse(cur, formatted_row)
 
         if isinstance(parsed, tuple):
