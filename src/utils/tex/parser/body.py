@@ -1,6 +1,8 @@
 from re import sub
 from typing import Callable, TextIO
 
+from autocorrect import Speller
+
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
 from src.mutils.check_if_table import check_if_table
@@ -17,6 +19,7 @@ def body(
         log: Logger,
         rules: Rules,
         replacements: Replacements,
+        autocorrect: bool,
         in_file: str,
         out_file: TextIO
     ) -> list[str]:
@@ -26,12 +29,15 @@ def body(
         log -- for logging.
         rules -- rules that needs to be followed in translation.
         replacements -- math symbols that will be replaced with latex commands.
+        autocorrect -- whether to toggle autocorrect.
         in_file -- path of the file to be converted to LaTeX.
         out_file -- where the translated line will be written.
 
     Returns:
         A list of files found in the input file.
     """
+
+    spell: Speller = Speller()
 
     log.logger("I", "Writing the body to the document ...")
 
@@ -121,7 +127,10 @@ def body(
                                     )
                                 continue
                             else:
-                                line = f"\n{line}\n"
+                                if autocorrect:
+                                    line = f"\n{spell(line)}\n"
+                                else:
+                                    line = f"\n{line}\n"
                         except IndexError:
                             pass
 

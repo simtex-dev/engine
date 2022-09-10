@@ -178,7 +178,8 @@ class Cli:
                 self.args,
                 self.rules,
                 self.config,
-                self.replacement
+                self.replacement,
+                self.args.autocorrect
             )
 
         try:

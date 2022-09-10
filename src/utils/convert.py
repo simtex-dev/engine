@@ -18,6 +18,7 @@ def convert(
         rules: Rules,
         config: Config,
         replacement: Replacements,
+        autocorrect: bool = False
     ) -> str | NoReturn:
     """This unifies all the modules.
 
@@ -28,6 +29,7 @@ def convert(
         config -- configuration of the document metadata, which includes,
             formatting, packages to use among others, refer to simtex.json.
         replacements -- math symbols that will be replaced with latex commands.
+        autocorrect -- whether to toggle autocorrect.
 
     Returns:
         The filepath of the output file.
@@ -57,7 +59,12 @@ def convert(
         with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
             start: int = headings(log, config, title, out_file)
             files: list[str] = body(
-                    log, rules, replacement, args.input, out_file
+                    log,
+                    rules,
+                    replacement,
+                    autocorrect,
+                    args.input,
+                    out_file
                 )
 
         format_body(log, config, start, OFILE_PATH)
