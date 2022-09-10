@@ -142,6 +142,11 @@ class Cli:
             help="Assume yes to every prompt.",
             action="store_true"
         )
+        self.parser.add_argument(
+            "-A", "--autocorrect",
+            help="Apply autocorrection in wrong spellings.",
+            action="store_true"
+        )
 
     def create_parser(self) -> None:
         """Create the parser."""
