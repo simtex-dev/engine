@@ -123,7 +123,11 @@ def body(
                         try:
                             if check_if_table(ref_tex[cur], ref_tex[cur+1]):
                                 ignore = table(
-                                        rules, replacements, cur, ref_tex, out_file
+                                        rules,
+                                        replacements,
+                                        cur,
+                                        ref_tex,
+                                        out_file
                                     )
                                 continue
                             else:
