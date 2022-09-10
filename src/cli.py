@@ -162,6 +162,7 @@ class Cli:
         """Commandline interface of the program."""
 
         self.create_parser() # create the arguments
+        print(self.args.assumeyes)
         self.config, self.rules, self.replacement = (
                 self.conf_parse.fetched_conf(
                     self.args.assumeyes

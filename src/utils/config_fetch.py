@@ -188,7 +188,7 @@ class ConfParse:
         return Replacements(raw_conf)
 
     def fetched_conf(
-            self, assume_yes: bool
+            self, assume_yes: bool = False
         ) -> tuple[Config, Rules, Replacements] | NoReturn:
         """Fetch the values from config file, and give fallback method
         for its respective function.

@@ -17,10 +17,12 @@ def prompt(
         return True
     else:
         ans: bool | str
-        if (ans := input(f"\033[1mINPT\033[0m\t {msg}").lower()) == "y":
+        if (
+                ans := input(f"\033[1mINPT\033[0m\t {msg}").lower().strip()
+            ) == "y":
             if not other_cases:
                 return True
             else:
-                return ans.strip()
+                return ans
 
     return False

@@ -47,7 +47,7 @@ def fix_missing_config(
             )
         filename = "code_conf.txt"
 
-    if prompt(
+    if not prompt(
             (
                 "Config is missing. Download the base config (\033[36m"
                 f"{filename}\033[0m) from \033[36m{link}\033[0m? [y/n] "
