@@ -31,15 +31,23 @@ def table(
 
     cur: int; row: str
     for cur, row in enumerate(source[start:]):
-        if Counter(row)["|"] < 1:
-            end: int = cur+start+2
+        row = row.replace("\n", "").strip()
 
-        formatted_row: str = format(
-                rules, replacements, row, row.split("|")
-            )
+        if row.strip() in ["\n", ""]:
+            end: int = cur+start
+            break
+
         parsed: str | tuple[
                 int, list[str], str
-            ] = table_parse(cur, formatted_row)
+            ] = table_parse(
+                cur,
+                format(
+                    rules,
+                    replacements,
+                    row,
+                    row.split("|")
+                )
+            )
 
         if isinstance(parsed, tuple):
             cols: str = " | ".join(["c" for _ in parsed[1]])
@@ -51,7 +59,7 @@ def table(
             if parsed == r"\hline":
                 line = f"\n\t\t{parsed}"
             else:
-                line = f"\n\t\t{parsed} \\\\"
+                line = f"\n\t\t{parsed} \\\\\n"
 
         out_file.write(line)
 
