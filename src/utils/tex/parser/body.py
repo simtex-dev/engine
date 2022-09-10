@@ -1,7 +1,7 @@
 from re import sub
 from typing import Callable, TextIO
 
-from autocorrect import Speller
+from autocorrect import Speller # type: ignore
 
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
@@ -37,7 +37,7 @@ def body(
         A list of files found in the input file.
     """
 
-    spell: Speller = Speller()
+    spell = Speller()
 
     log.logger("I", "Writing the body to the document ...")
 
