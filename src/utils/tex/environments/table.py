@@ -48,7 +48,10 @@ def table(
                     f"\n\t\t{parsed[2]} \\\\"
                 )
         elif isinstance(parsed, str):
-            line = f"\n\t\t{parsed} \\\\"
+            if parsed == r"\hline":
+                line = f"\n\t\t{parsed}"
+            else:
+                line = f"\n\t\t{parsed} \\\\"
 
         out_file.write(line)
 
