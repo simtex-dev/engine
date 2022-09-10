@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 
-@dataclass(frozen=True)
+@dataclass
 class Config:
     """Dataclass for configuration of the document
     file, its metadata and the program itself.
