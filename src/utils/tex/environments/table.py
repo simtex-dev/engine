@@ -11,6 +11,7 @@ def table(
         rules: Rules,
         replacements: Replacements,
         start: int,
+        replace_math_symb: bool,
         source: list[str],
         out_file: TextIO
     ) -> int:
@@ -20,6 +21,7 @@ def table(
         rules: Rules -- rules that needs to be followed in translation.
         replacements -- math symbols that will be replaced with latex commands.
         start -- where the parser/translator would start.
+        replace_math_symb -- whether to replace the math symbols.
         source -- where the other rows would be found.
         out_file -- where the translated line will be written.
 
@@ -45,7 +47,8 @@ def table(
                     rules,
                     replacements,
                     row,
-                    row.split("|")
+                    row.split("|"),
+                    replace_math_symb
                 )
             )
 

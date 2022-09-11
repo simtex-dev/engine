@@ -130,6 +130,7 @@ def body(
                                         rules,
                                         replacements,
                                         cur,
+                                        replace_math_symb,
                                         ref_tex,
                                         out_file
                                     )
