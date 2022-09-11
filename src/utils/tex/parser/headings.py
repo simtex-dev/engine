@@ -45,7 +45,7 @@ def headings(
             (
                 "\documentclass"
                 f"[{config.font_size}pt,"
-                f"{config.encode}]"
+                f" {config.encode}]"
                 f"{{{config.doc_class}}}\n"
             ),
             (
@@ -59,13 +59,13 @@ def headings(
     if config.date == "<NOW>":
         config.__setattr__("date", datetime.now().strftime("%B %d, %Y"))
 
-    pkgs: str
-    for pkgs in config.packages:
-        if isinstance(pkgs, list):
+    pkgs_: str
+    for pkgs_ in config.packages:
+        if isinstance(pkgs_, list):
             try:
-                if pkgs[0] == "geometry":
-                    pkgs = (
-                            pkgs
+                if pkgs_[0] == "geometry":
+                    param: str = (
+                            pkgs_[1]
                                 .replace(
                                     "<MARGIN>",
                                     f"{config.margin}in"
@@ -75,19 +75,21 @@ def headings(
                                     config.paper_size
                                 )
                         )
-                elif pkgs[0] == "hyperref":
-                    pkgs = pkgs.replace(
+                elif pkgs_[0] == "hyperref":
+                    param = pkgs_[1].replace(
                             "<LINK_COLORS>",
                             config.link_color
                         )
+                else:
+                    param = pkgs_[1]
 
-                pkgs = f"[{pkgs[1]}]{{{pkgs}}}"
+                pkg = f"[{param}]{{{pkgs_[0]}}}"
             except IndexError:
                 continue
         else:
-            pkgs = f"{{{pkgs}}}"
+            pkg = f"{{{pkgs_}}}"
 
-        headings.append(f"\\usepackage{pkgs}")
+        headings.append(f"\\usepackage{pkg}")
 
     headings.append(
         (
