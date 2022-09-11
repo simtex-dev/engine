@@ -34,11 +34,11 @@ $$
 
 Any two successive numbers in Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21, ...) have a very close ratio to the golden ratio:
 
-$$
-\frac{5}{3} = 1.6667 --
-\frac{8}{5} = 1.6000 --
-\frac{13}{8} = 1.6250 --
-\frac{21}{13} = 1.6154 --
+$$--
+\frac{5}{3} = 1.6667
+\frac{8}{5} = 1.6000
+\frac{13}{8} = 1.6250
+\frac{21}{13} = 1.6154
 $$
 
 Fibonacci spiral is also a good approximation of spirals that are present in nature such as nautilus shell, hurricanes and the human ear.
