@@ -52,7 +52,7 @@ def table(
         if isinstance(parsed, tuple):
             cols: str = " | ".join(["c" for _ in parsed[1]])
             line: str = (
-                    f"\t\\begin{{tabular}}{{{cols}}}"
+                    f"\t\\begin{{tabular}}{{| {cols} |}}"
                     f"\n\t\t{parsed[2]} \\\\"
                 )
         elif isinstance(parsed, str):
