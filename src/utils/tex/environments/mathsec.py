@@ -25,8 +25,13 @@ def mathsec(
 
     maths: list[str] = []
 
-    if line.strip() == rule: # for align
-        out_file.write("\n\\begin{align}\n")
+    if line.strip() == rule or line.strip() in [f"{rule}--", f"{rule} --"]: # for align
+        if line.strip().endswith("--"):
+            align_env: str = "align*"
+        else:
+            align_env = "align"
+
+        out_file.write(f"\n\\begin{{{align_env}}}\n")
 
         eq: str; cur: int
         for cur, eq in enumerate(source[start+1:]):
@@ -66,7 +71,7 @@ def mathsec(
         for eq in maths:
             out_file.write(f"\t{eq}")
 
-        out_file.write("\\end{align}\n")
+        out_file.write(f"\\end{{{align_env}}}\n")
     else:
         end = start+1
         out_file.write(
