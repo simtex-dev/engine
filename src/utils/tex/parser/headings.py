@@ -52,14 +52,22 @@ def headings(
 
     pkgs: str
     for pkgs in config.packages:
-        if "margin" in pkgs:
-            pkgs = (
-                    pkgs
-                        .replace("<MARGIN>", f"{config.margin}in")
-                        .replace("<PAPER_SIZE>", config.paper_size)
-                )
-        elif "colorlinks" in pkgs:
-            pkgs = pkgs.replace("<LINK_COLORS>", config.link_color)
+        if isinstance(pkgs, list):
+            try:
+                if pkgs[0] == "geometry":
+                    pkgs = (
+                            pkgs
+                                .replace("<MARGIN>", f"{config.margin}in")
+                                .replace("<PAPER_SIZE>", config.paper_size)
+                        )
+                elif pkgs[0] == "hyperref":
+                    pkgs = pkgs.replace("<LINK_COLORS>", config.link_color)
+
+                pkgs = f"[{pkgs[1]}]{{{pkgs}}}"
+            except IndexError:
+                pass
+        else:
+            pkgs = f"{{{pkgs}}}"
 
         headings.append(f"\\usepackage{pkgs}")
 
