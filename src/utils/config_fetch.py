@@ -168,11 +168,7 @@ class ConfParse:
             raw_conf["ENCODE"],
             raw_conf["REPLACE"],
             raw_conf["TWOCOLS"],
-            raw_conf["ASSUME_YES"],
-            raw_conf["HLINE"],
-            raw_conf["HLINE_ENDING_COUNT"],
-            raw_conf["COLUMNLINE_COUNT"],
-            raw_conf["TABLE_HEAD_FORMAT"]
+            raw_conf["ASSUME_YES"]
         )
 
     def _replacements(self) -> Replacements:

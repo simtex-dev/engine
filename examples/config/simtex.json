@@ -98,11 +98,7 @@
         "ENCODE": "UTF8",
         "REPLACE": false,
         "TWOCOLS": false,
-        "ASSUME_YES": false,
-        "HLINE": true,
-        "HLINE_ENDING_COUNT": 1,
-        "COLUMNLINE_COUNT": 1,
-        "TABLE_HEAD_FORMAT": "bold"
+        "ASSUME_YES": false
     },
     {
         "-->": "\\longrightarrow",

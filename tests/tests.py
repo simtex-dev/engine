@@ -65,11 +65,7 @@ class TestCases(unittest.TestCase):
                 encode="UTF8",
                 replace=False,
                 twocols=False,
-                assume_yes=False,
-                hline=True,
-                hline_ec=1,
-                collinec=1,
-                thead_for="bold"
+                assume_yes=False
             ),
             self.config
         )
