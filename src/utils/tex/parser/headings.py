@@ -42,9 +42,18 @@ def headings(
         }
 
     headings: list[str] = [
-            f"\documentclass[{config.font_size}pt, "
-            f"{config.encode}]{{{config.doc_class}}}\n",
-            f"% font\n\\usepackage{{{config.doc_font}}}\n\n% packages"
+            (
+                "\documentclass"
+                f"[{config.font_size}pt,"
+                f"{config.encode}]"
+                f"{{{config.doc_class}}}\n"
+            ),
+            (
+                "% font\n"
+                "\\usepackage"
+                f"{{{config.doc_font}}}"
+                "\n\n% packages"
+            )
         ]
 
     if config.date == "<NOW>":
@@ -57,22 +66,35 @@ def headings(
                 if pkgs[0] == "geometry":
                     pkgs = (
                             pkgs
-                                .replace("<MARGIN>", f"{config.margin}in")
-                                .replace("<PAPER_SIZE>", config.paper_size)
+                                .replace(
+                                    "<MARGIN>",
+                                    f"{config.margin}in"
+                                )
+                                .replace(
+                                    "<PAPER_SIZE>",
+                                    config.paper_size
+                                )
                         )
                 elif pkgs[0] == "hyperref":
-                    pkgs = pkgs.replace("<LINK_COLORS>", config.link_color)
+                    pkgs = pkgs.replace(
+                            "<LINK_COLORS>",
+                            config.link_color
+                        )
 
                 pkgs = f"[{pkgs[1]}]{{{pkgs}}}"
             except IndexError:
-                pass
+                continue
         else:
             pkgs = f"{{{pkgs}}}"
 
         headings.append(f"\\usepackage{pkgs}")
 
     headings.append(
-        f"\\usepackage[scaled={config.cfont_scale}]{{{config.code_font}}}"
+        (
+            "\\usepackage"
+            f"[scaled={config.cfont_scale}]"
+            f"{{{config.code_font}}}"
+        )
     )
 
     sec_sizes: str | int; sec_val: str
@@ -82,31 +104,52 @@ def headings(
         if str(sec_sizes) == "<DEF>":
             CONST -= 1
         else:
-            headings.append(sec_val.replace("<SECTION_SIZES>", str(sec_sizes)))
+            headings.append(
+                sec_val.replace(
+                    "<SECTION_SIZES>",
+                    str(sec_sizes)
+                )
+            )
 
-    headings.append(
-        f"\n% basic config\n\setlength\parindent{{{config.indent_size}pt}}"
-    )
-    headings.append(
-        f"\\renewcommand{{\\thefootnote}}{{\\fnsymbol{{{config.footnote}}}}}"
+    headings.extend(
+        [
+            (
+                "\n% basic config"
+                "\n\setlength"
+                "\parindent"
+                f"{{{config.indent_size}pt}}"
+            ),
+            (
+                f"\\renewcommand{{\\thefootnote}}"
+                f"{{\\fnsymbol{{{config.footnote}}}}}"
+            )
+        ]
     )
 
     if config.sloppy:
         headings.append(r"\sloppy")
 
-    lstconf: IO[Any]
-    with open(config.code_conf, "r", encoding="utf-8") as lstconf:
-        headings.append("\n%\ lst listings config")
-        for lines in lstconf.readlines():
-            headings.append(lines.replace("\n", ""))
+    try:
+        lstconf: IO[Any]
+        with open(config.code_conf, "r", encoding="utf-8") as lstconf:
+            headings.append("\n%\ lst listings config")
+            for lines in lstconf.readlines():
+                headings.append(lines.replace("\n", ""))
+    except (FileNotFoundError, PermissionError) as Err:
+        log.logger(
+            "e", f"{Err}. Cannot read code config file, skipping ..."
+        )
 
-    items: str
-    for items in [
-            f"\n% paper info\n\\title{{{title}}}",
+    headings.extend(
+        [
+            (
+                "\n% paper info\n"
+                f"\\title{{{title}}}"
+            ),
             f"\\author{{{config.author}}}",
             f"\date{{{config.date}}}"
-        ]:
-        headings.append(items)
+        ]
+    )
 
     try:
         log.logger("I", "Writing headings to file ...")
@@ -121,5 +164,6 @@ def headings(
         log.logger(
             "E", f"{Err}. Cannot write headings to file, aborting ..."
         )
+        raise SystemExit
 
     return len(headings)+CONST # 11 is the number of newlines created.
