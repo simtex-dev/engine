@@ -52,7 +52,6 @@ class Cli:
             "-i", "--input",
             help="File to be converted into LaTeX.",
             action="store",
-            required=True
         )
         self.parser.add_argument(
             "-T", "--title",
@@ -153,7 +152,7 @@ class Cli:
             action="store_true"
         )
         self.parser.add_argument(
-            "-v", "--version",
+            "--version",
             help="Print the version number of the application.",
             action="store_true"
         )
@@ -170,37 +169,39 @@ class Cli:
 
     def cli(self) -> None:
         """Commandline interface of the program."""
-
         self.create_parser() # create the arguments
-        print(self.args.assumeyes)
-        self.config, self.rules, self.replacement = (
-                self.conf_parse.fetched_conf(
-                    self.args.assumeyes
-                )
-            )
-
-        # update the config for overrides
-        update_conf(
-            self.log, self.config, self.args, self.args.assumeyes
-        )
-
-        converter: Callable[[],str] = lambda: convert(
-                self.log,
-                self.args,
-                self.rules,
-                self.config,
-                self.replacement,
-                self.args.autocorrect
-            )
 
         try:
             if self.args.convert or self.args.build or self.args.buildnview:
+                self.config, self.rules, self.replacement = (
+                    self.conf_parse.fetched_conf(
+                            self.args.assumeyes
+                        )
+                )
+
+                # update the config for overrides
+                update_conf(
+                    self.log, self.config, self.args, self.args.assumeyes
+                )
+
+                converter: Callable[[],str] = lambda: convert(
+                        self.log,
+                        self.args,
+                        self.rules,
+                        self.config,
+                        self.replacement,
+                        self.args.autocorrect
+                    )
+
                 files: list[str] = converter()
+
             elif self.args.version:
-                print(f"Simtex version: {self.__version__}")
+                print(f"Simtex version: {self.__version__}.")
                 raise SystemExit
+
             else:
                 self.log.logger("E", "Unknown option.")
+
         except KeyboardInterrupt:
             self.log.logger("E", "Operation interrupted, aborting ...")
         except CalledProcessError as Err:
