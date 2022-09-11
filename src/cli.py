@@ -17,9 +17,11 @@ class Cli:
         self.conf_parse: ConfParse = ConfParse(self.log)
 
         description: str = (
-                "Convert your mardown or text files"
-                " into PDF using LaTeX with one command!"
-            )
+            "Convert your markdown or text files"
+            " into LaTeX/pdf with one command!\n"
+            "Interop with LaTeX and markdown is "
+            "also allowed by simtex!"
+        )
         self.parser: ArgumentParser = ArgumentParser(
                 prog="simtex",
                 usage="simtex [OPTIONS] [INPUT] FILE [ARGUMENTS]",
