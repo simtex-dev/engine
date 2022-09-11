@@ -1,28 +1,7 @@
 from setuptools import setup
-from os import walk
-from os.path import join
 from typing import TextIO
 
-
-def find_module(PATH: str = "src") -> list[str]:
-    """Find modules in the given path.
-
-    Args:
-        PATH -- where to look from.
-
-    Returns:
-        The list of all modules found.
-    """
-
-    modules: list[str] = []
-
-    root: str; dir: str | list[str]
-    for root, _, dir in walk(PATH):
-        for file in dir:
-            if file.endswith(".py") and not file.endswith("__init__.py"):
-                modules.append(join(root, file).removesuffix(".py"))
-
-    return modules
+from setup_utils import get_dependencies, find_module
 
 
 desc: TextIO
@@ -48,11 +27,7 @@ setup(
     license="GPL v3",
     py_modules=find_module(),
     python_requires=">=3.10",
-    install_requires=[
-            "rich==12.4.4",
-            "requests==2.28.1",
-            "autocorrect==2.6.1"
-        ],
+    install_requires=get_dependencies("requirements.txt"),
     classifiers=[
             "Development Status :: 4 - Beta",
             "Programming Language :: Python :: 3.10",
@@ -66,4 +41,5 @@ setup(
         ]
     },
 )
+
 
