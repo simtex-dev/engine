@@ -5,6 +5,7 @@ from typing import Callable
 from src.utils.config_fetch import ConfParse
 from src.utils.convert import convert
 from src.mutils.update_conf import update_conf
+from src.metadata.info import PkgInfo
 from src.utils.logger import Logger
 
 
@@ -12,7 +13,6 @@ class Cli:
     """Commandline interface of the program."""
 
     def __init__(self) -> None:
-        self.__version__ = "0.4.0-beta"
         self.log: Logger = Logger()
         self.conf_parse: ConfParse = ConfParse(self.log)
 
@@ -198,7 +198,7 @@ class Cli:
                 files: list[str] = converter()
 
             elif self.args.version:
-                print(f"Simtex version: {self.__version__}.")
+                print(f"Simtex version: {PkgInfo.__version__}.")
                 raise SystemExit
 
             else:
