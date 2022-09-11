@@ -25,7 +25,7 @@ def headings(
     """
 
     CONST: int = 12
-    SECTIONS: dict[str, str] = {
+    sections: dict[str, str] = {
             "main": (
                     "\n%\ size config of sections"
                     "\n\sectionfont{\\fontsize{"
@@ -69,7 +69,7 @@ def headings(
 
     sec_sizes: str | int; sec_val: str
     for sec_sizes, sec_val in zip(
-            config.section_sizes.values(), SECTIONS.values()
+            config.section_sizes.values(), sections.values()
         ):
         if str(sec_sizes) == "<DEF>":
             CONST -= 1
