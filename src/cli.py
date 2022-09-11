@@ -190,36 +190,7 @@ class Cli:
 
         try:
             if self.args.convert:
-                output_filename: str = converter()
-                print(
-                    "\033[34mINFO \033[0m\t To compile the output, you "
-                    "use can overleaf: \033[36mhttps://www.overleaf.com/"
-                    "\033[0m (not sponsored) to compile the output."
-                )
-            elif self.args.build:
-                output_filename = converter()
-                build_file(
-                    self.log,
-                    self.config.compiler,
-                    self.config.output_folder,
-                    output_filename,
-                    self.args.verbose
-                )
-            elif self.args.buildnview:
-                output_filename = converter()
-                build_file(
-                    self.log,
-                    self.config.compiler,
-                    self.config.output_folder,
-                    output_filename,
-                    self.args.verbose
-                )
-                try:
-                    Popen(["xgd-open", output_filename])
-                except FileNotFoundError:
-                    self.log.logger(
-                        "e", "No PDF viewer found, cannot view PDF file."
-                    )
+                files: list[str] = converter()
             else:
                 self.log.logger("E", "Unknown option.")
         except KeyboardInterrupt:
@@ -230,7 +201,6 @@ class Cli:
             )
         else:
             print(
-                f"\033[34mINFO\033[0m\t File {self.args.input}"
-                f" converted successfully and can be found in:"
-                f" \033[1;36m{output_filename}\033[0m."
+                f"\033[34mINFO\033[0m\t File(s) {self.args.input} converted "
+                f"successfully and can be found in \033[1;36m{files}\033[0m."
             )
