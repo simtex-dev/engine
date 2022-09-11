@@ -184,7 +184,7 @@ class Cli:
                     self.log, self.config, self.args, self.args.assumeyes
                 )
 
-                converter: Callable[[],str] = lambda: convert(
+                converter: Callable[[], list[str]] = lambda: convert(
                         self.log,
                         self.args,
                         self.rules,
