@@ -85,6 +85,9 @@ def headings(
 
                 pkg = f"[{param}]{{{pkgs_[0]}}}"
             except IndexError:
+                log.logger(
+                    "e", f"Error detected in package: {pkgs_}, skipping ..."
+                )
                 continue
         else:
             pkg = f"{{{pkgs_}}}"
