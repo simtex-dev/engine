@@ -1,10 +1,9 @@
 from argparse import ArgumentParser
-from subprocess import CalledProcessError, Popen
+from subprocess import CalledProcessError
 from typing import Callable
 
 from src.utils.config_fetch import ConfParse
 from src.utils.convert import convert
-from src.mutils.build_tex import build_file
 from src.mutils.update_conf import update_conf
 from src.utils.logger import Logger
 
@@ -13,6 +12,7 @@ class Cli:
     """Commandline interface of the program."""
 
     def __init__(self) -> None:
+        self.__version__ = "0.4.0-beta"
         self.log: Logger = Logger()
         self.conf_parse: ConfParse = ConfParse(self.log)
 
@@ -152,6 +152,11 @@ class Cli:
             help="Automatically replace math symbols defined.",
             action="store_true"
         )
+        self.parser.add_argument(
+            "-v", "--version",
+            help="Print the version number of the application.",
+            action="store_true"
+        )
 
     def create_parser(self) -> None:
         """Create the parser."""
@@ -191,6 +196,9 @@ class Cli:
         try:
             if self.args.convert or self.args.build or self.args.buildnview:
                 files: list[str] = converter()
+            elif self.args.version:
+                print(f"Simtex version: {self.__version__}")
+                raise SystemExit
             else:
                 self.log.logger("E", "Unknown option.")
         except KeyboardInterrupt:
