@@ -4,6 +4,7 @@ from typing import Callable
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
 from src.mutils.check_if_eq import check_if_eq
+from src.utils.tex.text.replace_util import replace_symb
 
 
 def format(
@@ -15,7 +16,7 @@ def format(
         line -- line that needs to be translated.
         replacements -- math symbols that will be replaced with latex commands.
         words -- list of words in the line split by spaces.
-        rules: Rules -- rules that needs to be followed in translation.
+        rules -- rules that needs to be followed in translation.
 
     Returns:
         The formatted line.
@@ -79,23 +80,6 @@ def format(
         if not check_if_eq(rules.inline_math[0], word, inline_maths):
             line = line.replace(word, word.replace("_", r"\_"))
 
-        math_symb: str
-        if (
-                (
-                    math_symb := word.replace(
-                            rules.inline_math[0], ""
-                        )
-                ) in replacements.replacements.keys()
-            ):
-            line = line.replace(
-                    word,
-                    (
-                        "$"
-                        +replacements.replacements.get(
-                            math_symb, word
-                        )
-                        +"$"
-                    )
-                )
+        line = replace_symb(line, word, rules, replacements)
 
     return line.replace("LaTeX", r"\LaTeX{}").replace("%", r"\%")
