@@ -60,12 +60,13 @@ def update_conf(
             "indent_size": args.indent,
             "doc_font": args.font,
             "compiler": args.compiler,
-            "encode": args.encoding
+            "encode": args.encoding,
+            "replace": args.replace
         }
 
     key_: str; param: Any
     for key_, param in PARAMETERS.items(): # for overrides
-        if param is not None:
+        if param is not None and config.__getattribute__(key_) != param:
             log.logger(
                 "I",
                 (
