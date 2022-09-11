@@ -1,11 +1,7 @@
 [
     {
         "FOR": [
-            "markdown",
-            "md",
-            "rst",
-            "txt",
-            "text"
+            "md"
         ],
         "CODE_BLOCKS": "```",
         "IMAGE": "!\\[([^]]+)\\]\\(([^]]+)\\)",
