@@ -85,11 +85,7 @@ class TestCases(unittest.TestCase):
         self.assertEqual(
             Rules(
                 files=[
-                        "markdown",
-                        "md",
-                        "rst",
-                        "txt",
-                        "text"
+                        "md"
                     ],
                 code="```",
                 image="!\\[([^]]+)\\]\\(([^]]+)\\)",
