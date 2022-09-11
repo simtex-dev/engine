@@ -7,11 +7,11 @@ else
 fi
 
 
-if [[ ! $(command -v mypy &> /dev/null) ]]; then 
+if [[ ! $(command -v mypy --help &> /dev/null) ]]; then
     python -m pip install mypy
 fi
 
-if [[ ! $(command -v pytest &> /dev/null) ]]; then
+if [[ ! $(command -v pytest --help &> /dev/null) ]]; then
     python -m pip install pyinstaller
 fi
 
