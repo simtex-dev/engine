@@ -147,6 +147,11 @@ class Cli:
             help="Apply autocorrection in wrong spellings.",
             action="store_true"
         )
+        self.parser.add_argument(
+            "-R", "--replace",
+            help="Automatically replace math symbols defined.",
+            action="store_true"
+        )
 
     def create_parser(self) -> None:
         """Create the parser."""
