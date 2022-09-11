@@ -189,7 +189,7 @@ class Cli:
             )
 
         try:
-            if self.args.convert:
+            if self.args.convert or self.args.build or self.args.buildnview:
                 files: list[str] = converter()
             else:
                 self.log.logger("E", "Unknown option.")
