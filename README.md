@@ -1,10 +1,18 @@
-# simtex
+# `simtex`
 
 ![](https://api.codiga.io/project/34276/score/svg)
 ![](https://github.com/iaacornus/simtex/actions/workflows/pytest.yaml/badge.svg)
 
-simtex (simplified LaTeX) allows you to convert your mardown or text files
-into PDF using LaTeX with one command, configured with simple `.json` file.
+`simtex` (simplified LaTeX) allows you to convert your mardown or files
+ into PDF using LaTeX with one command, configured with simple `.json` file.
+
+> `simtex` is a program that works based on rules of the user that is
+defined in `simtex.json`, which the program uses to the files and converts
+it in LaTeX based on the rules defined by the user.
+
+`simtex` also allows for interop between markdown and LaTeX, especially in cases
+where markdown is not enough to format the document, that part could be written
+in LaTeX while the others would be converted by `simtex`!
 
 > Note: This program does not intend to replace the LaTeX system, but to
 simplify the process of turning your already existing markdown/text file
@@ -19,7 +27,8 @@ features, and not HTML tags.
 ❯ simtex --help
 usage: simtex [OPTIONS] [INPUT] FILE [ARGUMENTS]
 
-Convert your mardown or text files into PDF using LaTeX with one command!
+Convert your markdown or text files into LaTeX/pdf with one command! Interop
+with LaTeX and markdown is also allowed by simtex!
 
 options:
   -h, --help            show this help message and exit
@@ -54,9 +63,12 @@ options:
   -ft, --filenametitle  Use the filename as title.
   -v, --verbose         Show the stdout of processes.
   -y, --assumeyes       Assume yes to every prompt.
+  -A, --autocorrect     Apply autocorrection in wrong spellings.
+  -R, --replace         Automatically replace math symbols defined.
+  --version             Print the version number of the application.
 ```
 
-# Features
+# Convertion features
 
 The program allows the user to convert simple file such as markdown or text
 file into PDF using LaTeX. This program does not intend to compete with pandoc,
@@ -99,6 +111,17 @@ date, `-d="August 15, 2552` to provide other date instead of the present. The
 program will output the `tex` file, as well as `pdf`, if `-b` was used, in `./out`
 inside the folder of the input if there is no output folder given. See the
 [documentation of arguments and configuration file](./examples/config/README.md).
+
+# Program features
+
+1. Convert a whole directory of files into LaTeX. `simtex` allows conversion of
+bunch of files in all at once.
+2. 'simtex' supports different compilers.
+3. Interoperation between LaTeX and raw files. `simtex` is a program
+that works based on the rules defined by user in `simtex.json`, which it uses
+to convert the document given by the user.
+4. Autocorrect (**beta**) of spelling mistakes in the document.
+5. Automatic replacement (**beta**) of unicode characters and ASCII symbols that represent mathematical symbol or anything that is defined by user to their respective LaTeX command or the defined command by the user.
 
 # Installation
 
