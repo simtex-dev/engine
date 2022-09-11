@@ -63,6 +63,7 @@ def convert(
                     rules,
                     replacement,
                     autocorrect,
+                    config.replace,
                     args.input,
                     out_file
                 )

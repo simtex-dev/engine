@@ -20,6 +20,7 @@ def body(
         rules: Rules,
         replacements: Replacements,
         autocorrect: bool,
+        replace_math_symb: bool,
         in_file: str,
         out_file: TextIO
     ) -> list[str]:
@@ -30,6 +31,7 @@ def body(
         rules -- rules that needs to be followed in translation.
         replacements -- math symbols that will be replaced with latex commands.
         autocorrect -- whether to toggle autocorrect.
+        replace_math_symb -- whether to replace the math symbols.
         in_file -- path of the file to be converted to LaTeX.
         out_file -- where the translated line will be written.
 
@@ -140,6 +142,14 @@ def body(
                         except IndexError:
                             pass
 
-        out_file.write(format(rules, replacements, line, line.split()))
+        out_file.write(
+            format(
+                rules,
+                replacements,
+                line,
+                line.split(),
+                replace_math_symb
+            )
+        )
 
     return files

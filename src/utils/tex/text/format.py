@@ -8,7 +8,11 @@ from src.utils.tex.text.replace_util import replace_symb
 
 
 def format(
-        rules: Rules, replacements: Replacements, line: str, words: list[str]
+        rules: Rules,
+        replacements: Replacements,
+        line: str,
+        words: list[str],
+        replace_math_symb: bool
     ) -> str:
     """Formats the text in a line.
 
@@ -17,6 +21,7 @@ def format(
         replacements -- math symbols that will be replaced with latex commands.
         words -- list of words in the line split by spaces.
         rules -- rules that needs to be followed in translation.
+        replace_math_symb -- whether to replace the math symbols.
 
     Returns:
         The formatted line.
@@ -80,6 +85,7 @@ def format(
         if not check_if_eq(rules.inline_math[0], word, inline_maths):
             line = line.replace(word, word.replace("_", r"\_"))
 
-        line = replace_symb(line, word, rules, replacements)
+        if replace_math_symb:
+            line = replace_symb(line, word, rules, replacements)
 
     return line.replace("LaTeX", r"\LaTeX{}").replace("%", r"\%")
