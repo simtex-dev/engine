@@ -12,12 +12,7 @@ with open("README.md", "r", encoding="utf-8") as desc:
 setup(
     name="simtex",
     version=PkgInfo.__version__,
-    description=(
-            "Convert your markdown or text files"
-            " into LaTeX/pdf with one command!\n"
-            "Interop with LaTeX and markdown is "
-            "also allowed by simtex!"
-        ),
+    description=PkgInfo.__description__,
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/iaacornus/simtex",

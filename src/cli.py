@@ -16,16 +16,10 @@ class Cli:
         self.log: Logger = Logger()
         self.conf_parse: ConfParse = ConfParse(self.log)
 
-        description: str = (
-            "Convert your markdown or text files"
-            " into LaTeX/pdf with one command!\n"
-            "Interop with LaTeX and markdown is "
-            "also allowed by simtex!"
-        )
         self.parser: ArgumentParser = ArgumentParser(
                 prog="simtex",
                 usage="simtex [OPTIONS] [INPUT] FILE [ARGUMENTS]",
-                description=description
+                description=PkgInfo.__description__
             )
 
     def _options(self) -> None:
