@@ -1,14 +1,11 @@
-from typing import Any, TextIO, NoReturn
+from os.path import isdir
+from typing import Any, NoReturn
 
 from src.configs.config import Config
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
-from src.utils.tex.parser.headings import headings
-from src.utils.tex.parser.body import body
-from src.mutils.format_body import format_body
-from src.mutils.fix_file_path import fix_file_path
-from src.mutils.fix_title import fix_title
-from src.mutils.finalize import finalize
+from src.utils.convert_file import convert_file
+from src.mutils.find_files import find_files
 from src.utils.logger import Logger
 
 
@@ -20,7 +17,7 @@ def convert(
         replacement: Replacements,
         autocorrect: bool = False
     ) -> str | NoReturn:
-    """This unifies all the modules.
+    """Call the converter to convert the files.
 
     Args:
         log -- for logging.
@@ -29,51 +26,47 @@ def convert(
         config -- configuration of the document metadata, which includes,
             formatting, packages to use among others, refer to simtex.json.
         replacements -- math symbols that will be replaced with latex commands.
+        input_file -- the directory of the input file.
         autocorrect -- whether to toggle autocorrect.
 
     Returns:
         The filepath of the output file.
     """
 
-    log.logger("I", f"Converting {args.input} ...")
 
-    title = fix_title(
-            log,
-            args.title,
-            args.input,
-            args.filenametitle,
-            args.assumeyes
-        ).replace(
-            "_", r"\_"
-        )
-    OFILE_PATH: str = fix_file_path(
-            log,
-            args.input,
-            config.output_folder,
-            args.filename,
-            args.assumeyes
-        )
-
-    try:
-        out_file: TextIO
-        with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
-            start: int = headings(log, config, title, out_file)
-            files: list[str] = body(
-                    log,
-                    rules,
-                    replacement,
-                    autocorrect,
-                    config.replace,
-                    args.input,
-                    out_file
-                )
-
-        format_body(log, config, start, OFILE_PATH)
-        finalize(log, files, config.output_folder, args.input)
-    except (IOError, PermissionError) as Err:
+    if isdir(args.input):
         log.logger(
-            "E", f"{Err}. Cannot convert the file to LaTeX, aborting ..."
+            "I",
+            (
+                f"The input: {args.input} is a "
+                "directory, converting all files ending"
+                f" with: {rules.files} to LaTeX ..."
+            )
         )
-        raise SystemExit
+        files: list[str] = find_files(args.input, rules.files)
 
-    return OFILE_PATH
+        cur: int; file: str
+        for cur, file in enumerate(files):
+            log.logger(
+                "I", f"Converting the {cur} in directory: {args.input}"
+            )
+            convert_file(
+                log,
+                args,
+                rules,
+                config,
+                replacement,
+                file,
+                autocorrect
+            )
+    else:
+        convert_file(
+            log,
+            args,
+            rules,
+            config,
+            replacement,
+            args.input,
+            autocorrect
+        )
+
