@@ -1,0 +1,77 @@
+\documentclass[12pt, UTF8]{article}
+
+% font
+\usepackage{lmodern}
+
+% packages
+\usepackage[margin=1in, a4paper]{geometry}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{sectsty}
+\usepackage{footmisc}
+\usepackage{gensymb}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage[normalem]{ulem}
+\usepackage[colorlinks, allcolors=blue]{hyperref}
+\usepackage[scaled=0.9]{DejaVuSansMono}
+
+% basic config
+\setlength\parindent{24pt}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\sloppy
+
+%\ lst listings config
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{lstlistings_stylesheet}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=lstlistings_stylesheet}
+
+% paper info
+\title{table\_ex}
+\author{John Doe}
+\date{September 11, 2022}
+
+\begin{document}
+	\maketitle
+	
+	\section{A more practical table example}
+	
+	From \href{https://latex-tutorial.com/tutorials/tables/}{https://latex-tutorial.com/tutorials/tables/}
+	
+	Tables in \LaTeX{} can be created through a combination of the table environment and the tabular environment. The table environment part contains the caption and defines the float for our table, i.e. where in our document the table should be positioned and whether we want it to be displayed centered.
+	
+	\begin{center}
+		\begin{tabular}{| c | c | c |}		\hline
+			$\alpha$ & $\beta$ & $\gamma$ \\
+			\hline
+			1 & 1110.1 & a \\
+			2 & 10.1 & b \\
+			3 & 23.113231 & c \\		\hline
+		\end{tabular}
+	\end{center}
+
+\end{document}
