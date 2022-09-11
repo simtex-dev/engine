@@ -31,10 +31,12 @@ with open("README.md", "r", encoding="utf-8") as desc:
 
 setup(
     name="simtex",
-    version="0.3.3.1-beta",
+    version="0.4-beta",
     description=(
             "Convert your markdown or text files"
-            " into LaTeX/pdf with one command!"
+            " into LaTeX/pdf with one command!\n"
+            "Interop with LaTeX and markdown is "
+            "also allowed by simtex!"
         ),
     long_description=readme,
     long_description_content_type="text/markdown",
