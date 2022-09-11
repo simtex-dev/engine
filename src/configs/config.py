@@ -51,7 +51,7 @@ class Config:
     code_font: str
     cfont_scale: float
     code_conf: str
-    packages: list[str]
+    packages: list[str | list[str]]
     footnote: str
     section_sizes: dict[str, int | str]
     links: bool

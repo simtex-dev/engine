@@ -59,7 +59,7 @@ def headings(
     if config.date == "<NOW>":
         config.__setattr__("date", datetime.now().strftime("%B %d, %Y"))
 
-    pkgs_: str
+    pkgs_: str | list[str]
     for pkgs_ in config.packages:
         if isinstance(pkgs_, list):
             try:
