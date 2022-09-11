@@ -53,7 +53,7 @@ def table(
             cols: str = " | ".join(["c" for _ in parsed[1]])
             line: str = (
                     f"\t\\begin{{tabular}}{{| {cols} |}}"
-                    f"\n\t\t{parsed[2]} \\\\"
+                    f"\t\t\\hline\n\t\t{parsed[2]} \\\\"
                 )
         elif isinstance(parsed, str):
             if parsed == r"\hline":
@@ -63,5 +63,11 @@ def table(
 
         out_file.write(line)
 
-    out_file.write("\n\t\\end{tabular}\n\\end{center}\n")
+    out_file.write(
+        (
+            "\t\t\\hline\n\t"
+            "\\end{tabular}\n"
+            "\\end{center}\n"
+        )
+    )
     return end
