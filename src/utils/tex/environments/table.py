@@ -59,7 +59,7 @@ def table(
             if parsed == r"\hline":
                 line = f"\n\t\t{parsed}"
             else:
-                line = f"\n\t\t{parsed} \\\\\n"
+                line = f"\n\t\t{parsed} \\\\"
 
         out_file.write(line)
 
