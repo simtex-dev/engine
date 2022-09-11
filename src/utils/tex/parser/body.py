@@ -104,6 +104,7 @@ def body(
                             replacements,
                             ref_tex,
                             cur,
+                            replace_math_symb,
                             out_file
                         )
                     continue

@@ -10,6 +10,7 @@ def quotation(
         replacements: Replacements,
         sources: list[str],
         start: int,
+        replace_math_symb: bool,
         out_file: TextIO
     ) -> int:
     """For typesetting of block quotes using csquotes package.
@@ -19,6 +20,7 @@ def quotation(
         replacements -- math symbols that will be replaced with latex commands.
         sources -- where the other lines of equation would be found.
         start -- where the parser/translator would start.
+        replace_math_symb -- whether to replace the math symbols.
         out_file -- where the translated line will be written.
 
     Returns:
@@ -37,7 +39,8 @@ def quotation(
                     rules,
                     replacements,
                     quote.replace(rules.bquote, '').strip(),
-                    quote.split()
+                    quote.split(),
+                    replace_math_symb
                 )
             out_file.write(f"\t{line}\n")
 
