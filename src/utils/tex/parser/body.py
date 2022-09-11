@@ -65,6 +65,8 @@ def body(
     with open(in_file, "r", encoding="utf-8") as ref_file:
         ref_tex: list[str] = ref_file.readlines()
 
+    ref_tex.append("\n")
+
     cur: int # current index
     for cur, line in enumerate(ref_tex):
         if line in ["", "\n"] or cur <= ignore:
