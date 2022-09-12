@@ -1,0 +1,85 @@
+\documentclass[12pt, UTF8]{article}
+
+% font
+\usepackage{lmodern}
+
+% packages
+\usepackage[margin=1in, a4paper]{geometry}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{sectsty}
+\usepackage{footmisc}
+\usepackage{gensymb}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage[normalem]{ulem}
+\usepackage[colorlinks, allcolors=blue]{hyperref}
+\usepackage[scaled=0.9]{DejaVuSansMono}
+
+% basic config
+\setlength\parindent{24pt}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\sloppy
+
+%\ lst listings config
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{lstlistings_stylesheet}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=lstlistings_stylesheet}
+
+% paper info
+\title{table}
+\author{John Doe}
+\date{September 11, 2022}
+
+\begin{document}
+	\maketitle
+
+	\section{Tables}
+
+	Simtex also now supports table!
+
+	\begin{center}
+		\begin{tabular}{| c | c | c | c |}		\hline
+			See & \textbf{this} & cool & \textit{example} \\
+			\hline
+			1 & 2 & 3 & 4 \\
+			5 & 6 & 7 & 8 \\		\hline
+		\end{tabular}
+	\end{center}
+
+	Another example is this one, although the support is not quite good as of now (09.11.2022):
+
+	\begin{center}
+		\begin{tabular}{| c | c | c |}		\hline
+			Col 1 & Col 2 & Col 3 \\
+			\hline
+			Hello & From & Tables \\
+			Another & Example & Here \\		\hline
+		\end{tabular}
+	\end{center}
+
+\end{document}

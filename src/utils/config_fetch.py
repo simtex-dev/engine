@@ -4,7 +4,9 @@ from pathlib import Path
 from json import JSONDecodeError, load
 from typing import IO, Any, NoReturn, Optional
 
-from src.config import Config, Rules, Replacements
+from src.configs.config import Config
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
 from src.mutils.fix_missing_conf import fix_missing_config
 from src.utils.logger import Logger
 
@@ -99,6 +101,7 @@ class ConfParse:
         """
 
         raw_conf: dict[str, Any] = self.raw_conf_[0]
+        nonum: str = raw_conf["NONUM"]
 
         return Rules(
             raw_conf["FOR"],
@@ -106,15 +109,15 @@ class ConfParse:
             raw_conf["IMAGE"],
             raw_conf["LINKS"],
             raw_conf["SECTION"],
-            f"{raw_conf['SECTION']}*",
+            f"{raw_conf['SECTION']}{nonum}",
             raw_conf["SUBSECTION"],
-            f"{raw_conf['SUBSECTION']}*",
+            f"{raw_conf['SUBSECTION']}{nonum}",
             raw_conf["SUBSUBSECTION"],
-            f"{raw_conf['SUBSUBSECTION']}*",
+            f"{raw_conf['SUBSUBSECTION']}{nonum}",
             raw_conf["PARAGRAPH"],
-            f"{raw_conf['PARAGRAPH']}*",
+            f"{raw_conf['PARAGRAPH']}{nonum}",
             raw_conf["SUBPARAGRAPH"],
-            f"{raw_conf['SUBPARAGRAPH']}*",
+            f"{raw_conf['SUBPARAGRAPH']}{nonum}",
             raw_conf["PARAGRAPH_MATH"],
             raw_conf["INLINE_MATH"],
             raw_conf["INLINE_CODE"],
@@ -126,7 +129,8 @@ class ConfParse:
             raw_conf["SUBSCRIPT"],
             raw_conf["ULINE"],
             raw_conf["QUOTE"],
-            raw_conf["BQUOTE"]
+            raw_conf["BQUOTE"],
+            nonum
         )
 
     def _conf(self) -> Config:
@@ -162,7 +166,9 @@ class ConfParse:
             raw_conf["OUTPUT_FOLDER"],
             raw_conf["COMPILER"],
             raw_conf["ENCODE"],
-            raw_conf["REPLACE"]
+            raw_conf["REPLACE"],
+            raw_conf["TWOCOLS"],
+            raw_conf["ASSUME_YES"]
         )
 
     def _replacements(self) -> Replacements:
@@ -177,9 +183,14 @@ class ConfParse:
 
         return Replacements(raw_conf)
 
-    def fetched_conf(self) -> tuple[Config, Rules, Replacements] | NoReturn:
+    def fetched_conf(
+            self, assume_yes: bool = False
+        ) -> tuple[Config, Rules, Replacements] | NoReturn:
         """Fetch the values from config file, and give fallback method
         for its respective function.
+
+        Args:
+            assume_yes -- whether to assume yes or not.
 
         Returns:
             Both of the parsed data from the raw JSON config file.
@@ -199,6 +210,7 @@ class ConfParse:
                         f" fetching the new config file from development ..."
                     ),
                     self.CONF_PATH,
+                    assume_yes,
                     conf=True,
                     missing=False
                 )

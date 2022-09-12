@@ -1,8 +1,6 @@
 from string import digits
 from typing import TextIO
 
-from src.utils.logger import Logger
-
 
 def tex_enumerate(
         start: int, source: list[str], out_file: TextIO

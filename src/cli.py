@@ -1,11 +1,11 @@
 from argparse import ArgumentParser
-from subprocess import CalledProcessError, Popen
+from subprocess import CalledProcessError
 from typing import Callable
 
 from src.utils.config_fetch import ConfParse
 from src.utils.convert import convert
-from src.mutils.build_tex import build_file
 from src.mutils.update_conf import update_conf
+from src.metadata.info import PkgInfo
 from src.utils.logger import Logger
 
 
@@ -14,17 +14,12 @@ class Cli:
 
     def __init__(self) -> None:
         self.log: Logger = Logger()
-        conf_parse: ConfParse = ConfParse(self.log)
-        self.config, self.rules, self.replacement = conf_parse.fetched_conf()
+        self.conf_parse: ConfParse = ConfParse(self.log)
 
-        description: str = (
-                "Convert your mardown or text files"
-                " into PDF using LaTeX with one command!"
-            )
         self.parser: ArgumentParser = ArgumentParser(
                 prog="simtex",
                 usage="simtex [OPTIONS] [INPUT] FILE [ARGUMENTS]",
-                description=description
+                description=PkgInfo.__description__
             )
 
     def _options(self) -> None:
@@ -53,7 +48,6 @@ class Cli:
             "-i", "--input",
             help="File to be converted into LaTeX.",
             action="store",
-            required=True
         )
         self.parser.add_argument(
             "-T", "--title",
@@ -119,6 +113,11 @@ class Cli:
             help="Use a different encoding for the document.",
             action="store"
         )
+        # self.parser.add_argument(
+        #     "-tc", "--twocolumns",
+        #     help="Use two columns in the document.",
+        #     action="store_true"
+        # )
 
     def _misc(self) -> None:
         """Other arguments."""
@@ -131,6 +130,26 @@ class Cli:
         self.parser.add_argument(
             "-v", "--verbose",
             help="Show the stdout of processes.",
+            action="store_true"
+        )
+        self.parser.add_argument(
+            "-y", "--assumeyes",
+            help="Assume yes to every prompt.",
+            action="store_true"
+        )
+        self.parser.add_argument(
+            "-A", "--autocorrect",
+            help="Apply autocorrection in wrong spellings.",
+            action="store_true"
+        )
+        self.parser.add_argument(
+            "-R", "--replace",
+            help="Automatically replace math symbols defined.",
+            action="store_true"
+        )
+        self.parser.add_argument(
+            "--version",
+            help="Print the version number of the application.",
             action="store_true"
         )
 
@@ -146,56 +165,39 @@ class Cli:
 
     def cli(self) -> None:
         """Commandline interface of the program."""
-
         self.create_parser() # create the arguments
-        # update the config for overrides
-        update_conf(self.log, self.config, self.args)
-
-        converter: Callable[[],str] = lambda: convert(
-                self.log,
-                self.args,
-                self.rules,
-                self.config,
-                self.replacement,
-                self.args.title,
-                self.args.input,
-                self.args.filenametitle
-            )
 
         try:
-            if self.args.convert:
-                output_filename: str = converter()
-                print(
-                    "\033[34mINFO \033[0m\t To compile the output, you "
-                    "use can overleaf: \033[36mhttps://www.overleaf.com/"
-                    "\033[0m (not sponsored) to compile the output."
+            if self.args.convert or self.args.build or self.args.buildnview:
+                self.config, self.rules, self.replacement = (
+                    self.conf_parse.fetched_conf(
+                            self.args.assumeyes
+                        )
                 )
-            elif self.args.build:
-                output_filename = converter()
-                build_file(
-                    self.log,
-                    self.config.compiler,
-                    self.config.output_folder,
-                    output_filename,
-                    self.args.verbose
+
+                # update the config for overrides
+                update_conf(
+                    self.log, self.config, self.args, self.args.assumeyes
                 )
-            elif self.args.buildnview:
-                output_filename = converter()
-                build_file(
-                    self.log,
-                    self.config.compiler,
-                    self.config.output_folder,
-                    output_filename,
-                    self.args.verbose
-                )
-                try:
-                    Popen(["xgd-open", output_filename])
-                except FileNotFoundError:
-                    self.log.logger(
-                        "e", "No PDF viewer found, cannot view PDF file."
+
+                converter: Callable[[], list[str]] = lambda: convert(
+                        self.log,
+                        self.args,
+                        self.rules,
+                        self.config,
+                        self.replacement,
+                        self.args.autocorrect
                     )
+
+                files: list[str] = converter()
+
+            elif self.args.version:
+                print(f"Simtex version: {PkgInfo.__version__}.")
+                raise SystemExit
+
             else:
                 self.log.logger("E", "Unknown option.")
+
         except KeyboardInterrupt:
             self.log.logger("E", "Operation interrupted, aborting ...")
         except CalledProcessError as Err:
@@ -204,7 +206,6 @@ class Cli:
             )
         else:
             print(
-                f"\033[34mINFO\033[0m\t File {self.args.input}"
-                f" converted successfully and can be found in:"
-                f" \033[1;36m{output_filename}\033[0m."
+                f"\033[34mINFO\033[0m\t File(s) {self.args.input} converted "
+                f"successfully and can be found in \033[1;36m{files}\033[0m."
             )

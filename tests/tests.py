@@ -1,8 +1,9 @@
 import unittest
 from os.path import expanduser
 
-from src.config import Config, Replacements, Rules
-
+from src.configs.config import Config
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
 from src.utils.config_fetch import ConfParse
 from src.utils.logger import Logger
 
@@ -14,7 +15,9 @@ class TestCases(unittest.TestCase):
         self.log: Logger = Logger()
         conf_parser: ConfParse = ConfParse(self.log, True)
         self.config: Config; self.rules: Rules; self.replacement: Replacements
-        self.config, self.rules, self.replacement = conf_parser.fetched_conf()
+        self.config, self.rules, self.replacement = (
+                conf_parser.fetched_conf(assume_yes=True)
+            )
 
     def test_config(self) -> None:
         """Test case for config."""
@@ -32,20 +35,29 @@ class TestCases(unittest.TestCase):
                 cfont_scale=0.9,
                 code_conf=f"{expanduser('~')}/.config/simtex/code_conf.txt",
                 packages=[
-                        r"[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
-                        r"{indentfirst}",
-                        r"{amsmath}",
-                        r"{mathtools}",
-                        r"{sectsty}",
-                        r"{footmisc}",
-                        r"{gensymb}",
-                        r"{xcolor}",
-                        r"{listings}",
-                        r"{caption}",
-                        r"{csquotes}",
-                        r"[normalem]{ulem}",
-                        r"[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
+                    [
+                        "geometry",
+                        "margin=<MARGIN>, <PAPER_SIZE>"
                     ],
+                    "indentfirst",
+                    "amsmath",
+                    "mathtools",
+                    "sectsty",
+                    "footmisc",
+                    "gensymb",
+                    "xcolor",
+                    "listings",
+                    "caption",
+                    "csquotes",
+                    [
+                        "ulem",
+                        "normalem"
+                    ],
+                    [
+                        "hyperref",
+                        "colorlinks, allcolors=<LINK_COLORS>"
+                    ]
+                ],
                 footnote="footnote",
                 section_sizes={
                         "main": "<DEF>",
@@ -60,7 +72,9 @@ class TestCases(unittest.TestCase):
                 output_folder="out",
                 compiler="pdflatex",
                 encode="UTF8",
-                replace=True
+                replace=False,
+                twocols=False,
+                assume_yes=False
             ),
             self.config
         )
@@ -71,11 +85,7 @@ class TestCases(unittest.TestCase):
         self.assertEqual(
             Rules(
                 files=[
-                        "markdown",
-                        "md",
-                        "rst",
-                        "txt",
-                        "text"
+                        "md"
                     ],
                 code="```",
                 image="!\\[([^]]+)\\]\\(([^]]+)\\)",
@@ -101,7 +111,8 @@ class TestCases(unittest.TestCase):
                 subscript=["-^", "-\\^(.*?)-\\^"],
                 uline=["._", "._(.*?)._"],
                 quote=["\"", "\"(.*?)\""],
-                bquote=">"
+                bquote=">",
+                nonum="*"
             ),
             self.rules
         )

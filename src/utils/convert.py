@@ -1,12 +1,13 @@
-from typing import Any, TextIO, NoReturn
+from os.path import isdir
+from subprocess import Popen
+from typing import Any, NoReturn
 
-from src.config import Config, Replacements, Rules
-from src.utils.tex.parser.headings import headings
-from src.utils.tex.parser.body import body
-from src.mutils.format_body import format_body
-from src.mutils.fix_file_path import fix_file_path
-from src.mutils.fix_title import fix_title
-from src.mutils.finalize import finalize
+from src.configs.config import Config
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
+from src.mutils.build_tex import build_file
+from src.utils.convert_file import convert_file
+from src.mutils.find_files import find_files
 from src.utils.logger import Logger
 
 
@@ -16,11 +17,9 @@ def convert(
         rules: Rules,
         config: Config,
         replacement: Replacements,
-        title: str,
-        in_file: str,
-        filenametitle: bool
-    ) -> str | NoReturn:
-    """This unifies all the modules.
+        autocorrect: bool = False
+    ) -> list[str] | NoReturn:
+    """Call the converter to convert the files.
 
     Args:
         log -- for logging.
@@ -29,34 +28,76 @@ def convert(
         config -- configuration of the document metadata, which includes,
             formatting, packages to use among others, refer to simtex.json.
         replacements -- math symbols that will be replaced with latex commands.
-        title -- title of the document.
-        in_file -- path of the file to be converted to LaTeX.
+        input_file -- the directory of the input file.
+        autocorrect -- whether to toggle autocorrect.
 
     Returns:
-        The filepath of the output file.
+        The path(s) of the converted file.
     """
 
-    log.logger("I", f"Converting {in_file} ...")
+    file_path: list[str] = []
 
-    title = fix_title(log, title, in_file, filenametitle).replace(r"_", r"\_")
-    OFILE_PATH: str = fix_file_path(
-            log, in_file, config.output_folder, args.filename
-        )
-
-    try:
-        out_file: TextIO
-        with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
-            start: int = headings(log, config, title, out_file)
-            files: list[str] = body(
-                    log, rules, replacement, in_file, out_file
-                )
-
-        format_body(log, config, start, OFILE_PATH)
-        finalize(log, files, config.output_folder, in_file)
-    except (IOError, PermissionError) as Err:
+    if isdir(args.input):
         log.logger(
-            "E", f"{Err}. Cannot convert the file to LaTeX, aborting ..."
+            "I",
+            (
+                f"The input: {args.input} is a "
+                "directory, converting all files ending"
+                f" with: {rules.files} to LaTeX ..."
+            )
         )
-        raise SystemExit
+        files: list[str] = find_files(args.input, rules.files)
 
-    return OFILE_PATH
+        cur: int; file: str
+        for cur, file in enumerate(files):
+            log.logger(
+                "I", f"Converting the {cur} in directory: {args.input}"
+            )
+            file_path.append(
+                convert_file(
+                    log,
+                    args,
+                    rules,
+                    config,
+                    replacement,
+                    file,
+                    autocorrect
+                )
+            )
+    else:
+        file_path.append(
+            convert_file(
+                log,
+                args,
+                rules,
+                config,
+                replacement,
+                args.input,
+                autocorrect
+            )
+        )
+
+    if args.build:
+        for file in file_path:
+            build_file(
+                log,
+                config.compiler,
+                config.output_folder,
+                file,
+                args.verbose
+            )
+            if args.buildnview:
+                try:
+                    Popen(["xgd-open", file])
+                except FileNotFoundError:
+                    log.logger(
+                        "e", "No PDF viewer found, cannot view PDF file."
+                    )
+    else:
+        print(
+            "\033[34mINFO \033[0m\t To compile the output, you "
+            "use can overleaf: \033[36mhttps://www.overleaf.com/"
+            "\033[0m (not sponsored) to compile the output."
+        )
+
+    return file_path

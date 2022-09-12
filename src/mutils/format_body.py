@@ -1,6 +1,6 @@
 from typing import TextIO, Any, IO, NoReturn
 
-from src.config import Config
+from src.configs.config import Config
 from src.utils.logger import Logger
 
 

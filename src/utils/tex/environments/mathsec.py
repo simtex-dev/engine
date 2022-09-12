@@ -25,46 +25,53 @@ def mathsec(
 
     maths: list[str] = []
 
-    if line.strip() == rule: # for align
-        out_file.write("\n\\begin{align}\n")
+    if line.strip() == rule or line.strip() in [f"{rule}--", f"{rule} --"]: # for align
+        if line.strip().endswith("--"):
+            align_env: str = "align*"
+        else:
+            align_env = "align"
 
-        eqs: str; mline: int
-        for mline, eqs in enumerate(source[start+1:]):
-            if eqs.strip() == rule:
-                end = mline+1+start
+        out_file.write(f"\n\\begin{{{align_env}}}\n")
+
+        eq: str; cur: int
+        for cur, eq in enumerate(source[start+1:]):
+            if eq.strip() == rule:
+                end = cur+1+start
                 break
 
-            if "&" not in eqs:
-                if "=" in eqs:
-                    eqs = eqs.replace("=", "&=", 1)
+            eq = eq.replace("\n", "").strip()
+            if "&" not in eq:
+                if "=" in eq and "\\text{" not in eq:
+                    eq = eq.replace("=", "&=", 1)
                 else:
-                    eqs = f"&{eqs}"
-
-            eqs = eqs.replace("\n", "").strip()
+                    eq = f"&{eq}"
 
             terminator: str
-            for terminator in ["--\\", "--", "\\--"]:
-                if eqs.endswith(terminator) or eqs.startswith("\\text{"):
-                    eqs = eqs.strip().removesuffix(terminator)
-                    eqs = f"{eqs} \\nonumber"
+            for terminator in [r"--\\", "--", r"\\--"]:
+                if eq.endswith(terminator):
+                    eq = eq.removesuffix(terminator)
+                    eq = f"{eq} \\nonumber"
                     break
 
-            if not eqs.endswith(r"\\"):
-                eqs = f"{eqs} \\\\\n"
-            else:
-                eqs = f"{eqs} \n"
+            if eq.startswith((r"&\text", r"\text")):
+                eq = f"{eq} \\nonumber"
 
-            maths.append(eqs)
+            if not eq.endswith(r"\\"):
+                eq = f"{eq} \\\\\n"
+            else:
+                eq = f"{eq} \n"
+
+            maths.append(eq)
 
         try:
             maths[-1] = maths[-1].replace("\\\\\n", "\n")
         except IndexError:
             pass
 
-        for eqs in maths:
-            out_file.write(f"\t{eqs}")
+        for eq in maths:
+            out_file.write(f"\t{eq}")
 
-        out_file.write("\\end{align}\n")
+        out_file.write(f"\\end{{{align_env}}}\n")
     else:
         end = start+1
         out_file.write(

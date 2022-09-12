@@ -16,12 +16,12 @@ The solution to the previous problem created by Fibonacci is a sequence of numbe
 
 Golden Ratio, also known as Divine Proportion exists when a line is divided into two parts and the ratio of the longer part, $a$, to shorter part, $b$, is equal to the ratio of the sum $a+b$ to $a$:
 
-The value of Golden Ratio is given by the irrational number (cannot be expressed by ratio of two whole numbers), $\Phi = 1.6180339887$:
+The value of Golden Ratio is given by the irrational number (cannot be expressed by ratio of two whole numbers), $\Phi = 1.6180339887$, that can be derived as:
 
 $$
 \frac{a}{b} = \frac{a + b}{a} = \Phi --
-\Phi = \frac{a}{b} and \Phi = \frac{a+b}{a} --
-\text{From $\Phi \frac{a}{b}$, we get $\frac{1}{\Phi} \frac{b}{a}$} --
+\text{$\Phi = \frac{a}{b}$ and $\Phi = \frac{a+b}{a}$} --
+\text{From $\Phi = \frac{a}{b}$, we get $\frac{1}{\Phi} = \frac{b}{a}$} --
 \text{Using $\Phi \frac{a+b}{a}$} --
 \Phi = \frac{a}{a} + \frac{b}{a} --
 = 1 + \frac{b}{a} --
@@ -34,11 +34,11 @@ $$
 
 Any two successive numbers in Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21, ...) have a very close ratio to the golden ratio:
 
-$$
-\frac{5}{3} = 1.6667 --
-\frac{8}{5} = 1.6000 --
-\frac{13}{8} = 1.6250 --
-\frac{21}{13} = 1.6154 --
+$$--
+\frac{5}{3} = 1.6667
+\frac{8}{5} = 1.6000
+\frac{13}{8} = 1.6250
+\frac{21}{13} = 1.6154
 $$
 
 Fibonacci spiral is also a good approximation of spirals that are present in nature such as nautilus shell, hurricanes and the human ear.
@@ -96,35 +96,49 @@ Proposed by Pierre in 1836. Alternate model that considers the constraints in po
 
 $$P(t) = \frac{K}{1 + Ae^{-kt}}$$
 
-Where $P(t)$ is the population after time, $t$. $K$ is the constraint or the limiting value, $k$ is the relative growth rate coefficient, $P_{0}$ is the initial population at $t = 0$, and $A$:
+Where $P(t)$ is the population after time, $t$. $K$ is the constraint or the limiting value, $k$ is the relative growth rate coefficient, $P_{0}$ is the initial population at $t = 0$, and $A = \frac{K - P_{0}}{P_{0}}$. Then, $P(t)$ is:
 
-$$A = \frac{K - P_{0}}{P_{0}}$$
+$$P(t) = \frac{K}{1 + \big(\frac{K - P_{0}}{P_{0}}\big)e^{-kt}}$$
 
-Then, $P(t)$ is:
-
-$$P(t) = \frac{K}{1 + \bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt}}$$
-
-In missing $t$:
+In missing $t$, $t$ can be isolated by:
 
 $$
-P(t) = \frac{K}{1 + \bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt}} --
-P(t) \cdot 1 + \bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt} = K --
-1 + \bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt} = \frac{K}{P(t)} --
-\bigg(\frac{K - P_{0}}{P_{0}}\bigg)e^{-kt} = \frac{K}{P(t)} - 1 --
-e^{-kt} = \frac{\frac{K}{P(t)} - 1}{\bigg(\frac{K - P_{0}}{P_{0}}\bigg)} \longrightarrow \frac{\frac{K}{P(t)} - 1}{A}
-= \frac{\frac{K - P(t)}{P(t)}}{A} --
-e^{-kt} = \frac{K - P(t)}{P(t) \cdot A} --
-ln(e^{-kt}) = ln\bigg(\frac{K - P(t)}{P(t) \cdot A}\bigg) --
--kt = ln\bigg(\frac{K - P(t)}{P(t) \cdot A}\bigg)
+P(t) = \frac{K}{1 + \Big(\frac{K - P_{0}}{P_{0}}\Big)e^{-kt}} --
+K = P(t) \cdot 1 + \Big(\frac{K - P_{0}}{P_{0}}\Big)e^{-kt} --
+\frac{K}{P(t)} = 1 + \Big(\frac{K - P_{0}}{P_{0}}\Big)e^{-kt} --
+$$
+
+Then subtracting $1$ to the other side of the equation:
+
+$$\Big(\frac{K - P_{0}}{P_{0}}\Big)e^{-kt} = \frac{K}{P(t)} - 1$$
+
+Let $\frac{K - P_{0}}{P_0} = A$:
+
+$$
+e^{-kt} = \frac{\frac{K}{P(t)} - 1}{\big(\frac{K - P_{0}}{P_{0}}\big)} \longrightarrow \frac{\frac{K}{P(t)} - 1}{A} \\
+= \frac{\frac{K - P(t)}{P(t)}}{A}
+$$
+
+Simplifying, $\frac{K}{P(t)} -1 = \frac{K - P(t)}{P(t)}$:
+
+$$
+e^{-kt} = \frac{K - P(t)}{P(t) \cdot A}
+$$
+
+And taking the natural logarithm of both sides, since: $ln_{e} X = Y \longrightarrow e^{y} = X$
+
+$$
+ln(e^{-kt}) = ln\big(\frac{K - P(t)}{P(t) \cdot A}\big) --
+-kt = ln\big(\frac{K - P(t)}{P(t) \cdot A}\big)
 $$
 
 Then with the equation, we can easily find $t$:
 
-$$\boldsymbol{t} = \boldsymbol{ln\bigg(\frac{K - P(t)}{P(t) \cdot A}\bigg) \cdot \frac{1}{|-k|}}$$
+$$\boldsymbol{t} = \boldsymbol{ln\big(\frac{K - P(t)}{P(t) \cdot A}\big) \cdot \frac{1}{|-k|}}$$
 
 And $k$:
 
-$$\boldsymbol{-k} = \boldsymbol{ln\bigg(\frac{K - P(t)}{P(t) \cdot A}\bigg) \cdot \frac{1}{t}}$$
+$$\boldsymbol{-k} = \boldsymbol{ln\big(\frac{K - P(t)}{P(t) \cdot A}\big) \cdot \frac{1}{t}}$$
 
 ###* Exponential Decay
 
@@ -138,13 +152,13 @@ And time, $t$, again is:
 
 $$
 e^{-rt} = \frac{P(t)}{P_{0}} --
--rt = ln\bigg(\frac{P(t)}{P_{0}}\bigg) --
+-rt = ln\big(\frac{P(t)}{P_{0}}\big) --
 $$
 
 Then we can find $t$ as:
 
-$$t = ln\bigg(\bigg[\frac{P(t)}{P_{0}}\bigg]\bigg) \frac{1}{|-r|}$$
+$$t = ln\big(\big[\frac{P(t)}{P_{0}}\big]\big) \frac{1}{|-r|}$$
 
 And $r$ as:
 
-$$-r = ln\bigg(\bigg[\frac{P(t)}{P_{0}}\bigg]\bigg) \frac{1}{t}$$
+$$-r = ln\big(\big[\frac{P(t)}{P_{0}}\big]\big) \frac{1}{t}$$

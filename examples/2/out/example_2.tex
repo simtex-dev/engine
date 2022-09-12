@@ -1,0 +1,78 @@
+\documentclass[12pt, UTF8]{article}
+
+% font
+\usepackage{lmodern}
+
+% packages
+\usepackage[margin=1in, a4paper]{geometry}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{sectsty}
+\usepackage{footmisc}
+\usepackage{gensymb}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{csquotes}
+\usepackage[normalem]{ulem}
+\usepackage[colorlinks, allcolors=blue]{hyperref}
+\usepackage[scaled=0.9]{DejaVuSansMono}
+
+% basic config
+\setlength\parindent{24pt}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\sloppy
+
+%\ lst listings config
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{lstlistings_stylesheet}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=4
+}
+\lstset{style=lstlistings_stylesheet}
+
+% paper info
+\title{example\_2}
+\author{John Doe}
+\date{September 12, 2022}
+
+\begin{document}
+	\maketitle
+	
+	\section*{A Practical Example}
+	
+	1. Prove that $\frac{sin A}{1 + cos A} + \frac{cos A}{sin A} = csc A$:
+	
+	\textbf{Solution}
+	
+	\begin{align}
+		&\text{Starting from left:}  \nonumber \nonumber \\
+		\frac{sin A}{1 + cos A} + \frac{cos A}{sin A} &= \frac{sin A \cdot sin A + cos A (1 + cos A)}{(1 + cos A) sin A} \\
+		&\frac{sin^2 A + cos A + cos^2 A}{(1 + cos A) sin A} \\ 
+		&\text{Then cancelling both $1 + cos A$:} \\ \nonumber \\
+		&\frac{1 + cos A}{(1 + cos A) sin A} \\ 
+		\frac{1}{sin A} &= csc A 
+	\end{align}
+	
+	This example is generated with: \texttt{simtex -b -i='examples/2/example\_2.md'  -T='A practical example' -a='iaacornus'}
+
+\end{document}

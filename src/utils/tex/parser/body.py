@@ -1,7 +1,12 @@
 from re import sub
 from typing import Callable, TextIO
 
-from src.config import Rules, Replacements
+from autocorrect import Speller # type: ignore
+
+from src.configs.rules import Rules
+from src.configs.replacements import Replacements
+from src.mutils.check_if_table import check_if_table
+from src.utils.tex.environments.table import table
 from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.figure import figure
 from src.utils.tex.environments.quotes import quotation
@@ -14,6 +19,8 @@ def body(
         log: Logger,
         rules: Rules,
         replacements: Replacements,
+        autocorrect: bool,
+        replace_math_symb: bool,
         in_file: str,
         out_file: TextIO
     ) -> list[str]:
@@ -23,12 +30,16 @@ def body(
         log -- for logging.
         rules -- rules that needs to be followed in translation.
         replacements -- math symbols that will be replaced with latex commands.
+        autocorrect -- whether to toggle autocorrect.
+        replace_math_symb -- whether to replace the math symbols.
         in_file -- path of the file to be converted to LaTeX.
         out_file -- where the translated line will be written.
 
     Returns:
         A list of files found in the input file.
     """
+
+    spell = Speller()
 
     log.logger("I", "Writing the body to the document ...")
 
@@ -55,6 +66,8 @@ def body(
     ref_file: TextIO
     with open(in_file, "r", encoding="utf-8") as ref_file:
         ref_tex: list[str] = ref_file.readlines()
+
+    ref_tex.append("\n")
 
     cur: int # current index
     for cur, line in enumerate(ref_tex):
@@ -91,6 +104,7 @@ def body(
                             replacements,
                             ref_tex,
                             cur,
+                            replace_math_symb,
                             out_file
                         )
                     continue
@@ -111,10 +125,33 @@ def body(
                             out_file
                         )
                     if not skip_line:
-                        line = f"\n{line}\n"
-                    else:
-                        continue
+                        try:
+                            if check_if_table(ref_tex[cur], ref_tex[cur+1]):
+                                ignore = table(
+                                        rules,
+                                        replacements,
+                                        cur,
+                                        replace_math_symb,
+                                        ref_tex,
+                                        out_file
+                                    )
+                                continue
+                            else:
+                                if autocorrect:
+                                    line = f"\n{spell(line)}\n"
+                                else:
+                                    line = f"\n{line}\n"
+                        except IndexError:
+                            pass
 
-        out_file.write(format(rules, replacements, line, line.split()))
+        out_file.write(
+            format(
+                rules,
+                replacements,
+                line,
+                line.split(),
+                replace_math_symb
+            )
+        )
 
     return files

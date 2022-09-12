@@ -1,11 +1,7 @@
 [
     {
         "FOR": [
-            "markdown",
-            "md",
-            "rst",
-            "txt",
-            "text"
+            "md"
         ],
         "CODE_BLOCKS": "```",
         "IMAGE": "!\\[([^]]+)\\]\\(([^]]+)\\)",
@@ -53,7 +49,8 @@
             "\"",
             "\"(.*?)\""
         ],
-        "BQUOTE": ">"
+        "BQUOTE": ">",
+        "NONUM": "*"
     },
     {
         "DOC_CLASS": "article",
@@ -67,19 +64,19 @@
         "CFONT_SCALE": 0.9,
         "CODE_CONF": "<HOME>/.config/simtex/code_conf.txt",
         "PACKAGES": [
-            "[margin=<MARGIN>, <PAPER_SIZE>]{geometry}",
-            "{indentfirst}",
-            "{amsmath}",
-            "{mathtools}",
-            "{sectsty}",
-            "{footmisc}",
-            "{gensymb}",
-            "{xcolor}",
-            "{listings}",
-            "{caption}",
-            "{csquotes}",
-            "[normalem]{ulem}",
-            "[colorlinks, allcolors=<LINK_COLORS>]{hyperref}"
+            ["geometry", "margin=<MARGIN>, <PAPER_SIZE>"],
+            "indentfirst",
+            "amsmath",
+            "mathtools",
+            "sectsty",
+            "footmisc",
+            "gensymb",
+            "xcolor",
+            "listings",
+            "caption",
+            "csquotes",
+            ["ulem", "normalem"],
+            ["hyperref", "colorlinks, allcolors=<LINK_COLORS>"]
         ],
         "FOOTNOTE": "footnote",
         "SECTION_SIZES": {
@@ -95,7 +92,9 @@
         "OUTPUT_FOLDER": "out",
         "COMPILER": "pdflatex",
         "ENCODE": "UTF8",
-        "REPLACE": false
+        "REPLACE": false,
+        "TWOCOLS": false,
+        "ASSUME_YES": false
     },
     {
         "-->": "\\longrightarrow",

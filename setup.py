@@ -1,32 +1,8 @@
 from setuptools import setup
-from os import walk
-from os.path import join
 from typing import TextIO
 
-
-def find_module(PATH: str = "src") -> list[str]:
-    """Find modules in the given path.
-
-    Args:
-        PATH -- where to look from.
-
-    Returns:
-        The list of all modules found.
-    """
-
-    modules: list[str] = []
-
-    root: str; dir: str | list[str]
-    for root, _, dir in walk(PATH):
-        for file in dir:
-            if (
-                    file.endswith(".py")
-                    and file != "__init__.py"
-                    and not file.endswith(".pyc")
-                ):
-                modules.append(join(root, file).removesuffix(".py"))
-
-    return modules
+from setup_utils import get_dependencies, find_module
+from src.metadata.info import PkgInfo
 
 
 desc: TextIO
@@ -35,23 +11,19 @@ with open("README.md", "r", encoding="utf-8") as desc:
 
 setup(
     name="simtex",
-    version="0.3.3.2-beta",
-    description=(
-            "Convert your markdown or text files"
-            " into LaTeX/pdf with one command!"
-        ),
+    version=PkgInfo.__version__,
+    description=PkgInfo.__description__,
     long_description=readme,
     long_description_content_type="text/markdown",
     url="https://github.com/iaacornus/simtex",
-    author="iaacornus",
-    author_email="iaacornus.devel@gmail.com",
+    author=PkgInfo.__author__,
+    author_email=PkgInfo.__author_email__,
+    maintainer=PkgInfo.__author__,
+    maintainer_email=PkgInfo.__author_email__,
     license="GPL v3",
     py_modules=find_module(),
     python_requires=">=3.10",
-    install_requires=[
-            "rich==12.4.4",
-            "requests==2.28.1"
-        ],
+    install_requires=get_dependencies("requirements.txt"),
     classifiers=[
             "Development Status :: 4 - Beta",
             "Programming Language :: Python :: 3.10",
@@ -65,4 +37,5 @@ setup(
         ]
     },
 )
+
 
