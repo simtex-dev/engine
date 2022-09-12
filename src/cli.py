@@ -113,11 +113,11 @@ class Cli:
             help="Use a different encoding for the document.",
             action="store"
         )
-        self.parser.add_argument(
-            "-tc", "--twocolumns",
-            help="Use two columns in the document.",
-            action="store_true"
-        )
+        # self.parser.add_argument(
+        #     "-tc", "--twocolumns",
+        #     help="Use two columns in the document.",
+        #     action="store_true"
+        # )
 
     def _misc(self) -> None:
         """Other arguments."""
