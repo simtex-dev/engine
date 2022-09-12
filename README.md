@@ -141,9 +141,11 @@ published on [PyPI](https://pypi.org/project/simtex/) since v0.2.0-alpha:
 pip install --user simtex
 ```
 
-Other options, specifically `-b` and `-B` requires `pdflatex`, which is provided
-by any TeX distributions that can be installed, but `texlive` package is recommended
-which can be installed via:
+Other options, specifically `-b` and `-B` requires `pdflatex` and any default 
+pdf viewer for the latter. The LaTeX compiler can be provided by any of TeX
+distributions that can be installed, but `texlive` with its full package is 
+recommended since it is tested. `texlive` is available in most distribution
+and can be installed with its package manager:
 
 ```
 # fedora
@@ -167,6 +169,10 @@ Refer to [CONTRIBUTING](CONTRIBUTING.md).
 
 # Roadmap
 
-1. Support for enumerate/lists.
-2. Support Windows
-3. Add templates
+The first prioritized features (not sorted) are listed below:
+
+- [ ] Support for enumerate/lists.
+- [ ] Support Windows
+- [ ] Add templates
+- [ ] Include GUI
+- [ ] Improve table support
