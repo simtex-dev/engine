@@ -27,28 +27,6 @@ def find_module(PATH: str) -> list[str]:
     return modules
 
 
-def get_dependencies(source: str) -> list[str]:
-    """Get the listed dependencies in requirements.txt
-
-    Args:
-        source -- requirements.txt
-
-    Returns:
-        The list of dependencies.
-    """
-
-    try:
-        dep_list: TextIO
-        with open(source, "r", encoding="utf-8") as dep_list:
-            deps: list[str] = dep_list.readlines()
-    except FileNotFoundError as Err:
-        raise SystemExit("Cannot fetch dependencies.")
-
-    return [
-        dep.replace("\n", "") for dep in deps if dep not in ["", "\n"]
-    ]
-
-
 desc: TextIO
 with open("README.md", "r", encoding="utf-8") as desc:
     readme: str = desc.read()
@@ -67,7 +45,11 @@ setup(
     license="GPL v3",
     py_modules=find_module("src"),
     python_requires=">=3.10",
-    install_requires=get_dependencies("requirements.txt"),
+    install_requires=[
+            "rich==12.4.4",
+            "requests==2.28.1",
+            "autocorrect==2.6.1"
+        ],
     classifiers=[
             "Development Status :: 4 - Beta",
             "Programming Language :: Python :: 3.10",
