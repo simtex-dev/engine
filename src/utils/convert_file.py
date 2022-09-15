@@ -1,4 +1,5 @@
-from typing import Any, TextIO, NoReturn
+from json import loads
+from typing import IO, Any, TextIO, NoReturn
 
 from src.configs.config import Config
 from src.configs.rules import Rules
@@ -55,6 +56,22 @@ def convert_file(
         )
 
     try:
+        lang_maps: IO[Any]
+        with open("data/lang_maps.json", "r", encoding="utf-8") as lang_maps:
+            lang_map: dict[str, str] = loads(lang_maps)
+
+        try:
+            lang: str = lang_map[config.autocorrect_lang]
+        except KeyError:
+            lang = "en"
+            log.logger(
+                "e",
+                (
+                    f"No value found for key: {config.autocorrect_lang}"
+                    ", using English (en) as language for autocorrect ..."
+                )
+            )
+
         out_file: TextIO
         with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
             start: int = headings(log, config, title, out_file)
@@ -63,7 +80,7 @@ def convert_file(
                     rules,
                     replacement,
                     config.autocorrect,
-                    config.autocorrect_lang,
+                    lang,
                     config.replace,
                     input_file,
                     out_file
