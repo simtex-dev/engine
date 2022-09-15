@@ -1,8 +1,6 @@
 from re import sub
 from typing import Callable, TextIO
 
-from autocorrect import Speller # type: ignore
-
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
 from src.mutils.check_if_table import check_if_table
@@ -11,6 +9,7 @@ from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.figure import figure
 from src.utils.tex.environments.quotes import quotation
 from src.utils.tex.environments.listings import listings
+from src.utils.tex.text.fix_spell import fix_spell
 from src.utils.tex.text.format import format
 from src.utils.logger import Logger
 
@@ -40,8 +39,6 @@ def body(
     Returns:
         A list of files found in the input file.
     """
-
-    spell = Speller(lang=autocorrect_lang)
 
     log.logger("I", "Writing the body to the document ...")
 
@@ -140,7 +137,7 @@ def body(
                                 continue
                             else:
                                 if autocorrect:
-                                    line = f"\n{spell(line)}\n"
+                                    line = fix_spell(line)
                                 else:
                                     line = f"\n{line}\n"
                         except IndexError:
