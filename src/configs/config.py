@@ -65,3 +65,5 @@ class Config:
     replace: bool
     twocols: bool
     assume_yes: bool
+    autocorrect: bool
+    autocorrect_lang: str
