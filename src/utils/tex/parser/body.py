@@ -20,6 +20,7 @@ def body(
         rules: Rules,
         replacements: Replacements,
         autocorrect: bool,
+        autocorrect_lang: str,
         replace_math_symb: bool,
         in_file: str,
         out_file: TextIO
@@ -31,6 +32,7 @@ def body(
         rules -- rules that needs to be followed in translation.
         replacements -- math symbols that will be replaced with latex commands.
         autocorrect -- whether to toggle autocorrect.
+        autocorrect_lang -- language of autocorrect to use.
         replace_math_symb -- whether to replace the math symbols.
         in_file -- path of the file to be converted to LaTeX.
         out_file -- where the translated line will be written.
@@ -39,7 +41,7 @@ def body(
         A list of files found in the input file.
     """
 
-    spell = Speller()
+    spell = Speller(lang=autocorrect_lang)
 
     log.logger("I", "Writing the body to the document ...")
 

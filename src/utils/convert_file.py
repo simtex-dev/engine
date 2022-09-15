@@ -65,6 +65,7 @@ def convert_file(
                     rules,
                     replacement,
                     autocorrect,
+                    config.autocorrect_lang,
                     config.replace,
                     input_file,
                     out_file
