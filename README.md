@@ -4,9 +4,11 @@
 ![](https://github.com/iaacornus/simtex/actions/workflows/pytest.yaml/badge.svg)
 ![](https://img.shields.io/pypi/v/simtex?label=pypi%20package)
 ![](https://img.shields.io/pypi/dm/simtex)
+![](https://img.shields.io/github/license/iaacornus/simtex)
+![](https://badgen.net/pypi/python/simtex)
 
 `simtex` (simplified LaTeX) allows you to convert your mardown or files
- into PDF using LaTeX with one command, configured with simple `.json` file.
+into PDF using LaTeX with one command, configured with simple `.json` file.
 
 > `simtex` is a program that works based on rules of the user that is
 defined in `simtex.json`, which the program uses to the files and converts
