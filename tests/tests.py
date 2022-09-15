@@ -74,7 +74,9 @@ class TestCases(unittest.TestCase):
                 encode="UTF8",
                 replace=False,
                 twocols=False,
-                assume_yes=False
+                assume_yes=False,
+                autocorrect=False,
+                autocorrect_lang="ENGLISH"
             ),
             self.config
         )
