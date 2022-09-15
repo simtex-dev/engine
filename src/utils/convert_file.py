@@ -19,7 +19,6 @@ def convert_file(
         config: Config,
         replacement: Replacements,
         input_file: str,
-        autocorrect: bool = False
     ) -> str | NoReturn:
     """Convert the given input file to LaTeX.
 
@@ -31,7 +30,6 @@ def convert_file(
             formatting, packages to use among others, refer to simtex.json.
         replacements -- math symbols that will be replaced with latex commands.
         input_file -- the directory of the input file.
-        autocorrect -- whether to toggle autocorrect.
 
     Returns:
         The filepath of the output file.
@@ -64,7 +62,7 @@ def convert_file(
                     log,
                     rules,
                     replacement,
-                    autocorrect,
+                    config.autocorrect,
                     config.autocorrect_lang,
                     config.replace,
                     input_file,

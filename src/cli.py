@@ -185,8 +185,7 @@ class Cli:
                         self.args,
                         self.rules,
                         self.config,
-                        self.replacement,
-                        self.args.autocorrect
+                        self.replacement
                     )
 
                 files: list[str] = converter()

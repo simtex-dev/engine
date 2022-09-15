@@ -17,7 +17,6 @@ def convert(
         rules: Rules,
         config: Config,
         replacement: Replacements,
-        autocorrect: bool = False
     ) -> list[str] | NoReturn:
     """Call the converter to convert the files.
 
@@ -29,7 +28,6 @@ def convert(
             formatting, packages to use among others, refer to simtex.json.
         replacements -- math symbols that will be replaced with latex commands.
         input_file -- the directory of the input file.
-        autocorrect -- whether to toggle autocorrect.
 
     Returns:
         The path(s) of the converted file.
@@ -60,8 +58,7 @@ def convert(
                     rules,
                     config,
                     replacement,
-                    file,
-                    autocorrect
+                    file
                 )
             )
     else:
@@ -72,8 +69,7 @@ def convert(
                 rules,
                 config,
                 replacement,
-                args.input,
-                autocorrect
+                args.input
             )
         )
 
