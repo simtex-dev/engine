@@ -137,7 +137,7 @@ def body(
                                 continue
                             else:
                                 if autocorrect:
-                                    line = fix_spell(line)
+                                    line = fix_spell(line, autocorrect_lang)
                                 else:
                                     line = f"\n{line}\n"
                         except IndexError:
