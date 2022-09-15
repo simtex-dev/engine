@@ -1,5 +1,4 @@
-from json import loads
-from typing import IO, Any, TextIO, NoReturn
+from typing import Any, TextIO, NoReturn
 
 from src.configs.config import Config
 from src.configs.rules import Rules
@@ -10,6 +9,7 @@ from src.mutils.format_body import format_body
 from src.mutils.fix_file_path import fix_file_path
 from src.mutils.fix_title import fix_title
 from src.mutils.finalize import finalize
+from src.data.lang_maps import Languages
 from src.utils.logger import Logger
 
 
@@ -56,12 +56,10 @@ def convert_file(
         )
 
     try:
-        lang_maps: IO[Any]
-        with open("data/lang_maps.json", "r", encoding="utf-8") as lang_maps:
-            lang_map: dict[str, str] = loads(lang_maps)
-
         try:
-            lang: str = lang_map[config.autocorrect_lang]
+            lang: str = Languages.lang_codes[
+                    config.autocorrect_lang.lower().title()
+                ]
         except KeyError:
             lang = "en"
             log.logger(
