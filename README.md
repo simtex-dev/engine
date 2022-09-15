@@ -2,6 +2,8 @@
 
 ![](https://api.codiga.io/project/34276/score/svg)
 ![](https://github.com/iaacornus/simtex/actions/workflows/pytest.yaml/badge.svg)
+![](https://img.shields.io/pypi/v/simtex?label=pypi%20package)
+![](https://img.shields.io/pypi/dm/simtex)
 
 `simtex` (simplified LaTeX) allows you to convert your mardown or files
  into PDF using LaTeX with one command, configured with simple `.json` file.
@@ -141,9 +143,9 @@ published on [PyPI](https://pypi.org/project/simtex/) since v0.2.0-alpha:
 pip install --user simtex
 ```
 
-Other options, specifically `-b` and `-B` requires `pdflatex` and any default 
+Other options, specifically `-b` and `-B` requires `pdflatex` and any default
 pdf viewer for the latter. The LaTeX compiler can be provided by any of TeX
-distributions that can be installed, but `texlive` with its full package is 
+distributions that can be installed, but `texlive` with its full package is
 recommended since it is tested. `texlive` is available in most distribution
 and can be installed with its package manager:
 
