@@ -18,17 +18,17 @@ class Cli:
 
         self.parser: ArgumentParser = ArgumentParser(
                 prog="simtex",
-                usage="simtex [OPTIONS] [INPUT] FILE [ARGUMENTS]",
+                usage="simtex [INPUT] [ARGUMENTS]",
                 description=PkgInfo.__description__
             )
 
     def _options(self) -> None:
         """The options of the program."""
 
-        self.parser.add_argument( # commands
-            "-c", "--convert",
-            help="Convert the input to LaTeX.",
-            action="store_true"
+        self.parser.add_argument(
+            "input", metavar="[INPUT]",
+            type=str,
+            help="File to convert to LaTeX."
         )
         self.parser.add_argument(
             "-b", "--build",
@@ -44,11 +44,6 @@ class Cli:
     def _arguments(self) -> None:
         """Main and commonly used arguments of the program"""
 
-        self.parser.add_argument( # starts here are the options
-            "-i", "--input",
-            help="File to be converted into LaTeX.",
-            action="store",
-        )
         self.parser.add_argument(
             "-T", "--title",
             help="Set the title of the document.",
@@ -168,7 +163,7 @@ class Cli:
         self.create_parser() # create the arguments
 
         try:
-            if self.args.convert or self.args.build or self.args.buildnview:
+            if self.args.input or self.args.build or self.args.buildnview:
                 self.config, self.rules, self.replacement = (
                     self.conf_parse.fetched_conf(
                             self.args.assumeyes
