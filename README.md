@@ -29,14 +29,16 @@ features, and not HTML tags.
 
 ```
 ❯ simtex --help
-usage: simtex [OPTIONS] [INPUT] FILE [ARGUMENTS]
+usage: simtex [INPUT] [ARGUMENTS]
 
 Convert your markdown or text files into LaTeX/pdf with one command! Interop
 with LaTeX and markdown is also allowed by simtex!
 
+positional arguments:
+  [INPUT]               File to convert to LaTeX.
+
 options:
   -h, --help            show this help message and exit
-  -c, --convert         Convert the input to LaTeX.
   -b, --build           Build the generated LaTeX file.
   -B, --buildnview      Build the generated LaTeX file and view the output.
   -F FONT, --font FONT  Use different font package.
@@ -50,9 +52,6 @@ options:
                         Margin size to be used.
   -e ENCODING, --encoding ENCODING
                         Use a different encoding for the document.
-  -tc, --twocolumns     Use two columns in the document.
-  -i INPUT, --input INPUT
-                        File to be converted into LaTeX.
   -T TITLE, --title TITLE
                         Set the title of the document.
   -f FILENAME, --filename FILENAME
