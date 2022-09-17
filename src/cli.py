@@ -45,7 +45,7 @@ class Cli:
         """Main and commonly used arguments of the program"""
 
         self.parser.add_argument(
-            "-T", "--title",
+            "-t", "--title",
             help="Set the title of the document.",
             action="store",
         )
@@ -55,7 +55,7 @@ class Cli:
             action="store"
         )
         self.parser.add_argument(
-            "-of", "--outputfolder",
+            "-o", "--outputfolder",
             help="Change the output folder for the output file.",
             action="store"
         )
@@ -70,7 +70,7 @@ class Cli:
             action="store"
         )
         self.parser.add_argument(
-            "-C", "--compiler",
+            "-c", "--compiler",
             help="Use a different LaTeX compiler.",
             action="store"
         )
@@ -123,11 +123,6 @@ class Cli:
             action="store_true"
         )
         self.parser.add_argument(
-            "-v", "--verbose",
-            help="Show the stdout of processes.",
-            action="store_true"
-        )
-        self.parser.add_argument(
             "-y", "--assumeyes",
             help="Assume yes to every prompt.",
             action="store_true"
@@ -140,6 +135,11 @@ class Cli:
         self.parser.add_argument(
             "-R", "--replace",
             help="Automatically replace math symbols defined.",
+            action="store_true"
+        )
+        self.parser.add_argument(
+            "-v", "--verbose",
+            help="Show the stdout of processes.",
             action="store_true"
         )
         self.parser.add_argument(
