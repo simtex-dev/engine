@@ -165,10 +165,10 @@ class Cli:
         try:
             if self.args.input or self.args.build or self.args.buildnview:
                 self.config, self.rules, self.replacement = (
-                    self.conf_parse.fetched_conf(
-                            self.args.assumeyes
-                        )
-                )
+                        self.conf_parse.fetched_conf(
+                                self.args.assumeyes
+                            )
+                    )
 
                 # update the config for overrides
                 update_conf(
