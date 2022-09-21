@@ -49,10 +49,13 @@ def body(
     striptitle: Callable[
             [str, str], str
         ] = lambda line, symbol: (
-            line
-                .replace(symbol, "")
-                .replace("\n", "")
-                .strip()
+            (
+                line
+                    .replace(symbol, "")
+                    .replace("\n", "")
+                    .strip()
+            )
+            + "\centering" if "c" in symbol else ""
         )
     section: Callable[
             [str, str, str], str
