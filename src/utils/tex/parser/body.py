@@ -44,6 +44,7 @@ def body(
 
     files: list[str] = []
     ignore: int = -1
+    centering: str = r"\centering"
 
     line: str
     striptitle: Callable[
@@ -55,14 +56,17 @@ def body(
                     .replace("\n", "")
                     .strip()
             )
-            + "\centering" if "c" in symbol else ""
         )
     section: Callable[
             [str, str, str], str
         ] = lambda symbol, line, command: (
             f"\n\\{command}"
             f"{'*' if symbol.endswith('*') else ''}"
-            f"{{{striptitle(line, symbol)}}}\n"
+            r"{"
+            f"{striptitle(line, symbol)}"
+            f"{centering if 'c' in symbol else ''}"
+            r"}"
+            "\n"
         )
 
     ref_file: TextIO
