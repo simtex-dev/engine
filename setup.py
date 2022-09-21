@@ -47,8 +47,7 @@ setup(
     python_requires=">=3.10",
     install_requires=[
             "rich==12.4.4",
-            "requests==2.28.1",
-            "autocorrect==2.6.1"
+            "requests==2.28.1"
         ],
     classifiers=[
             "Development Status :: 4 - Beta",
