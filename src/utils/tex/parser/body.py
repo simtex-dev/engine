@@ -78,8 +78,9 @@ def body(
 
         # replace numerous \n, if there is any, with one \n
         line = sub(r"\n{2, 10}", "\n", line).strip()
+        symbol: str = line.split()[0].strip()
 
-        match (symbol := line.split()[0].strip()):
+        match symbol.replace("c", ""):
             case rules.section | rules.sectionn:
                 line = section(symbol, line, "section")
             case rules.subsection | rules.subsectionn:
