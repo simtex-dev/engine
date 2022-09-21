@@ -94,9 +94,7 @@
         "ENCODE": "UTF8",
         "REPLACE": false,
         "TWOCOLS": false,
-        "ASSUME_YES": false,
-        "AUTOCORRECT": false,
-        "AUTOCORRECT_LANG": "ENGLISH"
+        "ASSUME_YES": false
     },
     {
         "-->": "\\longrightarrow",

@@ -167,10 +167,7 @@ class ConfParse:
             raw_conf["COMPILER"],
             raw_conf["ENCODE"],
             raw_conf["REPLACE"],
-            raw_conf["TWOCOLS"],
-            raw_conf["ASSUME_YES"],
-            raw_conf["AUTOCORRECT"],
-            raw_conf["AUTOCORRECT_LANG"]
+            raw_conf["TWOCOLS"]
         )
 
     def _replacements(self) -> Replacements:

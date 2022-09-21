@@ -65,7 +65,6 @@ options:
                         Use a different LaTeX compiler.
   -ft, --filenametitle  Use the filename as title.
   -y, --assumeyes       Assume yes to every prompt.
-  -A, --autocorrect     Apply autocorrection in wrong spellings.
   -R, --replace         Automatically replace math symbols defined.
   -v, --verbose         Show the stdout of processes.
   --version             Print the version number of the application.
@@ -123,8 +122,7 @@ bunch of files in all at once.
 3. Interoperation between LaTeX and raw files. `simtex` is a program
 that works based on the rules defined by user in `simtex.json`, which it uses
 to convert the document given by the user.
-4. Autocorrect (**beta**) of spelling mistakes in the document.
-5. Automatic replacement (**beta**) of unicode characters and ASCII symbols that represent mathematical symbol or anything that is defined by user to their respective LaTeX command or the defined command by the user.
+4. Automatic replacement (**beta**) of unicode characters and ASCII symbols that represent mathematical symbol or anything that is defined by user to their respective LaTeX command or the defined command by the user.
 
 # Installation
 
