@@ -61,8 +61,7 @@ def update_conf(
             "doc_font": args.font,
             "compiler": args.compiler,
             "encode": args.encoding,
-            "replace": args.replace,
-            "autocorrect": args.autocorrect
+            "replace": args.replace
         }
 
     key_: str; param: Any
