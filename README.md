@@ -52,22 +52,22 @@ options:
                         Margin size to be used.
   -e ENCODING, --encoding ENCODING
                         Use a different encoding for the document.
-  -T TITLE, --title TITLE
+  -t TITLE, --title TITLE
                         Set the title of the document.
   -f FILENAME, --filename FILENAME
                         Use different name for the output file.
-  -of OUTPUTFOLDER, --outputfolder OUTPUTFOLDER
+  -o OUTPUTFOLDER, --outputfolder OUTPUTFOLDER
                         Change the output folder for the output file.
   -a AUTHOR, --author AUTHOR
                         Set the author name of the document.
   -d DATE, --date DATE  Set the date of the document.
-  -C COMPILER, --compiler COMPILER
+  -c COMPILER, --compiler COMPILER
                         Use a different LaTeX compiler.
   -ft, --filenametitle  Use the filename as title.
-  -v, --verbose         Show the stdout of processes.
   -y, --assumeyes       Assume yes to every prompt.
   -A, --autocorrect     Apply autocorrection in wrong spellings.
   -R, --replace         Automatically replace math symbols defined.
+  -v, --verbose         Show the stdout of processes.
   --version             Print the version number of the application.
 ```
 
@@ -101,7 +101,7 @@ You can view the output of the program [here](./examples/1/out/hello.pdf) which 
 generated using the command:
 
 ```
-simtex -c -i="./examples/1/hello.md" -T="Hello Simtex!" -f="hello.tex" -a="iaacornus" -d="August 15, 2552"
+simtex examples/1/hello.md -t "Hello Simtex!" -f hello -a iaacornus" -d "August 15, 2552"
 ```
 
 > View [`./examples/1/hello.md`](./examples/1/example.md)
