@@ -9,7 +9,6 @@ from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.figure import figure
 from src.utils.tex.environments.quotes import quotation
 from src.utils.tex.environments.listings import listings
-from src.utils.tex.text.fix_spell import fix_spell
 from src.utils.tex.text.format import format
 from src.utils.logger import Logger
 
@@ -18,8 +17,6 @@ def body(
         log: Logger,
         rules: Rules,
         replacements: Replacements,
-        autocorrect: bool,
-        autocorrect_lang: str,
         replace_math_symb: bool,
         in_file: str,
         out_file: TextIO
@@ -30,8 +27,6 @@ def body(
         log -- for logging.
         rules -- rules that needs to be followed in translation.
         replacements -- math symbols that will be replaced with latex commands.
-        autocorrect -- whether to toggle autocorrect.
-        autocorrect_lang -- language of autocorrect to use.
         replace_math_symb -- whether to replace the math symbols.
         in_file -- path of the file to be converted to LaTeX.
         out_file -- where the translated line will be written.
@@ -144,10 +139,7 @@ def body(
                                     )
                                 continue
                             else:
-                                if autocorrect:
-                                    line = fix_spell(line, autocorrect_lang)
-                                else:
-                                    line = f"\n{line}\n"
+                                line = f"\n{line}\n"
                         except IndexError:
                             pass
 

@@ -9,7 +9,6 @@ from src.mutils.format_body import format_body
 from src.mutils.fix_file_path import fix_file_path
 from src.mutils.fix_title import fix_title
 from src.mutils.finalize import finalize
-from src.data.lang_maps import Languages
 from src.utils.logger import Logger
 
 
@@ -56,20 +55,6 @@ def convert_file(
         )
 
     try:
-        try:
-            lang: str = Languages.lang_codes[
-                    config.autocorrect_lang.lower().title()
-                ]
-        except KeyError:
-            lang = "en"
-            log.logger(
-                "e",
-                (
-                    f"No value found for key: {config.autocorrect_lang}"
-                    ", using English (en) as language for autocorrect ..."
-                )
-            )
-
         out_file: TextIO
         with open(OFILE_PATH, "w", encoding="utf-8") as out_file:
             start: int = headings(log, config, title, out_file)
@@ -77,8 +62,6 @@ def convert_file(
                     log,
                     rules,
                     replacement,
-                    config.autocorrect,
-                    lang,
                     config.replace,
                     input_file,
                     out_file
