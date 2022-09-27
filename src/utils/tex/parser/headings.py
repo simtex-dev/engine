@@ -64,11 +64,24 @@ def headings(
         if isinstance(pkgs_, list):
             try:
                 if pkgs_[0] == "geometry":
+                    if len(margins := config.margin) > 1:
+                        try:
+                            margin: str = (
+                                    f"top={margins[0]}{config.unit}"
+                                    f"right={margins[1]}{config.unit}"
+                                    f"left={margins[2]}{config.unit}"
+                                    f"bottom={margins[3]}{config.unit}"
+                                )
+                        except IndexError:
+                            pass
+                    else:
+                        margin = f"{config.margin[0]}{{config.unit}}"
+
                     param: str = (
                             pkgs_[1]
                                 .replace(
                                     "<MARGIN>",
-                                    f"{config.margin}in"
+                                    margin
                                 )
                                 .replace(
                                     "<PAPER_SIZE>",
