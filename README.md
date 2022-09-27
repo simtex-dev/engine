@@ -48,8 +48,9 @@ options:
                         Use different paper size.
   -I INDENT, --indent INDENT
                         Indent size to be used.
-  -m MARGIN, --margin MARGIN
+  -m MARGIN [MARGIN ...], --margin MARGIN [MARGIN ...]
                         Margin size to be used.
+  -u UNIT, --unit UNIT  Unit of length of be used in margin size.
   -e ENCODING, --encoding ENCODING
                         Use a different encoding for the document.
   -t TITLE, --title TITLE
