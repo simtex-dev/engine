@@ -27,7 +27,7 @@ class TestCases(unittest.TestCase):
                 doc_class="article",
                 doc_font="lmodern",
                 font_size=12,
-                margin=1,
+                margin=[1],
                 unit="in",
                 paper_size="a4paper",
                 indent_size=24,
