@@ -66,7 +66,7 @@ def headings(
                 if pkgs_[0] == "geometry":
                     if len(margins := config.margin) > 1:
                         try:
-                            margin: list[str] | str = []
+                            margin_: list[str] = []
                             part: str; size: int | float
                             for part, size in zip(
                                     [
@@ -77,10 +77,10 @@ def headings(
                                     ],
                                     config.margin
                                 ):
-                                margin.append(
+                                margin_.append(
                                     f"{part}={size}{config.unit}"
                                 )
-                            margin = ", ".join(margin)
+                            margin: str = ", ".join(margin_)
                         except IndexError:
                             pass
                     else:
