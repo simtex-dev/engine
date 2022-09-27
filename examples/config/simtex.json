@@ -57,6 +57,7 @@
         "DEF_FONT": "lmodern",
         "FONT_SIZE": 12,
         "MARGIN": 1,
+        "UNIT": "in",
         "PAPER_SIZE": "a4paper",
         "INDENT_SIZE": 24,
         "SLOPPY": true,

@@ -147,6 +147,7 @@ class ConfParse:
             raw_conf["DEF_FONT"],
             raw_conf["FONT_SIZE"],
             raw_conf["MARGIN"],
+            raw_conf["UNIT"],
             raw_conf["PAPER_SIZE"],
             raw_conf["INDENT_SIZE"],
             raw_conf["SLOPPY"],

@@ -11,6 +11,7 @@ class Config:
         doc_font -- main document font.
         font_size -- size of the main font.
         margin -- margin of all sides in the document.
+        unit -- the unit of lenght to be used in margin.
         paper_size -- size of the paper.
         indent_size -- size of indent.
         sloppy -- whether to use sloppy.
@@ -45,6 +46,7 @@ class Config:
     doc_font: str
     font_size: int
     margin: int
+    unit: str
     paper_size: str
     indent_size: int
     sloppy: bool

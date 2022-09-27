@@ -101,6 +101,7 @@ class Cli:
         self.parser.add_argument(
             "-m", "--margin",
             help="Margin size to be used.",
+            nargs="+",
             action="store"
         )
         self.parser.add_argument(
