@@ -65,7 +65,7 @@
         "CFONT_SCALE": 0.9,
         "CODE_CONF": "<HOME>/.config/simtex/code_conf.txt",
         "PACKAGES": [
-            ["geometry", "margin=<MARGIN>, <PAPER_SIZE>"],
+            ["geometry", "<MARGIN>, <PAPER_SIZE>"],
             "indentfirst",
             "amsmath",
             "mathtools",
