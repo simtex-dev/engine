@@ -48,8 +48,9 @@ options:
                         Use different paper size.
   -I INDENT, --indent INDENT
                         Indent size to be used.
-  -m MARGIN, --margin MARGIN
+  -m MARGIN [MARGIN ...], --margin MARGIN [MARGIN ...]
                         Margin size to be used.
+  -u UNIT, --unit UNIT  Unit of length of be used in margin size.
   -e ENCODING, --encoding ENCODING
                         Use a different encoding for the document.
   -t TITLE, --title TITLE
@@ -100,29 +101,24 @@ You can view the output of the program [here](./examples/1/out/hello.pdf) which 
 generated using the command:
 
 ```
-simtex examples/1/hello.md -t "Hello Simtex!" -f hello -a iaacornus" -d "August 15, 2552"
+simtex examples/1/hello.md -t "Hello Simtex!" -f hello -a iaacornus -d "August 15, 2552"
 ```
 
 > View [`./examples/1/hello.md`](./examples/1/example.md)
 
 > View output: [.examples/1/hello.pdf](./examples/1/out/hello.pdf)
 
-To convert a LaTeX file, and rename the default author defined in
-`$CONF_PATH/simtex.json`, add `-a="iaacornus (or your name)`, and with the
-date, `-d="August 15, 2552` to provide other date instead of the present. The
-program will output the `tex` file, as well as `pdf`, if `-b` was used, in `./out`
-inside the folder of the input if there is no output folder given. See the
+See the
 [documentation of arguments and configuration file](./examples/config/README.md).
 
 # Program features
 
 1. Convert a whole directory of files into LaTeX. `simtex` allows conversion of
 bunch of files in all at once.
-2. 'simtex' supports different compilers.
+2. 'simtex' supports different compilers, such as `xetex`, `luatex`, and `pdflatex`.
 3. Interoperation between LaTeX and raw files. `simtex` is a program
 that works based on the rules defined by user in `simtex.json`, which it uses
 to convert the document given by the user.
-4. Automatic replacement (**beta**) of unicode characters and ASCII symbols that represent mathematical symbol or anything that is defined by user to their respective LaTeX command or the defined command by the user.
 
 # Installation
 
@@ -163,10 +159,31 @@ For other installation method, see [INSTALL.md](INSTALL.md) for details.
 
 # Contribution
 
-Refer to [CONTRIBUTING](CONTRIBUTING.md).
-
 1. All contributions are required to abide by the [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md)
 2. Opening and reporting issues is welcomed and considered as valuable contribution in this project.
+
+## Source Code
+
+1. Fork the project
+2. Create the branch for the issue/feature
+3. Commit your changes
+4. Open a pull request
+5. Wait for review
+
+> All contributions are required to abide by the code style for more consistent
+> and easier to maintain code base over time.
+
+Refer to [CONTRIBUTING](CONTRIBUTING.md).
+
+## Issues/Bug Reporting
+
+- Raise an issue/feature request in ISSUES section of the GitHub page, providing the:
+
+
+1. Description of the issue/feature
+2. Version of simtex (for issues)
+3. Steps to reproduce (for issues)
+4. Preferably, if possible, part of the document being converted (for issues)
 
 # Roadmap
 
