@@ -105,6 +105,11 @@ class Cli:
             action="store"
         )
         self.parser.add_argument(
+            "-u", "--unit",
+            help="Unit of length of be used in margin size.",
+            action="store"
+        )
+        self.parser.add_argument(
             "-e", "--encoding",
             help="Use a different encoding for the document.",
             action="store"

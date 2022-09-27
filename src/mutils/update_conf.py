@@ -57,6 +57,7 @@ def update_conf(
             "font_size": args.fontsize,
             "paper_size": args.papersize,
             "margin": args.margin,
+            "unit": args.unit,
             "indent_size": args.indent,
             "doc_font": args.font,
             "compiler": args.compiler,
