@@ -45,7 +45,7 @@ class Config:
     doc_class: str
     doc_font: str
     font_size: int
-    margin: int
+    margin: list[int | float]
     unit: str
     paper_size: str
     indent_size: int
