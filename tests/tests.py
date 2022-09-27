@@ -38,7 +38,7 @@ class TestCases(unittest.TestCase):
                 packages=[
                     [
                         "geometry",
-                        "margin=<MARGIN>, <PAPER_SIZE>"
+                        "<MARGIN>, <PAPER_SIZE>"
                     ],
                     "indentfirst",
                     "amsmath",
