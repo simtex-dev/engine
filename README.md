@@ -1,6 +1,6 @@
 # `simtex`
 
-![](https://api.codiga.io/project/34276/score/svg)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/533c793885034bfbaf4ea97e3ffbfa97)](https://www.codacy.com/gh/simtex-dev/simtex/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=simtex-dev/simtex&amp;utm_campaign=Badge_Grade)
 ![](https://github.com/iaacornus/simtex/actions/workflows/pytest.yaml/badge.svg)
 ![](https://img.shields.io/pypi/v/simtex?label=pypi%20package)
 ![](https://img.shields.io/pypi/dm/simtex)
