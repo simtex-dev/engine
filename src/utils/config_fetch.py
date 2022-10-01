@@ -4,10 +4,13 @@ from pathlib import Path
 from json import JSONDecodeError, load
 from typing import IO, Any, NoReturn, Optional
 
+from appdirs import AppDirs
+
 from src.configs.config import Config
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
 from src.mutils.config.fix_missing_conf import fix_missing_config
+from src.pkg.info import PkgInfo
 from src.utils.logger import Logger
 
 
@@ -23,26 +26,23 @@ class ConfParse:
         """
 
         self.log: Logger = log
-        self.HOME: Path = Path.home()
-        self.BASE_CONF_PATH: str = f"{self.HOME}/.config"
+        self.APPDATA: AppDirs = AppDirs(
+                PkgInfo.__program_name__, PkgInfo.__author__
+            )
         self.CONF_PATH: str = (
-                (
-                    f"{self.BASE_CONF_PATH}/simtex"
-                ) if not test else (
+                self.APPDATA.user_config_dir if not test else (
                     "./examples/config"
                 )
             )
 
         paths: str
-        for paths in [self.BASE_CONF_PATH, self.CONF_PATH]:
-            if not exists(paths):
-                try:
-                    mkdir(paths)
-                except (SystemError, OSError, IOError) as Err:
-                    self.log.logger(
-                        "E", f"{Err}. Cannot create: {paths}, aborting ..."
-                    )
-                    raise SystemExit
+        try:
+            mkdir(self.CONF_PATH)
+        except (SystemError, OSError, IOError) as Err:
+            self.log.logger(
+                "E", f"{Err}. Cannot create: {paths}, aborting ..."
+            )
+            raise SystemExit
 
         if not exists(f"{self.CONF_PATH}/simtex.json"):
             fix_missing_config(
