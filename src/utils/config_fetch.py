@@ -1,10 +1,9 @@
 from os import mkdir
 from os.path import exists, expanduser
-from pathlib import Path
 from json import JSONDecodeError, load
 from typing import IO, Any, NoReturn, Optional
 
-from appdirs import AppDirs
+from appdirs import AppDirs # type: ignore
 
 from src.configs.config import Config
 from src.configs.rules import Rules
