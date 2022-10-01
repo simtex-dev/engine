@@ -3,7 +3,7 @@ from typing import Callable
 
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
-from src.mutils.check_if_eq import check_if_eq
+from src.mutils.environment.check_if_eq import check_if_eq
 from src.utils.tex.text.replace_util import replace_symb
 
 

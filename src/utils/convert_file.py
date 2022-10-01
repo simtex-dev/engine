@@ -5,10 +5,10 @@ from src.configs.rules import Rules
 from src.configs.replacements import Replacements
 from src.utils.tex.parser.headings import headings
 from src.utils.tex.parser.body import body
-from src.mutils.format_body import format_body
-from src.mutils.fix_file_path import fix_file_path
-from src.mutils.fix_title import fix_title
-from src.mutils.finalize import finalize
+from src.mutils.document.format_body import format_body
+from src.mutils.program.fix_file_path import fix_file_path
+from src.mutils.document.fix_title import fix_title
+from src.mutils.document.finalize import finalize
 from src.utils.logger import Logger
 
 

@@ -3,7 +3,7 @@ from typing import Callable, TextIO
 
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
-from src.mutils.check_if_table import check_if_table
+from src.mutils.environment.check_if_table import check_if_table
 from src.utils.tex.environments.table import table
 from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.figure import figure
