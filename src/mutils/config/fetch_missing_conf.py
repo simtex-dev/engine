@@ -7,7 +7,7 @@ from src.mutils.misc.prompts import prompt
 from src.utils.logger import Logger
 
 
-def fix_missing_config(
+def fetch_missing_config(
         log: Logger,
         log_msg: str,
         CONF_PATH: str,
