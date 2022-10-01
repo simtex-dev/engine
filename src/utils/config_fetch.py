@@ -151,7 +151,7 @@ class ConfParse:
             raw_conf["CODE_FONT"],
             raw_conf["CFONT_SCALE"],
             raw_conf["CODE_CONF"].replace(
-                "<HOME>", expanduser("~")
+                "<CONF_PATH>", self.CONF_PATH
             ),
             raw_conf["PACKAGES"],
             raw_conf["FOOTNOTE"],
@@ -182,13 +182,10 @@ class ConfParse:
         return Replacements(raw_conf)
 
     def fetched_conf(
-            self, assume_yes: bool = False
+            self
         ) -> tuple[Config, Rules, Replacements] | NoReturn:
         """Fetch the values from config file, and give fallback method
         for its respective function.
-
-        Args:
-            assume_yes -- whether to assume yes or not.
 
         Returns:
             Both of the parsed data from the raw JSON config file.
@@ -201,14 +198,14 @@ class ConfParse:
                 rules_values: Rules = self._rules()
                 replacements: Replacements = self._replacements()
             except KeyError as Err:
-                fix_missing_config(
+                fetch_missing_config(
                     self.log,
                     (
                         f"Missing {Err}. Some parameters are missing,"
                         f" fetching the new config file from development ..."
                     ),
                     self.CONF_PATH,
-                    assume_yes,
+                    self.assume_yes,
                     conf=True,
                     missing=False
                 )
