@@ -5,7 +5,7 @@ from typing import Callable
 from src.utils.config_fetch import ConfParse
 from src.utils.converter.convert import convert
 from src.mutils.config.update_conf import update_conf
-from src.metadata.info import PkgInfo
+from src.pkg.info import PkgInfo
 from src.utils.logger import Logger
 
 

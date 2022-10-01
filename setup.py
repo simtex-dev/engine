@@ -3,7 +3,7 @@ from os import walk
 from os.path import join
 from typing import TextIO
 
-from src.metadata.info import PkgInfo
+from src.pkg.info import PkgInfo
 
 
 def find_module(PATH: str) -> list[str]:
