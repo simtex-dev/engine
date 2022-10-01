@@ -14,10 +14,10 @@ class TestCases(unittest.TestCase):
 
     def setUp(self) -> None:
         self.log: Logger = Logger()
-        conf_parser: ConfParse = ConfParse(self.log, True)
+        conf_parser: ConfParse = ConfParse(self.log, True, True)
         self.config: Config; self.rules: Rules; self.replacement: Replacements
         self.config, self.rules, self.replacement = (
-                conf_parser.fetched_conf(assume_yes=True)
+                conf_parser.fetched_conf()
             )
 
     def test_config(self) -> None:
