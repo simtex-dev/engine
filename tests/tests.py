@@ -1,6 +1,8 @@
 import unittest
 from os.path import expanduser
 
+from appdirs import user_config_dir
+
 from src.configs.config import Config
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
@@ -34,7 +36,10 @@ class TestCases(unittest.TestCase):
                 sloppy=True,
                 code_font="DejaVuSansMono",
                 cfont_scale=0.9,
-                code_conf=f"{expanduser('~')}/.config/simtex/code_conf.txt",
+                code_conf=(
+                        f"{user_config_dir('simtex', 'iaacornus')}"
+                        "/code_conf.txt"
+                    ),
                 packages=[
                     [
                         "geometry",
