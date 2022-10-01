@@ -9,7 +9,7 @@ from src.utils.tex.environments.mathsec import mathsec
 from src.utils.tex.environments.figure import figure
 from src.utils.tex.environments.quotes import quotation
 from src.utils.tex.environments.listings import listings
-from src.utils.tex.text.format import format
+from src.utils.tex.format.format import format
 from src.utils.logger import Logger
 
 

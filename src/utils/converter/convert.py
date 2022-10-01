@@ -6,7 +6,7 @@ from src.configs.config import Config
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
 from src.mutils.program.build_tex import build_file
-from src.utils.convert_file import convert_file
+from src.utils.converter.convert_file import convert_file
 from src.mutils.misc.find_files import find_files
 from src.utils.logger import Logger
 
