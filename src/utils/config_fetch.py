@@ -1,5 +1,5 @@
 from os import mkdir
-from os.path import exists, expanduser
+from os.path import exists
 from json import JSONDecodeError, load
 from typing import IO, Any, NoReturn, Optional
 
@@ -8,7 +8,8 @@ from appdirs import AppDirs # type: ignore
 from src.configs.config import Config
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
-from src.mutils.config.fix_missing_conf import fix_missing_config
+from src.mutils.config.check_fix_conf import check_fix_conf
+from src.mutils.config.fetch_missing_conf import fetch_missing_config
 from src.pkg.info import PkgInfo
 from src.utils.logger import Logger
 
@@ -16,7 +17,12 @@ from src.utils.logger import Logger
 class ConfParse:
     """Parse the JSON configuration file."""
 
-    def __init__(self, log: Logger, test: Optional[bool] = False) -> None:
+    def __init__(
+            self,
+            log: Logger,
+            test: Optional[bool] = False,
+            assume_yes: bool = False
+        ) -> None:
         """Check the config file in instantiation before proceeding.
 
         Args:
@@ -33,36 +39,28 @@ class ConfParse:
                     "./examples/config"
                 )
             )
+        self.assume_yes = assume_yes
 
-        paths: str
-        try:
-            mkdir(self.CONF_PATH)
-        except (SystemError, OSError, IOError) as Err:
-            self.log.logger(
-                "E", f"{Err}. Cannot create: {paths}, aborting ..."
-            )
-            raise SystemExit
+        if not exists(self.CONF_PATH):
+            try:
+                mkdir(self.CONF_PATH)
+            except (SystemError, OSError, IOError) as Err:
+                self.log.logger(
+                    "E", f"{Err}. Cannot create: {self.CONF_PATH}, aborting ..."
+                )
+                raise SystemExit
 
-        if not exists(f"{self.CONF_PATH}/simtex.json"):
-            fix_missing_config(
-                self.log,
-                (
-                    "Cannot find simtex.json in PATH"
-                    ", fetching original config  ..."
-                ),
-                self.CONF_PATH,
-                True
-            )
-        elif not exists(f"{self.CONF_PATH}/code_conf.txt"):
-            fix_missing_config(
-                self.log,
-                (
-                    "Cannot find code_conf.txt in PATH"
-                    ", fetching original config  ..."
-                ),
-                self.CONF_PATH,
-                True
-            )
+        check_fix_conf(
+            self.log,
+            self.CONF_PATH,
+            [
+                "simtex.json",
+                "code_conf.txt"
+            ],
+            self.assume_yes
+        )
+
+
 
     def _fetch(self) -> list[dict[str, Any]] | NoReturn:
         """Fetch the values from config file.
