@@ -3,7 +3,7 @@ from os.path import exists
 from re import sub
 from typing import NoReturn
 
-from src.mutils.prompts import prompt
+from src.mutils.misc.prompts import prompt
 from src.utils.logger import Logger
 
 

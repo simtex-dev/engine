@@ -7,7 +7,7 @@ from typing import IO, Any, NoReturn, Optional
 from src.configs.config import Config
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
-from src.mutils.fix_missing_conf import fix_missing_config
+from src.mutils.config.fix_missing_conf import fix_missing_config
 from src.utils.logger import Logger
 
 

@@ -2,8 +2,8 @@ from typing import NoReturn
 
 from requests import get
 
-from src.mutils.merge_conf import merge_conf
-from src.mutils.prompts import prompt
+from src.mutils.config.merge_conf import merge_conf
+from src.mutils.misc.prompts import prompt
 from src.utils.logger import Logger
 
 

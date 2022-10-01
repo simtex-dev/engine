@@ -2,7 +2,7 @@ from difflib import SequenceMatcher as SeqMatch
 from typing import Any
 
 from src.configs.config import Config
-from src.mutils.prompts import prompt
+from src.mutils.misc.prompts import prompt
 from src.utils.logger import Logger
 
 

@@ -3,8 +3,8 @@ from typing import TextIO
 
 from src.configs.rules import Rules
 from src.configs.replacements import Replacements
-from src.utils.tex.text.format import format
-from src.utils.tex.parser.table_parse import table_parse
+from src.utils.tex.format.format import format
+from src.utils.tex.parser.table import table_parse
 
 
 def table(
